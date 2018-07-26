@@ -1,0 +1,970 @@
+/* create sticky menu bar */
+.fixed { position: fixed; left: 0px; top: 0px; right: 0px; z-index: 1; }
+
+.customSelect {
+   background: #d7fbfd;
+   color:#000;
+   /*text-shadow:0 1px 0 rgba(240, 255, 255, 0.4);*/
+}
+
+.customNavbar {
+  /* background-color: transparent;
+   background: transparent;
+   border-color: transparent;*/
+   opacity: .99;
+   /*background: rgba(240, 255, 255, 0.2);*/
+}
+
+.customNavbarShort {
+  /* background-color: transparent;
+   background: transparent;
+   border-color: transparent;*/
+   opacity: .99;
+   background: #5bb5b1;
+   color:#FFFF99;
+}
+
+.collapsableNavbarShortOverride {
+	background: #e7e7e7;
+	color:maroon;
+}
+
+.collapsableNavbarShortOverride :hover {
+	color:maroon;
+}
+
+.collapsableNavbar {
+	padding-right:30px;
+}
+
+/*.sticky {
+	 position: fixed;
+	 width: 100%;
+}*/
+
+/*.pickGamesDiv {
+	float:left;
+	padding-left:5px;
+	padding-right:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:center;
+	height:50px;
+}*/
+
+.pickGameLine :hover {
+	outline: 1px solid blue;
+}
+
+.floatLeftDiv {
+	float:left;
+	padding-left:5px;
+	padding-right:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:center;
+	height:50px;
+}
+
+.floatRightDiv {
+	float:right;
+	padding-left:5px;
+	padding-right:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:center;
+	height:50px;
+}
+
+.inlineDiv {
+	display:inline-block;
+	/*padding-left:5px;
+	padding-right:5px;
+	margin-top:5px;
+	margin-bottom:5px;	*/
+	text-align:center;
+/*	height:50px;*/
+}
+
+.hrBreak {
+	width: 85%;
+	height: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:#058689;
+	color:#058689;
+	border: 0 none;
+}
+
+.mainTitle {
+	color:#6C0000;
+	font-size: 42px;
+	font-family: 'aileronthin', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+	text-align:center;
+}
+
+.siteDownTitle {
+	color:#6C0000;
+	font-family: 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+	text-align:center;
+}
+
+.siteDownText p {
+	color:#6C0000;
+	font-family: 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+	text-align:center;
+	font-size:18px;
+}
+
+.imgButtonNav {
+	width:80%;
+	height:80%;
+	/*text-align: center;*/
+	/*padding-left:18%;*/
+}
+
+.imgButtonMobileNav {
+	width:50%;
+	height:50%;
+	padding-left:10%;
+}
+
+.imgButtonNavSmall {
+	width:100px;
+
+}
+
+.imgAvatarNav {
+	height:75px;
+}
+
+.imgAvatarNavMobile {
+	height:45px;
+}
+
+.imgAvatarNavSmall {
+	height:75px;
+}
+.headerTitle {
+	color:#6C0000;
+	font-family: 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+}
+
+.headerTitle2 {
+	color:teal;
+	font-family: 'aileronthin', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+}
+
+.headerTitle3 {
+	color:#3ca4d7;
+	font-family: 'aileronlight', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 900;
+}
+
+.headerFireworks {
+	color:#3ca4d7;
+	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 900;
+	font-variant: small-caps;
+	letter-spacing: 3px;
+}
+
+.headerFireworks2 {
+	color:#6C0000;
+	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 900;
+	font-variant: small-caps;
+	font-style: normal;
+	letter-spacing: 3px;
+}
+
+.headerTitle4 {
+	color:#3ca4d7;
+	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 900;
+	font-variant: small-caps;
+	letter-spacing: 3px;
+}
+
+.newsOpinion p {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 17px;
+}
+
+.newsOpinionHeaders {
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	font-size: 18px;
+	color: #b57f7f;
+}
+
+.discoverCaption  {
+	color:#6C0000;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 16px;
+	text-align:center;
+}
+
+.cursiveTangerine {
+	font-family: 'Tangerine', cursive;
+}
+
+.enjoyLife {
+	font-family: 'Indie Flower', cursive;
+	font-weight:bold;
+	font-size:20px;
+	/*font-style:italic;*/
+}
+.tableTitle {
+	background-color:#058689;
+	border:2px solid #058689;
+	color:white;
+}
+
+.tableTitleNoBorder {
+	background-color:#058689;
+	/*border-top:2px solid #055659;*/
+	color:white;
+}
+
+.tableTitleHeader {
+	background-color:white;
+	border:2px solid #058689;
+	color:red;
+}
+
+.dialogTable {
+	padding:25px;
+}
+
+.dialogTable tr td {
+	padding-top:15px;
+	vertical-align:top;
+	padding-left: 10px;
+}
+
+.divRankingTableRow {
+	height:45px;
+}
+
+.powerRankingTitle {
+	background-color:#0ABEC7;
+	border:2px solid #0ABEC7;
+	color:white;
+}
+
+.offenceTitle {
+	background-color:#275bad;
+	border:2px solid #275bad;
+	color:white;
+}
+
+.defenceTitle {
+	background-color:#CC0000;
+	border:2px solid #CC0000;
+	color:white;
+}
+
+.powerRankingText {
+	/*color:#0ABEC7;*/
+	color:white;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color:#0ABEC7;
+	border:2px solid #0ABEC7;
+/*	background-color:white;
+	border:2px solid white;*/
+}
+
+.offenceText {
+	color:white;
+	background-color:#275bad;
+	border:2px solid #275bad;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+/*	color:#006600;
+	background-color:white;
+	border:2px solid white;*/
+}
+
+.defenceText {
+	color:white;
+	background-color:#CC0000;
+	border:2px solid #CC0000;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+/*	color:#CC0000;
+	background-color:white;
+	border:2px solid white;*/
+}
+
+.jumbotronOverride {
+	background:white;
+	border:1px solid #055659;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.jumbotronOverrideEditorial {
+	background:white;
+	border:1px solid grey;
+}
+
+.panelHome {
+	padding-top:25px;
+	padding-bottom:25px;
+}
+
+.panelHome .panel-body p {
+	font-size:14px;
+	/*font-weight: medium;*/
+	font-family: Helvetica, 'Balthazar', Helvetica, sans-serif;
+
+}
+
+.panelOverride {
+	background:white;
+	border:4px solid #055659;
+}
+
+.panelBodyOverride {
+	padding:0px;
+	margin:0px;
+}
+
+.panelOverrideNoBorder {
+	background:white;
+	border:0px solid white;
+}
+
+.panelTitleOverride {
+	background-color:#058689;
+	border:2px solid #055659;
+	color:white;
+	text-align:center;
+}
+
+
+.iconImage {
+	height: 50px;
+}
+
+.loginLink {
+	/*color: #ce2c3d;
+	font-size:28px;*/
+	padding-top:15px;
+	/*text-align:left;
+	text-decoration:none;
+	font-variant:small-caps;
+	letter-spacing: 2px;*/
+	cursor: pointer;
+}
+
+.loginLink a {
+	/*color: #ce2c3d;*/
+	color: NavajoWhite;
+	font-size:18px;
+	text-align:left;
+	text-decoration:none;
+	font-variant:small-caps;
+	font-weight:bold;
+	letter-spacing: 2px;
+	cursor: pointer;
+}
+
+.helpInfo {
+	padding-top:10px;
+	padding-bottom:10px;
+	color: #006A80;
+	font-size: 16px;
+	font-variant:small-caps;
+	letter-spacing: 1px;
+}
+
+.emailLink {
+	color:#006A80;
+	font-size:16px;
+	font-variant:small-caps;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.center-column-text {
+	text-align: center;
+	vertical-align:middle;
+}
+
+.left-column-text {
+	text-align: left;
+	vertical-align:middle;
+}
+
+.right-column-text {
+	text-align: right;
+	vertical-align:middle;
+}
+
+.pickGameTable  {
+	width: 100%;
+}
+
+.pickGameTable  th {
+	text-align: center;
+	vertical-align: middle;
+	/*color: #6C0000;*/
+	font-size: 16px;
+	font-weight: bold;
+	/*border-top: 1px solid red;*/
+	/*border-bottom: 2px solid #6C0000;*/
+}
+
+.pickGameTable td  {
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.pickGameTable tr  {
+	line-height: 35px;
+}
+
+.teamWeekRankTable  {
+	width: 100%;
+}
+
+.teamWeekRankTable  th {
+	text-align: center;
+	vertical-align: middle;
+	/*color: #6C0000;*/
+	font-size: 12px;
+	font-weight: bold;
+	/*border-top: 1px solid red;*/
+	/*border-bottom: 2px solid #6C0000;*/
+}
+
+.teamWeekRankTable td  {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.teamWeekRankTable td input {
+	height:20px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.teamWeekRankTable tr  {
+	line-height: 25px;
+}
+
+.teamWeeklyRankings  {
+	/*width: 100%; */
+}
+
+.teamWeeklyRankings  th {
+	text-align: center;
+	vertical-align: middle;
+	/*color: #6C0000;*/
+	font-size: 14px;
+	font-weight: bold;
+	/*border-top: 1px solid red;*/
+	/*border-bottom: 2px solid #6C0000;*/
+}
+
+.teamWeeklyRankings td  {
+	font-size: 16px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.teamWeeklyRankings tr  {
+	line-height: 35px;
+}
+
+
+.TeamWeeklyRankingsInfoTable  {
+	width: 100%;
+	background-color:white;
+	border:2px solid white;
+	overflow-x: scroll;
+}
+
+.TeamWeeklyRankingsTableItemsCenter   {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.TeamWeeklyRankingsTable tr  {
+	line-height: 35px;
+}
+
+.miscTitle {
+	background-color:#058689;
+	border:2px solid #058689;
+	color:white;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.miscText {
+	color:#058689;
+	background-color:white;
+	border:2px solid white;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.miscData {
+	background-color:white;
+	border:2px solid white;
+	color:black;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.scrollClass {
+	overflow: auto;
+	height: 480px;
+}
+
+.ScriptscrollClass {
+	overflow: auto;
+	height: 480px;
+	padding:15px;
+	width:99%;
+}
+
+.MemberWeeklyTable {
+	padding-top:20px;
+	padding: 3px;
+	width:100%;
+	font-size: 18px;
+}
+
+.MemberWeeklyTable img {
+	padding:3px;
+}
+
+.MemberWeeklyTable th {
+	text-align: center;
+}
+
+/*.leaderBoardTable  {
+	width: 100%;
+	font-size: 16px;
+}*/
+
+.leaderBoardTable {
+	padding-top:20px;
+	padding: 3px;
+	width:100%;
+	font-size: 18px;
+}
+
+/* this is a hack fix to bootstrap table responsive issue */
+.table-responsive {
+	overflow-x: auto;
+}
+
+.leaderBoardTable img {
+	padding:3px;
+}
+
+.leaderBoardTable th {
+	text-align: center;
+}
+
+.leaderBoardTable tr {
+	border-top: none;
+}
+
+.leaderBoardPanelTitle {
+	color:white;
+	font-family: 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-weight: 700;
+	text-align:center;
+	font-size: 26px;
+}
+
+.teamSelected  {
+	background-color: maroon;
+	color:white;
+	border:1px solid maroon;
+}
+
+.expertRole  {
+	color:#8c072a;
+	text-align: left;
+	vertical-align:middle;
+	background-color: #f7edef;
+}
+
+.teamWon  {
+	background-color: #006600;
+	color:white;
+	border:1px solid white;
+}
+
+.teamLost  {
+	color:black;
+}
+
+.teamNotSelected  {
+	background-color: white;
+	color:black;
+}
+
+.menuItems {
+	padding-top:0px;
+	padding-left:0px;
+	font-size: 17px;
+}
+
+.tableItems {
+	width:100%;
+}
+
+/*.tableItems tr {
+	border-bottom: 1px solid lightgrey;
+}*/
+
+.tableItems tr td {
+	padding:3px;
+	font-size: 16px;
+}
+
+.tableItems tr th {
+	padding:3px;
+	font-size: 18px;
+	color:black;
+	text-align: center;
+	border-bottom: 1px solid lightgrey;
+}
+
+.teamTitleSpacing {
+	height:10px;
+	width:100%;
+	background:white;
+}
+
+.teamTitleConf {
+	color:white;
+	padding-left:10px;
+	font-size: 24px;
+	font-style: italic;
+	font-variant: small-caps;
+	letter-spacing: 3px;
+}
+
+.teamTitleDiv {
+	color:white;
+	padding-left:10px;
+	font-size: 18px;
+	font-style: italic;
+	font-variant: small-caps;
+	letter-spacing: 2px;
+}
+
+.afctitle  {
+	background:maroon;
+}
+
+.nfctitle  {
+	background:#000066;
+}
+
+/* teaminfoGrid grid */
+.teaminfoGrid {
+    width: 100%;
+    height: 640px;
+}
+
+/* gameinfoGrid grid */
+.gameinfoGrid {
+    width: 100%;
+    height: 550px;
+}
+
+.teamdetailTableFirstRow {
+	width:20%;
+}
+
+.hallFameParagraph {
+	font-size: 18px;
+}
+
+/*banner stuff*/
+.bannerText  {
+	font-size: 24px;
+	font-family: "Balthazar", Arial, Helvetica, sans-serif;
+}
+
+.bannerTextSmall {
+	font-size: 13px;
+	font-family: "Balthazar", Arial, Helvetica, sans-serif;
+}
+
+/*imgae css*/
+.centeredImage {
+	text-align: center;
+	/*clear: left;*/
+    margin-right: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	width:'100%';
+}
+
+/* all page css */
+.topPagePosition {
+	padding-top:85px;
+}
+
+.pageCaption {
+	padding-left:35px;
+	padding-bottom:25px;
+	/*height: 35px;*/
+/*	padding-top:50px;*/
+	color:maroon;
+	font-weight:600;
+}
+
+.panelCaption {
+	color:teal;
+	font-weight:700;
+}
+
+.panelTable {
+	/*color:teal;*/
+	/*font-weight:700; */
+	line-height: 35px;
+	border-color: white;
+}
+
+.subpanelCaption {
+	color:red;
+	font-weight:600;
+}
+
+.pageStandardOffset {
+	padding-left:35px;
+	padding-right:15px;
+}
+
+.horizontalFieldOffset {
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.objectOffset {
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+.inboxTableFirstRow {
+	width:20%;
+}
+
+.keyrequestsTableFirstRow {
+	width:20%;
+}
+
+.keyrequestDetailTableFirstRow {
+	width:35%;
+}
+
+/* inbox grid */
+.inboxGrid {
+    width: 100%;
+    height: 250px;
+}
+
+/* keyRequestsGrid grid */
+.keyRequestsGrid {
+    width: 100%;
+    height: 250px;
+}
+
+.header-filtered {
+  color: blue;
+}
+
+/*panel images */
+.panel-img {
+    margin-left:auto;
+    margin-right:auto;
+    width:"100%" !important;
+    /*height:350px !important;*/
+}
+
+/*drop down boostrap menus */
+.dropdown :hover {
+    cursor: pointer;
+}
+
+/*Start of bootstrap submenu*/
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+/*End of bootstrap submenu*/
+
+/*boostrap collabsable*/
+.panel-title :hover {
+    cursor: pointer;
+}
+
+.showPointer :hover {
+    cursor: pointer;
+}
+
+#anchorMessage {
+    text-decoration:none;
+    font-style:italic;
+    color:black;
+    font-weight:bold;
+}
+
+#anchorMessage :hover {
+    text-decoration:none;
+    font-style:italic;
+    color:red;
+    font-weight:bold;
+}
+
+
+/*myrv footer*/
+.myrv-footer {
+	/*background:LightSeaGreen;*/
+	background:#BBF7D7;
+	height:525px;
+	color:Silver;
+	font-size:15px;
+	text-decoration: none;
+	font-family:"Lusitana", Arial, Helvetica, sans-serif;
+}
+
+.myrv-footer-text-red {
+	font-style:italic;
+	font-weight:bold;
+	font-size:18px;
+	color:#ff7878;
+}
+
+.myrv-footer-text-green {
+	font-style:italic;
+	font-weight:bold;
+	font-size:18px;
+	color:#74d680;
+}
+
+.myrv-footer-links {
+	font-style:italic;
+	font-weight:700;
+	font-size:18px;
+	color:#006A80;
+	cursor: pointer;
+	font-family: 'Cormorant Garamond', serif;
+	font-variant: small-caps;
+	letter-spacing: 2px;
+}
+
+.myrv-footer-links :hover {
+	font-style:normal;
+	color:#972C46;
+	cursor: pointer;
+}
+
+
+/* myrv paragraph text large */
+.myrv-paragraph {
+	color:grey;
+	font-size:18px;
+	font-weight:300;
+	/*font-family:"Lusitana", Arial, Helvetica, sans-serif;*/
+	padding:15px;
+}
+
+.myrv-paragraph-header-large {
+	color:black;
+	font-size:18px;
+	font-weight:600;
+	/*font-family:"Lusitana", Arial, Helvetica, sans-serif;*/
+}
+
+.myrv-paragraph-large {
+	color:black;
+	font-size:20px;
+	font-weight:300;
+	/*font-family:Verdana, Arial, Helvetica, sans-serif;*/
+}
+
+.myrv-paragraph-large li {
+	padding-top:10px;
+}
+
+/*Angular-ChartJS */
+.chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+.teamStatsChart {
+    /*width: 500px;*/
+    height: 300px;
+}
