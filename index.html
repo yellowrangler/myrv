@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="css/dropzone/basic.css">
 <link rel="stylesheet" href="css/dropzone/dropzone.css">
 
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+<!-- <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" /> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps:400,700'|Damion|Pacifico|Lusitana|Tangerine|Cormorant+Garamond|Balthazar|Indie+Flower|Josefin+Sans|Lato:100,300,400,700|Open+Sans:300,300i" type="text/css" rel="stylesheet" >
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/aileron" type="text/css"/>
 <link href="css/myrv.css" rel="stylesheet" />
@@ -27,9 +28,13 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-touch.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.19/angular-ui-router.js"></script> -->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-sanitize.js"></script>
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <!-- <script src="script/jquery.snow.js"></script> -->
 <!-- <script src="script/parallax-js/parallax.js"></script> -->
 <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
@@ -50,18 +55,19 @@
 <!-- controllers  -->
 <script src="app/controllers/firstController.js"></script>
 <script src="app/controllers/parenthomeController.js"></script>
+<script src="app/controllers/memberController.js"></script>
 <script src="app/controllers/lastController.js"></script>
 <!-- factories  -->
 <script src="app/factories/loginfactory.js"></script>
-<!-- <script src="app/factories/membersfactory.js"></script> -->
+<script src="app/factories/memberfactory.js"></script>
 <!-- services  -->
 <script src="app/services/msgservice.js"></script>
 <script src="app/services/loginservice.js"></script>
 <!-- <script src="app/services/chartservice.js"></script> -->
 <script src="app/services/selectlistservice.js"></script>
 
-<!-- <script src="app/directives/directives.js"></script>
-<script src="app/validations/validate.js"></script> -->
+<script src="app/directives/directives.js"></script>
+<script src="app/validations/validate.js"></script>
 
 <!-- <script src="script/snow/js/snow.js"></script> -->
 <script src="script/myrv.js"></script>
@@ -109,11 +115,25 @@
             <ul class="nav navbar-nav">
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
+                    <img id="teamnavimg" name="navImage" class="img-responsive imgButtonNav" style="height:95px;" src="img/buttons/myrvreview.png">
+                    <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a class="collapsableNavbar" href="#/reviewtrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewmemberprofile">My Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewvehicleinformation">My Vehicle Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewvcalander">My Calander</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="menuItems dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">
                     <img id="myrvsetup" name="navImage" class="img-responsive imgButtonNav" style="height:95px;"  src="img/buttons/myrvsetup.png">
                     <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/setupmember">Member Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/setuptrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/membersetupmember">Member Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/membersetuptrip">Trips</a></li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Vehicles</a>
                             <ul class="dropdown-menu">
@@ -134,16 +154,54 @@
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav">
+            <ul id="adminselect" class="nav navbar-nav">
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
-                    <img id="teamnavimg" name="navImage" class="img-responsive imgButtonNav" style="height:95px;" src="img/buttons/myrvreview.png">
+                    <img id="adminnavimg" name="navImage" class="img-responsive imgButtonNav" src="img/buttons/admin.png">
                     <b class="caret"></b></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/reviewtrip">Trips</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewmemberprofile">My Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvehicleinformation">My Vehicle Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvcalander">My Calander</a></li>
+                    <ul role="menu" class="dropdown-menu multi-level" aria-labelledby="dropdownMenu">
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Team Management</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/teaminfo">Team Information</a></li>
+                                <li><a class="collapsableNavbar" href="#/teamseasoninfo">Team Season Information</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li role="presentation" class="divider"></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Game Management</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/gameinfo">Set Game Day Full</a></li>
+                                <li><a class="collapsableNavbar" href="#/gamenetworkinfo">Set Game Networks</a></li>
+                                <li><a class="collapsableNavbar" href="#/gameteamscoresinfo">Set Game Scores</a></li>
+                                <li><a class="collapsableNavbar" href="#/gameteamdatetimeinfo">Set Game DateTime</a></li>
+                                <li><a class="collapsableNavbar" href="#/gameranking">Game Week Ranking </a></li>
+                            </ul>
+                        </li>
+                        
+                        <li role="presentation" class="divider"></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Member Management</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/addmember">Member Add</a></li>
+                                <li><a class="collapsableNavbar" href="#/updatemember">Member Manage</a></li>
+                                <li><a class="collapsableNavbar" href="#/addavatar">Member Avatar</a></li>
+                                <li><a class="collapsableNavbar" href="#/sendplayeremail">Member(s) eMail</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li role="presentation" class="divider"></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Group Management</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/addmembergroup">Group Add</a></li>
+                                <li><a class="collapsableNavbar" href="#/updatemembergroup">Group Manage</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li role="presentation" class="divider"></li>
+                        <li><a class="collapsableNavbar" href="#/weeklyscripts">System Scripts</a></li>
                     </ul>
                 </li>
             </ul>
@@ -151,7 +209,7 @@
             <ul  class="nav navbar-nav pull-right" >
                 <li style="text-align:center;padding-top:30px;padding-right:20px;">
                     <div>
-                    <a id="menubaravatarimage" name="menubaravatarimage" class="collapsableNavbar" href="#/memberupdatemember">
+                    <a id="menubaravatarimage" name="menubaravatarimage" class="collapsableNavbar" href="#/membersetupmember">
                     <img id="avatarnavimg" name="navAvatarImage" class="img-circle imgAvatarNav" ng-show="memberavatar != ''" ng-src="img/avatars/{{memberavatar}}">
                     </a>
                     <br />
@@ -207,13 +265,28 @@
             <ul class="nav navbar-nav">
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
+                        <img style="vertical-align:middle;height:25px;display:inline;" class="" src="img/buttons/myrvreview.png"><span style="padding-left:5px;">Review
+                        <b class="caret"></b>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a class="collapsableNavbar" href="#/reviewtrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewmemberprofile">My Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewvehicleinformation">My Vehicle Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/reviewvcalander">My Calander</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li class="menuItems dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">
                         <img style="vertical-align:middle;height:25px;display:inline;" class="" src="img/buttons/myrvsetup.png"><span style="padding-left:5px;">Setup</span>
                    
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/setupmember">Member Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/setuptrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/membersetupmember">Member Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/membersetuptrip">Trips</a></li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Vehicles</a>
                             <ul class="dropdown-menu">
@@ -230,21 +303,6 @@
                             </ul>
                         </li>
                         <li><a class="collapsableNavbar" href="#/setupcalander">Calander</a></li>    
-                    </ul>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav">
-                <li class="menuItems dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle">
-                        <img style="vertical-align:middle;height:25px;display:inline;" class="" src="img/buttons/myrvreview.png"><span style="padding-left:5px;">Review
-                        <b class="caret"></b>
-                    </a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/reviewtrip">Trips</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewmemberprofile">My Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvehicleinformation">My Vehicle Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvcalander">My Calander</a></li>
                     </ul>
                 </li>
             </ul>
@@ -305,7 +363,7 @@
             <ul  class="nav navbar-nav pull-right" >
                 <li style="text-align:center;padding-top:18px;padding-right:20px;">
                     <div ng-show="memberavatar != ''" >
-                        <a id="menubaravatarimageshort" name="menubaravatarimageshort" style="color:crimson;text-decoration:none;font-weight:bold;" class="collapsableNavbar" href="#/memberupdatemember">
+                        <a id="menubaravatarimageshort" name="menubaravatarimageshort" style="color:crimson;text-decoration:none;font-weight:bold;" class="collapsableNavbar" href="#/membersetupmember">
                             {{memberscreenname}}
                         </a>
                         <br />
@@ -316,7 +374,7 @@
         </div> <!-- end of navbar  -->
     </div> <!-- end of container fluid -->            
 </nav>
-<div id="myrv-view" style="padding-top:130px; padding-bottom:170px;background:white;" data-ng-view="" class="topPagePosition"></div>
+<div id="myrv-view" name="myrv-view" style="padding-top:150px; padding-bottom:170px;background:white;" data-ng-view="" class="topPagePosition"></div>
 
 <div class="myrv-footer">
 	<div class="container-fluid" style="padding-top:15px;">

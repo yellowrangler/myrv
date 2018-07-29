@@ -56,7 +56,7 @@ if (!mysql_select_db($DBschema, $dbConn))
 //---------------------------------------------------------------
 // Try to login
 //---------------------------------------------------------------
-$sql = "SELECT id AS memberid,screenname,membername,avatar,password,role,status 
+$sql = "SELECT id AS memberid, email, screenname, membername, avatar, password, role, status 
 FROM membertbl  
 WHERE email = '$email' AND password ='$password' AND status = 'active'";
 // print $sql;
@@ -90,6 +90,7 @@ if ($rc == 1)
 		$tblmembername = $row['membername'];
 		$tblavatar = $row['avatar'];
 		$tblrole = $row['role'];
+		$tblemail = $row['email'];;
 
 		$msgtext = "Hi $tblmembername, You are now logged in to MY RV!";
     }

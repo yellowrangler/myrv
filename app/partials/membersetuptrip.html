@@ -1,0 +1,260 @@
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Manage Your Trip & Waypoint Information</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="pageStandardOffset row">
+    <div class="col-md-5">
+        <div style="padding-bottom:35px;" class="form-group">
+            <label for="membertrips" style="text-align:right;" class="col-md-5">Trips</label>
+            <div class="col-md-6  form-inline">
+                <select tabindex="1" class="form-control" ng-change="getMemberTrip(current.tripid)" ng-model="current.tripid" id="membertrips" name="membertrips" >
+                    <option value="Not Selected">Not Selected</option>
+                    <option ng-repeat="trip in membertrips" ng-selected="current.tripid == trip.id" value="{{trip.id}}">{{trip.tripname}}</option>
+                </select>
+                
+                <div style="padding-left:15px;display:inline;" class="">
+                    <button style="width:20%;" class="btn btn-info btn-sm" ng-click="newTrip()" id="newTripButton">New</button>
+                </div>
+                
+            </div> <!-- end of col 6 -->
+        </div> <!-- end of form-group -->
+
+        <div style="padding-top:25px;" class="panel panel-default">
+            <form id="membersetuptripForm" name="membersetuptripForm" style="padding:5px;" class="form-horizontal">
+                <div class="form-group" >
+                    <label for="membername" class="col-md-4 control-label">Trip</label>
+                    <div class="col-md-7">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.trip.tripname" id="tripname" name="tripname" placeholder="Trip name">
+                    </div> <!-- end of col -->
+
+                    <input type="hidden" value="{{current.trip.id}}" id="tripid" name="tripid">
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <div class="col-md-offset-4 col-md-7">
+                        <input tabindex="" type="checkbox" ng-model="current.trip.currenttrip" ng-checked="current.trip.currenttrip == '1'" id="currenttrip" name="currenttrip"> This is current trip
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startdate" class="col-md-4 control-label">Start Date</label>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.trip.startdate" id="startdate" name="startdate"  myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="enddate" class="col-md-4 control-label">End Date</label>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.trip.enddate" id="enddate" name="enddate"  myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startdate" class="col-md-4 control-label">Start Location</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.trip.startlocation" id="startlocation" name="startlocation" placeholder="Start Location">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="endlocation" class="col-md-4 control-label">End Location</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.trip.endlocation" id="endlocation" name="endlocation" placeholder="End Location">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startodometer" class="col-md-4 control-label">Start Odometer</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.trip.startodometer" id="startodometer" name="startodometer" placeholder="Start Odometer">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="endodometer" class="col-md-4 control-label">End Odometer</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.trip.endodometer" id="endodometer" name="endodometer" placeholder="End Odometer">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startlatitude" class="col-md-4 control-label">Start Latitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" class="form-control" ng-model="current.trip.startlatitude" id="startlatitude" name="startlatitude" placeholder="Start Latitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startlongitude" class="col-md-4 control-label">Start Longitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.trip.startlongitude" id="startlongitude" name="startlongitude" placeholder="Start Longitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="endlatitude" class="col-md-4 control-label">End Latitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" class="form-control" ng-model="current.trip.endlatitude" id="endlatitude" name="endlatitude" placeholder="End Latitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="endlongitude" class="col-md-4 control-label">End Longitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.trip.endlongitude" id="endlongitude" name="endlongitude" placeholder="End Longitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div style="padding-top:15px;" class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <button style="width:20%;" class="btn btn-info btn-sm" ng-click="updateMemberTrip()" id="updateButton">Save</button>
+                        
+                        <span style="padding-left:45px;">&nbsp;</span>
+                        <button style="width:20%;" class="btn btn-danger btn-sm" ng-click="DeleteMemberTrip()" id="deleteButton">Delete</button>
+                    </div> <!-- end of col -->
+                </div> <!-- end of form-group --> 
+            </form>
+        </div> <!-- end of panel panel -->
+    </div> <!-- end of div col md 4 -->
+
+    <div style="height:400px;" ng-hide="current.tripid" class="col-md-5">
+    
+        <div style="padding-top:35%;text-align:center;">
+            <h3> Select a trip and Waypoints will appear here</h3>
+        </div>
+
+    </div>
+
+    <div ng-hide="!current.tripid" class="col-md-5">
+        <div style="padding-bottom:35px;" class="form-group">
+            <label for="membertripwaypoints" style="text-align:right;" class="col-md-5">Waypoints</label>
+            <div class="col-md-6  form-inline">
+                <select tabindex="1" class="form-control" ng-change="getMemberTripWaypoint(current.tripid, current.waypointid)" ng-model="current.waypointid" id="membertripwaypoints" name="membertripwaypoints" >
+                    <option value="Not Selected">Not Selected</option>
+                    <option ng-repeat="waypoint in membertripwaypoints" ng-selected="current.waypointid == waypoint.id" value="{{waypoint.id}}">{{waypoint.sequencenumber}} {{waypoint.waypointname}}</option>
+                </select>
+                
+                <div style="padding-left:15px;display:inline;" class="">
+                    <button style="width:20%;" class="btn btn-info btn-sm" ng-click="newTripWaypoint()" id="newTripWaypointButton">New</button>
+                </div>
+                
+            </div> <!-- end of col 6 -->
+        </div> <!-- end of form-group -->
+
+        <div style="padding-top:25px;" class="panel panel-default">
+            <form id="membersetuptripwaypointForm" name="membersetuptripwaypointForm" style="padding:5px;" class="form-horizontal">
+                <div class="form-group" >
+                    <label for="membername" class="col-md-4 control-label">Waypoint Name</label>
+                    <div class="col-md-7">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.waypoint.waypointname" id="waypointname" name="waypointname" placeholder="Waypointname name">
+                    </div> <!-- end of col -->
+
+                    <input type="hidden" value="{{current.waypoint.id}}" id="waypointid" name="waypointid">
+                    <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="startdate" class="col-md-4 control-label">Order Number</label>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.waypoint.sequencenumber" id="sequencenumber" name="sequencenumber" placeholder="Order Nbr">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="waypointdate" class="col-md-4 control-label">Arrive Date</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.waypointdate" id="waypointdate" name="waypointdate"  myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="duration" class="col-md-4 control-label">Duration</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.duration" id="duration" name="duration" placeholder="Duration">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="address" class="col-md-4 control-label">Address</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.address" id="address" name="address" placeholder="Address">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="city" class="col-md-4 control-label">City</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.city" id="city" name="city" placeholder="City">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="state" class="col-md-4 control-label">State</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.state" id="state" name="state" placeholder="State">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="estimatedmiles" class="col-md-4 control-label">Estimated miles</label>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.waypoint.estimatedmiles" id="estimatedmiles" name="estimatedmiles" placeholder="Est miles from prev waypoint">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="latitude" class="col-md-4 control-label">Latitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" class="form-control" ng-model="current.waypoint.latitude" id="latitude" name="latitude" placeholder="Latitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="longitude" class="col-md-4 control-label">Longitude</label>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.waypoint.longitude" id="longitude" name="longitude" placeholder="Longitude">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="biography" class="col-md-4 control-label">Comments</label>
+                    <div class="col-md-7">
+                        <textarea tabindex="12" class="form-control" ng-model="current.waypoint.comments" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div style="padding-top:15px;" class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <button style="width:20%;" class="btn btn-info btn-sm" ng-click="updateMemberTripWaypoint()" id="updateButton">Save</button>
+                        
+                        <span style="padding-left:45px;">&nbsp;</span>
+                        <button style="width:20%;" class="btn btn-danger btn-sm" ng-click="DeleteMemberTripWaypoint()" id="deleteButton">Delete</button>
+                    </div> <!-- end of col -->
+                </div> <!-- end of form-group --> 
+            </form>
+        </div> <!-- end of panel panel -->
+    </div> <!-- end of div col md 5 -->
+</div> <!-- end of row -->
+
+<!-- dialogs -->
+<div class="modal fade" id="tripSetupMemberDialogModal" tabindex="-1" role="dialog" aria-labelledby="tripSetupMemberDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="tripSetupMemberDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="tripSetupMemberDialogModalBody"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

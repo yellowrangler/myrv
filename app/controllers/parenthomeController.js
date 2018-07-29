@@ -18,7 +18,7 @@ controllers.myrvParentController = function ($scope, $http, $window, $route, $lo
     }
 
     function showPicture() {
-        $('#homePicShowModalTitle').text("Playoff Brackets 2017!");
+        $('#homePicShowModalTitle').text("");
         $('#homePicShowModal').modal();
     }
 
@@ -67,6 +67,12 @@ controllers.myrvParentController = function ($scope, $http, $window, $route, $lo
     function init() {
         $scope.current = {};
         $scope.bigNavbar = true;
+
+        var ua = getUserAgent();
+        $scope.current.devicename = ua.deviceName; 
+        $scope.current.devicetype = ua.deviceType;   
+
+        $scope.mobileDevice = isMobile();
 
         setviewpadding();
 
