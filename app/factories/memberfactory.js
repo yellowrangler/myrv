@@ -19,6 +19,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.deletememberTrip = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembertrip.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.getMembertrips = function (data) {
         return $http({ 
             method: 'POST', 
@@ -41,6 +50,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         return $http({ 
             method: 'POST', 
             url: "app/ajax/savemembertripwaypoint.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deletememberTripWaypoint = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembertripwaypoint.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

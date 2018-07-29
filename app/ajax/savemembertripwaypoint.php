@@ -78,6 +78,7 @@ if (!mysql_select_db($DBschema, $dbConn))
 //---------------------------------------------------------------
 // update an existing trip. Insert a new one
 //---------------------------------------------------------------
+$sqlFunction = "";
 if ($waypointid == "")
 {
 	// insert new trip
@@ -87,6 +88,8 @@ if ($waypointid == "")
 	VALUES 
 	($memberid,'$tripid','$sequencenumber','$waypointname','$type','$address','$city',
 	 '$state','$estimatedmiles','$latitude','$longitude','$waypointdate','$duration','$comments','$enterdate')";
+
+	 $sqlFunction = "insert";
 }
 else
 {
@@ -110,6 +113,8 @@ else
 		comments='$comments',
 	    lastupdate = '$enterdate' 
 	WHERE memberid = $memberid AND tripid = $tripid AND id = $waypointid";
+
+	$sqlFunction = "update";
 }
 
 // print $sql;
@@ -127,6 +132,14 @@ if (!$sql_result)
     $msgtext = "System Error: $sqlerr";
 }
 
+//
+// get id if insert
+//
+if ($sqlFunction == "insert")
+{
+	$waypointid = mysql_insert_id();
+}
+
 
 //
 // close db connection
@@ -136,6 +149,10 @@ mysql_close($dbConn);
 //
 // pass back info
 //
-exit($msgtext);
+$msg["msgtext"] = $msgtext;
+$msg["waypointid"] = $waypointid;
+$msg["waypointname"] = $waypointname;
+
+exit(json_encode($msg));
 
 ?>

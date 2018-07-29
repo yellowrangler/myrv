@@ -103,6 +103,7 @@ if ($currenttrip == 1) {
 //---------------------------------------------------------------
 // update an existing trip. Insert a new one
 //---------------------------------------------------------------
+$sqlFunction = "";
 if ($tripid == "")
 {
 	// insert new trip
@@ -112,6 +113,8 @@ if ($tripid == "")
 	VALUES 
 	($memberid,'$tripname','$currenttrip','$startodometer','$startdate','$startlocation','$startlatitude',
 	 '$startlongitude','$endodometer','$endlocation','$endlatitude','$endlongitude','$enddate','$enterdate')";
+
+	 $sqlFunction = "insert";
 }
 else
 {
@@ -133,6 +136,8 @@ else
 	    enddate = '$enddate',
 	    lastupdate = '$enterdate' 
 	WHERE memberid = $memberid AND id = $tripid";
+
+	$sqlFunction = "update";
 }
 
 // print $sql;
@@ -150,6 +155,16 @@ if (!$sql_result)
     $msgtext = "System Error: $sqlerr";
 }
 
+//
+// get id if insert
+//
+if ($sqlFunction == "insert")
+{
+	$tripid = mysql_insert_id();
+}
+
+// print "sqlFunction=$sqlFunction   :   tripid=$tripid";
+// die();
 
 //
 // close db connection
@@ -159,6 +174,10 @@ mysql_close($dbConn);
 //
 // pass back info
 //
-exit($msgtext);
+$msg["msgtext"] = $msgtext;
+$msg["tripid"] = $tripid;
+$msg["tripname"] = $tripname;
+
+exit(json_encode($msg));
 
 ?>
