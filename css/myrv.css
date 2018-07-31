@@ -120,8 +120,23 @@
 }
 
 .navImageMYRV {
-	padding-right:20px;
+	padding-right:10px;
 	padding-left:20px;
+	display:inline;
+}
+
+.navImageTextMYRVLogo {
+	font-size:22px; 
+	color:teal;
+	margin: 0 0;
+	padding-right:45px;
+	text-align:center;
+}
+
+.navImageTextMYRVButton {
+	font-size:18px; 
+	color:teal;
+/*	margin: 0 0;*/
 }
 
 .imgButtonNav {
@@ -358,6 +373,10 @@
 	text-align:center;
 }
 
+.panelTitlelMYRV {
+	text-align:center;
+	font-weight:700;
+}
 
 .iconImage {
 	height: 50px;

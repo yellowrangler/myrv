@@ -205,6 +205,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     }
 
     function getMemberTripWaypoint(waypointid) {
+        $scope.current.waypointid = waypointid;
 
         for (var i = 0; i < $scope.membertripwaypoints.length; i++)
         {
