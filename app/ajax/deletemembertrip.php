@@ -10,6 +10,7 @@ include_once ('../class/class.AccessLog.php');
 
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
+$tripname = $_POST['tripname'];
 
 //
 // get date time for this transaction
@@ -85,7 +86,7 @@ if ($currenttrip == 1) {
 //---------------------------------------------------------------
 // delete an existing trip. 
 //---------------------------------------------------------------
-$sql = "DELETE triptbl 
+$sql = "DELETE FROM triptbl 
 WHERE memberid = $memberid AND id = $tripid";
 
 // print $sql;

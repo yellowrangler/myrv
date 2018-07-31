@@ -11,8 +11,19 @@ include_once ('../class/class.AccessLog.php');
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
 $tripname = $_POST['tripname'];
-$startdate = $_POST['startdate'];
-$enddate = $_POST['enddate'];
+
+$startdate = "";
+if (!empty($_POST['startdate'])) 
+{
+	$startdate = date("Y-m-d", strtotime($_POST['startdate']) );
+}
+
+$enddate = "";
+if (!empty($_POST['enddate'])) 
+{
+	$enddate = date("Y-m-d", strtotime($_POST['enddate']) );
+}
+
 $startodometer = $_POST['startodometer'];
 $endodometer = $_POST['endodometer'];
 $startlocation =  $_POST['startlocation'];

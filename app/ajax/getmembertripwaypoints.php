@@ -94,6 +94,17 @@ if (!$sql_result)
 //
 $waypoints = array();
 while($r = mysql_fetch_assoc($sql_result)) {
+	$var = explode("-",$r[waypointdate]);
+	if (checkdate($var[1], $var[2], $var[0]))
+	{
+		$date = date("m/d/Y", strtotime($r[waypointdate]) );
+	}
+	else
+	{
+		$date = "";
+	}
+	$r[waypointdate] = $date;
+	
     $waypoints[] = $r;
 }
 

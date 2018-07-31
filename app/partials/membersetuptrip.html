@@ -5,19 +5,28 @@
 </div> <!-- end of row -->
 
 <div class="pageStandardOffset row">
-    <div class="col-md-4">
-        <div style="padding-bottom:35px;" class="form-group">
-            <label for="membertrips" style="text-align:right;" class="col-md-3">Trips</label>
-            <div class="col-md-8  form-inline">
-                <select tabindex="1" class="form-control" ng-change="getMemberTrip(current.tripid)" ng-model="current.tripid" id="membertrips" name="membertrips" >
-                    <option value="Not Selected">Not Selected</option>
-                    <option ng-repeat="trip in membertrips" ng-selected="current.tripid == trip.id" value="{{trip.id}}">{{trip.tripname}}</option>
-                </select>
-                
-                <div style="padding-left:15px;display:inline;" class="">
-                    <button style="width:20%;" class="btn btn-info btn-sm" ng-click="newTrip()" id="newTripButton">New</button>
-                </div>
-            </div> <!-- end of col 6 -->
+    <div class="col-md-3">
+        <div style="padding-bottom:55px;">
+            <label for="membertripwaypoints" style="text-align:center;" class="col-md-12">Trip List</label>
+        </div><!-- end row -->
+        <div ng-hide="membertrips==''" style="overflow:auto;height:790px;" class="panel panel-default">
+            <div style="padding-left:10px;padding-top:5px;padding-bottom:5px;" ng-repeat="trip in membertrips" ng-click=getMemberTrip(trip.id)><span ng-class-odd="'oddnItem'" ng-class-even="'evenItem'">{{trip.tripname}}</span>
+            </div> 
+        </div>
+
+        <div ng-hide="membertrips!=''" style="overflow:auto;" class="panel panel-default">
+            <div style="padding-top:30px;padding-bottom:30px;">
+                <span style="padding-left:30%;font-weight:500;color:maroon">No Trips</span>
+            </div>   
+        </div>
+    </div> 
+
+    <div class="col-md-3">
+        <div style="padding-bottom:10px;" class="form-group">
+            <label for="membertrips" style="text-align:right;" class="col-md-7">Trip Detail</label>
+            <div style="padding-left:15px;display:inline;" class="">
+                <button class="btn btn-info btn-sm" ng-click="newTrip()" id="newTripButton">New</button>
+            </div>
         </div> <!-- end of form-group -->
 
         <form id="membersetuptripForm" name="membersetuptripForm" style="padding:5px;" class="form-horizontal">
@@ -120,11 +129,11 @@
             </div> <!-- end of inner pannel -->
 
             <div style="padding-top:15px;" class="form-group">
-                <div class="col-sm-offset-3 col-sm-10">
-                    <button style="width:20%;" class="btn btn-info btn-sm" ng-click="updateMemberTrip()" id="updateButton">Save</button>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button style="" class="btn btn-info btn-sm" ng-click="updateMemberTrip()" id="updateButton">Save</button>
                     
-                    <span style="padding-left:45px;">&nbsp;</span>
-                    <button style="width:20%;" class="btn btn-danger btn-sm" ng-click="DeleteMemberTrip()" id="deleteButton">Delete</button>
+                    <span style="padding-left:15px;">&nbsp;</span>
+                    <button style="" class="btn btn-danger btn-sm" ng-click="DeleteMemberTrip()" id="deleteButton">Delete</button>
                 </div> <!-- end of col -->
             </div> <!-- end of form-group -->                     
         </form>
@@ -143,7 +152,8 @@
             <label for="membertripwaypoints" style="text-align:center;" class="col-md-12">Waypoint List</label>
         </div><!-- end row -->
         <div ng-hide="membertripwaypoints==''" style="overflow:auto;height:790px;" class="panel panel-default">
-            <div style="padding-left:10px;padding-top:5px;padding-bottom:5px;" ng-repeat="waypoint in membertripwaypoints" ng-click="getMemberTripWaypoint(waypoint.tripid,waypoint.id)">{{waypoint.waypointname}}</div> 
+            <div style="padding-left:10px;padding-top:5px;padding-bottom:5px;" ng-repeat="waypoint in membertripwaypoints" ng-click="getMemberTripWaypoint(waypoint.tripid,waypoint.id)"><span ng-class-odd="'oddnItem'" ng-class-even="'evenItem'">{{waypoint.waypointname}}</span>
+            </div> 
         </div>
 
         <div ng-hide="membertripwaypoints!=''" style="overflow:auto;" class="panel panel-default">
@@ -156,7 +166,7 @@
     <div ng-hide="!current.tripid" class="col-md-4">
         <form id="membersetuptripwaypointForm" name="membersetuptripwaypointForm" style="padding:5px;" class="form-horizontal">
             <div style="padding-bottom:50px;">
-            <label for="membertripwaypoints" style="text-align:right;" class="col-md-5">Waypoint Details</label>
+            <label for="membertripwaypoints" style="text-align:right;" class="col-md-5">Waypoint Detail</label>
                 
             <div style="padding-left:15px;display:inline;" class="col-md-6">
                 <button  class="btn btn-info btn-sm" ng-click="newTripWaypoint()" id="newTripWaypointButton">New</button>

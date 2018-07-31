@@ -97,6 +97,7 @@ if ($rc == 1)
     else 
     { 
         $msgtext = "Unable to Log you in!";
+        $rc = 0;
     }
 }
 

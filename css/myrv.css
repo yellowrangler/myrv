@@ -437,100 +437,6 @@
 	vertical-align:middle;
 }
 
-.pickGameTable  {
-	width: 100%;
-}
-
-.pickGameTable  th {
-	text-align: center;
-	vertical-align: middle;
-	/*color: #6C0000;*/
-	font-size: 16px;
-	font-weight: bold;
-	/*border-top: 1px solid red;*/
-	/*border-bottom: 2px solid #6C0000;*/
-}
-
-.pickGameTable td  {
-	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.pickGameTable tr  {
-	line-height: 35px;
-}
-
-.teamWeekRankTable  {
-	width: 100%;
-}
-
-.teamWeekRankTable  th {
-	text-align: center;
-	vertical-align: middle;
-	/*color: #6C0000;*/
-	font-size: 12px;
-	font-weight: bold;
-	/*border-top: 1px solid red;*/
-	/*border-bottom: 2px solid #6C0000;*/
-}
-
-.teamWeekRankTable td  {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.teamWeekRankTable td input {
-	height:20px;
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.teamWeekRankTable tr  {
-	line-height: 25px;
-}
-
-.teamWeeklyRankings  {
-	/*width: 100%; */
-}
-
-.teamWeeklyRankings  th {
-	text-align: center;
-	vertical-align: middle;
-	/*color: #6C0000;*/
-	font-size: 14px;
-	font-weight: bold;
-	/*border-top: 1px solid red;*/
-	/*border-bottom: 2px solid #6C0000;*/
-}
-
-.teamWeeklyRankings td  {
-	font-size: 16px;
-	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.teamWeeklyRankings tr  {
-	line-height: 35px;
-}
-
-
-.TeamWeeklyRankingsInfoTable  {
-	width: 100%;
-	background-color:white;
-	border:2px solid white;
-	overflow-x: scroll;
-}
-
-.TeamWeeklyRankingsTableItemsCenter   {
-	text-align: center;
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: bold;
-}
-
-.TeamWeeklyRankingsTable tr  {
-	line-height: 35px;
-}
 
 .miscTitle {
 	background-color:#058689;
@@ -621,32 +527,12 @@
 	font-size: 26px;
 }
 
-.teamSelected  {
-	background-color: maroon;
-	color:white;
-	border:1px solid maroon;
+.evenItem  {
+	color: #F74E7F;
 }
 
-.expertRole  {
-	color:#8c072a;
-	text-align: left;
-	vertical-align:middle;
-	background-color: #f7edef;
-}
-
-.teamWon  {
-	background-color: #006600;
-	color:white;
-	border:1px solid white;
-}
-
-.teamLost  {
-	color:black;
-}
-
-.teamNotSelected  {
-	background-color: white;
-	color:black;
+.oddnItem  {
+	color:teal;
 }
 
 .menuItems {

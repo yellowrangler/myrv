@@ -88,6 +88,28 @@ if (!$sql_result)
 //
 $trips = array();
 while($r = mysql_fetch_assoc($sql_result)) {
+	$var = explode("-",$r[startdate]);
+	if (checkdate($var[1], $var[2], $var[0]))
+	{
+		$date = date("m/d/Y", strtotime($r[startdate]) );
+	}
+	else
+	{
+		$date = "";
+	}
+	$r[startdate] = $date;
+
+	$var = explode("-",$r[enddate]);
+	if (checkdate($var[1], $var[2], $var[0]))
+	{
+		$date = date("m/d/Y", strtotime($r[enddate]) );
+	}
+	else
+	{
+		$date = "";
+	}
+	$r[enddate] = $date;
+
     $trips[] = $r;
 }
 

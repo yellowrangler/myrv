@@ -20,7 +20,13 @@ $state = $_POST['state'];
 $estimatedmiles =  $_POST['estimatedmiles'];
 $latitude = $_POST['latitude'];
 $longitude = $_POST['longitude'];
-$waypointdate = $_POST['waypointdate'];
+
+$waypointdate = "";
+if (!empty($_POST['waypointdate'])) 
+{
+	$waypointdate = date("Y-m-d", strtotime($_POST['waypointdate']) );
+}
+
 $duration = $_POST['duration'];
 $comments = $_POST['comments'];
 

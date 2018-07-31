@@ -11,6 +11,7 @@ include_once ('../class/class.AccessLog.php');
 $memberid = $_POST['memberid'];
 $tripid = $_POST['tripid'];
 $waypointid = $_POST['waypointid'];
+$waypointname = $_POST['waypointname'];
 
 //
 // get date time for this transaction
