@@ -206,6 +206,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
     function getMemberTripWaypoint(waypointid) {
         $scope.current.waypointid = waypointid;
+        console.log("wapoint get:"+waypointid);
 
         for (var i = 0; i < $scope.membertripwaypoints.length; i++)
         {
@@ -238,6 +239,10 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             {
                 $scope.current.waypointid = data.waypointid;
                 $scope.current.waypointname = data.waypointname;
+
+                
+                $scope.membertripwaypoints = "";
+                getMemberTripWaypoints();
 
                 console.log("after return tripid="+$scope.current.tripid);
 
@@ -319,12 +324,18 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     };
 
     $scope.getMemberTrip = function (tripid) {
+        $scope.current.waypointid = "";
+        $scope.membertripwaypoints = "";
+
+        resetTripWaypointForm()
+
         getMemberTrip(tripid);
 
         getMemberTripWaypoints();
     }
 
     $scope.newTrip = function () {
+        resetTripWaypointForm();
         resetTripForm();
     }
 
@@ -340,6 +351,8 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     $scope.DeleteMemberTrip = function () {
         DeleteMemberTrip();
 
+        resetTripWaypointForm()
+
         resetTripForm();
     }
 
@@ -349,9 +362,6 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     
     $scope.updateMemberTripWaypoint = function () {
         updateMemberTripWaypoint();
-
-        $scope.membertripwaypoints = "";
-        getMemberTripWaypoints();
     }
 
     $scope.DeleteMemberTripWaypoint = function() {
