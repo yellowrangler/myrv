@@ -7,7 +7,6 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-
 $memberid = $_POST['memberid'];
 $tripid = $_POST['tripid'];
 $waypointid = $_POST['waypointid'];
@@ -61,21 +60,11 @@ $DBpassword = "tarryc";
 //
 // connect to db
 //
-$dbConn = @mysql_connect($DBhost, $DBuser, $DBpassword);
-if (!$dbConn) 
+$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
+if ($mysqli->connect_errno) 
 {
 	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to save member trip waypoint information.");
-
-	$rv = "";
-	exit($rv);
-}
-
-if (!mysql_select_db($DBschema, $dbConn)) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
+	$dberr = mysqli_connect_error();
 	$log->writeLog("DB error: $dberr - Error selecting db Unable to save member trip waypoint information.");
 
 	$rv = "";
@@ -128,11 +117,11 @@ else
 // print $sql;
 // exit();
 
-$sql_result = @mysql_query($sql, $dbConn);
-if (!$sql_result)
+$result = $mysqli->query($sql);
+if (!$result) 
 {
     $log = new ErrorLog("logs/");
-    $sqlerr = mysql_error();
+	$sqlerr = $mysqli->errno();
     $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to save member $memberid trip waypoint information.");
     $log->writeLog("SQL: $sql");
 
@@ -145,14 +134,14 @@ if (!$sql_result)
 //
 if ($sqlFunction == "insert")
 {
-	$waypointid = mysql_insert_id();
+	$waypointid = $mysqli->insert_id;
 }
 
 
 //
 // close db connection
 //
-mysql_close($dbConn);
+$mysqli->close();
 
 //
 // pass back info

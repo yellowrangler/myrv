@@ -32,22 +32,12 @@ $DBpassword = "tarryc";
 //
 // connect to db
 //
-$dbConn = @mysql_connect($DBhost, $DBuser, $DBpassword);
-if (!$dbConn)
+$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
+if ($mysqli->connect_errno) 
 {
-	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to signin for myrv email $email.");
-
-	$rv = "";
-	exit($rv);
-}
-
-if (!mysql_select_db($DBschema, $dbConn))
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error selecting db Unable to signin for myrv email $email.");
+    $log = new ErrorLog("logs/");
+	$dberr = mysqli_connect_error();
+	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to connect for myrv email $email.");
 
 	$rv = "";
 	exit($rv);
@@ -63,11 +53,11 @@ WHERE email = '$email' AND password ='$password' AND status = 'active'";
 // exit();
 
 $rc = 1;
-$sql_result = @mysql_query($sql, $dbConn);
-if (!$sql_result)
+$result = $mysqli->query($sql);
+if (!$result) 
 {
-	$log = new ErrorLog("logs/");
-	$sqlerr = mysql_error();
+    $log = new ErrorLog("logs/");
+	$sqlerr = $mysqli->errno();
 	$log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to signin for myrv email $email.");
 	$log->writeLog("SQL: $sql");
 
@@ -75,15 +65,12 @@ if (!$sql_result)
 	$msgtext = "System Error: $sqlerr";
 }
 
-//
-// check if we got any rows
-//
 if ($rc == 1)
 {
-	$count = mysql_num_rows($sql_result);
+	$count = $result->num_rows;
 	if ($count == 1)
 	{
-		$row = mysql_fetch_assoc($sql_result);
+		$row = $result->fetch_assoc();
 		$tblpassword = $row['password'];
 		$tblmemberid = $row['memberid'];
 		$tblscreenname = $row['screenname'];
@@ -104,11 +91,8 @@ if ($rc == 1)
 //
 // close db connection
 //
-mysql_close($dbConn);
+$mysqli->close();
 
-//
-// pass back info
-//
 //
 // pass back info
 //

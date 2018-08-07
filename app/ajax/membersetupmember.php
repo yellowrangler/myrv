@@ -102,22 +102,12 @@ $DBpassword = "tarryc";
 //
 // connect to db
 //
-$dbConn = @mysql_connect($DBhost, $DBuser, $DBpassword);
-if (!$dbConn) 
+$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
+if ($mysqli->connect_errno) 
 {
 	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to update membername for myrv member update membername $membername.");
-
-	$rv = "";
-	exit($rv);
-}
-
-if (!mysql_select_db($DBschema, $dbConn)) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error selecting db Unable to update membername for myrv member update membername $membername.");
+	$dberr = mysqli_connect_error();
+	$log->writeLog("DB error: $dberr - Error connect db Unable to update membername for myrv member update membername $membername.");
 
 	$rv = "";
 	exit($rv);
@@ -126,7 +116,7 @@ if (!mysql_select_db($DBschema, $dbConn))
 //
 // now encode string. Must be done  after mysql connect
 //
-$biography = mysql_real_escape_string($biography);
+$biography = $mysqli->real_escape_string($biography);
 
 //---------------------------------------------------------------
 // update membername 
@@ -152,14 +142,13 @@ $sql = "UPDATE membertbl
 		password = '$password', 
 		lastupdate = '$lastupdateTS'
 	WHERE id = '$memberid'"; 
-
 	// print($sql);
 
-$sql_result = @mysql_query($sql, $dbConn);
-if (!$sql_result)
+$result = $mysqli->query($sql);
+if (!$result) 
 {
 	$log = new ErrorLog("logs/");
-	$sqlerr = mysql_error();
+	$sqlerr = $mysqli->errno();
 	$log->writeLog("SQL error: $sqlerr - Error doing update to db Unable to update membername for myrv member update membername $membername.");
 	$log->writeLog("SQL: $sql");
 
@@ -172,7 +161,7 @@ if (!$sql_result)
 // 
 // close db connection
 // 
-mysql_close($dbConn);
+$mysqli->close();
 
 //
 // pass back info

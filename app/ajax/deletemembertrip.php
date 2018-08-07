@@ -42,22 +42,12 @@ $DBpassword = "tarryc";
 //
 // connect to db
 //
-$dbConn = @mysql_connect($DBhost, $DBuser, $DBpassword);
-if (!$dbConn) 
+$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
+if ($mysqli->connect_errno) {
 {
 	$log = new ErrorLog("logs/");
 	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to delete member trip information.");
-
-	$rv = "";
-	exit($rv);
-}
-
-if (!mysql_select_db($DBschema, $dbConn)) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysql_error();
-	$log->writeLog("DB error: $dberr - Error selecting db Unable to delete member trip information.");
+	$log->writeLog("DB error: $dberr - Error connect db Unable to delete member trip information.");
 
 	$rv = "";
 	exit($rv);
@@ -69,8 +59,8 @@ if (!mysql_select_db($DBschema, $dbConn))
 if ($currenttrip == 1) {
 	$sql = "UPDATE triptbl SET currenttrip = 0 WHERE memberid = $memberid";
 
-	$sql_result = @mysql_query($sql, $dbConn);
-	if (!$sql_result)
+	$result = $mysqli->query($sql);
+	if (!$result)
 	{
 	    $log = new ErrorLog("logs/");
 	    $sqlerr = mysql_error();
@@ -92,11 +82,11 @@ WHERE memberid = $memberid AND id = $tripid";
 // print $sql;
 // exit();
 
-$sql_result = @mysql_query($sql, $dbConn);
-if (!$sql_result)
+$result = $mysqli->query($sql);
+if (!$result)
 {
     $log = new ErrorLog("logs/");
-    $sqlerr = mysql_error();
+    $dberr = mysqli_connect_error();
     $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to delete member $memberid trip information.");
     $log->writeLog("SQL: $sql");
 
@@ -113,11 +103,11 @@ WHERE memberid = $memberid AND tripid = $tripid";
 // print $sql;
 // exit();
 
-$sql_result = @mysql_query($sql, $dbConn);
-if (!$sql_result)
+$result = $mysqli->query($sql);
+if (!$result)
 {
     $log = new ErrorLog("logs/");
-    $sqlerr = mysql_error();
+    $sqlerr = $mysqli->errno();
     $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to delete member $memberid trip information.");
     $log->writeLog("SQL: $sql");
 
@@ -128,7 +118,7 @@ if (!$sql_result)
 //
 // close db connection
 //
-mysql_close($dbConn);
+$mysqli->close();
 
 //
 // pass back info
