@@ -13,6 +13,7 @@ $tripid = $_POST['tripid'];
 $waypointid = $_POST['waypointid'];
 $type = "";
 $waypointname = $_POST['waypointname'];
+$waypointlocation = $_POST['waypointlocation'];
 $sequencenumber = $_POST['sequencenumber'];
 $address = $_POST['address'];
 $city = $_POST['city'];
@@ -89,10 +90,10 @@ if ($waypointid == "")
 {
 	// insert new trip
 
-	$sql = "INSERT INTO tripwaypointstbl(memberid, tripid, sequencenumber, waypointname, type, 
+	$sql = "INSERT INTO tripwaypointstbl(memberid, tripid, sequencenumber, waypointname, waypointlocation, type, 
     address, city, state, estimatedmiles, latitude, longitude, waypointdate, duration, comments, lastupdate) 
 	VALUES 
-	($memberid,'$tripid','$sequencenumber','$waypointname','$type','$address','$city',
+	($memberid,'$tripid','$sequencenumber','$waypointname', '$waypointlocation', '$type','$address','$city',
 	 '$state','$estimatedmiles','$latitude','$longitude','$waypointdate','$duration','$comments','$enterdate')";
 
 	 $sqlFunction = "insert";
@@ -107,6 +108,7 @@ else
 		tripid=$tripid,
 		sequencenumber=$sequencenumber,
 		waypointname='$waypointname',
+		waypointlocation='$waypointlocation',
 		type='$type',
 		address='$address',
 		city='$city',

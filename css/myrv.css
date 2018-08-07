@@ -272,61 +272,6 @@
 	padding-left: 10px;
 }
 
-.divRankingTableRow {
-	height:45px;
-}
-
-.powerRankingTitle {
-	background-color:#0ABEC7;
-	border:2px solid #0ABEC7;
-	color:white;
-}
-
-.offenceTitle {
-	background-color:#275bad;
-	border:2px solid #275bad;
-	color:white;
-}
-
-.defenceTitle {
-	background-color:#CC0000;
-	border:2px solid #CC0000;
-	color:white;
-}
-
-.powerRankingText {
-	/*color:#0ABEC7;*/
-	color:white;
-	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-	background-color:#0ABEC7;
-	border:2px solid #0ABEC7;
-/*	background-color:white;
-	border:2px solid white;*/
-}
-
-.offenceText {
-	color:white;
-	background-color:#275bad;
-	border:2px solid #275bad;
-	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-/*	color:#006600;
-	background-color:white;
-	border:2px solid white;*/
-}
-
-.defenceText {
-	color:white;
-	background-color:#CC0000;
-	border:2px solid #CC0000;
-	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-/*	color:#CC0000;
-	background-color:white;
-	border:2px solid white;*/
-}
-
 .jumbotronOverride {
 	background:white;
 	border:1px solid #055659;
@@ -437,6 +382,12 @@
 	vertical-align:middle;
 }
 
+.formLabel {
+	text-align:left;
+	font-weight:200;
+	color:teal;
+	padding-bottom:5px;
+}
 
 .miscTitle {
 	background-color:#058689;
@@ -527,12 +478,40 @@
 	font-size: 26px;
 }
 
+.tripList {
+	margin:10px;
+	padding:5px;
+	border: 1px solid white;
+	background: teal;
+}
+
+.tripList :hover {
+	color: yellow;
+	cursor:pointer;
+}
+
+.tripListSelect {
+	margin:10px;
+	padding:5px;
+	border: 1px solid white;
+	background: maroon;
+}
+
+.emptyTripList {
+	margin:10px;
+	padding:5px;
+	border: 1px solid white;
+	background: #1350b2;
+	color:white;
+	text-align:center;
+}
+
 .evenItem  {
-	color: #F74E7F;
+	color:white;
 }
 
 .oddnItem  {
-	color:teal;
+	color:white;
 }
 
 .menuItems {

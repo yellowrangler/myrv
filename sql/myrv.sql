@@ -77,6 +77,7 @@ CREATE TABLE tripwaypointstbl (
     tripid bigint(20) unsigned DEFAULT NULL,
     sequencenumber bigint(20) unsigned DEFAULT NULL,
     waypointname VARCHAR(256) DEFAULT NULL,
+    waypointlocation VARCHAR(1000) DEFAULT NULL,
     type VARCHAR(256) DEFAULT NULL,
     address varchar(100) NULL,
     city varchar(100) NULL,

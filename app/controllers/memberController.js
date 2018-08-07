@@ -206,7 +206,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             .success( function(data) {
                 $scope.membertripwaypoints = data;
 
+                console.log("getMemberTripWaypoints start:");
                 console.log($scope.membertripwaypoints);
+                console.log("getMemberTripWaypoints end:");
                 })
             .error( function(edata) {
                 alert(edata);
