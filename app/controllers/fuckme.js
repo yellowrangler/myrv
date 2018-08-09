@@ -444,7 +444,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
         return vehiclename;
     }
     
-    function updateMemberVehicle() {
+    function updateMemberVehicle(vehicleid) {
         var formstring = $("#membersetupvehicleForm").serialize();
 
         // console.log(formstring);
@@ -582,7 +582,7 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
         }
     }
 
-    function updateMemberVehicleInsurance() {
+    function updateMemberVehicleInsurance(insuranceid) {
         var formstring = $("#membersetupvehicleinsuranceForm").serialize();
 
         // console.log(formstring);
@@ -600,7 +600,7 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
                 $('#memberSetupVehicleInsuranceDialogModalBody').html("Vehicle information updated succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>");
                 $('#memberSetupVehicleInsuranceDialogModal').modal();
  
-                $scope.membervehicleinsurances = "";
+                $scope.membertripwaypoints = "";
 
                 resetMemberVehicleInsuranceForm();
                 getMemberVehicleInsurances();
@@ -609,40 +609,6 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
             {
                 $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Update Vehicle Insurance Error");
                 $('#memberSetupVehicleInsuranceDialogModalBody').text("Error updating Vehicle Insurance - "+data);
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
-            }
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
-
-    function deleteMemberVehicleInsurance() {
-        var qdata = 'memberid='+$scope.current.memberid+'&insuranceid='+$scope.current.insuranceid+"&insurancename="+$scope.current.insurancename;
-
-        // console.log("after return waypointid="+$scope.current.waypointid);
-
-        memberFactory.deletememberVehicleInsurance(qdata)
-        .success( function(data) {
-            if (data.msgtext == "ok")
-            {
-                $scope.current.insuranceid = data.insuranceid;
-                $scope.current.insurancename = data.insurancename;
-
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Success");
-                $('#memberSetupVehicleInsuranceDialogModalBody').html("Vehicle Insurance information deleted succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>!");
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
-
-                $scope.current.insurancename = "";
-                $scope.current.insuranceid = "";
-
-                resetMemberVehicleInsuranceForm();
-                getMemberVehicleInsurances();
-            }
-            else
-            {
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Error");
-                $('#memberSetupVehicleInsuranceDialogModalBody').text("Error deleting Vehicle Insurance - "+data);
                 $('#memberSetupVehicleInsuranceDialogModal').modal();
             }
         })
@@ -670,7 +636,7 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
         getMemberVehicleInsurance(insuranceid);
     }
 
-    $scope.updateMemberVehicleInsurance = function() {
+    $scope.updateMemberVehicleInsurance = function(insuranceid) {
         updateMemberVehicleInsurance(insuranceid);
     }
 
@@ -678,8 +644,8 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
         resetMemberVehicleInsuranceForm();
     }
 
-    $scope.deleteMemberVehicleInsurance = function () {
-        deleteMemberVehicleInsurance();
+    $scope.deleteMemberVehicleIns = function () {
+        deleteMemberVehicle();
     }
 }
 
@@ -718,11 +684,11 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
         }
     }
 
-    function updateMemberVehicleRoadsideAssistance() {
+    function updateMemberVehicleRoadsideAssistance(roadsideassistanceid) {
         var formstring = $("#membersetupvehicleroadsideassistanceForm").serialize();
         // console.log(formstring);
 
-        memberFactory.saveMembervehicleroadsideassistance(formstring)
+        memberFactory.saveMembervehicleroadsideassistanceid(formstring)
         .success( function(data) {
             if (data.msgtext == "ok")
             {
@@ -738,7 +704,7 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
                 $scope.membervehicleroadsideassistances = "";
 
                 resetMemberRoadsideAssistanceForm();
-                getMemberVehicleRoadsideAssitances();
+                getMemberRoadsideAssistances();
             }
             else
             {
@@ -766,14 +732,14 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
                 $scope.current.roadsideassistancename = data.roadsideassistancename;
 
                 $('#memberSetupVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Success");
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>!");
+                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for Vehicle insurance <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>!");
                 $('#memberSetupVehicleRoadsideAssistanceeDialogModal').modal();
 
                 $scope.current.roadsideassistanceid = "";
                 $scope.current.roadsideassistancename = "";
 
                 resetMemberRoadsideAssistanceForm();
-                getMemberVehicleRoadsideAssitances();
+                getMemberRoadsideAssistances();
             }
             else
             {
@@ -791,7 +757,7 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
     function init() {
         setviewpadding();
 
-        $scope.roadsideassistancestatuses = selectListService.getList('memberstatus');
+        $scope.roadsideassistancestatus = selectListService.getList('memberstatusList');
 
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
@@ -799,14 +765,14 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
 
         $scope.membervehicleroadsideassistances = "";
 
-        getMemberVehicleRoadsideAssitances();
+        getMemberVehicleInsurances();
     };
 
     $scope.getMemberVehicleRoadsideAssitance = function(roadsideassistanceid) {
         getMemberVehicleRoadsideAssitance(roadsideassistanceid);
     }
 
-    $scope.updateMemberVehicleRoadsideAssistance = function() {
+    $scope.updateMemberVehicleRoadsideAssistance = function(roadsideassistanceid) {
         updateMemberVehicleRoadsideAssistance(roadsideassistanceid);
     }
 

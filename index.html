@@ -109,7 +109,6 @@
                         <li><a class="collapsableNavbar" href="#/actionfood">Food</a></li>
                         <li><a class="collapsableNavbar" href="#/actionovernight">Overnights</a></li>
                         <li><a class="collapsableNavbar" href="#/actionservice">Service</a></li>
-                        <li><a class="collapsableNavbar" href="#/actionmaintenance">Maintenance</a></li>
                         <li><a class="collapsableNavbar" href="#/actionaccident">Accident</a></li>
                         <li><a class="collapsableNavbar" href="#/actionpinme">Pin Me</a></li>
                         <li><a class="collapsableNavbar" href="#/actionevent">Event</a></li>
@@ -120,15 +119,23 @@
             <ul class="nav navbar-nav">
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
-                        <img id="myreview" name="navImage" class="img-responsive navImageMYRV" src="img/buttons/myrvreview.png">
-                        <span class="navImageTextMYRVButton">Review</span>
+                        <img id="myview" name="navImage" class="img-responsive navImageMYRV" src="img/buttons/myrvview.png">
+                        <span class="navImageTextMYRVButton">View</span>
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/reviewtrip">Trips</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewmemberprofile">My Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvehicleinformation">My Vehicle Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/reviewvcalander">My Calander</a></li>
+                        <li><a class="collapsableNavbar" href="#/viewtrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/viewmemberprofile">My Profile</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">My Vehicles Information</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/viewvehicles">My Vehicles</a></li>
+                                <li><a class="collapsableNavbar" href="#/viewvehicleinsurance">My Vehicle Insurance</a></li>
+                                <li><a class="collapsableNavbar" href="#/viewvehicleservice">My Vehicle Service</a></li>  
+                                <li><a class="collapsableNavbar" href="#/viewvehicleassistance">My Roadside Assistance</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="collapsableNavbar" href="#/viewvcalander">My Calander</a></li>
                     </ul>
                 </li>
             </ul>
@@ -146,16 +153,9 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Vehicles</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/membersetupvehiclerv">Information</a></li>
-                                <li><a class="collapsableNavbar" href="#/setupvehiclemaintenance">Maintenance</a></li>
-                                <li><a class="collapsableNavbar" href="#/setupvehicleservice">Service</a></li>    
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="">Assistance</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/setupinsurance">Insurance</a></li>
-                                <li><a class="collapsableNavbar" href="#/setuproadsideassistance">Roadside Assistance</a></li>
+                                <li><a class="collapsableNavbar" href="#/membersetupvehiclerv">Vehicle</a></li>
+                                <li><a class="collapsableNavbar" href="#/membersetupvehicleinsurance">Insurance</a></li>
+                                <li><a class="collapsableNavbar" href="#/membersetupvehicleroadsideassistance">Roadside Assistance</a></li>
                             </ul>
                         </li>
                         <li><a class="collapsableNavbar" href="#/setupcalander">Calander</a></li>    

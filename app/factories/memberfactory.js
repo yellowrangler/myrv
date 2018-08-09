@@ -99,7 +99,62 @@ myrvApp.factory('memberFactory', function($q, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
     }
+
+    factory.getMembervehicleinsurances = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembervehicleinsurances.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.saveMembervehicleinsurance = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savemembervehicleinsurance.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deletememberVehicleInsurance = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembervehicleinsurance.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.getMembervehicleroadsideassitances = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembervehicleroadsideassitances.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.saveMembervehicleroadsideassistance = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savemembervehicleroadsideassistance.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deletememberVehicleRoadsideAssistance = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembervehicleroadsidesssistance.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
     
+
 
 
     factory.getMembers = function (data) {

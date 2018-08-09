@@ -11,6 +11,8 @@ include_once ('../class/class.AccessLog.php');
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
 $tripname = $_POST['tripname'];
+$towvehicle = $_POST['towvehicle'];
+$rv = $_POST['rv'];
 
 $startdate = "";
 if (!empty($_POST['startdate'])) 
@@ -109,11 +111,12 @@ if ($tripid == "")
 {
 	// insert new trip
 
-	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, startdate, startlocation, 
+	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, 
 	startlatitude, startlongitude, endodometer, endlocation, endlatitude, endlongitude, enddate, lastupdate) 
 	VALUES 
-	($memberid,'$tripname','$currenttrip','$startodometer','$startdate','$startlocation','$startlatitude',
-	 '$startlongitude','$endodometer','$endlocation','$endlatitude','$endlongitude','$enddate','$enterdate')";
+	($memberid,'$tripname','$currenttrip','$startodometer','$towvehicle','$rv'
+		'$startdate','$startlocation','$startlatitude',
+	 	'$startlongitude','$endodometer','$endlocation','$endlatitude','$endlongitude','$enddate','$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -126,6 +129,8 @@ else
 	    tripname = '$tripname',
 	    currenttrip = '$currenttrip',
 	    startodometer = '$startodometer',
+	    towvehicle = '$towvehicle',
+	    rv = '$rv',
 	    startdate = '$startdate',
 	    startlocation = '$startlocation',
 	    startlatitude = '$startlatitude',

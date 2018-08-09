@@ -1,6 +1,6 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your Personal Vehicle & RV Information</h2>
+        <h2 class="headerTitle">Manage Your Vehicle & RV Information</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -24,71 +24,69 @@
 
 <div style="padding-top:15px;padding-left:35px;" class="row">
     <form id="membersetupvehicleForm" name="membersetupvehicleForm" style="padding:5px;">
-
+    <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
         <div class="col-md-5">
-            <div class="panel panel-default form-horizontal">
-                <div style="padding-top:15px;" class="form-group" >
-                    <label for="vehicletype" class="col-md-4 control-label">Vehicle Type</label>
-                    <div class="col-md-3">
-                        <select tabindex="1" class="form-control" ng-model="current.vehicle.vehicletype" id="vehicletype" name="vehicletype" >
-                          <option value="Not Selected">Not Selected</option>
-                          <option ng-repeat="vehicletype in vehicletypes" value="{{vehicletype.value}}">{{vehicletype.title}}</option>
-                        </select>
-                    </div>
+            <div style="padding-top:15px;" class="form-group" >
+                <label for="vehicletype" class="col-md-4 control-label">Vehicle Type</label>
+                <div class="col-md-5">
+                    <select tabindex="1" class="form-control" ng-model="current.vehicle.vehicletype" id="vehicletype" name="vehicletype" >
+                      <option value="Not Selected">Not Selected</option>
+                      <option ng-repeat="vehicletype in vehicletypes" value="{{vehicletype.value}}">{{vehicletype.title}}</option>
+                    </select>
+                </div>
 
-                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
-                    <input type="hidden" value="{{current.vehicleid}}" id="vehicleid" name="vehicleid">
+                <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                <input type="hidden" value="{{current.vehicleid}}" id="vehicleid" name="vehicleid">
 
-                </div> <!-- end of form-group -->
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="make" class="col-md-4 control-label">Make</label>
-                    <div class="col-md-4">
-                        <input tabindex="2" type="text" class="form-control" ng-model="current.vehicle.make" id="make" name="make" placeholder="Make">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="make" class="col-md-4 control-label">Make</label>
+                <div class="col-md-4">
+                    <input tabindex="2" type="text" class="form-control" ng-model="current.vehicle.make" id="make" name="make" placeholder="Make">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="model" class="col-md-4 control-label">Model</label>
-                    <div class="col-md-4">
-                        <input tabindex="3" type="text" class="form-control" ng-model="current.vehicle.model" id="model" name="model" placeholder="Model">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="model" class="col-md-4 control-label">Model</label>
+                <div class="col-md-4">
+                    <input tabindex="3" type="text" class="form-control" ng-model="current.vehicle.model" id="model" name="model" placeholder="Model">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="color" class="col-md-4 control-label">Color</label>
-                    <div class="col-md-4">
-                        <input tabindex="4" type="text" class="form-control" ng-model="current.vehicle.color" id="color" name="color" placeholder="Color">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="color" class="col-md-4 control-label">Color</label>
+                <div class="col-md-4">
+                    <input tabindex="4" type="text" class="form-control" ng-model="current.vehicle.color" id="color" name="color" placeholder="Color">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="year" class="col-md-4 control-label">Year</label>
-                    <div class="col-md-4">
-                        <input tabindex="5" type="text" class="form-control" ng-model="current.vehicle.year" id="year" name="year" placeholder="Year">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="year" class="col-md-4 control-label">Year</label>
+                <div class="col-md-4">
+                    <input tabindex="5" type="text" class="form-control" ng-model="current.vehicle.year" id="year" name="year" placeholder="Year">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="platenbr" class="col-md-4 control-label">Plate Number</label>
-                    <div class="col-md-4">
-                        <input tabindex="6" type="text" class="form-control" ng-model="current.vehicle.platenbr" id="platenbr" name="platenbr" placeholder="Plate Number">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="platenbr" class="col-md-4 control-label">Plate Number</label>
+                <div class="col-md-4">
+                    <input tabindex="6" type="text" class="form-control" ng-model="current.vehicle.platenbr" id="platenbr" name="platenbr" placeholder="Plate Number">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="platestate" class="col-md-4 control-label">Plate State</label>
-                    <div class="col-md-4">
-                        <input tabindex="7" type="text" class="form-control" ng-model="current.vehicle.platestate" id="platestate" name="platestate" placeholder="Plate State">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="platestate" class="col-md-4 control-label">Plate State</label>
+                <div class="col-md-4">
+                    <input tabindex="7" type="text" class="form-control" ng-model="current.vehicle.platestate" id="platestate" name="platestate" placeholder="Plate State">
+                </div>
+            </div> <!-- end of form-group -->
                 
-            </div> <!-- end of panel -->
         </div> <!-- end of col 7 -->
 
         <div class="col-md-6">
 
-            <div class="panel panel-default form-horizontal">
+            <!-- <div class="panel panel-default form-horizontal"> -->
                 <div style="padding-top:15px;" class="form-group">
                     <label for="VIN" class="col-md-4 control-label">VIN</label>
                     <div class="col-md-4">
@@ -133,8 +131,9 @@
                         </select>
                     </div>
                 </div> <!-- end of form-group -->
-            </div> <!-- end of panel -->
+            <!-- </div> end of panel -->
         </div> <!-- end of col 4 -->
+    </div> <!-- end of panel   --> 
     </form>   
 </div> <!-- end of row --> 
 

@@ -7,16 +7,10 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-$memberid = "";
-if( isset($_POST['memberid']) )
-{
-     $memberid = $_POST['memberid'];
-}
-$vehicletype = "";
-if( isset($_POST['vehicletype']) )
-{
-     $vehicletype = $_POST['vehicletype'];
-}
+
+$memberid = $_POST['memberid'];
+$insuranceid = $_POST['insuranceid'];
+$insurancename = $_POST['insurancename'];
 
 //
 // get date time for this transaction
@@ -28,6 +22,7 @@ $datetime = date("Y-m-d H:i:s");
 
 // set variables
 $enterdate = $datetime;
+$msgtext = "ok";
 
 //
 // messaging
@@ -47,62 +42,38 @@ $DBpassword = "tarryc";
 //
 // connect to db
 //
+
 $mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno)
+if ($mysqli->connect_errno) 
 {
 	$log = new ErrorLog("logs/");
 	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to get member vehicles information.");
+	$log->writeLog("DB error: $dberr - Error connect db Unable to delete member vehicle insurance information.");
 
 	$rv = "";
 	exit($rv);
 }
 
 //---------------------------------------------------------------
-// get member vehicles information
+// delete the waypoint 
 //---------------------------------------------------------------
-if ($vehicletype == 'all')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid'";
-}
-else if ($vehicletype == 'towvehicle')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid' AND vehicletype = 'Tow Vehicle'";
-}
-else if ($vehicletype == 'rv')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid' AND vehicletype = 'RV'"; 
-}
-
+$sql = "DELETE FROM vechileinsurancetbl  
+WHERE memberid = $memberid AND id = $insuranceid";
 
 // print $sql;
+// exit();
 
 $result = $mysqli->query($sql);
-if (!$result) 
+if (!$result)
 {
     $log = new ErrorLog("logs/");
     $sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to get member $memberid vehicle information.");
+    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to delete member $memberid vehicle insurance information.");
     $log->writeLog("SQL: $sql");
 
     $status = -100;
     $msgtext = "System Error: $sqlerr";
 }
-
-//
-// get the vehicle information
-// fill the array
-//
-$vehicles = array();
-while($r = $result->fetch_assoc()) 
-{
-    $vehicles[] = $r;
-}
-
-// print_r($vehicles);
 
 //
 // close db connection
@@ -112,6 +83,10 @@ $mysqli->close();
 //
 // pass back info
 //
-exit(json_encode($vehicles));
+$msg["msgtext"] = $msgtext;
+$msg["insuranceid"] = $insuranceid;
+$msg["insurancename"] = $insurancename;
+
+exit(json_encode($msg));
 
 ?>

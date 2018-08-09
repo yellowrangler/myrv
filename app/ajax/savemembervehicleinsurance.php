@@ -7,23 +7,18 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-$vehicleid = $_POST['vehicleid'];
+$insuranceid = $_POST['insuranceid'];
 $memberid = $_POST['memberid'];
-$vehicletype = $_POST['vehicletype'];
-$make = $_POST['make'];
-$model = $_POST['model'];
-$color = $_POST['color'];
-$year = $_POST['year'];
-$platenbr = $_POST['platenbr'];
-$platestate = $_POST['platestate'];
-$VIN = $_POST['VIN'];
-$tirenumber = $_POST['tirenumber'];
-$tiresize = $_POST['tiresize'];
-$vehiclelength = $_POST['vehiclelength'];
+$insurancename = $_POST['insurancename'];
+$polcynumber = $_POST['polcynumber'];
+$policyholder = $_POST['policyholder'];
+$policytype = $_POST['policytype'];
+$effectivedate = $_POST['effectivedate'];
+$agentname = $_POST['agentname'];
+$agentphonenbr = $_POST['agentphonenbr'];
+$websiteurl = $_POST['websiteurl'];
 $comments = $_POST['comments'];
 $status = $_POST['status'];
-
-$vehiclename = "$vehicletype $make $model $color $year $platenbr";
 
 //
 // get date time for this transaction
@@ -60,7 +55,7 @@ if ($mysqli->connect_errno)
 {
 	$log = new ErrorLog("logs/");
 	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to save member vehicle information.");
+	$log->writeLog("DB error: $dberr - Error connect db Unable to save member vehicle insurance information.");
 
 	$rv = "";
 	exit($rv);
@@ -70,17 +65,17 @@ if ($mysqli->connect_errno)
 // update an existing vehicle. Insert a new one
 //---------------------------------------------------------------
 $sqlFunction = "";
-if ($vehicleid == "")
+if ($insuranceid == "")
 {
 	// insert new vehicle
 
-	$sql = "INSERT INTO vehicletbl(memberid,
-		vehicletype,make,model,color,year,platenbr,platestate,VIN,
-		tirenumber,tiresize,vehiclelength,comments,status,lastupdate) 
+	$sql = "INSERT INTO vechileinsurancetbl(memberid,
+		insurancename,polcynumber,policyholder,policytype,effectivedate,
+		agentname,agentphonenbr,websiteurl,comments,status,lastupdate) 
 	VALUES 
-	($memberid,'$vehicletype','$make','$model','$color','$year',
-		'$platenbr','$platestate','$VIN','$tirenumber','$tiresize',
-		'$vehiclelength','$comments','$status','$enterdate')";
+	($memberid,'$insurancename','$polcynumber','$policyholder','$policytype',
+		'$effectivedate','$agentname','$agentphonenbr','$websiteurl','$comments',
+		'$status','$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -88,23 +83,20 @@ else
 {
 	// update existing trip
 
-	$sql = "UPDATE vehicletbl SET 
+	$sql = "UPDATE vechileinsurancetbl SET 
 	    memberid = '$memberid',
-		vehicletype = '$vehicletype',
-		make = '$make',
-		model = '$model',
-		color = '$color',
-		year = '$year',
-		platenbr = '$platenbr',
-		platestate = '$platestate',
-		VIN = '$VIN',
-		tirenumber = '$tirenumber',
-		tiresize = '$tiresize',
-		vehiclelength = '$vehiclelength',
+		insurancename = '$insurancename',
+		polcynumber = '$polcynumber',
+		policyholder = '$policyholder',
+		policytype = '$policytype',
+		effectivedate = '$effectivedate',
+		agentname = '$agentname',
+		agentphonenbr = '$agentphonenbr',
+		websiteurl = '$websiteurl',
 		comments = '$comments',
 		status = '$status',
 	    lastupdate = '$enterdate'
-	WHERE memberid = '$memberid' AND id = '$vehicleid'";
+	WHERE memberid = '$memberid' AND id = '$insuranceid'";
 
 	$sqlFunction = "update";
 }
@@ -117,7 +109,7 @@ if (!$result)
 {
     $log = new ErrorLog("logs/");
 	$sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to save member $memberid vehicle information.");
+    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to save member $memberid vehicle insurance information.");
     $log->writeLog("SQL: $sql");
 
     $status = -100;
@@ -129,7 +121,7 @@ if (!$result)
 //
 if ($sqlFunction == "insert")
 {
-	$vehicleid = $mysqli->insert_id;
+	$insuranceid = $mysqli->insert_id;
 }
 
 // print "sqlFunction=$sqlFunction   :   vehicleid=$vehicleid";
@@ -144,8 +136,8 @@ $mysqli->close();
 // pass back info
 //
 $msg["msgtext"] = $msgtext;
-$msg["vehicleid"] = $vehicleid;
-$msg["vehiclename"] = $vehiclename;
+$msg["insuranceid"] = $insuranceid;
+$msg["insurancename"] = $insurancename;
 
 exit(json_encode($msg));
 

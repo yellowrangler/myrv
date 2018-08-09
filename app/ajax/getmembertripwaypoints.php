@@ -62,7 +62,7 @@ if ($mysqli->connect_errno)
 //---------------------------------------------------------------
 // get member trip waypoints information
 //---------------------------------------------------------------
-$sql = "SELECT *  FROM tripwaypointstbl WHERE memberid = '$memberid' AND tripid = '$tripid' ORDER BY sequencenumber";
+$sql = "SELECT *  FROM tripwaypointstbl WHERE memberid = '$memberid' AND tripid = '$tripid' ORDER BY waypointdate";
 // print $sql;
 
 $result = $mysqli->query($sql);
@@ -103,7 +103,6 @@ while($r = $result->fetch_assoc()) {
 // close db connection
 //
 $mysqli->close();
-
 
 //
 // pass back info

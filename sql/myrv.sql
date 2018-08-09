@@ -1,3 +1,6 @@
+This is old pleause us myrv-db-dump.sql
+
+
 USE myrv;
 
 DROP TABLE membertbl;
@@ -42,7 +45,7 @@ ADD COLUMN biographyprofileind int(11) DEFAULT NULL AFTER noemail;
 DROP TABLE triptbl;
 CREATE TABLE triptbl (
     id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    memberid varchar(100) DEFAULT NULL,
+    memberid bigint(20) unsigned DEFAULT NULL,
     tripname VARCHAR(256) DEFAULT NULL,
     currenttrip	VARCHAR(2) DEFAULT NULL,
     startodometer VARCHAR(256) DEFAULT NULL,
@@ -105,6 +108,7 @@ DROP TABLE vechiletbl;
 CREATE TABLE vechiletbl (
     id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     memberid bigint(20) unsigned DEFAULT NULL,
+    vechileinsuranceid bigint(20) unsigned DEFAULT NULL,
     vehicletype VARCHAR(256) DEFAULT NULL,
     make VARCHAR(256) DEFAULT NULL,
     model VARCHAR(256) DEFAULT NULL,
@@ -116,6 +120,41 @@ CREATE TABLE vechiletbl (
     tiresize VARCHAR(256) DEFAULT NULL,
     tirenumber  VARCHAR(256) DEFAULT NULL,
     length VARCHAR(256) DEFAULT NULL,
+    comments VARCHAR(1000) DEFAULT NULL,
+    status VARCHAR(256) DEFAULT NULL,
+    lastupdate datetime DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+
+DROP TABLE vechileinsurancetbl;
+CREATE TABLE vechileinsurancetbl (
+    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    memberid bigint(20) unsigned DEFAULT NULL,
+    insurancename VARCHAR(256) DEFAULT NULL,
+    polcynumber VARCHAR(256) DEFAULT NULL,
+    policyholder VARCHAR(256) DEFAULT NULL,
+    policytype VARCHAR(256) DEFAULT NULL,
+    effectivedate VARCHAR(256) DEFAULT NULL,
+    agentname VARCHAR(256) DEFAULT NULL,
+    agentphonenbr VARCHAR(256) DEFAULT NULL,
+    websiteurl VARCHAR(256) DEFAULT NULL,
+    comments VARCHAR(1000) DEFAULT NULL,
+    status VARCHAR(256) DEFAULT NULL,
+    lastupdate datetime DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE vechileroadsideassistancetbl;
+CREATE TABLE vechileroadsideassistancetbl (
+    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    memberid bigint(20) unsigned DEFAULT NULL,
+    roadsideassistancename VARCHAR(256) DEFAULT NULL,
+    polcynumber VARCHAR(256) DEFAULT NULL,
+    policyholder VARCHAR(256) DEFAULT NULL,
+    expirationdate VARCHAR(256) DEFAULT NULL,
+    emergencyphonenbr VARCHAR(256) DEFAULT NULL,
+    websiteurl VARCHAR(256) DEFAULT NULL,
     comments VARCHAR(1000) DEFAULT NULL,
     status VARCHAR(256) DEFAULT NULL,
     lastupdate datetime DEFAULT NULL,

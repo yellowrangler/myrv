@@ -12,11 +12,6 @@ if( isset($_POST['memberid']) )
 {
      $memberid = $_POST['memberid'];
 }
-$vehicletype = "";
-if( isset($_POST['vehicletype']) )
-{
-     $vehicletype = $_POST['vehicletype'];
-}
 
 //
 // get date time for this transaction
@@ -52,32 +47,16 @@ if ($mysqli->connect_errno)
 {
 	$log = new ErrorLog("logs/");
 	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to get member vehicles information.");
+	$log->writeLog("DB error: $dberr - Error connect db Unable to get member vehicle roadsideassitances information.");
 
 	$rv = "";
 	exit($rv);
 }
 
 //---------------------------------------------------------------
-// get member vehicles information
+// get member vehicle roadsideassitances information
 //---------------------------------------------------------------
-if ($vehicletype == 'all')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid'";
-}
-else if ($vehicletype == 'towvehicle')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid' AND vehicletype = 'Tow Vehicle'";
-}
-else if ($vehicletype == 'rv')
-{
-    $sql = "SELECT *  FROM vehicletbl 
-    WHERE memberid = '$memberid' AND vehicletype = 'RV'"; 
-}
-
-
+$sql = "SELECT *  FROM vechileroadsideassistancetbl WHERE memberid = '$memberid'";
 // print $sql;
 
 $result = $mysqli->query($sql);
@@ -85,7 +64,7 @@ if (!$result)
 {
     $log = new ErrorLog("logs/");
     $sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to get member $memberid vehicle information.");
+    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to get member $memberid vehicle roadsideassitances information.");
     $log->writeLog("SQL: $sql");
 
     $status = -100;
@@ -96,10 +75,10 @@ if (!$result)
 // get the vehicle information
 // fill the array
 //
-$vehicles = array();
+$roadsideassistances = array();
 while($r = $result->fetch_assoc()) 
 {
-    $vehicles[] = $r;
+    $roadsideassistances[] = $r;
 }
 
 // print_r($vehicles);
@@ -112,6 +91,6 @@ $mysqli->close();
 //
 // pass back info
 //
-exit(json_encode($vehicles));
+exit(json_encode($roadsideassistances));
 
 ?>
