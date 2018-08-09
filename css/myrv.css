@@ -621,7 +621,7 @@
 }
 
 .pageCaption {
-	padding-left:35px;
+	padding-left:15px;
 	padding-bottom:25px;
 	/*height: 35px;*/
 /*	padding-top:50px;*/
@@ -647,7 +647,7 @@
 }
 
 .pageStandardOffset {
-	padding-left:35px;
+	padding-left:15px;
 	padding-right:15px;
 }
 

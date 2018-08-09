@@ -75,6 +75,23 @@ myrvApp.directive('yesNoListDisplay', function () {
     }
 });
 
+myrvApp.directive('statusListDisplay', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            nameid: '@',
+            prefix: '@'
+        },
+        templateUrl: 'app/directives/templates/statuslistdisplay.html',
+        replace: true,
+        transclude: false,
+        link: function (scope, elements, attrs, controllers) { 
+            var nameid = attrs.nameid;
+            var prefix = attrs.prefix;
+        }
+    }
+});
+
 myrvApp.directive('phoneNumberDisplay', function () {
     return {
         restrict: 'E',

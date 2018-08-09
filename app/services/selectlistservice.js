@@ -17,6 +17,14 @@ myrvApp.service('selectListService', function () {
                 thisList = memberstatusList;
                 break; 
 
+           case 'vehiclestatus':
+                thisList = vehiclestatusList;
+                break; 
+
+           case 'vehicletypes':
+                thisList = vehicletypesList;
+                break;           
+
            case 'memberroles':
                 thisList = memberroleList;
                 break; 
@@ -60,6 +68,17 @@ myrvApp.service('selectListService', function () {
         { title :  "member", value : "member" },
         { title :  "admin", value : "admin" },
         { title :  "expert", value : "expert" }
+    ];
+
+    var vehiclestatusList = [ 
+        { title :  "active", value : "active" },
+        { title :  "inactive", value : "inactive" },
+        { title :  "other", value : "other" }
+    ];
+
+    var vehicletypesList = [ 
+        { title :  "RV", value : "RV" },
+        { title :  "Truck", value : "Truck" }
     ];
 
     var membergenderList = [ 

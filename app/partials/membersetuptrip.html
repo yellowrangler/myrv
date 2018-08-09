@@ -10,7 +10,7 @@
             <span style="font-weight:600;text-align:center;">Trip List</span>
         </div><!-- end padding -->
 
-        <div ng-hide="membertrips==''" style="overflow:auto;height:790px;" class="panel panel-default panelOverrideNoBorder col-md-12">
+        <div ng-hide="membertrips==''" style="overflow:auto;height:790px;padding-right:0px;padding-left:0px;" class="panel panel-default panelOverrideNoBorder col-md-12">
             <div class="tripList" ng-repeat="trip in membertrips" ng-click=getMemberTrip(trip.id)>
                 <span ng-class-odd="'oddnItem'" ng-class-even="'evenItem'">{{trip.tripname}}</span>
             </div> <!-- end of repeat -->
@@ -173,7 +173,7 @@
             <span style="font-weight:600;text-align:center;">Waypoint List</span>
         </div><!-- end padding -->
         
-        <div ng-hide="membertripwaypoints==''" style="overflow:auto;height:790px;" class="panel panel-default panelOverrideNoBorder col-md-12">
+        <div ng-hide="membertripwaypoints==''" style="overflow:auto;height:790px;padding-right:0px;padding-left:0px;" class="panel panel-default panelOverrideNoBorder col-md-12">
             <div class="tripList" ng-repeat="waypoint in membertripwaypoints" ng-click="getMemberTripWaypoint(waypoint.tripid,waypoint.id)">
                 <span ng-class-odd="'oddnItem'" ng-class-even="'evenItem'">{{waypoint.waypointname}}</span>
             </div> <!-- end of repeat -->

@@ -73,6 +73,35 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMembervehicles = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembervehicles.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.savememberVehicle = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savemembervehicle.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMemberVehicle = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembervehicle.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+    
+
+
     factory.getMembers = function (data) {
         return $http({ 
             method: 'POST', 

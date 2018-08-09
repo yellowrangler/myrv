@@ -25,6 +25,11 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'membersetuptripController',
                 templateUrl: 'app/partials/membersetuptrip.html'
             })
+        .when('/membersetupvehiclerv',
+            {
+                controller: 'membersetupvehiclervController',
+                templateUrl: 'app/partials/membersetupvehicle.html'
+            })
         .when('/login',
             {
                 controller: 'loginController',

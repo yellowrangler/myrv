@@ -101,7 +101,26 @@ INSERT INTO tripwaypointstbl(id, memberid, tripid, sequencenumber, waypointname,
 (3,1,1,3,"Oscar Shire","","Address","Sarrasotta","FL","600","","","2017-04-10 00:00:00","5 days","Great Place");
 
 
-
+DROP TABLE vechiletbl;
+CREATE TABLE vechiletbl (
+    id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    memberid bigint(20) unsigned DEFAULT NULL,
+    vehicletype VARCHAR(256) DEFAULT NULL,
+    make VARCHAR(256) DEFAULT NULL,
+    model VARCHAR(256) DEFAULT NULL,
+    color VARCHAR(256) DEFAULT NULL,
+    year VARCHAR(256) DEFAULT NULL,
+    platenbr VARCHAR(256) DEFAULT NULL,
+    platestate VARCHAR(256) DEFAULT NULL,
+    VIN VARCHAR(256) DEFAULT NULL,
+    tiresize VARCHAR(256) DEFAULT NULL,
+    tirenumber  VARCHAR(256) DEFAULT NULL,
+    length VARCHAR(256) DEFAULT NULL,
+    comments VARCHAR(1000) DEFAULT NULL,
+    status VARCHAR(256) DEFAULT NULL,
+    lastupdate datetime DEFAULT NULL,
+    PRIMARY KEY (id)
+);
 
 
 -- Never use stuff under this comments
