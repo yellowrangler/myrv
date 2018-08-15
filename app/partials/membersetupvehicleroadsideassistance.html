@@ -7,7 +7,7 @@
 <div class="pageStandardOffset row">
     <div class="col-md-12">
         <div style="margin:0 auto;width:50%;" class="form-inline">
-            <label style="text-align:right;padding-right:15px;" for="memberroadsideassistance">Your Vehicle Insurance</label>
+            <label style="text-align:right;padding-right:15px;" for="memberroadsideassistance">Your Roadside Assistance</label>
             
             <select tabindex="1"  style="width:40%;" class="form-control " ng-change="getMemberVehicleRoadsideAssitance(current.roadsideassistanceid)" ng-model="current.roadsideassistanceid" id="memberroadsideassistance" name="memberroadsideassistance">
                 <option ng-repeat="roadsideassistance in membervehicleroadsideassistances" ng-selected="current.roadsideassistanceid == roadsideassistance.id" value="{{roadsideassistance.id}}">{{roadsideassistance.roadsideassistancename}}</option>

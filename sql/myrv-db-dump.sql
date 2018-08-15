@@ -96,7 +96,7 @@ CREATE TABLE `triptbl` (
 
 LOCK TABLES `triptbl` WRITE;
 /*!40000 ALTER TABLE `triptbl` DISABLE KEYS */;
-INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `startlatitude`, `startlongitude`, `endodometer`, `endlocation`, `endlatitude`, `endlongitude`, `enddate`, `lastupdate`) VALUES (1,1,'Spring 2018','1',NULL,NULL,'','2018-08-18','manchester','','','','Manchester, MA','','','2018-09-12','2018-08-07 14:57:34');
+INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `startlatitude`, `startlongitude`, `endodometer`, `endlocation`, `endlatitude`, `endlongitude`, `enddate`, `lastupdate`) VALUES (1,1,'Spring 2018','1',1,2,'','2018-08-18','manchester','','','','Manchester, MA','','','2018-09-12','2018-08-09 15:01:21');
 INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `startlatitude`, `startlongitude`, `endodometer`, `endlocation`, `endlatitude`, `endlongitude`, `enddate`, `lastupdate`) VALUES (2,1,'new trip','0',NULL,NULL,'','2016-07-01','manchester','','','','','','','2016-07-18','2018-07-31 18:50:22');
 INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `startlatitude`, `startlongitude`, `endodometer`, `endlocation`, `endlatitude`, `endlongitude`, `enddate`, `lastupdate`) VALUES (3,1,'new trip not so','0',NULL,NULL,'','2018-07-01','','','','','','','','2018-07-31','2018-07-31 18:50:59');
 INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `startlatitude`, `startlongitude`, `endodometer`, `endlocation`, `endlatitude`, `endlongitude`, `enddate`, `lastupdate`) VALUES (4,1,'new trip not so 2','0',NULL,NULL,'','2018-07-01','','','','','','','','2018-07-03','2018-07-31 18:52:29');
@@ -148,6 +148,74 @@ INSERT INTO `tripwaypointstbl` (`id`, `memberid`, `tripid`, `sequencenumber`, `w
 UNLOCK TABLES;
 
 --
+-- Table structure for table `vechileinsurancetbl`
+--
+
+DROP TABLE IF EXISTS `vechileinsurancetbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vechileinsurancetbl` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `memberid` bigint(20) unsigned DEFAULT NULL,
+  `insurancename` varchar(256) DEFAULT NULL,
+  `polcynumber` varchar(256) DEFAULT NULL,
+  `policyholder` varchar(256) DEFAULT NULL,
+  `policytype` varchar(256) DEFAULT NULL,
+  `effectivedate` varchar(256) DEFAULT NULL,
+  `agentname` varchar(256) DEFAULT NULL,
+  `agentphonenbr` varchar(256) DEFAULT NULL,
+  `websiteurl` varchar(256) DEFAULT NULL,
+  `comments` varchar(1000) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
+  `lastupdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vechileinsurancetbl`
+--
+
+LOCK TABLES `vechileinsurancetbl` WRITE;
+/*!40000 ALTER TABLE `vechileinsurancetbl` DISABLE KEYS */;
+INSERT INTO `vechileinsurancetbl` (`id`, `memberid`, `insurancename`, `polcynumber`, `policyholder`, `policytype`, `effectivedate`, `agentname`, `agentphonenbr`, `websiteurl`, `comments`, `status`, `lastupdate`) VALUES (1,1,'MapFre','FXC087','Tarrant Cutler','Auto & RV','06/15/2018','THOMAS GREGORY ASSOC.INS.BRK,INC.','(781) 435-6080','https://www.mapfreinsurance.com/en/','yowsa','active','2018-08-09 21:15:39');
+/*!40000 ALTER TABLE `vechileinsurancetbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vechileroadsideassistancetbl`
+--
+
+DROP TABLE IF EXISTS `vechileroadsideassistancetbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vechileroadsideassistancetbl` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `memberid` bigint(20) unsigned DEFAULT NULL,
+  `roadsideassistancename` varchar(256) DEFAULT NULL,
+  `polcynumber` varchar(256) DEFAULT NULL,
+  `policyholder` varchar(256) DEFAULT NULL,
+  `expirationdate` varchar(256) DEFAULT NULL,
+  `emergencyphonenbr` varchar(256) DEFAULT NULL,
+  `websiteurl` varchar(256) DEFAULT NULL,
+  `comments` varchar(1000) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
+  `lastupdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vechileroadsideassistancetbl`
+--
+
+LOCK TABLES `vechileroadsideassistancetbl` WRITE;
+/*!40000 ALTER TABLE `vechileroadsideassistancetbl` DISABLE KEYS */;
+INSERT INTO `vechileroadsideassistancetbl` (`id`, `memberid`, `roadsideassistancename`, `polcynumber`, `policyholder`, `expirationdate`, `emergencyphonenbr`, `websiteurl`, `comments`, `status`, `lastupdate`) VALUES (1,1,'Good Sams','FXC087','Tarrant Cutler','03/19/2019','1-800-601-2850','','Used it once','active','2018-08-09 22:36:25');
+/*!40000 ALTER TABLE `vechileroadsideassistancetbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `vehicletbl`
 --
 
@@ -168,6 +236,7 @@ CREATE TABLE `vehicletbl` (
   `tirenumber` varchar(256) DEFAULT NULL,
   `tiresize` varchar(256) DEFAULT NULL,
   `vehiclelength` varchar(250) DEFAULT NULL,
+  `vechileinsuranceid` bigint(20) DEFAULT NULL,
   `comments` varchar(1000) DEFAULT NULL,
   `status` varchar(256) DEFAULT NULL,
   `lastupdate` date DEFAULT NULL,
@@ -181,9 +250,9 @@ CREATE TABLE `vehicletbl` (
 
 LOCK TABLES `vehicletbl` WRITE;
 /*!40000 ALTER TABLE `vehicletbl` DISABLE KEYS */;
-INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `comments`, `status`, `lastupdate`) VALUES (1,1,'Truck','Ford','F150','Blue','2014','5469','MA','99999999','4','R16','','','active','2018-08-09');
-INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `comments`, `status`, `lastupdate`) VALUES (2,1,'RV','Airstream','Flying Cloud','Silver','2015','		','','999999999','2','R15','20 feet','','active','2018-08-09');
-INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `comments`, `status`, `lastupdate`) VALUES (3,1,'Truck','Mercedese','C30000','Black','1997','','','','','','','Tammys car','active','2018-08-09');
+INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `vechileinsuranceid`, `comments`, `status`, `lastupdate`) VALUES (1,1,'Tow Vehicle','Ford','F150','Blue','2014','5469','MA','99999999','4','R16','',NULL,'','active','2018-08-09');
+INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `vechileinsuranceid`, `comments`, `status`, `lastupdate`) VALUES (2,1,'RV','Airstream','Flying Cloud','Silver','2015','		','','999999999','2','R15','20 feet',NULL,'','active','2018-08-09');
+INSERT INTO `vehicletbl` (`id`, `memberid`, `vehicletype`, `make`, `model`, `color`, `year`, `platenbr`, `platestate`, `VIN`, `tirenumber`, `tiresize`, `vehiclelength`, `vechileinsuranceid`, `comments`, `status`, `lastupdate`) VALUES (3,1,'Tow Vehicle','Mercedese','C30000','Black','1997','','','','','','',NULL,'Tammys car','active','2018-08-09');
 /*!40000 ALTER TABLE `vehicletbl` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -196,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-09 10:12:29
+-- Dump completed on 2018-08-09 18:48:06
