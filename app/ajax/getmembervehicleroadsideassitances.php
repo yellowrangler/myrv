@@ -30,28 +30,11 @@ $enterdate = $datetime;
 $returnArrayLog = new AccessLog("logs/");
 // $returnArrayLog->writeLog("Member List request started" );
 
-//------------------------------------------------------
-// get admin user info
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
 //
-// connect to db
+// db connect
 //
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno)
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to get member vehicle roadsideassitances information.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to get member vehicle roadsideassitances information. memberid = $memberid.";
+include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // get member vehicle roadsideassitances information
@@ -59,24 +42,18 @@ if ($mysqli->connect_errno)
 $sql = "SELECT *  FROM vechileroadsideassistancetbl WHERE memberid = '$memberid'";
 // print $sql;
 
-$result = $mysqli->query($sql);
-if (!$result) 
-{
-    $log = new ErrorLog("logs/");
-    $sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to get member $memberid vehicle roadsideassitances information.");
-    $log->writeLog("SQL: $sql");
-
-    $status = -100;
-    $msgtext = "System Error: $sqlerr";
-}
+//
+// sql query
+//
+$function = "select";
+include 'mysqlquery.php';
 
 //
 // get the vehicle information
 // fill the array
 //
 $roadsideassistances = array();
-while($r = $result->fetch_assoc()) 
+while($r = mysqli_fetch_assoc($sql_result)) 
 {
     $roadsideassistances[] = $r;
 }
@@ -86,11 +63,10 @@ while($r = $result->fetch_assoc())
 //
 // close db connection
 //
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
 //
 exit(json_encode($roadsideassistances));
-
 ?>

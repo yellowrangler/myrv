@@ -7,7 +7,6 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-
 $memberid = $_POST['memberid'];
 $insuranceid = $_POST['insuranceid'];
 $insurancename = $_POST['insurancename'];
@@ -30,29 +29,11 @@ $msgtext = "ok";
 $returnArrayLog = new AccessLog("logs/");
 // $returnArrayLog->writeLog("Member List request started" );
 
-//------------------------------------------------------
-// get admin user info
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
 //
-// connect to db
+// db connect
 //
-
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to delete member vehicle insurance information.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to delete member vehicle information. memberid = $memberid. insuranceid = $insuranceid";
+include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // delete the waypoint 
@@ -60,25 +41,16 @@ if ($mysqli->connect_errno)
 $sql = "DELETE FROM vechileinsurancetbl  
 WHERE memberid = $memberid AND id = $insuranceid";
 
-// print $sql;
-// exit();
-
-$result = $mysqli->query($sql);
-if (!$result)
-{
-    $log = new ErrorLog("logs/");
-    $sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to delete member $memberid vehicle insurance information.");
-    $log->writeLog("SQL: $sql");
-
-    $status = -100;
-    $msgtext = "System Error: $sqlerr";
-}
+//
+// sql query
+//
+$function = "delete";
+include 'mysqlquery.php';
 
 //
 // close db connection
 //
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
@@ -88,5 +60,4 @@ $msg["insuranceid"] = $insuranceid;
 $msg["insurancename"] = $insurancename;
 
 exit(json_encode($msg));
-
 ?>

@@ -81,42 +81,16 @@ $datetime = date("Y-m-d H:i:s");
 // create time stamp versions for insert to mysql
 $lastupdateTS = date("Y-m-d H:i:s", strtotime($datetime));
 
-// print_r($_POST);
-// die();
-
 //
-// messaging
+// db connect
 //
-// $returnArrayLog = new AccessLog("logs/");
-// $returnArrayLog->writeLog("Add member request started" );
-
-//------------------------------------------------------
-// get admin member info
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
-//
-// connect to db
-//
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to update membername for myrv member update membername $membername.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to update membername for myrv member update memberid $memberid.";
+include 'mysqlconnect.php';
 
 //
 // now encode string. Must be done  after mysql connect
 //
-$biography = $mysqli->real_escape_string($biography);
+$biography = mysqli_real_escape_string($dbConn, $biography);
 
 //---------------------------------------------------------------
 // update membername 
@@ -144,28 +118,19 @@ $sql = "UPDATE membertbl
 	WHERE id = '$memberid'"; 
 	// print($sql);
 
-$result = $mysqli->query($sql);
-if (!$result) 
-{
-	$log = new ErrorLog("logs/");
-	$sqlerr = $mysqli->errno();
-	$log->writeLog("SQL error: $sqlerr - Error doing update to db Unable to update membername for myrv member update membername $membername.");
-	$log->writeLog("SQL: $sql");
-
-	$rc = -100;
-	$msgtext = "System Error: $sqlerr. sql = $sql";
-
-	exit($msgtext);
-}
+//
+// sql query
+//
+$function = "update";
+include 'mysqlquery.php';
 
 // 
 // close db connection
 // 
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
 //
-
 exit($msgtext);
 ?>

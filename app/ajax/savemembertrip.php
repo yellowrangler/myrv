@@ -7,7 +7,6 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
 $tripname = $_POST['tripname'];
@@ -30,10 +29,6 @@ $startodometer = $_POST['startodometer'];
 $endodometer = $_POST['endodometer'];
 $startlocation =  $_POST['startlocation'];
 $endlocation = $_POST['endlocation'];
-$startlatitude = $_POST['startlatitude'];
-$endlatitude = $_POST['endlatitude'];
-$startlongitude = $_POST['startlongitude'];
-$endlongitude = $_POST['endlongitude']; 
 
 $currenttrip = "";
 
@@ -60,28 +55,11 @@ $msgtext = "ok";
 $returnArrayLog = new AccessLog("logs/");
 // $returnArrayLog->writeLog("Member List request started" );
 
-//------------------------------------------------------
-// get admin user info
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
 //
-// connect to db
+// db connect
 //
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno) 
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to save member trip information.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to save member trip information. memberid = $memberid. tripid = $tripid.";
+include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // if current trip find if another exicts then change 
@@ -89,19 +67,14 @@ if ($mysqli->connect_errno)
 if ($currenttrip == 1) {
 	$sql = "UPDATE triptbl SET currenttrip = 0 WHERE memberid = $memberid";
 
-	$result = $mysqli->query($sql);
-	if (!$result) 
-	{
-	    $log = new ErrorLog("logs/");
-	    $sqlerr = $mysqli->errno();
-	    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to change all current trips for member: $memberid");
-	    $log->writeLog("SQL: $sql");
-
-	    $status = -100;
-	    $msgtext = "System Error: $sqlerr";
-	}
-
+	//
+	// sql query
+	//
+	$modulecontent = "Unable to update member trips to 0. memberid = $memberid. tripid = $tripid.";
+	$function = "update";
+	include 'mysqlquery.php';
 }
+
 
 //---------------------------------------------------------------
 // update an existing trip. Insert a new one
@@ -112,11 +85,10 @@ if ($tripid == "")
 	// insert new trip
 
 	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, 
-	startlatitude, startlongitude, endodometer, endlocation, endlatitude, endlongitude, enddate, lastupdate) 
+	endodometer, endlocation, enddate, lastupdate) 
 	VALUES 
-	($memberid,'$tripname','$currenttrip','$startodometer','$towvehicle','$rv'
-		'$startdate','$startlocation','$startlatitude',
-	 	'$startlongitude','$endodometer','$endlocation','$endlatitude','$endlongitude','$enddate','$enterdate')";
+	($memberid,'$tripname','$currenttrip','$startodometer','$towvehicle','$rv',
+		NULLIF('$startdate',''),'$startlocation','$endodometer','$endlocation',NULLIF('$enddate',''),'$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -131,15 +103,11 @@ else
 	    startodometer = '$startodometer',
 	    towvehicle = '$towvehicle',
 	    rv = '$rv',
-	    startdate = '$startdate',
+	    startdate = NULLIF('$startdate',''),
 	    startlocation = '$startlocation',
-	    startlatitude = '$startlatitude',
-	    startlongitude = '$startlongitude',
 	    endodometer = '$endodometer',
 	    endlocation = '$endlocation',
-	    endlatitude = '$endlatitude',
-	    endlongitude = '$endlongitude',
-	    enddate = '$enddate',
+	    enddate = NULLIF('$enddate',''),
 	    lastupdate = '$enterdate' 
 	WHERE memberid = $memberid AND id = $tripid";
 
@@ -149,24 +117,19 @@ else
 // print $sql;
 // exit();
 
-$result = $mysqli->query($sql);
-if (!$result) 
-{
-    $log = new ErrorLog("logs/");
-	$sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to save member $memberid trip information.");
-    $log->writeLog("SQL: $sql");
-
-    $status = -100;
-    $msgtext = "System Error: $sqlerr";
-}
+//
+// sql query
+//
+$modulecontent = "Unable to save member trip information. memberid = $memberid. tripid = $tripid.";
+$function = $sqlFunction;
+include 'mysqlquery.php';
 
 //
 // get id if insert
 //
 if ($sqlFunction == "insert")
 {
-	$tripid = $mysqli->insert_id;
+	$tripid = mysqli_insert_id($dbConn);
 }
 
 // print "sqlFunction=$sqlFunction   :   tripid=$tripid";
@@ -175,7 +138,7 @@ if ($sqlFunction == "insert")
 //
 // close db connection
 //
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
@@ -185,5 +148,4 @@ $msg["tripid"] = $tripid;
 $msg["tripname"] = $tripname;
 
 exit(json_encode($msg));
-
 ?>

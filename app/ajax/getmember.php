@@ -37,28 +37,11 @@ $enterdate = $datetime;
 $returnArrayLog = new AccessLog("logs/");
 // $returnArrayLog->writeLog("Member List request started" );
 
-//------------------------------------------------------
-// get admin user info
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
 //
-// connect to db
+// db connect
 //
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno)
-{
-	$log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error connect db Unable to get member information.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to get member information. memberid = $memberid. email = $email";
+include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // get member information
@@ -73,33 +56,25 @@ else
 }
 // print $sql;
 
-$result = $mysqli->query($sql);
-if (!$result)
-{
-    $log = new ErrorLog("logs/");
-    $sqlerr = $mysqli->errno();
-    $log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to get member $email information.");
-    $log->writeLog("SQL: $sql");
-
-    $status = -100;
-    $msgtext = "System Error: $sqlerr";
-}
+//
+// sql query
+//
+$function = "select";
+include 'mysqlquery.php';
 
 //
 // get the member information
 //
-$r = $result->fetch_assoc();
-// $r = mysql_fetch_assoc($sql_result);
+$r = mysqli_fetch_assoc($sql_result);
 $member = $r;
 
 //
 // close db connection
 //
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
 //
 exit(json_encode($member));
-
 ?>

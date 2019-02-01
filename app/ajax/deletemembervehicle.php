@@ -7,11 +7,9 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-$memberid = "";
-if( isset($_POST['memberid']) )
-{
-     $memberid = $_POST['memberid'];
-}
+$memberid = $_POST['memberid'];
+$vehicleid = $_POST['vehicleid'];
+$vehiclename = $_POST['vehiclename'];
 
 //
 // get date time for this transaction
@@ -23,6 +21,7 @@ $datetime = date("Y-m-d H:i:s");
 
 // set variables
 $enterdate = $datetime;
+$msgtext = "ok";
 
 //
 // messaging
@@ -33,32 +32,20 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to get member vehicle insurances information. memberid = $memberid.";
+$modulecontent = "Unable to delete member vehicle information. memberid = $memberid. vehicleid = $vehicleid";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
-// get member vehicle insurances information
+// delete the vehicle 
 //---------------------------------------------------------------
-$sql = "SELECT * FROM vechileinsurancetbl WHERE memberid = '$memberid'";
-// print $sql;
+$sql = "DELETE FROM vehicletbl  
+WHERE memberid = $memberid AND id = $vehicleid";
 
 //
 // sql query
 //
-$function = "select";
+$function = "delete";
 include 'mysqlquery.php';
-
-//
-// get the vehicle information
-// fill the array
-//
-$insurances = array();
-while($r = mysqli_fetch_assoc($sql_result)) 
-{
-    $insurances[] = $r;
-}
-
-// print_r($vehicles);
 
 //
 // close db connection
@@ -68,5 +55,9 @@ mysqli_close($dbConn);
 //
 // pass back info
 //
-exit(json_encode($insurances));
+$msg["msgtext"] = $msgtext;
+$msg["vehicleid"] = $vehicleid;
+$msg["vehiclename"] = $vehiclename;
+
+exit(json_encode($msg));
 ?>

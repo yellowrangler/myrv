@@ -94,11 +94,6 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
                 $scope.current.tripname = $scope.membertrips[i].tripname;
 
                 // console.log("current trip"+$scope.current.trip);
-
-                $scope.membertripwaypoints = "";
-                resetTripWaypointForm();
-
-                getMemberTripWaypoints();
             }
         }
     }
@@ -118,7 +113,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     function updateMemberTrip() {
 
         var formstring = $("#membersetuptripForm").serialize();
-            // var formstringClean = encodeURIComponent(formstring);
+        // var formstringClean = encodeURIComponent(formstring);
 
         // console.log("trip form serialize:"+formstring);
 
@@ -133,9 +128,6 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
                 $('#tripSetupMemberDialogModalBody').html("Trip information updated succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
 
                 $('#tripSetupMemberDialogModal').modal();
-
-                // resetTripWaypointForm()
-                // resetTripForm();
 
                 getMemberTrips();
             }
@@ -168,7 +160,6 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
                 $('#tripSetupMemberDialogModal').modal();
 
-                resetTripWaypointForm()
                 resetTripForm();
 
                 getMemberTrips();
@@ -196,119 +187,8 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
         $scope.current.tripid = "";
         $scope.current.tripname = "";
         $scope.current.trip = "";
-
-        resetTripWaypointForm();
     }
 
-    function getMemberTripWaypoints() {
-        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
-        memberFactory.getMembertripwaypoints(qdata)
-            .success( function(data) {
-                $scope.membertripwaypoints = data;
-
-                // console.log("getMemberTripWaypoints start:");
-                // console.log($scope.membertripwaypoints);
-                // console.log("getMemberTripWaypoints end:");
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
-    function getMemberTripWaypoint(waypointid) {
-        $scope.current.waypointid = waypointid;
-        // console.log("wapoint get:"+waypointid);
-
-        for (var i = 0; i < $scope.membertripwaypoints.length; i++)
-        {
-            if ($scope.membertripwaypoints[i].id == waypointid)
-            {
-                $scope.current.waypoint = $scope.membertripwaypoints[i];
-                $scope.current.waypointname = $scope.membertripwaypoints[i].waypointname;
-
-                // console.log($scope.current.waypoint);
-            }
-        }
-    }
-
-    function resetTripWaypointForm() {
-        // $("#membersetuptripwaypointForm")[0].reset();
-
-        $scope.current.waypointid ="";
-        $scope.current.waypointname ="";
-        $scope.current.waypoint ="";
-    }
-
-    function updateMemberTripWaypoint() {
-
-        var formstring = $("#membersetuptripwaypointForm").serialize();
-        // var formstringClean = encodeURIComponent(formstring);
-
-        // console.log(formstring);
-
-        memberFactory.savememberTripWaypoint(formstring)
-        .success( function(data) {
-            if (data.msgtext == "ok")
-            {
-                $scope.current.waypointid = data.waypointid;
-                $scope.current.waypointname = data.waypointname;
-
-                // console.log("after return tripid="+$scope.current.tripid);
-
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Waypoint Update Success");
-                $('#tripSetupMemberDialogModalBody').html("Trip Waypoint information updated succesfully for Waypoint <span style='color:teal;font-weight:700'>"+$scope.current.waypointname+"</span>!");
-                $('#tripSetupMemberDialogModal').modal();
-
-                $scope.membertripwaypoints = "";
-
-                resetTripWaypointForm();
-                getMemberTripWaypoints();
-            }
-            else
-            {
-                $('#tripSetupMemberDialogModalTitle').text("Member TripWaypoint Error");
-                $('#tripSetupMemberDialogModalBody').text("Error updating trip waypoint - "+data);
-                $('#tripSetupMemberDialogModal').modal();
-            }
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
-
-    function DeleteMemberTripWaypoint() {
-        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+"&waypointid="+$scope.current.waypointid+"&waypointname="+$scope.current.waypointname;
-
-        // console.log("after return waypointid="+$scope.current.waypointid);
-
-        memberFactory.deletememberTripWaypoint(qdata)
-        .success( function(data) {
-            if (data.msgtext == "ok")
-            {
-                $scope.current.waypointid = data.waypointid;
-                $scope.current.waypointname = data.waypointname;
-
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Waypoint Delete Success");
-                $('#tripSetupMemberDialogModalBody').html("Trip Waypoint information deleted succesfully for Waypoint <span style='color:teal;font-weight:700'>"+$scope.current.waypointname+"</span>!");
-                $('#tripSetupMemberDialogModal').modal();
-
-                $scope.current.waypointid = "";
-                $scope.current.waypointname = "";
-
-                resetTripWaypointForm();
-                getMemberTripWaypoints();
-            }
-            else
-            {
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Waypoint Delete Error");
-                $('#tripSetupMemberDialogModalBody').text("Error deleting trip waypoint - "+data);
-                $('#tripSetupMemberDialogModal').modal();
-            }
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
 
     function getMembertowvehicles() {
         var qdata = 'vehicletype=towvehicle&memberid='+$scope.current.memberid;
@@ -347,13 +227,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.membertrips = "";
-        $scope.membertripwaypoints = "";
 
         $scope.current.tripname = "";
         $scope.current.tripid = "";
-
-        $scope.current.waypointid = "";
-        $scope.current.waypointname = "";
 
         $scope.current.email = $scope.current.memberlogin.email;
 
@@ -368,12 +244,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     }
 
     $scope.newTrip = function () {
-        resetTripWaypointForm();
         resetTripForm();
-    }
-
-    $scope.newTripWaypoint = function () {
-        resetTripWaypointForm();
     }
 
     $scope.updateMemberTrip = function () {
@@ -382,18 +253,6 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
     $scope.DeleteMemberTrip = function () {
         DeleteMemberTrip();
-    }
-
-    $scope.getMemberTripWaypoint = function (tripid, waypointid) {
-        getMemberTripWaypoint(waypointid);
-    }
-    
-    $scope.updateMemberTripWaypoint = function () {
-        updateMemberTripWaypoint();
-    }
-
-    $scope.DeleteMemberTripWaypoint = function() {
-        DeleteMemberTripWaypoint();
     }
 
   }
@@ -439,7 +298,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     function composeMemberVehicleName(vehicle) {
         var vehiclename = "";
        
-        vehiclename = vehicle.type+" "+vehicle.make+" "+vehicle.model+" "+vehicle.color+" "+vehicle.year+" "+vehicle.platenbr;
+        vehiclename = vehicle.vehicletype+" "+vehicle.make+" "+vehicle.model+" "+vehicle.color+" "+vehicle.year+" "+vehicle.platenbr;
 
         return vehiclename;
     }
@@ -484,7 +343,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
         // console.log("after return waypointid="+$scope.current.waypointid);
 
-        memberFactory.deletememberVehicle(qdata)
+        memberFactory.deleteMemberVehicle(qdata)
         .success( function(data) {
             if (data.msgtext == "ok")
             {

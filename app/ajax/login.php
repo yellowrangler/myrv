@@ -20,28 +20,11 @@ $token = "";
 $returnArrayLog = new AccessLog("logs/");
 // $returnArrayLog->writeLog("Client List request started" );
 
-//------------------------------------------------------
-// connect to db
-//------------------------------------------------------
-// open connection to host
-$DBhost = "localhost";
-$DBschema = "myrv";
-$DBuser = "tarryc";
-$DBpassword = "tarryc";
-
 //
-// connect to db
+// db connect
 //
-$mysqli = new mysqli($DBhost, $DBuser, $DBpassword, $DBschema);
-if ($mysqli->connect_errno) 
-{
-    $log = new ErrorLog("logs/");
-	$dberr = mysqli_connect_error();
-	$log->writeLog("DB error: $dberr - Error mysql connect. Unable to connect for myrv email $email.");
-
-	$rv = "";
-	exit($rv);
-}
+$modulecontent = "Unable to login for myrv membername $email.";
+include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // Try to login
@@ -53,45 +36,38 @@ WHERE email = '$email' AND password ='$password' AND status = 'active'";
 // exit();
 
 $rc = 1;
-$result = $mysqli->query($sql);
-if (!$result) 
-{
-    $log = new ErrorLog("logs/");
-	$sqlerr = $mysqli->errno();
-	$log->writeLog("SQL error: $sqlerr - Error doing select to db Unable to signin for myrv email $email.");
-	$log->writeLog("SQL: $sql");
 
-	$rc = -100;
-	$msgtext = "System Error: $sqlerr";
+//
+// sql query
+//
+$function = "select";
+include 'mysqlquery.php';
+
+$count = mysqli_num_rows($sql_result);
+if ($count == 1)
+{
+	$row = mysqli_fetch_assoc($sql_result);
+	$tblpassword = $row['password'];
+	$tblmemberid = $row['memberid'];
+	$tblscreenname = $row['screenname'];
+	$tblmembername = $row['membername'];
+	$tblavatar = $row['avatar'];
+	$tblrole = $row['role'];
+	$tblemail = $row['email'];;
+
+	$msgtext = "Hi $tblmembername, You are now logged in to MY RV!";
+}
+else 
+{ 
+    $msgtext = "Unable to Log you in!";
+    $rc = 0;
 }
 
-if ($rc == 1)
-{
-	$count = $result->num_rows;
-	if ($count == 1)
-	{
-		$row = $result->fetch_assoc();
-		$tblpassword = $row['password'];
-		$tblmemberid = $row['memberid'];
-		$tblscreenname = $row['screenname'];
-		$tblmembername = $row['membername'];
-		$tblavatar = $row['avatar'];
-		$tblrole = $row['role'];
-		$tblemail = $row['email'];;
-
-		$msgtext = "Hi $tblmembername, You are now logged in to MY RV!";
-    }
-    else 
-    { 
-        $msgtext = "Unable to Log you in!";
-        $rc = 0;
-    }
-}
 
 //
 // close db connection
 //
-$mysqli->close();
+mysqli_close($dbConn);
 
 //
 // pass back info
