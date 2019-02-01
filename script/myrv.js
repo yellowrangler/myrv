@@ -227,6 +227,30 @@ function getCurrentDateTimeStr()
 	return todayStr;
 }
 
+function getCurrentDateStr()
+{
+	//
+	// get current date
+	//
+	var today = new Date();
+
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	var todayStr = mm.toString()+'/'+dd.toString()+'/'+yyyy.toString();
+
+	return todayStr;
+}
+
 function compareScores(venue, homescore, awayscore)
 {
     var result = false;

@@ -15,6 +15,11 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'homeController',
                 templateUrl: 'app/partials/home.html'
             }) 
+        .when('/gastripentry',
+            {
+                controller: 'gastripentryController',
+                templateUrl: 'app/partials/gastripentry.html'
+            })
         .when('/membersetupmember',
             {
                 controller: 'membersetupmemberController',

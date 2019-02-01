@@ -10,7 +10,7 @@ include_once ('../class/class.AccessLog.php');
 $memberid = "";
 if( isset($_POST['memberid']) )
 {
-     $memberid = $_POST['memberid'];
+    $memberid = $_POST['memberid'];
 }
 
 //
