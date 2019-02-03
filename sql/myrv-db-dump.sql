@@ -16,6 +16,77 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `gastripentrytbl`
+--
+
+DROP TABLE IF EXISTS `gastripentrytbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gastripentrytbl` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `memberid` bigint(20) unsigned DEFAULT NULL,
+  `tripid` bigint(20) unsigned DEFAULT NULL,
+  `odometer` decimal(18,1) DEFAULT NULL,
+  `amount` decimal(18,2) DEFAULT NULL,
+  `gallons` decimal(18,3) DEFAULT NULL,
+  `costpergallon` decimal(18,3) DEFAULT NULL,
+  `miles` decimal(18,1) DEFAULT NULL,
+  `mpg` decimal(18,1) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `station` varchar(1000) DEFAULT NULL,
+  `location` varchar(1000) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `comments` varchar(1000) DEFAULT NULL,
+  `tankfilled` int(11) DEFAULT NULL,
+  `lastupdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gastripentrytbl`
+--
+
+LOCK TABLES `gastripentrytbl` WRITE;
+/*!40000 ALTER TABLE `gastripentrytbl` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gastripentrytbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gastriptotalstbl`
+--
+
+DROP TABLE IF EXISTS `gastriptotalstbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gastriptotalstbl` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `memberid` bigint(20) unsigned DEFAULT NULL,
+  `tripid` bigint(20) unsigned DEFAULT NULL,
+  `odometer` decimal(18,1) DEFAULT NULL,
+  `totalamount` decimal(18,2) DEFAULT NULL,
+  `totalgallons` decimal(18,3) DEFAULT NULL,
+  `avecostpergallon` decimal(18,3) DEFAULT NULL,
+  `totalmiles` decimal(18,1) DEFAULT NULL,
+  `avempg` decimal(18,1) DEFAULT NULL,
+  `lastupdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gastriptotalstbl`
+--
+
+LOCK TABLES `gastriptotalstbl` WRITE;
+/*!40000 ALTER TABLE `gastriptotalstbl` DISABLE KEYS */;
+INSERT INTO `gastriptotalstbl` (`id`, `memberid`, `tripid`, `odometer`, `totalamount`, `totalgallons`, `avecostpergallon`, `totalmiles`, `avempg`, `lastupdate`) VALUES (1,1,3,100000.0,0.00,0.000,0.000,0.0,0.0,'2019-02-03 18:40:02');
+INSERT INTO `gastriptotalstbl` (`id`, `memberid`, `tripid`, `odometer`, `totalamount`, `totalgallons`, `avecostpergallon`, `totalmiles`, `avempg`, `lastupdate`) VALUES (2,1,4,100000.0,0.00,0.000,0.000,0.0,0.0,'2019-02-03 17:38:53');
+/*!40000 ALTER TABLE `gastriptotalstbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `membertbl`
 --
 
@@ -75,15 +146,15 @@ CREATE TABLE `triptbl` (
   `currenttrip` varchar(2) DEFAULT NULL,
   `towvehicle` bigint(20) DEFAULT NULL,
   `rv` bigint(20) DEFAULT NULL,
-  `startodometer` varchar(200) DEFAULT NULL,
+  `startodometer` decimal(18,1) DEFAULT NULL,
   `startdate` date DEFAULT NULL,
   `startlocation` varchar(256) DEFAULT NULL,
-  `endodometer` varchar(200) DEFAULT NULL,
+  `endodometer` decimal(18,1) DEFAULT NULL,
   `enddate` date DEFAULT NULL,
   `endlocation` varchar(1000) NOT NULL,
   `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,8 +163,8 @@ CREATE TABLE `triptbl` (
 
 LOCK TABLES `triptbl` WRITE;
 /*!40000 ALTER TABLE `triptbl` DISABLE KEYS */;
-INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `endodometer`, `enddate`, `endlocation`, `lastupdate`) VALUES (1,1,'Spring 2018','0',1,4,'','2018-08-18','Manchester','',NULL,'','2019-02-01 17:21:25');
-INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `endodometer`, `enddate`, `endlocation`, `lastupdate`) VALUES (2,1,'Winter 2019','1',1,4,'','2019-02-04','Orleans MA','',NULL,'','2019-02-01 17:21:42');
+INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `endodometer`, `enddate`, `endlocation`, `lastupdate`) VALUES (3,1,'Winter 2019','1',1,4,100000.0,'2019-02-04','Orleans',0.0,NULL,'','2019-02-03 18:40:02');
+INSERT INTO `triptbl` (`id`, `memberid`, `tripname`, `currenttrip`, `towvehicle`, `rv`, `startodometer`, `startdate`, `startlocation`, `endodometer`, `enddate`, `endlocation`, `lastupdate`) VALUES (4,1,'Trip 2','0',1,4,100000.0,'2019-02-03','',0.0,NULL,'','2019-02-03 17:38:53');
 /*!40000 ALTER TABLE `triptbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,4 +286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-01 16:34:45
+-- Dump completed on 2019-02-03 17:04:20

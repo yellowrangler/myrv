@@ -46,6 +46,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMembertripgastotals = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripgastotals.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.getMembervehicles = function (data) {
         return $http({ 
             method: 'POST', 

@@ -110,7 +110,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             }); 
     }
 
-    function updateMemberTrip() {
+    function saveMemberTrip() {
 
         var formstring = $("#membersetuptripForm").serialize();
         // var formstringClean = encodeURIComponent(formstring);
@@ -247,8 +247,8 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
         resetTripForm();
     }
 
-    $scope.updateMemberTrip = function () {
-        updateMemberTrip();
+    $scope.saveMemberTrip = function () {
+        saveMemberTrip();
     }
 
     $scope.DeleteMemberTrip = function () {

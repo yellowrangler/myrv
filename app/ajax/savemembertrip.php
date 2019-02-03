@@ -19,15 +19,32 @@ if (!empty($_POST['startdate']))
 	$startdate = date("Y-m-d", strtotime($_POST['startdate']) );
 }
 
+$startlocation = $_POST['startlocation'];
+
 $enddate = "";
 if (!empty($_POST['enddate'])) 
 {
 	$enddate = date("Y-m-d", strtotime($_POST['enddate']) );
 }
 
-$startodometer = $_POST['startodometer'];
-$endodometer = $_POST['endodometer'];
-$startlocation =  $_POST['startlocation'];
+if (is_numeric($_POST['startodometer']))
+{
+	$startodometer = $_POST['startodometer'];
+}
+else
+{
+	$startodometer = 0;
+}
+
+if (is_numeric($_POST['endodometer']))
+{
+	$endodometer = $_POST['endodometer'];
+}
+else
+{
+	$endodometer = 0;
+}
+
 $endlocation = $_POST['endlocation'];
 
 $currenttrip = "";
@@ -87,8 +104,8 @@ if ($tripid == "")
 	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, 
 	endodometer, endlocation, enddate, lastupdate) 
 	VALUES 
-	($memberid,'$tripname','$currenttrip','$startodometer','$towvehicle','$rv',
-		NULLIF('$startdate',''),'$startlocation','$endodometer','$endlocation',NULLIF('$enddate',''),'$enterdate')";
+	($memberid,'$tripname','$currenttrip',$startodometer,'$towvehicle','$rv',
+		NULLIF('$startdate',''),'$startlocation',$endodometer,'$endlocation',NULLIF('$enddate',''),'$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -100,12 +117,12 @@ else
 	    memberid = $memberid,
 	    tripname = '$tripname',
 	    currenttrip = '$currenttrip',
-	    startodometer = '$startodometer',
+	    startodometer = $startodometer,
 	    towvehicle = '$towvehicle',
 	    rv = '$rv',
 	    startdate = NULLIF('$startdate',''),
 	    startlocation = '$startlocation',
-	    endodometer = '$endodometer',
+	    endodometer = $endodometer,
 	    endlocation = '$endlocation',
 	    enddate = NULLIF('$enddate',''),
 	    lastupdate = '$enterdate' 
@@ -132,8 +149,67 @@ if ($sqlFunction == "insert")
 	$tripid = mysqli_insert_id($dbConn);
 }
 
-// print "sqlFunction=$sqlFunction   :   tripid=$tripid";
-// die();
+// 
+// Now add initial gas trip totals
+// 
+$sql = "SELECT id 
+FROM gastriptotalstbl 
+WHERE memberid = $memberid AND tripid = $tripid 
+ORDER BY id ASC LIMIT 1";
+
+//
+// sql query
+//
+$modulecontent = "Unable to get member trip gas total information. memberid = $memberid. tripid = $tripid.";
+$function = 'select';
+include 'mysqlquery.php';
+
+// 
+//  see if we get anything
+// 
+$count = mysqli_num_rows($sql_result);
+if ($count == 0)
+{
+	$sql = "INSERT INTO gastriptotalstbl
+		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, lastupdate) 
+		VALUES 
+		($memberid,$tripid,$startodometer,0,0,0,0,0,'$enterdate')";
+
+		$sqlFunction = "insert";
+}
+else
+{
+	//
+	// get the member trip gas totalsinformation
+	//
+	$r = mysqli_fetch_assoc($sql_result);
+	$idtotals = $r['id'];
+
+	//
+	// update the member trip gas totals information
+	//
+	$sql = "UPDATE gastriptotalstbl 
+		SET 
+		memberid=$memberid,
+		tripid=$tripid,
+		odometer=$startodometer,
+		totalamount=0,
+		totalgallons=0,
+		avecostpergallon=0,
+		totalmiles=0,
+		avempg=0,
+		lastupdate='$enterdate' 
+		WHERE id = $idtotals";
+
+	$sqlFunction = "update";
+}
+
+//
+// sql query
+//
+$modulecontent = "Unable to save member trip gas total information. memberid = $memberid. tripid = $tripid.";
+$function = $sqlFunction;
+include 'mysqlquery.php';
 
 //
 // close db connection
