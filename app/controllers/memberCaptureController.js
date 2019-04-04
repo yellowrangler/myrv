@@ -44,11 +44,8 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         memberFactory.getMembertripgastotals(qdata)
             .success( function(data) {
                 $scope.current.gastotals = data;
-                $scope.current.originaltotalmiles = data.totalamount;
-
-
-                var i = 0;
-
+                // $scope.current.original.gastotals = data;
+                $scope.current.original.gastotals = objectCopy(data);
                 })
             .error( function(edata) {
                 alert(edata);
@@ -58,50 +55,111 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
     function amountGallonsMilesChange() {
 
-        // 
+        //-----------------------------------------------------------
         //  calculate out mileage
+        //-----------------------------------------------------------
+
+        //
+        // Local variables
         // 
+        var amtgas = 0;  
+        var galgas = 0; 
+        var odmgas = 0;
+        var cpg = 0; 
+        var cpgtot = 0; 
+        var milgas = 0;   
+        var mpg = 0;
+        
+        var amtgastot = 0; 
+        var galgastot = 0;
+        var odmb4 = 0; 
+        var miltot = 0;  
+        var milgastot = 0;
+        var galgastot = 0;
+        var mpgtot = 0;
+        
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
 
-        var odgas = $scope.current.capture.odometer;  
-        var odtot = $scope.current.gastotals.odometer; 
-        var mitot = $scope.current.originaltotalmiles;
-        var milesgasgone = odgas - odtot;
-        var milestotalgone = (odtot * 1) + (milesgasgone * 1);
+        odmgas = $scope.current.capture.odometer * 1;  
+        odmb4 = $scope.current.original.gastotals.odometer * 1; 
+        miltot = $scope.current.original.gastotals.totalmiles * 1;
+        milgas = odmgas - odmb4;
+        milegastot = milgas + miltot;
 
-        $scope.current.capture.miles = milesgasgone.toFixed(1);
-        $scope.current.gastotals.totalmiles = milestotalgone.toFixed(1);
+        $scope.current.capture.odometer = odmgas.toFixed(1);
+        $scope.current.capture.miles = milgas.toFixed(1);
 
-        // 
-        //  calculate out cost per gallon
-        // 
+        //
+        // Totals
+        //
+        $scope.current.gastotals.totalmiles = milegastot.toFixed(1);
+
+        //----------------------------------------------------------- 
+        //  calculate out cost per gallon and total gallons
+        //----------------------------------------------------------- 
+
+        if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
+            return;
+
+        var amtgas = $scope.current.capture.amount * 1; 
+        $scope.current.capture.amount = amtgas.toFixed(2); 
+
+        if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
+            return;
+
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
 
-        if ($scope.current.capture.amount == undefined || $scope.current.capture.gallons == undefined)
-            return;
+        amtgas = $scope.current.capture.amount * 1;  
+        galgas = $scope.current.capture.gallons * 1; 
 
-        var amtgas = $scope.current.capture.amount;  
-        var galgas = $scope.current.capture.gallons; 
-        var cpg = amtgas / galgas;
+        amtgastot = $scope.current.gastotals.totalamount * 1;  
+        galgastot = $scope.current.gastotals.totalgallons * 1; 
+
+        amtgastot = (amtgastot + amtgas);  
+        galgastot = (galgastot + galgas); 
+        
+        cpg = amtgas / galgas;
+        cpgtot = amtgastot / galgastot;
 
         $scope.current.capture.costpergallon = cpg.toFixed(2);
+        $scope.current.capture.amount = amtgas.toFixed(2);  
+        $scope.current.capture.gallons= galgas.toFixed(3);
 
-        // 
+        //
+        // Totals
+        //
+        $scope.current.gastotals.avecostpergallon = cpgtot.toFixed(2);
+        $scope.current.gastotals.totalgallons = galgastot.toFixed(1);
+        $scope.current.gastotals.totalamount = amtgastot.toFixed(2);
+
+        //----------------------------------------------------------- 
         //  calculate mpg
-        // 
-        if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
-            return;
-
+        //----------------------------------------------------------- 
         if ($scope.current.capture.miles == undefined || $scope.current.capture.gallons == undefined)
             return;
 
-        var milgas = $scope.current.capture.miles;  
-        var galgas = $scope.current.capture.gallons; 
-        var mpg = milgas / galgas;
+        if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
+            return;
+
+        milgas = $scope.current.capture.miles * 1;  
+        galgas = $scope.current.capture.gallons * 1; 
+
+        milgastot = $scope.current.gastotals.totalmiles * 1;  
+        galgastot = $scope.current.gastotals.totalgallons * 1; 
+
+        mpg = milgas / galgas;
+        mpgtot = milgastot / galgastot;
 
         $scope.current.capture.mpg = mpg.toFixed(3);
+        $scope.current.capture.miles = milgas.toFixed(2);  
+        $scope.current.capture.gallons= galgas.toFixed(3);
+
+        //
+        // Totals
+        //
+        $scope.current.gastotals.totalmpg = mpgtot.toFixed(3);
     }
 
     function clearGasCapture() {
@@ -149,7 +207,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.activetripname = "";
-        $scope.current.originaltotalmiles = "";
+        $scope.current.original = {};
 
         $scope.membertrips = "";
         $scope.current.activestatetripid = "";
