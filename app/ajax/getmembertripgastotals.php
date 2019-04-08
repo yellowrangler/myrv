@@ -34,27 +34,8 @@ $returnArrayLog = new AccessLog("logs/");
 $modulecontent = "Unable to get member trip capture gas totals information. memberid = $memberid. tripid = $tripid.";
 include 'mysqlconnect.php';
 
-$sql = "SELECT *
-FROM gastriptotalstbl 
-WHERE memberid = $memberid AND tripid = $tripid 
-ORDER BY id DESC LIMIT 1";
-
-//
-// sql query
-//
-$function = "select";
-include 'mysqlquery.php';
-
-//
-// get id if insert
-//
-if ($sqlFunction == "insert")
-{
-	$tripid = mysqli_insert_id($dbConn);
-}
-
 // 
-// Now add initial gas trip totals
+// Now get gas trip totals
 // 
 $sql = "SELECT * 
 FROM gastriptotalstbl 
@@ -72,7 +53,6 @@ include 'mysqlquery.php';
 // Get the results
 // 
 $membertripgastotals = mysqli_fetch_assoc($sql_result);
-
 
 //
 // close db connection

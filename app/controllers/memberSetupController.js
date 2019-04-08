@@ -212,6 +212,23 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             }); 
     }
 
+    function odometerChange(name)
+    {
+        var odometer = 0;
+
+        switch (name) 
+        {
+            case 'startodometer':
+                odometer = $scope.current.trip.startodometer * 1;
+                $scope.current.trip.startodometer = odometer.toFixed(1);
+                break;
+
+            case 'endodometer':
+                odometer = $scope.current.trip.endodometer * 1;
+                $scope.current.trip.endodometer = odometer.toFixed(1);
+                break;    
+        }
+    }
 
     init();
     function init() {
@@ -228,6 +245,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.membertrips = "";
 
+        $scope.current.trip = {};
         $scope.current.tripname = "";
         $scope.current.tripid = "";
 
@@ -253,6 +271,10 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
     $scope.DeleteMemberTrip = function () {
         DeleteMemberTrip();
+    }
+
+    $scope.odometerChange = function (name) {
+        odometerChange(name);
     }
 
   }

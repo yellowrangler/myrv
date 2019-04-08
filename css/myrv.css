@@ -804,6 +804,15 @@
 	font-size:16px;
 }
 
+.capture-detail-checkbox-input {
+	padding-right:15px;
+	padding-top:5px;
+	text-align:left;
+	font-weight:400;
+	color:teal;
+	font-size:16px;
+}
+
 .capture-detail-labels-calculated {
 	padding-right:15px;
 	padding-top:5px;

@@ -4,210 +4,212 @@
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
+<form id="membercapturegasForm" name="membercapturegasForm" style="" class="form-horizontal">
 <div class="pageStandardOffset row">
 	<div class="col-md-offset-1 col-md-5">
-        <form id="membersetuptripForm" name="membersetuptripForm" style="" class="form-horizontal">
-            <div class="panel panel-success">
-                <div class="panel-heading panelTitlelMYRV">
-                    Gas Station Detail
-                </div> <!-- end of inner pannel heading-->
-                <div class="panel-body">
-                    <div class="form-group" >
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Active Trip
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="1" type="text" class="form-control" ng-model="current.activetripname" readonly id="activetripname" name="activetripname">
-                        </div> <!-- end of col -->
+        <div class="panel panel-success">
+            <div class="panel-heading panelTitlelMYRV">
+                Gas Station Detail
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group" >
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Active Trip
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.activetripname" readonly id="activetripname" name="activetripname">
+                    </div> <!-- end of col -->
 
-                        <input type="hidden" value="{{current.original.gastotals.totalmiles}}" id="originaltotalmiles" name="originaltotalmiles">
-                        <input type="hidden" value="{{current.activetripid}}" id="activetripid" name="activetripid">
-                        <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
-                    </div> <!-- end of form-group -->
+                    <input type="hidden" value="{{current.original.gastotals.totalmiles}}" id="originaltotalmiles" name="originaltotalmiles">
+                    <input type="hidden" value="{{current.activetripid}}" id="activetripid" name="activetripid">
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Date
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="2" type="text" class="form-control" ng-model="current.capture.date" id="date" name="date" myrvdatepicker />
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Date
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.date" id="date" name="date" myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Odometer
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="3" type="text" class="form-control" ng-model="current.capture.odometer" ng-blur="amountGallonsMilesChange()" id="odometer" name="odometer" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Odometer
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Station
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="4" type="text" class="form-control" ng-model="current.capture.station" id="station" name="station" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Station
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" class="form-control" ng-model="current.capture.station" id="station" name="station" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Location
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="5" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Location
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group" >
-                        <div class="col-md-4  capture-detail-labels-input">
-                            State
-                        </div>
-                    
-                        <div class="col-md-7">
-                            <select tabindex="6" class="form-control" ng-model="current.capture.state" id="state" name="state" >
-                                <option value="Not Selected">Not Selected</option>
-                                <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
-                            </select>
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group" >
+                    <div class="col-md-4  capture-detail-labels-input">
+                        State
+                    </div>
+                
+                    <div class="col-md-7">
+                        <select tabindex="6" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                            <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+                        </select>
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Amount  
-                        </div>
-                        <div class="col-md-7 form-inline">
-                        	<span style="text-align:right;padding-right:4px;">$</span>
-                            <input style="width:90%;" tabindex="7" ng-blur="amountGallonsMilesChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Amount  
+                    </div>
+                    <div class="col-md-7 form-inline">
+                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <input style="width:90%;" tabindex="7" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-input">
-                            Gallons
-                        </div>
-                        <div class="col-md-7">
-                            <input tabindex="8" type="text" ng-blur="amountGallonsMilesChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Gallons
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="8" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-calculated">
-                            Cost/Gallon
-                        </div>
-                        <div class="col-md-7 form-inline">
-                        	<span style="text-align:right;padding-right:4px;">$</span>
-                            <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group" >
+                    <div class="col-md-offset-4 col-md-7 capture-detail-checkbox-input">
+                        <input style="padding-top:10px;" tabindex="9" type="checkbox" ng-model="current.capture.notfilledtank" ng-checked="current.capture.notfilledtank == '1'" id="notfilledtank" name="notfilledtank"> Tank not filled
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4  capture-detail-labels-calculated">
-                            Miles
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" readonly class="form-control" ng-model="current.capture.miles" id="miles" name="miles" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-calculated">
+                        Cost/Gallon
+                    </div>
+                    <div class="col-md-7 form-inline">
+                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-4 capture-detail-labels-calculated">
-                            MPG
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" readonly class="form-control" ng-model="current.capture.mpg" id="mpg" name="mpg" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-calculated">
+                        Miles
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" readonly class="form-control" ng-model="current.capture.miles" id="miles" name="miles" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-                </div>  <!-- end of inner pannel body -->  
-            </div> <!-- end of inner pannel -->
+                <div class="form-group">
+                    <div class="col-md-4 capture-detail-labels-calculated">
+                        MPG
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" readonly class="form-control" ng-model="current.capture.mpg" id="mpg" name="mpg" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-            <div style="padding-top:15px;" class="form-group">
-                <div class="col-md-offset-1 col-md-11">
-                    <div class="col-md-3">
-                        <button style="" class="btn btn-info btn-sm" ng-click="clearGasCapture()" id="clearGasCaptureButton">Clear</button>
-                    </div> <!-- end of col 4 -->
-                    <div class="col-md-offset-1 col-md-8">
-                        <span style="padding-left:15px;">&nbsp;</span>
-                        <button style="width:50%;" class="btn btn-success" ng-click="saveGasCapture()" id="saveGasCaptureButton">Save</button>
-                    </div> <!-- end of col 6 -->
-                </div> <!-- end of col 12 -->
-            </div> <!-- end of form-group -->  
-        </form>
+            </div>  <!-- end of inner pannel body -->  
+        </div> <!-- end of inner pannel -->
+
+        <div style="padding-top:15px;" class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <div class="col-md-3">
+                    <button style="" class="btn btn-info btn-sm" ng-click="clearGasCapture()" id="clearGasCaptureButton">Clear</button>
+                </div> <!-- end of col 4 -->
+                <div class="col-md-offset-1 col-md-8">
+                    <span style="padding-left:15px;">&nbsp;</span>
+                    <button style="width:50%;" class="btn btn-success" ng-click="saveGasCapture()" id="saveGasCaptureButton">Save</button>
+                </div> <!-- end of col 6 -->
+            </div> <!-- end of col 12 -->
+        </div> <!-- end of form-group -->  
     </div> <!-- end of col-5 -->
 
     <div class="col-md-offset-1 col-md-4">
-        <form id="membersetuptripForm" name="membersetuptripForm" style="" class="form-horizontal">
-            <div class="panel panel-info">
-                <div class="panel-heading panelTitlelMYRV">
-                    Running Gas Totals
-                </div> <!-- end of inner pannel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="col-md-5 capture-detail-labels-calculated">
-                            Total Cost 
-                        </div>
-                        <div class="col-md-6  form-inline">
-                        	<span style="text-align:right;padding-right:4px;">$</span>
-                            <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.totalamount" id="totalamount" name="totalamount">
-                        </div>
-                    </div> <!-- end of form-group -->
+        <div class="panel panel-info">
+            <div class="panel-heading panelTitlelMYRV">
+                Running Gas Totals
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Total Cost 
+                    </div>
+                    <div class="col-md-6  form-inline">
+                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.totalamount" id="totalamount" name="totalamount">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-5 capture-detail-labels-calculated">
-                            Total Gallons
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" readonly class="form-control" ng-model="current.gastotals.totalgallons" id="totalgallons" name="totalgallons">
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Total Gallons
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.totalgallons" id="totalgallons" name="totalgallons">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-5  capture-detail-labels-calculated">
-                            Ave Cost/Gallon
-                        </div>
-                        <div class="col-md-6 form-inline">
-                        	<span style="text-align:right;padding-right:4px;">$</span>
-                            <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.avecostpergallon" id="avecostpergallon" name="avecostpergallon">
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-5  capture-detail-labels-calculated">
+                        Ave Cost/Gallon
+                    </div>
+                    <div class="col-md-6 form-inline">
+                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.avecostpergallon" id="avecostpergallon" name="avecostpergallon">
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-5  capture-detail-labels-calculated">
-                            Total Miles
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmiles" id="totalmiles" name="totalmiles" >
-                        </div>
-                    </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-5  capture-detail-labels-calculated">
+                        Total Miles
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmiles" id="totalmiles" name="totalmiles" >
+                    </div>
+                </div> <!-- end of form-group -->
 
-                    <div class="form-group">
-                        <div class="col-md-5 capture-detail-labels-calculated">
-                            Ave MPG
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmpg" id="totalmpg" name="totalmpg" >
-                        </div>
-                    </div> <!-- end of form-group -->
-                </div>  <!-- end of inner pannel body -->  
-            </div> <!-- end of inner pannel -->
-        </form>
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Ave MPG
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmpg" id="totalmpg" name="totalmpg" >
+                    </div>
+                </div> <!-- end of form-group -->
+            </div>  <!-- end of inner pannel body -->  
+        </div> <!-- end of inner pannel -->
     </div> <!-- end of col-5 -->
 </div> <!-- end of row -->
+</form>
 
 <!-- dialogs -->
-<div class="modal fade" id="homePicShowModal" tabindex="-1" role="dialog" aria-labelledby="homePicShowModalTitle" aria-hidden="true">
+<div class="modal fade" id="memCaptureGasDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureGasDialogModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="homePicShowModalTitle"></h4>
+        <h4 class="modal-title" id="memCaptureGasDialogModalTitle"></h4>
       </div>
       <div class="modal-body">
-        <p id="homePicShowModalBody">
-        	<!-- <img src="img/NFLPlayOffBracketSuperbowl522018F.png" style="width:100%;text-align:center;" alt="Playoff Bracket"> -->
+        <p id="memCaptureGasDialogModalBody">
         </p>
       </div>
       <div class="modal-footer">
