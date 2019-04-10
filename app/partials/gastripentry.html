@@ -30,7 +30,25 @@
                         Date
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.date" id="date" name="date" myrvdatepicker />
+                        <input  tabindex="2" type="text" class="form-control" size="8" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" name="date" myrvdatepicker />
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setToday()" id="settoday">Today</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Time
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" size="8" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time"  />
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
+
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -39,7 +57,7 @@
                         Odometer
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="3" type="text" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
+                        <input tabindex="4" type="text" style="display:inline;width:135px;" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -48,7 +66,7 @@
                         Station
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="4" type="text" class="form-control" ng-model="current.capture.station" id="station" name="station" >
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.capture.station" id="station" name="station" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -57,7 +75,7 @@
                         Location
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="5" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
+                        <input tabindex="6" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -67,7 +85,7 @@
                     </div>
                 
                     <div class="col-md-7">
-                        <select tabindex="6" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                        <select tabindex="7" class="form-control" ng-model="current.capture.state" id="state" name="state" >
                             <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
                         </select>
                     </div>
@@ -79,7 +97,7 @@
                     </div>
                     <div class="col-md-7 form-inline">
                     	<span style="text-align:right;padding-right:4px;">$</span>
-                        <input style="width:90%;" tabindex="7" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
+                        <input style="display:inline;width:135px;" tabindex="8" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -88,13 +106,13 @@
                         Gallons
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="8" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
+                        <input tabindex="9" style="display:inline;width:135px;" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group" >
                     <div class="col-md-offset-4 col-md-7 capture-detail-checkbox-input">
-                        <input style="padding-top:10px;" tabindex="9" type="checkbox" ng-model="current.capture.notfilledtank" ng-checked="current.capture.notfilledtank == '1'" id="notfilledtank" name="notfilledtank"> Tank not filled
+                        <input style="padding-top:10px;" tabindex="10" type="checkbox" ng-model="current.capture.notfilledtank" ng-checked="current.capture.notfilledtank == '1'" id="notfilledtank" name="notfilledtank"> Tank not filled
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -104,7 +122,7 @@
                     </div>
                     <div class="col-md-7 form-inline">
                     	<span style="text-align:right;padding-right:4px;">$</span>
-                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
+                        <input style="display:inline;width:135px;"  type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -113,7 +131,7 @@
                         Miles
                     </div>
                     <div class="col-md-7">
-                        <input type="text" readonly class="form-control" ng-model="current.capture.miles" id="miles" name="miles" >
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.capture.miles" id="miles" name="miles" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -122,7 +140,7 @@
                         MPG
                     </div>
                     <div class="col-md-7">
-                        <input type="text" readonly class="form-control" ng-model="current.capture.mpg" id="mpg" name="mpg" >
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.capture.mpg" id="mpg" name="mpg" >
                     </div>
                 </div> <!-- end of form-group -->
 

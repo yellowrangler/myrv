@@ -68,7 +68,7 @@ function calculateGasTotals($dbGasTotals,$inGas,$inGasTotals) {
     //----------------------------------------------------------- 
     $amtGasCpgTotalGiven = number_format($inGasTotals['avecostpergallon'], 3);
 
-    if (round(gallonsTotalCalculated, 3) == 0.000)
+    if (round($gallonsTotalCalculated, 3) == 0.000)
     {
     	$amtGasCpgTotalCalculated = number_format(0,3);
     }
@@ -122,13 +122,31 @@ function calculateGasTotals($dbGasTotals,$inGas,$inGasTotals) {
 $activetripid = $_POST['activetripid'];
 $memberid = $_POST['memberid'];
 $activetripname = $_POST['activetripname'];
+$date = $_POST['date'];
+$time = $_POST['time'];
 $station = $_POST['station'];
+$location = $_POST['location'];
 $state = $_POST['state'];
+
+$time = date('H:i:s', strtotime($time));
+$date = date('Y-m-d', strtotime($date));
+
+$nottankfilled = 0;
+if( isset($_POST['nottankfilled']) )
+{
+     $nottankfilled = 1;
+}
 
 $originaltotalmiles = 0;
 if (is_numeric($_POST['originaltotalmiles']))
 {
 	$originaltotalmiles = $_POST['originaltotalmiles'];
+}
+
+$odometer = 0;
+if (is_numeric($_POST['odometer']))
+{
+	$odometer = $_POST['odometer'];
 }
 
 $amount = 0;
@@ -152,13 +170,13 @@ if (is_numeric($_POST['costpergallon']))
 $miles = 0;
 if (is_numeric($_POST['miles']))
 {
-	$costpergallon = $_POST['miles'];
+	$miles = $_POST['miles'];
 }
 
 $mpg = 0;
 if (is_numeric($_POST['mpg']))
 {
-	$costpergallon = $_POST['mpg'];
+	$mpg = $_POST['mpg'];
 }
 
 // 
@@ -255,137 +273,94 @@ include 'mysqlquery.php';
 $dbMemGasTotals = mysqli_fetch_assoc($sql_result);
 
 //
+//  save gas trip entry totals id
+//
+$gastripentrytotalsid = $dbMemGasTotals['id'];
+
+//
 // Calculate and compare
 //
 $retmsgArray = calculateGasTotals($dbMemGasTotals,$inputGasData,$inputGasTotalsData);
-$msgArray['msgtext'] = $retmsgArray['msgtext'];
-$msgArray['dbgtext'] = $retmsgArray['dbgtext'];
-$msgArray['bodytext'] = "Successfully passed Calc Review";
+
+$validationMsg = $retmsgArray['dbgtext'];
 
 // print_r($msgArray);
-exit(json_encode($msgArray));
-
-
-
-
-
+// exit(json_encode($msgArray));
 
 //---------------------------------------------------------------
-// update an existing trip. Insert a new one
+// save gas trip entry
 //---------------------------------------------------------------
-$sqlFunction = "";
-if ($tripid == "")
-{
-	// insert new trip
+$sql = "INSERT INTO gastripentrytbl( 
+	memberid, 
+	tripid, 
+	odometer, 
+	amount, 
+	gallons, 
+	costpergallon, 
+	miles, 
+	mpg, 
+	date, 
+	time, 
+	station, 
+	location, 
+	state, 
+	nottankfilled, 
+	lastupdate) 
+VALUES (
+	$memberid,
+	$activetripid,
+	'$odometer', 
+	'$amount', 
+	'$gallons', 
+	'$costpergallon', 
+	'$miles', 
+	'$mpg', 
+	'$date', 
+	'$time', 
+	'$station', 
+	'$location', 
+	'$state', 
+	'$nottankfilled',
+	'$enterdate')";
 
-	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, 
-	endodometer, endlocation, enddate, lastupdate) 
-	VALUES 
-	($memberid,'$tripname','$currenttrip',$startodometer,'$towvehicle','$rv',
-		NULLIF('$startdate',''),'$startlocation',$endodometer,'$endlocation',NULLIF('$enddate',''),'$enterdate')";
-
-	 $sqlFunction = "insert";
-}
-else
-{
-	// update existing trip
-
-	$sql = "UPDATE triptbl SET 
-	    memberid = $memberid,
-	    tripname = '$tripname',
-	    currenttrip = '$currenttrip',
-	    startodometer = $startodometer,
-	    towvehicle = '$towvehicle',
-	    rv = '$rv',
-	    startdate = NULLIF('$startdate',''),
-	    startlocation = '$startlocation',
-	    endodometer = $endodometer,
-	    endlocation = '$endlocation',
-	    enddate = NULLIF('$enddate',''),
-	    lastupdate = '$enterdate' 
-	WHERE memberid = $memberid AND id = $tripid";
-
-	$sqlFunction = "update";
-}
+// print_r($_POST);
+// print("nottankfilled".$nottankfilled);
 
 // print $sql;
-// exit();
 
 //
 // sql query
 //
-$modulecontent = "Unable to save member trip information. memberid = $memberid. tripid = $tripid.";
-$function = $sqlFunction;
+$modulecontent = "Unable to save member gas trip entry. memberid = $memberid. tripid = $activetripid.";
+$function = "insert";
 include 'mysqlquery.php';
 
 //
-// get id if insert
+// get id
 //
-if ($sqlFunction == "insert")
-{
-	$tripid = mysqli_insert_id($dbConn);
-}
+$gastripentry = mysqli_insert_id($dbConn);
 
 // 
-// Now add initial gas trip totals
+// Now upsdate gas trip entry totals
 // 
-$sql = "SELECT id 
-FROM gastriptotalstbl 
-WHERE memberid = $memberid AND tripid = $tripid 
-ORDER BY id ASC LIMIT 1";
+$sqlFunction == "update";
+$sql = "UPDATE gastriptotalstbl 
+	SET 
+	totalamount=$totalamount,
+	totalgallons=$totalgallons,
+	avecostpergallon=$avecostpergallon,
+	totalmiles=$totalmiles,
+	avempg=$totalmpg,
+	lastupdate='$enterdate' 
+	WHERE id = $gastripentrytotalsid";
+
+// print $sql;
 
 //
 // sql query
 //
-$modulecontent = "Unable to get member trip gas total information. memberid = $memberid. tripid = $tripid.";
-$function = 'select';
-include 'mysqlquery.php';
-
-// 
-//  see if we get anything
-// 
-$count = mysqli_num_rows($sql_result);
-if ($count == 0)
-{
-	$sql = "INSERT INTO gastriptotalstbl
-		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, lastupdate) 
-		VALUES 
-		($memberid,$tripid,$startodometer,0,0,0,0,0,'$enterdate')";
-
-		$sqlFunction = "insert";
-}
-else
-{
-	//
-	// get the member trip gas totalsinformation
-	//
-	$r = mysqli_fetch_assoc($sql_result);
-	$idtotals = $r['id'];
-
-	//
-	// update the member trip gas totals information
-	//
-	$sql = "UPDATE gastriptotalstbl 
-		SET 
-		memberid=$memberid,
-		tripid=$tripid,
-		odometer=$startodometer,
-		totalamount=0,
-		totalgallons=0,
-		avecostpergallon=0,
-		totalmiles=0,
-		avempg=0,
-		lastupdate='$enterdate' 
-		WHERE id = $idtotals";
-
-	$sqlFunction = "update";
-}
-
-//
-// sql query
-//
-$modulecontent = "Unable to save member trip gas total information. memberid = $memberid. tripid = $tripid.";
-$function = $sqlFunction;
+$modulecontent = "Unable to update member trip gas total information for gas trip entry. memberid = $memberid. tripid = $activetripid.";
+$function = 'update';
 include 'mysqlquery.php';
 
 //
@@ -396,9 +371,9 @@ mysqli_close($dbConn);
 //
 // pass back info
 //
-$msg["msgtext"] = $msgtext;
-$msg["tripid"] = $tripid;
-$msg["tripname"] = $tripname;
+$msgArray['msgtext'] = 'ok';
+$msgArray['dbgtext'] = $retmsgArray['dbgtext'];
+$msgArray['bodytext'] = "Successfully updated gas entry details and totals";
 
-exit(json_encode($msg));
+exit(json_encode($msgArray));
 ?>

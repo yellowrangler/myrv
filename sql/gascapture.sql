@@ -1,47 +1,52 @@
 DROP TABLE IF EXISTS `gastripentrytbl`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+
 CREATE TABLE `gastripentrytbl` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `memberid` bigint(20) unsigned DEFAULT NULL,
-  `tripid` bigint(20) unsigned DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `memberid` bigint(20) UNSIGNED DEFAULT NULL,
+  `tripid` bigint(20) UNSIGNED DEFAULT NULL,
   `odometer` decimal(18,1) DEFAULT NULL,
   `amount` decimal(18,2) DEFAULT NULL,
   `gallons` decimal(18,3) DEFAULT NULL,
   `costpergallon` decimal(18,3) DEFAULT NULL,
   `miles` decimal(18,1) DEFAULT NULL,
-  `mpg` decimal(18,1) DEFAULT NULL,
+  `mpg` decimal(18,3) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
   `station` varchar(1000) DEFAULT NULL,
   `location` varchar(1000) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
   `state` varchar(100) DEFAULT NULL,
   `comments` varchar(1000) DEFAULT NULL,
-  `tankfilled` int(11) DEFAULT NULL,
+  `nottankfilled` int(11) DEFAULT NULL,
   `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
 DROP TABLE IF EXISTS `gastriptotalstbl`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gastriptotalstbl` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `memberid` bigint(20) unsigned DEFAULT NULL,
-  `tripid` bigint(20) unsigned DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `memberid` bigint(20) UNSIGNED DEFAULT NULL,
+  `tripid` bigint(20) UNSIGNED DEFAULT NULL,
   `odometer` decimal(18,1) DEFAULT NULL,
   `totalamount` decimal(18,2) DEFAULT NULL,
   `totalgallons` decimal(18,3) DEFAULT NULL,
   `avecostpergallon` decimal(18,3) DEFAULT NULL,
   `totalmiles` decimal(18,1) DEFAULT NULL,
-  `avempg` decimal(18,1) DEFAULT NULL,
+  `avempg` decimal(18,3) DEFAULT NULL,
   `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
+--
+-- Dumping data for table `gastriptotalstbl`
+--
+
+INSERT INTO `gastriptotalstbl` (`id`, `memberid`, `tripid`, `odometer`, `totalamount`, `totalgallons`, `avecostpergallon`, `totalmiles`, `avempg`, `lastupdate`) VALUES
+(1, 1, 3, '100000.0', '0.00', '0.000', '0.000', '0.0', '0.000', '2019-02-03 18:40:02'),
+(2, 1, 4, '100000.0', '0.00', '0.000', '0.000', '0.0', '0.000', '2019-02-03 17:38:53'),
+(3, 1, 5, '80088.7', '0.00', '0.000', '0.000', '0.0', '0.000', '2019-04-05 15:21:59');
+
+
 DROP TABLE IF EXISTS `triptbl`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `triptbl` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `memberid` bigint(20) DEFAULT NULL,
@@ -58,6 +63,9 @@ CREATE TABLE `triptbl` (
   `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
+
+
+
 
 LOCK TABLES `triptbl` WRITE;
 /*!40000 ALTER TABLE `triptbl` DISABLE KEYS */;

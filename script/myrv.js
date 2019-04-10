@@ -237,6 +237,55 @@ function getCurrentDateTimeStr()
 	return todayStr;
 }
 
+function getCurrentTimeStr(timeType)
+{
+	//
+	// get current date
+	//
+	var today = new Date();
+
+	var ss = today.getSeconds();
+	var min = today.getMinutes();
+	var hh = today.getHours();
+
+	if (timeType == 24)
+	{
+		if(ss<10) {
+		    ss='0'+ss
+		} 
+
+		if(min<10) {
+		    min='0'+min
+		}
+
+		if(hh<10) {
+		    hh='0'+hh
+		}
+
+		var todayStr = hh.toString()+":"+min.toString()+":"+ss.toString();
+	}
+
+	if (timeType == 12)
+	{
+		if(hh>12) {
+			hh = hh - 12;
+		    ss='PM';
+		}
+		else {
+			ss='AM';
+		} 
+
+		if(min<10) {
+		    min='0'+min
+		}
+
+		var todayStr = hh.toString()+":"+min.toString()+" "+ss.toString();
+	}
+	
+
+	return todayStr;
+}
+
 function getCurrentDateStr()
 {
 	//
@@ -260,37 +309,6 @@ function getCurrentDateStr()
 
 	return todayStr;
 }
-
-function compareScores(venue, homescore, awayscore)
-{
-    var result = false;
-
-    var homescoreNbr = parseInt(homescore);
-    var awayscoreNbr = parseInt(awayscore);
-
-    if (venue == "home")
-    {
-        if (homescoreNbr > awayscoreNbr)
-        {
-            result = true;
-        }
-    }
-    else if (venue == "away")
-    {
-        if (awayscoreNbr > homescoreNbr)
-        {
-            result = true;
-        }
-
-    }
-    else
-    {
-        alert ("No venue");
-    }
-
-    return result;
-}
-
 
 //
 // prototypes
@@ -374,96 +392,3 @@ function doAnimation(index, colorText, timeMS)
 			);
 		}, 50);
 }
-
-function makeSnowAnimation(options, targetElement)
-{
-    var $flake1          = $('<div id="flake" />').css({'position': 'absolute', 'top': '-50px'}).html('&#10052;'),
-        documentHeight  = $(targetElement).height(),
-        documentWidth   = $(targetElement).width(),
-        defaults        = {
-                            minSize     : 10,
-                            maxSize     : 20,
-                            newOn       : 500,
-                            flakeColor1  : "#FFFFFF",
-                            flakeColor2  : "black"
-                        },
-        options         = $.extend({}, defaults, options);
-
-    var $flake2          = $('<div id="flake" />').css({'position': 'absolute', 'top': '-50px'}).html('&#10053;');
-        // documentHeight  = $(targetElement).height(),
-        // documentWidth   = $(targetElement).width(),
-        // defaults        = {
-        //                     minSize     : 10,
-        //                     maxSize     : 20,
-        //                     newOn       : 500,
-        //                     flakeColor  : "#FFFFFF"
-        //                 },
-        // options2         = $.extend({}, defaults, options2);    
-        
-    var intervalVariable        = 
-        setInterval( function(){
-            var startPositionLeftFlake1   = Math.random() * documentWidth - 100,
-            	startPositionLeftFlake2   = Math.random() * documentWidth - 10,
-                startOpacity        = 0.5 + Math.random(),
-                sizeFlake           = options.minSize + Math.random() * options.maxSize,
-                endPositionTopFlake1      = documentHeight - 20,
-                endPositionTopFlake2      = documentHeight - 50,
-                endPositionLeftFlake1     = startPositionLeftFlake1 - 100 + Math.random() * 200,
-                endPositionLeftFlake2     = startPositionLeftFlake2 - 10 + Math.random() * 40,
-                durationFall        = documentHeight * 10 + Math.random() * 5000;
-            $flake1
-                .clone()
-                .appendTo(targetElement)
-                .css(
-                    {
-                        left: startPositionLeftFlake1,
-                        opacity: startOpacity,
-                        'font-size': sizeFlake,
-                        color: options.flakeColor1
-                    }
-                )
-                .animate(
-                    {
-                        top: endPositionTopFlake1,
-                        left: endPositionLeftFlake1,
-                        opacity: 0.2
-                    },
-                    durationFall,
-                    'linear',
-                    function() {
-                        $(this).remove()
-                    }
-                );
-
-            $flake2
-                .clone()
-                .appendTo(targetElement)
-                .css(
-                    {
-                        left: startPositionLeftFlake2,
-                        opacity: startOpacity,
-                        'font-size': sizeFlake,
-                        color: options.flakeColor2
-                    }
-                )
-                .animate(
-                    {
-                        top: endPositionTopFlake2,
-                        left: endPositionLeftFlake2,
-                        opacity: 0.2
-                    },
-                    durationFall,
-                    'linear',
-                    function() {
-                        $(this).remove()
-                    }
-                );  
-        }, options.newOn);
-
-    return(intervalVariable);
-}
-
-
-
-
-

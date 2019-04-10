@@ -160,7 +160,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             cpg = amtgas / galgas;
         }
         
-        if (cpgtot == 0)
+        if (galgastot == 0)
         {
             cpgtot = 0;
         }
@@ -387,6 +387,16 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
     $scope.calculateChange = function () {
         calculateChange();
+    }
+
+    $scope.setToday = function () {
+        $scope.current.capture.date = getCurrentDateStr();
+
+        $("#date").val($scope.current.capture.date);
+    }
+
+    $scope.setNow = function () {
+        $scope.current.capture.time = getCurrentTimeStr(12);
     }
 
 }
