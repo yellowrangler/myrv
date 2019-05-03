@@ -150,7 +150,7 @@
         <div style="padding-top:15px;" class="form-group">
             <div class="col-md-offset-1 col-md-11">
                 <div class="col-md-3">
-                    <button style="" class="btn btn-info btn-sm" ng-click="clearGasCapture()" id="clearGasCaptureButton">Clear</button>
+                    <button style="" class="btn btn-info btn-sm" ng-click="resetGasCapture()" id="resetGasCaptureButton">Clear</button>
                 </div> <!-- end of col 4 -->
                 <div class="col-md-offset-1 col-md-8">
                     <span style="padding-left:15px;">&nbsp;</span>
@@ -210,6 +210,10 @@
                     </div>
                     <div class="col-md-6">
                         <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmpg" id="totalmpg" name="totalmpg" >
+
+                        <input type="hidden" ng-model="current.gastotals.topoffgallons" id="topoffgallons" name="topoffgallons" value="{{current.gastotals.topoffgallons}}">
+
+                        <input type="hidden" ng-model="current.gastotals.gastripentrytotalsid" id="gastripentrytotalsid" name="gastripentrytotalsid" value="{{current.gastotals.gastripentrytotalsid}}">
                     </div>
                 </div> <!-- end of form-group -->
             </div>  <!-- end of inner pannel body -->  

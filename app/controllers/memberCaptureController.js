@@ -43,7 +43,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid;
         memberFactory.getMembertripgastotals(qdata)
             .success( function(data) {
-                $scope.current.gastotals = data;
+                $scope.current.gastotals = objectCopy(data);
                 
                 $scope.current.original.gastotals = objectCopy(data);
                 })
@@ -72,8 +72,10 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         odmgas = $scope.current.capture.odometer * 1;  
         odmb4 = $scope.current.original.gastotals.odometer * 1; 
         milgas = odmgas - odmb4;
+
         miltot = $scope.current.original.gastotals.totalmiles * 1;
         miltot = miltot + milgas;
+
         $scope.current.capture.odometer = odmgas.toFixed(1);
         $scope.current.capture.miles = milgas.toFixed(1);
 
@@ -222,8 +224,20 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         galgas = $scope.current.capture.gallons * 1; 
 
         milgastot = $scope.current.original.gastotals.totalmiles * 1;  
-        galgastot = $scope.current.original.gastotals.totalgallons * 1; 
+        milgastot = milgastot + milgas;
 
+        galgastot = $scope.current.original.gastotals.totalgallons * 1; 
+        galgastopofftot = $scope.current.original.gastotals.topoffgallons * 1;
+        if (milgastot > 0)
+        {
+            galgastot = (galgastot + galgas) - galgastopofftot;
+        }
+        else
+        {
+            galgastot = galgastot + galgas;
+            $scope.current.gastotals.topoffgallons = galgastot.toFixed(3);
+        }
+        
         if (galgas == 0)
         {
             mpg = 0;
@@ -239,12 +253,18 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         }
         else
         {
-            mpgtot = milgastot / galgastot;
+            if (milgastot == 0)
+            {
+                mpgtot = mpg;
+            }
+            else
+            {
+                mpgtot = milgastot / galgastot;
+            }
         }
 
         $scope.current.capture.mpg = mpg.toFixed(3);
         $scope.current.gastotals.totalmpg = mpgtot.toFixed(3);
- 
     }
 
 
@@ -289,8 +309,25 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         calculateMPG();
     }
 
-    function clearGasCapture() {
-        
+    function resetGasCapture() {
+        $scope.current.activetripname = "";
+        $scope.current.original = {};
+
+        $scope.membertrips = "";
+        $scope.current.activestatetripid = "";
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        $scope.current.capture = {};
+        $scope.current.capture.date = getCurrentDateStr();
+
+        $scope.current.gastotals = {};
+
+        // use ng-change in html to calc totals
+
+        getMembertowvehicles();
+        getMemberrvehicles();
+
+        getMemberTrips();
     }
 
     function saveGasCapture() {
@@ -306,6 +343,8 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
                 $('#memCaptureGasDialogModalBody').html(data.bodytext);
 
                 $('#memCaptureGasDialogModal').modal();
+
+                resetGasCapture();
             }
             else
             {
@@ -357,28 +396,12 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
-        $scope.current.activetripname = "";
-        $scope.current.original = {};
 
-        $scope.membertrips = "";
-        $scope.current.activestatetripid = "";
-        $scope.current.email = $scope.current.memberlogin.email;
-
-        $scope.current.capture = {};
-        $scope.current.capture.date = getCurrentDateStr();
-
-        $scope.current.gastotals = {};
-
-        // use ng-change in html to calc totals
-
-        getMembertowvehicles();
-        getMemberrvehicles();
-
-        getMemberTrips();
+        resetGasCapture();
     };
 
-    $scope.clearGasCapture = function () {
-        clearGasCapture();
+    $scope.resetGasCapture = function () {
+        resetGasCapture();
     }
 
     $scope.saveGasCapture = function () {

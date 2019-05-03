@@ -37,10 +37,10 @@ include 'mysqlconnect.php';
 // 
 // Now get gas trip totals
 // 
-$sql = "SELECT * 
-FROM gastriptotalstbl 
-WHERE memberid = $memberid AND tripid = $tripid 
-ORDER BY id DESC LIMIT 1";
+$sql = "SELECT id as gastripentrytotalsid, memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, topoffgallons, lastupdate 
+	FROM gastriptotalstbl 
+	WHERE memberid = $memberid AND tripid = $tripid 
+	ORDER BY id DESC LIMIT 1";
 
 //
 // sql query

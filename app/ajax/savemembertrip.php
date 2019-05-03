@@ -171,9 +171,9 @@ $count = mysqli_num_rows($sql_result);
 if ($count == 0)
 {
 	$sql = "INSERT INTO gastriptotalstbl
-		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, lastupdate) 
+		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, totalgallons, lastupdate) 
 		VALUES 
-		($memberid,$tripid,$startodometer,0,0,0,0,0,'$enterdate')";
+		($memberid,$tripid,$startodometer,0,0,0,0,0,0,'$enterdate')";
 
 		$sqlFunction = "insert";
 }
@@ -193,11 +193,6 @@ else
 		memberid=$memberid,
 		tripid=$tripid,
 		odometer=$startodometer,
-		totalamount=0,
-		totalgallons=0,
-		avecostpergallon=0,
-		totalmiles=0,
-		avempg=0,
 		lastupdate='$enterdate' 
 		WHERE id = $idtotals";
 
