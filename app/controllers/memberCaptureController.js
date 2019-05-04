@@ -1,57 +1,6 @@
 controllers.gastripentryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
-    function getMemberTrips() {
-
-        var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getMembertrips(qdata)
-            .success( function(data) {
-                $scope.membertrips = data;
-
-                getActiveMemberTrip();
-
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
-    function getActiveMemberTrip() {
-
-        $scope.current.activetripid = "";
-
-        for (var i = 0; i < $scope.membertrips.length; i++)
-        {
-            if ($scope.membertrips[i].currenttrip == 1)
-            {
-                $scope.current.activetrip = $scope.membertrips[i];
-                $scope.current.activetripid = $scope.current.activetrip.id
-                $scope.current.activetripname = $scope.membertrips[i].tripname;
-
-
-                getMemberTripGasTotals();
-
-                // console.log("current trip"+$scope.current.trip);
-            }
-        }
-
-    }
-
-    function getMemberTripGasTotals() {
-        $scope.current.gastotals = {};
-
-        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid;
-        memberFactory.getMembertripgastotals(qdata)
-            .success( function(data) {
-                $scope.current.gastotals = objectCopy(data);
-                
-                $scope.current.original.gastotals = objectCopy(data);
-                })
-            .error( function(edata) {
-                alert(edata);
-            });
-
-    }
 
     //-----------------------------------------------------------
     //  calculate out mileage
@@ -328,6 +277,58 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         getMemberrvehicles();
 
         getMemberTrips();
+    }
+
+    function getMemberTrips() {
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMembertrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+
+                getActiveMemberTrip();
+
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getActiveMemberTrip() {
+
+        $scope.current.activetripid = "";
+
+        for (var i = 0; i < $scope.membertrips.length; i++)
+        {
+            if ($scope.membertrips[i].currenttrip == 1)
+            {
+                $scope.current.activetrip = $scope.membertrips[i];
+                $scope.current.activetripid = $scope.current.activetrip.id
+                $scope.current.activetripname = $scope.membertrips[i].tripname;
+
+
+                getMemberTripGasTotals();
+
+                // console.log("current trip"+$scope.current.trip);
+            }
+        }
+
+    }
+
+    function getMemberTripGasTotals() {
+        $scope.current.gastotals = {};
+
+        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid;
+        memberFactory.getMembertripgastotals(qdata)
+            .success( function(data) {
+                $scope.current.gastotals = objectCopy(data);
+                
+                $scope.current.original.gastotals = objectCopy(data);
+                })
+            .error( function(edata) {
+                alert(edata);
+            });
+
     }
 
     function saveGasCapture() {

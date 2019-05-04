@@ -117,7 +117,7 @@ else
 	    memberid = $memberid,
 	    tripname = '$tripname',
 	    currenttrip = '$currenttrip',
-	    startodometer = $startodometer,
+	    -- startodometer = $startodometer,
 	    towvehicle = '$towvehicle',
 	    rv = '$rv',
 	    startdate = NULLIF('$startdate',''),
@@ -192,7 +192,7 @@ else
 		SET 
 		memberid=$memberid,
 		tripid=$tripid,
-		odometer=$startodometer,
+		-- odometer=$startodometer,
 		lastupdate='$enterdate' 
 		WHERE id = $idtotals";
 
