@@ -1,0 +1,20 @@
+if not full
+	set notfull indicator on totals table
+	update all except mpg (perhaps in MPG field say Not Full)
+	set notfull indicator on gas details table
+	write all records
+
+
+if full
+	if notfull indicator on totals table is set
+		gather total miles and total gallons from gas detail records that have notfull indicator on
+		calculate mpg seperately with new totals
+		unset notfull indicator on totals table
+		write all records
+		
+		
+		
+1. How prevent duplicate records with same odometer reading	
+2. Need edit screen for updating gas capture
+3. Need rebalance code to recalculate all entrys based on date and odometer
+4. How prevent odometer entry that is less then current in capture	

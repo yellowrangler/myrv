@@ -75,6 +75,7 @@ CREATE TABLE `gastriptotalstbl` (
   `totalmiles` decimal(18,1) DEFAULT NULL,
   `avempg` decimal(18,1) DEFAULT NULL,
   `topoffgallons` decimal(18,3) DEFAULT NULL,  
+  `nottankfilled` int(11) DEFAULT NULL,
   `lastupdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -276,43 +276,25 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         getMembertowvehicles();
         getMemberrvehicles();
 
-        getMemberTrips();
-    }
-
-    function getMemberTrips() {
-
-        var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getMembertrips(qdata)
-            .success( function(data) {
-                $scope.membertrips = data;
-
-                getActiveMemberTrip();
-
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
+        getActiveMemberTrip();
     }
 
     function getActiveMemberTrip() {
 
         $scope.current.activetripid = "";
 
-        for (var i = 0; i < $scope.membertrips.length; i++)
-        {
-            if ($scope.membertrips[i].currenttrip == 1)
-            {
-                $scope.current.activetrip = $scope.membertrips[i];
-                $scope.current.activetripid = $scope.current.activetrip.id
-                $scope.current.activetripname = $scope.membertrips[i].tripname;
-
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getActiveMembertrip(qdata)
+            .success( function(data) {
+                $scope.current.activetrip = data;
+                $scope.current.activetripid = data.id
+                $scope.current.activetripname = data.tripname;
 
                 getMemberTripGasTotals();
-
-                // console.log("current trip"+$scope.current.trip);
-            }
-        }
-
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
     }
 
     function getMemberTripGasTotals() {

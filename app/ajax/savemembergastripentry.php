@@ -85,6 +85,12 @@ if (is_numeric($_POST['topoffgallons']))
     $topoffgallons = $_POST['topoffgallons'];
 }
 
+$gastotalsnottankfilled = 0;
+if (is_numeric($_POST['gastotalsnottankfilled']))
+{
+    $gastotalsnottankfilled = $_POST['gastotalsnottankfilled'];
+}
+
 $totalgallons = 0;
 if (is_numeric($_POST['totalgallons']))
 {
@@ -196,6 +202,7 @@ $sql = "UPDATE gastriptotalstbl
     odometer=$odometer,
 	totalamount=$totalamount,
 	totalgallons=$totalgallons,
+    nottankfilled=$gastotalsnottankfilled,
     topoffgallons=$topoffgallons,
 	avecostpergallon=$avecostpergallon,
 	totalmiles=$totalmiles,
