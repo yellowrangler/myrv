@@ -86,7 +86,7 @@ if (is_numeric($_POST['topoffgallons']))
 }
 
 $gastotalsnottankfilled = 0;
-if (is_numeric($_POST['gastotalsnottankfilled']))
+if (isset($_POST['gastotalsnottankfilled']))
 {
     $gastotalsnottankfilled = $_POST['gastotalsnottankfilled'];
 }
@@ -114,6 +114,9 @@ if (is_numeric($_POST['totalmpg']))
 {
 	$totalmpg = $_POST['totalmpg'];
 }
+
+// print_r($_POST);
+// exit();
 
 //
 // get date time for this transaction

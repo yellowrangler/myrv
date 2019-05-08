@@ -53,6 +53,15 @@ CREATE TABLE `gastripentrytbl` (
 --
 -- Dumping data for table `gastripentrytbl`
 --
+INSERT INTO `gastripentrytbl` (`id`, `memberid`, `tripid`, `odometer`, `amount`, `gallons`, `costpergallon`, `miles`, `mpg`, `date`, `time`, `station`, `location`, `state`, `comments`, `nottankfilled`, `lastupdate`) VALUES
+(1, 1, 5, '80088.7', '70.00', '27.039', '2.589', '0.0', '0.000', '2018-04-03', '10:23:00', 'Pilot', 'Clinton', 'NJ', NULL, 0, '2019-05-08 14:24:39'),
+(2, 1, 5, '80307.1', '42.89', '17.803', '2.409', '218.4', '12.268', '2019-04-03', '22:25:00', 'Flying J', 'Winchester', 'VA', NULL, 0, '2019-05-08 14:26:27'),
+(3, 1, 5, '80596.7', '60.10', '24.048', '2.499', '289.6', '12.043', '2018-04-04', '10:27:00', 'Flying J', 'Mc Airy', 'NC', NULL, 0, '2019-05-08 14:29:10'),
+(4, 1, 5, '80884.1', '55.81', '23.070', '2.419', '287.4', '12.458', '2018-04-05', '10:31:00', 'Pilot', 'Kannapolis', 'NC', NULL, 0, '2019-05-08 14:33:23'),
+(5, 1, 5, '81268.3', '79.73', '32.824', '2.429', '384.2', '11.705', '2018-04-09', '11:15:00', 'Pilot', 'Hardville', 'SC', NULL, 0, '2019-05-08 15:16:56'),
+(6, 1, 5, '81605.5', '67.36', '27.506', '2.449', '337.2', '12.259', '2018-04-12', '11:56:00', 'Pilot', 'Coca', 'FL', NULL, 0, '2019-05-08 15:58:06'),
+(7, 1, 5, '81803.1', '50.72', '18.792', '2.699', '197.6', '10.515', '2018-04-13', '11:58:00', 'Pilot', 'Unknown', 'FL', NULL, 0, '2019-05-08 16:01:22');
+
 
 INSERT INTO `gastripentrytbl` (`id`, `memberid`, `tripid`, `odometer`, `amount`, `gallons`, `costpergallon`, `miles`, `mpg`, `date`, `time`, `station`, `location`, `state`, `comments`, `nottankfilled`, `lastupdate`) VALUES
 (1, 1, 5, '80088.7', '70.00', '27.039', '2.589', '0.0', '0.000', '2018-04-03', '00:36:00', 'Pilot', 'Clinton', 'NJ', NULL, 0, '2019-05-02 16:39:58');
@@ -83,6 +92,10 @@ CREATE TABLE `gastriptotalstbl` (
 --
 -- Dumping data for table `gastriptotalstbl`
 --
+INSERT INTO `gastriptotalstbl` (`id`, `memberid`, `tripid`, `odometer`, `totalamount`, `totalgallons`, `avecostpergallon`, `totalmiles`, `avempg`, `topoffgallons`, `nottankfilled`, `lastupdate`) VALUES
+(1, 1, 3, '100000.0', '0.00', '0.000', '0.000', '0.0', '0.0', '0.000', NULL, '2019-02-03 18:40:02'),
+(2, 1, 4, '100000.0', '0.00', '0.000', '0.000', '0.0', '0.0', '0.000', NULL, '2019-02-03 17:38:53'),
+(3, 1, 5, '81803.1', '426.61', '171.082', '2.494', '1714.4', '11.9', '27.039', 0, '2019-05-08 16:01:22');
 
 INSERT INTO `gastriptotalstbl` (`id`, `memberid`, `tripid`, `odometer`, `totalamount`, `totalgallons`, `avecostpergallon`, `totalmiles`, `avempg`, `topoffgallons`, `lastupdate`) VALUES
 (1, 1, 3, '100000.0', '0.00', '0.000', '0.000', '0.0', '0.0', '0.0', '2019-02-03 18:40:02'),

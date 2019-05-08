@@ -48,7 +48,6 @@
                         <span style="padding-right:10px">&nbsp;</span>
 
                         <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
-
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -112,7 +111,7 @@
 
                 <div class="form-group" >
                     <div class="col-md-offset-4 col-md-7 capture-detail-checkbox-input">
-                        <input style="padding-top:10px;" tabindex="10" type="checkbox" ng-model="current.capture.notfilledtank" ng-checked="current.capture.notfilledtank == '1'" id="notfilledtank" name="notfilledtank"> Tank not filled
+                        <input style="padding-top:10px;" ng-click="calculateChange()" tabindex="10" type="checkbox" ng-model="current.capture.nottankfilled" ng-checked="current.capture.nottankfilled == '1'" id="nottankfilled" name="nottankfilled"> Tank not filled
                     </div>
                 </div> <!-- end of form-group -->
 

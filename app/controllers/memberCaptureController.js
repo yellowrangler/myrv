@@ -67,7 +67,6 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
     }
 
-
     //----------------------------------------------------------- 
     //  calculate out cost per gallon 
     //----------------------------------------------------------- 
@@ -124,7 +123,6 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.gastotals.avecostpergallon = cpgtot.toFixed(3);
     }
 
-
     //----------------------------------------------------------- 
     //  calculate out cost per gallon 
     //----------------------------------------------------------- 
@@ -162,6 +160,19 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         var milgastot = 0;
         var galgastot = 0;  
         var mpgtot = 0;
+
+
+        // 
+        // if tank not filled no mpg
+        //
+        if ($scope.current.capture.nottankfilled)
+        {
+            $scope.current.capture.mpg = mpg.toFixed(3);
+            $scope.current.gastotals.totalmpg = $scope.current.original.gastotals.avempg;
+            $scope.current.gastotals.nottankfilled = 1;
+
+            return;
+        }
         
         if ($scope.current.capture.miles == undefined || $scope.current.capture.gallons == undefined)
             return;
