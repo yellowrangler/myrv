@@ -109,10 +109,10 @@ if (is_numeric($_POST['totalmiles']))
 	$totalmiles = $_POST['totalmiles'];
 }
 
-$totalmpg = 0;
-if (is_numeric($_POST['totalmpg']))
+$avempg = 0;
+if (is_numeric($_POST['avempg']))
 {
-	$totalmpg = $_POST['totalmpg'];
+	$avempg = $_POST['avempg'];
 }
 
 // print_r($_POST);
@@ -209,7 +209,7 @@ $sql = "UPDATE gastriptotalstbl
     topoffgallons=$topoffgallons,
 	avecostpergallon=$avecostpergallon,
 	totalmiles=$totalmiles,
-	avempg=$totalmpg,
+	avempg=$avempg,
 	lastupdate='$enterdate' 
 	WHERE id = $gastripentrytotalsid";
 

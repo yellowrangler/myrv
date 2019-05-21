@@ -168,7 +168,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.nottankfilled)
         {
             $scope.current.capture.mpg = mpg.toFixed(3);
-            $scope.current.gastotals.totalmpg = $scope.current.original.gastotals.avempg;
+            $scope.current.gastotals.avempg = $scope.current.original.gastotals.avempg;
             $scope.current.gastotals.nottankfilled = 1;
 
             return;
@@ -244,7 +244,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         }
 
         $scope.current.capture.mpg = mpg.toFixed(3);
-        $scope.current.gastotals.totalmpg = mpgtot.toFixed(3);
+        $scope.current.gastotals.avempg = mpgtot.toFixed(3);
     }
 
 
