@@ -18,3 +18,22 @@ if full
 2. Need edit screen for updating gas capture
 3. Need rebalance code to recalculate all entrys based on date and odometer
 4. How prevent odometer entry that is less then current in capture	
+
+
+
+how calc gas tank filled
+
+select * 
+from gastripentrytbl
+where memberid = 1 and tripid = 5 
+order by date desc 
+
+while (get next record)
+{
+	if notfull indicator detail is set
+		add miles to miles
+		add gallons to gallons
+	else
+		break out of loop
+}
+

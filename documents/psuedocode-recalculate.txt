@@ -1,8 +1,4 @@
-controllers.gastripentryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
-    $scope.current = {};
-
-
-    //-----------------------------------------------------------
+//-----------------------------------------------------------
     //  calculate out mileage
     //-----------------------------------------------------------
     function calculateMillage() {
@@ -179,29 +175,9 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
             return;
-        
+
         milgas = $scope.current.capture.miles * 1;  
         galgas = $scope.current.capture.gallons * 1; 
-
-        // 
-        //  we must provide for a tank not full
-        // 
-        var catchupDetailMiles = 0;
-        var catchupDetailGallons = 0;
-        if ($scope.current.original.gastotals.nottankfilled)
-        {
-            // 
-            // we must now gather miles and gallons to provide true mpg
-            // 
-            // var arrayLength = objectArraySize($scope.current.original.gasdetails);
-            for ($i = 0; $scope.current.original.gasdetails[$i].nottankfilled == 1; $i++)
-            {
-                catchupDetailMiles = catchupDetailMiles + ($scope.current.original.gasdetails[$i].miles * 1);
-                catchupDetailGallons = catchupDetailGallons + ($scope.current.original.gasdetails[$i].gallons * 1);
-            }
-
-            $scope.current.gastotals.nottankfilled = 0;
-        }
 
         milgastot = $scope.current.original.gastotals.totalmiles * 1;  
         milgastot = milgastot + milgas;
@@ -224,7 +200,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         }
         else
         {
-            mpg = (milgas + catchupDetailMiles) / (galgas + catchupDetailGallons);
+            mpg = milgas / galgas;
         }
         
         if (galgastot == 0)
@@ -289,169 +265,48 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         calculateMPG();
     }
 
-    function resetGasCapture() {
-        $scope.current.activetripname = "";
-        $scope.current.original = {};
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 
-        $scope.membertrips = "";
-        $scope.current.activestatetripid = "";
-        $scope.current.email = $scope.current.memberlogin.email;
+// Psuedo Code
 
-        $scope.current.capture = {};
-        $scope.current.capture.date = getCurrentDateStr();
+// Variables
+$firstTime = 1;
 
-        $scope.current.gastotals = {};
+$tripStartOdometer = 0;
 
-        // use ng-change in html to calc totals
+$prevOdometer = 0;
+$prevAmount = 0;
+$prevGallons = 0;
 
-        getMembertowvehicles();
-        getMemberrvehicles();
+$detailOdometer = 0;
+$detailAmount = 0;
+$detailGallons = 0;
+$detailMiles = 0;
+$detailCPG = 0;
+$detailMPG = 0;
+$detailNottankfilled = 0;
 
-        getActiveMemberTrip();
-    }
+$totalOdometer = 0;
+$totalAmount = 0;
+$totalGallons = 0;
+$totalMiles = 0;
+$totalCPG = 0;
+$totalMPG = 0;
+$totalNottankfilled = 0;
 
-    function getActiveMemberTrip() {
 
-        $scope.current.activetripid = "";
+$sql = "SELECT * FROM triptbl
+WHERE tripid = $tripid AND memberid = $memberid";
 
-        var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getActiveMembertrip(qdata)
-            .success( function(data) {
-                $scope.current.activetrip = data;
-                $scope.current.activetripid = data.id
-                $scope.current.activetripname = data.tripname;
+execute sql
 
-                getMemberTripGasDetais();
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
+$sql = "SELECT * FROM gastripentrytbl
+WHERE tripid = $tripid AND memberid = $memberid
+ORDER BY date, time";
 
-    function getMemberTripGasDetais() {
-        $scope.current.gasdetails = {};
+execute sql
 
-        $order = "DESC";
 
-        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid+'&order='+$order;
-        memberFactory.getMembertripgasdetails(qdata)
-            .success( function(data) {
-                $scope.current.original.gasdetails = objectCopy(data);
 
-                getMemberTripGasTotals();
-                })
-            .error( function(edata) {
-                alert(edata);
-            });
-
-    }
-
-    function getMemberTripGasTotals() {
-        $scope.current.gastotals = {};
-
-        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid;
-        memberFactory.getMembertripgastotals(qdata)
-            .success( function(data) {
-                $scope.current.gastotals = objectCopy(data);
-                
-                $scope.current.original.gastotals = objectCopy(data);
-                })
-            .error( function(edata) {
-                alert(edata);
-            });
-
-    }
-
-    function saveGasCapture() {
-        var formstring = $("#membercapturegasForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMembergastripentry(formstring)
-        .success( function(data) {
-            if (data.msgtext == "ok")
-            {
-                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Success");
-                $('#memCaptureGasDialogModalBody').html(data.bodytext);
-
-                $('#memCaptureGasDialogModal').modal();
-
-                resetGasCapture();
-            }
-            else
-            {
-                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
-                $('#memCaptureGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
-                $('#memCaptureGasDialogModal').modal();
-            }
-
-            // must call for new totals and reload scope.current.original.gastotals
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
-
-    function getMembertowvehicles() {
-        var qdata = 'vehicletype=towvehicle&memberid='+$scope.current.memberid;
-        memberFactory.getMembervehicles(qdata)
-            .success( function(data) {
-                $scope.membertowvehicles = data;
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
-    function getMemberrvehicles() {
-        var qdata = 'vehicletype=rv&memberid='+$scope.current.memberid;
-        memberFactory.getMembervehicles(qdata)
-            .success( function(data) {
-                $scope.memberrvvehicles = data;
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-    
-
-    init();
-    function init() {
-        //
-        // this is not getting called at right time for definig top offset
-        // in jquery ready. So adding it here
-        //
-        setviewpadding();
-
-        $scope.states = selectListService.getList('states');
-
-        $scope.current.memberlogin = loginService.getLogin();
-        $scope.current.memberid = $scope.current.memberlogin.memberid;
-        $scope.current.membername = $scope.current.memberlogin.membername;
-
-        resetGasCapture();
-    };
-
-    $scope.resetGasCapture = function () {
-        resetGasCapture();
-    }
-
-    $scope.saveGasCapture = function () {
-        saveGasCapture();
-    }
-
-    $scope.calculateChange = function () {
-        calculateChange();
-    }
-
-    $scope.setToday = function () {
-        $scope.current.capture.date = getCurrentDateStr();
-
-        $("#date").val($scope.current.capture.date);
-    }
-
-    $scope.setNow = function () {
-        $scope.current.capture.time = getCurrentTimeStr(12);
-    }
-
-}

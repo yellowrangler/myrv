@@ -19,6 +19,14 @@ function objectCopy(src) {
   return target;
 }
 
+function objectArraySize(obj) {
+  	var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+}
+
 function setviewpadding()
 {	
 	// var navTypeMobile = isMobile();

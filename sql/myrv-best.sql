@@ -82,7 +82,7 @@ CREATE TABLE `gastriptotalstbl` (
   `totalgallons` decimal(18,3) DEFAULT NULL,
   `avecostpergallon` decimal(18,3) DEFAULT NULL,
   `totalmiles` decimal(18,1) DEFAULT NULL,
-  `avempg` decimal(18,1) DEFAULT NULL,
+  `avempg` decimal(18,3) DEFAULT NULL,
   `topoffgallons` decimal(18,3) DEFAULT NULL,  
   `nottankfilled` int(11) DEFAULT NULL,
   `lastupdate` datetime DEFAULT NULL,
