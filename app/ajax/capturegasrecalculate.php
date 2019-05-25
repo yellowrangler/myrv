@@ -36,6 +36,7 @@ $totalsEntry[tripid] = $tripid;
 $totalsEntry[odometer] = 0;
 $totalsEntry[totalamount] = 0;
 $totalsEntry[totalgallons] = 0;
+$totalsEntry[avecostpergallon] = 0;
 $totalsEntry[totalmiles] = 0;
 $totalsEntry[avempg] = 0;
 $totalsEntry[topoffgallons] = 0;
@@ -339,11 +340,116 @@ echo "<pre>".print_r($totalsEntry, true)."</pre>";
 // $sql = "DELETE FROM gastriptotalstbl
 // WHERE tripid = $tripid AND memberid = $memberid";
 
+// //
+// // sql query
+// //
+// $modulecontent = "Unable to delete member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
+// $function = 'delete';
+// include 'mysqlquery.php';
+
+
+$sql = "INSERT INTO gastripentrytbl 
+    (id, memberid, tripid, odometer, amount, gallons, 
+    costpergallon, miles, mpg, date, time, station, 
+    location, state, comments, nottankfilled, lastupdate) VALUES ";
+
+
+$firstTime = 1;
+for ($idx = 0; $idx < sizeof($detailEntrys); $idx++) 
+{
+    if ($firstTime == 1) 
+    {
+        $firstTime = 0;
+    }
+    else
+    {
+        $sql = $sql . ", ";
+    }
+
+    $detailEntrysid = $detailEntrys[$idx][id];
+    $detailEntrysmemberid = $detailEntrys[$idx][memberid];
+    $detailEntrystripid = $detailEntrys[$idx][tripid];
+    $detailEntrysodometer = $detailEntrys[$idx][odometer];
+    $detailEntrysamount = $detailEntrys[$idx][amount];
+    $detailEntrysgallons = $detailEntrys[$idx][gallons];
+    $detailEntryscostpergallon = $detailEntrys[$idx][costpergallon];
+    $detailEntrysmiles = $detailEntrys[$idx][miles];
+    $detailEntrysmpg = $detailEntrys[$idx][mpg];
+    $detailEntrysdate = $detailEntrys[$idx][date];
+    $detailEntrystime = $detailEntrys[$idx][time];
+    $detailEntrysstation = $detailEntrys[$idx][station];
+    $detailEntryslocation = $detailEntrys[$idx][location];
+    $detailEntrysstate = $detailEntrys[$idx][state];
+    $detailEntryscomments = $detailEntrys[$idx][comments];
+    $detailEntrysnottankfilled = $detailEntrys[$idx][nottankfilled];
+
+    $sql = $sql . "(
+        $detailEntrysid,
+        $detailEntrysmemberid,
+        $detailEntrystripid,
+        '$detailEntrysodometer',
+        '$detailEntrysamount',
+        '$detailEntrysgallons',
+        '$detailEntryscostpergallon',
+        '$detailEntrysmiles',
+        '$detailEntrysmpg',
+        '$detailEntrysdate',
+        '$detailEntrystime',
+        '$detailEntrysstation',
+        '$detailEntryslocation',
+        '$detailEntrysstate',
+        '$detailEntryscomments',
+        '$detailEntrysnottankfilled',
+        '$enterdate')";
+}
+
+$sql = $sql . "; ";
+
+print "<pre><br> detail entry inserts <br>"."</pre>";
+print "<pre><br> $sql <br></pre>";
+
 //
 // sql query
 //
-// $modulecontent = "Unable to delete member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
-// $function = 'delete';
+// $modulecontent = "Unable to insert member trip gas capture details records. memberid = $memberid. tripid = $tripid.";
+// $function = 'insert';
+// include 'mysqlquery.php';  
+
+$totalsEntrymemberid = $totalsEntry[memberid];
+$totalsEntrytripid = $totalsEntry[tripid];
+$totalsEntryodometer = $totalsEntry[odometer];
+$totalsEntrytotalamount = $totalsEntry[totalamount];
+$totalsEntrytotalgallons = $totalsEntry[totalgallons];
+$totalsEntryavecostpergallon = $totalsEntry[avecostpergallon];
+$totalsEntrytotalmiles = $totalsEntry[totalmiles];
+$totalsEntryavempg = $totalsEntry[avempg];
+$totalsEntrytopoffgallons = $totalsEntry[topoffgallons];
+$totalsEntrynottankfilled = $totalsEntry[nottankfilled];
+
+$sql = "UPDATE  gastriptotalstbl  
+    SET meberid = $totalsEntrymemberid, 
+    tripid = $totalsEntrytripid, 
+    odometer = '$totalsEntryodometer', 
+    totalamount = '$totalsEntrytotalamount', 
+    totalgallons = '$totalsEntrytotalgallons', 
+    avecostpergallon = '$totalsEntryavecostpergallon', 
+    totalmiles = '$totalsEntrytotalmiles', 
+    avempg = '$totalsEntryavempg', 
+    topoffgallons = '$totalsEntrytopoffgallons', 
+    nottankfilled = '$totalsEntrynottankfilled', 
+    lastupdate = '$enterdate' 
+    WHERE tripid = $tripid AND memberid = $memberid";
+
+
+
+print "<pre><br> total entry updates <br>"."</pre>";
+print "<pre><br> $sql <br></pre>";
+
+// //
+// // sql query
+// //
+// $modulecontent = "Unable to update member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
+// $function = 'update';
 // include 'mysqlquery.php';
 
 //
