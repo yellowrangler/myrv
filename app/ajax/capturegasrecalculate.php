@@ -4,14 +4,45 @@ include_once ('../class/class.Log.php');
 include_once ('../class/class.ErrorLog.php');
 include_once ('../class/class.AccessLog.php');
 
-//
-// post input
-//
-// $tripid = $_POST['tripid'];
-// $memberid = $_POST['memberid'];
 
-$tripid = 5;
-$memberid = 1;
+//
+// get or post variables
+//
+if (isset($_POST["tripid"]))
+{
+  $tripid = $_POST["tripid"];
+}
+else
+{
+  if (isset($_GET["tripid"]))
+  {
+    $tripid = $_GET["tripid"];
+  }
+  else
+  {
+    $msg = $msg . "No tripid passed - terminated";
+    exit($msg);
+
+  }
+}
+
+if (isset($_POST["memberid"]))
+{
+  $memberid = $_POST["memberid"];
+}
+else
+{
+  if (isset($_GET["memberid"]))
+  {
+    $memberid = $_GET["memberid"];
+  }
+  else
+  {
+    $msg = $msg . "No memberid passed - terminated";
+    exit($msg);
+
+  }
+}
 
 //
 // get date time for this transaction
@@ -44,6 +75,9 @@ $totalsEntry[nottankfilled] = 0;
 $totalsEntry[lastupdate] = "";
 
 $tripStartOdometer = 0;
+
+print "<br> Start Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
+
 
 // 
 //  functions
@@ -329,25 +363,27 @@ for ($idx = 0; $idx < sizeof($detailEntrys); $idx++)
     $totalsEntry[odometer] = round($totalsEntry[odometer], 1);
 }
 
-print "<br> detail entrys <br>"."</pre>";
-echo "<pre>".print_r($detailEntrys, true)."</pre>";
-print "<br> total entrys <br>";
-echo "<pre>".print_r($totalsEntry, true)."</pre>";
+// print "<br> detail entrys <br>"."</pre>";
+// echo "<pre>".print_r($detailEntrys, true)."</pre>";
+// print "<br> total entrys <br>";
+// echo "<pre>".print_r($totalsEntry, true)."</pre>";
 
 // 
-// Now truncare the trip capture gas detail totals record as we will rebuild it
+// Now delete the trip capture gas detail totals record before we will rebuild it
 // 
-// $sql = "DELETE FROM gastriptotalstbl
-// WHERE tripid = $tripid AND memberid = $memberid";
+$sql = "DELETE FROM gastripentrytbl
+WHERE tripid = $tripid AND memberid = $memberid";
 
-// //
-// // sql query
-// //
-// $modulecontent = "Unable to delete member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
-// $function = 'delete';
-// include 'mysqlquery.php';
+//
+// sql query
+//
+$modulecontent = "Unable to delete member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
+$function = 'delete';
+include 'mysqlquery.php';
 
-
+// 
+// Now do mass insert for trip capture gas detail totals record as we will rebuild it
+// 
 $sql = "INSERT INTO gastripentrytbl 
     (id, memberid, tripid, odometer, amount, gallons, 
     costpergallon, miles, mpg, date, time, station, 
@@ -405,15 +441,15 @@ for ($idx = 0; $idx < sizeof($detailEntrys); $idx++)
 
 $sql = $sql . "; ";
 
-print "<pre><br> detail entry inserts <br>"."</pre>";
-print "<pre><br> $sql <br></pre>";
+// print "<pre><br> detail entry inserts <br>"."</pre>";
+// print "<pre><br> $sql <br></pre>";
 
 //
 // sql query
 //
-// $modulecontent = "Unable to insert member trip gas capture details records. memberid = $memberid. tripid = $tripid.";
-// $function = 'insert';
-// include 'mysqlquery.php';  
+$modulecontent = "Unable to insert member trip gas capture details records. memberid = $memberid. tripid = $tripid.";
+$function = 'insert';
+include 'mysqlquery.php';  
 
 $totalsEntrymemberid = $totalsEntry[memberid];
 $totalsEntrytripid = $totalsEntry[tripid];
@@ -427,7 +463,7 @@ $totalsEntrytopoffgallons = $totalsEntry[topoffgallons];
 $totalsEntrynottankfilled = $totalsEntry[nottankfilled];
 
 $sql = "UPDATE  gastriptotalstbl  
-    SET meberid = $totalsEntrymemberid, 
+    SET memberid = $totalsEntrymemberid, 
     tripid = $totalsEntrytripid, 
     odometer = '$totalsEntryodometer', 
     totalamount = '$totalsEntrytotalamount', 
@@ -442,15 +478,15 @@ $sql = "UPDATE  gastriptotalstbl
 
 
 
-print "<pre><br> total entry updates <br>"."</pre>";
-print "<pre><br> $sql <br></pre>";
+// print "<pre><br> total entry updates <br>"."</pre>";
+// print "<pre><br> $sql <br></pre>";
 
-// //
-// // sql query
-// //
-// $modulecontent = "Unable to update member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
-// $function = 'update';
-// include 'mysqlquery.php';
+//
+// sql query
+//
+$modulecontent = "Unable to update member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
+$function = 'update';
+include 'mysqlquery.php';
 
 //
 // close db connection
@@ -460,5 +496,7 @@ mysqli_close($dbConn);
 //
 // pass back info
 //
+print "<br> Finished Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
+
 exit();
 ?>

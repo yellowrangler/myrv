@@ -1,10 +1,10 @@
 myrvApp.factory('memberFactory', function($q, $http) {
     var factory = {};
 
-    factory.membersetupMember = function (data) {
+    factory.membermanageMember = function (data) {
         return $http({ 
             method: 'POST', 
-            url: "app/ajax/membersetupmember.php",
+            url: "app/ajax/membermanagemember.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

@@ -1,4 +1,4 @@
-controllers.membersetupmemberController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagememberController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function getMember()
@@ -48,22 +48,22 @@ controllers.membersetupmemberController = function ($scope, $http, $location, me
         }
         else
         {
-            var formstring = $("#membersetupmemberForm").serialize();
+            var formstring = $("#membermanagememberForm").serialize();
             // var formstringClean = encodeURIComponent(formstring);
 
-            memberFactory.membersetupMember(formstring)
+            memberFactory.membermanageMember(formstring)
             .success( function(data) {
                 if (data == "ok")
                 {
-                    $('#memberSetupMemberDialogModalTitle').text("Member Update Success");
-                    $('#memberSetupMemberDialogModalBody').text("Member "+$scope.current.membername+" updated succesfully!");
-                    $('#memberSetupMemberDialogModal').modal();
+                    $('#membermanageMemberDialogModalTitle').text("Member Update Success");
+                    $('#membermanageMemberDialogModalBody').text("Member "+$scope.current.membername+" updated succesfully!");
+                    $('#membermanageMemberDialogModal').modal();
                 }
                 else
                 {
-                    $('#memberSetupMemberDialogModalTitle').text("Member Update Error");
-                    $('#memberSetupMemberDialogModalBody').text("Error updating member - "+data);
-                    $('#memberSetupMemberDialogModal').modal();
+                    $('#membermanageMemberDialogModalTitle').text("Member Update Error");
+                    $('#membermanageMemberDialogModalBody').text("Error updating member - "+data);
+                    $('#membermanageMemberDialogModal').modal();
                 }
             })
             .error( function(edata) {
@@ -73,13 +73,13 @@ controllers.membersetupmemberController = function ($scope, $http, $location, me
     }
 
     $scope.updateAvatar = function() {
-        $('#meberSetupMemberDialogModalTitle').text("Update Avatar Information");
-        $('#meberSetupMemberDialogModalBody').html("<center>At this time please send me your Avatar via eMail! <BR />We will open this up some day.</center>");
-        $('#meberSetupMemberDialogModal').modal();
+        $('#mebermanageMemberDialogModalTitle').text("Update Avatar Information");
+        $('#mebermanageMemberDialogModalBody').html("<center>At this time please send me your Avatar via eMail! <BR />We will open this up some day.</center>");
+        $('#mebermanageMemberDialogModal').modal();
     }
 }
 
-controllers.membersetuptripController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagetripController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberTrip(tripid) {
@@ -112,7 +112,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
     function saveMemberTrip() {
 
-        var formstring = $("#membersetuptripForm").serialize();
+        var formstring = $("#membermanagetripForm").serialize();
         // var formstringClean = encodeURIComponent(formstring);
 
         // console.log("trip form serialize:"+formstring);
@@ -124,18 +124,18 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
                 $scope.current.tripid = data.tripid;
                 $scope.current.tripname = data.tripname;
 
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Update Success");
-                $('#tripSetupMemberDialogModalBody').html("Trip information updated succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip Update Success");
+                $('#tripmanageMemberDialogModalBody').html("Trip information updated succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
 
-                $('#tripSetupMemberDialogModal').modal();
+                $('#tripmanageMemberDialogModal').modal();
 
                 getMemberTrips();
             }
             else
             {
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Update Error");
-                $('#tripSetupMemberDialogModalBody').text("Error updating trip - "+data);
-                $('#tripSetupMemberDialogModal').modal();
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip Update Error");
+                $('#tripmanageMemberDialogModalBody').text("Error updating trip - "+data);
+                $('#tripmanageMemberDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -155,10 +155,10 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
                 $scope.current.tripid = data.tripid;
                 $scope.current.tripname = data.tripname;
 
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Delete Success");
-                $('#tripSetupMemberDialogModalBody').html("Trip information deleted succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip Delete Success");
+                $('#tripmanageMemberDialogModalBody').html("Trip information deleted succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
 
-                $('#tripSetupMemberDialogModal').modal();
+                $('#tripmanageMemberDialogModal').modal();
 
                 resetTripForm();
 
@@ -166,9 +166,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             }
             else
             {
-                $('#tripSetupMemberDialogModalTitle').text("Member Trip Delete Error");
-                $('#tripSetupMemberDialogModalBody').text("Error updating trip - "+data);
-                $('#tripSetupMemberDialogModal').modal();
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip Delete Error");
+                $('#tripmanageMemberDialogModalBody').text("Error updating trip - "+data);
+                $('#tripmanageMemberDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -177,7 +177,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
      }
 
     function resetTripForm() {
-        // $("#membersetuptripForm")[0].reset();
+        // $("#membermanagetripForm")[0].reset();
 
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
@@ -279,7 +279,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
   }
 
-  controllers.membersetupvehiclervController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+  controllers.membermanagevehiclervController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberVehicles() {
@@ -326,7 +326,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     }
     
     function updateMemberVehicle() {
-        var formstring = $("#membersetupvehicleForm").serialize();
+        var formstring = $("#membermanagevehicleForm").serialize();
 
         // console.log(formstring);
 
@@ -339,9 +339,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
 
                 // console.log("after return tripid="+$scope.current.tripid);
 
-                $('#memberSetupVehicleDialogModalTitle').text("Member Update Vehicle Success");
-                $('#memberSetupVehicleDialogModalBody').html("Vehicle information updated succesfully for Vehicle <span style='color:teal;font-weight:700'>"+$scope.current.vehiclename+"</span>");
-                $('#memberSetupVehicleDialogModal').modal();
+                $('#membermanageVehicleDialogModalTitle').text("Member Update Vehicle Success");
+                $('#membermanageVehicleDialogModalBody').html("Vehicle information updated succesfully for Vehicle <span style='color:teal;font-weight:700'>"+$scope.current.vehiclename+"</span>");
+                $('#membermanageVehicleDialogModal').modal();
  
                 $scope.membervehicles = "";
 
@@ -350,9 +350,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             }
             else
             {
-                $('#memberSetupVehicleDialogModalTitle').text("Member Update Vehicle Error");
-                $('#memberSetupVehicleDialogModalBody').text("Error updating Vehicle - "+data);
-                $('#memberSetupVehicleDialogModal').modal();
+                $('#membermanageVehicleDialogModalTitle').text("Member Update Vehicle Error");
+                $('#membermanageVehicleDialogModalBody').text("Error updating Vehicle - "+data);
+                $('#membermanageVehicleDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -372,9 +372,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
                 $scope.current.vehicleid = data.vehicleid;
                 $scope.current.vehiclename = data.vehiclename;
 
-                $('#memberSetupVehicleDialogModalTitle').text("Member Vehicle Delete Success");
-                $('#memberSetupVehicleDialogModalBody').html("Vehicle information deleted succesfully for Vehicle <span style='color:teal;font-weight:700'>"+$scope.current.vehiclename+"</span>!");
-                $('#memberSetupVehicleDialogModal').modal();
+                $('#membermanageVehicleDialogModalTitle').text("Member Vehicle Delete Success");
+                $('#membermanageVehicleDialogModalBody').html("Vehicle information deleted succesfully for Vehicle <span style='color:teal;font-weight:700'>"+$scope.current.vehiclename+"</span>!");
+                $('#membermanageVehicleDialogModal').modal();
 
                 $scope.current.vehicleid = "";
                 $scope.current.vehiclename = "";
@@ -384,9 +384,9 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
             }
             else
             {
-                $('#memberSetupVehicleDialogModalTitle').text("Member Vehicle Delete Error");
-                $('#memberSetupVehicleDialogModalBody').text("Error deleting Vehicle - "+data);
-                $('#memberSetupVehicleDialogModal').modal();
+                $('#membermanageVehicleDialogModalTitle').text("Member Vehicle Delete Error");
+                $('#membermanageVehicleDialogModalBody').text("Error deleting Vehicle - "+data);
+                $('#membermanageVehicleDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -428,7 +428,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     }
 }
 
-controllers.membersetupvehicleinsuranceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagevehicleinsuranceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function resetMemberVehicleInsuranceForm() {
@@ -464,7 +464,7 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
     }
 
     function updateMemberVehicleInsurance() {
-        var formstring = $("#membersetupvehicleinsuranceForm").serialize();
+        var formstring = $("#membermanagevehicleinsuranceForm").serialize();
 
         // console.log(formstring);
 
@@ -477,9 +477,9 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
 
                 // console.log("after return tripid="+$scope.current.tripid);
 
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Update Vehicle Insurance Success");
-                $('#memberSetupVehicleInsuranceDialogModalBody').html("Vehicle information updated succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>");
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
+                $('#membermanageVehicleInsuranceDialogModalTitle').text("Member Update Vehicle Insurance Success");
+                $('#membermanageVehicleInsuranceDialogModalBody').html("Vehicle information updated succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>");
+                $('#membermanageVehicleInsuranceDialogModal').modal();
  
                 $scope.membervehicleinsurances = "";
 
@@ -488,9 +488,9 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
             }
             else
             {
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Update Vehicle Insurance Error");
-                $('#memberSetupVehicleInsuranceDialogModalBody').text("Error updating Vehicle Insurance - "+data);
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
+                $('#membermanageVehicleInsuranceDialogModalTitle').text("Member Update Vehicle Insurance Error");
+                $('#membermanageVehicleInsuranceDialogModalBody').text("Error updating Vehicle Insurance - "+data);
+                $('#membermanageVehicleInsuranceDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -510,9 +510,9 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
                 $scope.current.insuranceid = data.insuranceid;
                 $scope.current.insurancename = data.insurancename;
 
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Success");
-                $('#memberSetupVehicleInsuranceDialogModalBody').html("Vehicle Insurance information deleted succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>!");
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
+                $('#membermanageVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Success");
+                $('#membermanageVehicleInsuranceDialogModalBody').html("Vehicle Insurance information deleted succesfully for Vehicle Insurance <span style='color:teal;font-weight:700'>"+$scope.current.insurancename+"</span>!");
+                $('#membermanageVehicleInsuranceDialogModal').modal();
 
                 $scope.current.insurancename = "";
                 $scope.current.insuranceid = "";
@@ -522,9 +522,9 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
             }
             else
             {
-                $('#memberSetupVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Error");
-                $('#memberSetupVehicleInsuranceDialogModalBody').text("Error deleting Vehicle Insurance - "+data);
-                $('#memberSetupVehicleInsuranceDialogModal').modal();
+                $('#membermanageVehicleInsuranceDialogModalTitle').text("Member Vehicle Insurance Delete Error");
+                $('#membermanageVehicleInsuranceDialogModalBody').text("Error deleting Vehicle Insurance - "+data);
+                $('#membermanageVehicleInsuranceDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -564,7 +564,7 @@ controllers.membersetupvehicleinsuranceController = function ($scope, $http, $lo
     }
 }
 
-controllers.membersetupvehicleroadsideassistanceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagevehicleroadsideassistanceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function resetMemberRoadsideAssistanceForm() {
@@ -600,7 +600,7 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
     }
 
     function updateMemberVehicleRoadsideAssistance() {
-        var formstring = $("#membersetupvehicleroadsideassistanceForm").serialize();
+        var formstring = $("#membermanagevehicleroadsideassistanceForm").serialize();
         // console.log(formstring);
 
         memberFactory.saveMembervehicleroadsideassistance(formstring)
@@ -612,9 +612,9 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
 
                 // console.log("after return tripid="+$scope.current.tripid);
 
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Success");
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').html("Vehicle information updated succesfully for Roadside Assitance <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>");
-                $('#memberSetupVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Success");
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Vehicle information updated succesfully for Roadside Assitance <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>");
+                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
  
                 $scope.membervehicleroadsideassistances = "";
 
@@ -623,9 +623,9 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
             }
             else
             {
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Error");
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').text("Error updating Roadside Assitance - "+data);
-                $('#memberSetupVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Error");
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').text("Error updating Roadside Assitance - "+data);
+                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -646,9 +646,9 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
                 $scope.current.roadsideassistanceid = data.roadsideassistanceid;
                 $scope.current.roadsideassistancename = data.roadsideassistancename;
 
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Success");
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>!");
-                $('#memberSetupVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Success");
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>!");
+                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
 
                 $scope.current.roadsideassistanceid = "";
                 $scope.current.roadsideassistancename = "";
@@ -658,9 +658,9 @@ controllers.membersetupvehicleroadsideassistanceController = function ($scope, $
             }
             else
             {
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Error");
-                $('#memberSetupVehicleRoadsideAssistanceDialogModalBody').text("Error deleting Roadside Assitance- "+data);
-                $('#memberSetupVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Error");
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').text("Error deleting Roadside Assitance- "+data);
+                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
             }
         })
         .error( function(edata) {

@@ -1,4 +1,25 @@
 /* create sticky menu bar */
+@font-face {
+    font-family: 'aileronthin';
+    src: url('fonts/aileron/Aileron-Thin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aileronsemibold';
+    src: url('fonts/aileron/Aileron-SemiBold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aileronlight';
+    src: url('Aileron-Light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .fixed { position: fixed; left: 0px; top: 0px; right: 0px; z-index: 1; }
 
 .customSelect {
@@ -188,7 +209,7 @@
 
 .headerFireworks {
 	color:#3ca4d7;
-	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-family: 'aileronsemibold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
 	font-weight: 900;
 	font-variant: small-caps;
 	letter-spacing: 3px;
@@ -196,16 +217,16 @@
 
 .headerFireworks2 {
 	color:#6C0000;
-	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-family: 'aileronsemibold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
 	font-weight: 900;
 	font-variant: small-caps;
 	font-style: normal;
 	letter-spacing: 3px;
 }
 
-.headerTitle4 {
+.headerTitle {
 	color:#3ca4d7;
-	font-family: 'aileronSemiBold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-family: 'aileronsemibold', 'Damion', 'Oleo Script Swash Caps', Helvetica, sans-serif;
 	font-weight: 900;
 	font-variant: small-caps;
 	letter-spacing: 3px;

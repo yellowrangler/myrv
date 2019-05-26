@@ -18,7 +18,8 @@
 <!-- <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" /> -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps:400,700'|Damion|Pacifico|Lusitana|Tangerine|Cormorant+Garamond|Balthazar|Indie+Flower|Josefin+Sans|Lato:100,300,400,700|Open+Sans:300,300i" type="text/css" rel="stylesheet" >
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/aileron" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/aileron" type="text/css"/> -->
 <link href="css/myrv.css" rel="stylesheet" />
 
 <!-- Vendor Libs -->
@@ -56,7 +57,7 @@
 <!-- controllers  -->
 <script src="app/controllers/firstController.js"></script>
 <script src="app/controllers/parenthomeController.js"></script>
-<script src="app/controllers/memberSetupController.js"></script>
+<script src="app/controllers/memberManageController.js"></script>
 <script src="app/controllers/memberCaptureController.js"></script>
 <script src="app/controllers/lastController.js"></script>
 <!-- factories  -->
@@ -102,14 +103,15 @@
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <img id="myrvaction" name="navImage" class="img-responsive navImageMYRV" src="img/buttons/myrvaction.png">
-                        <span class="navImageTextMYRVButton">Action</span>
+                        <span class="navImageTextMYRVButton">Capture</span>
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a class="collapsableNavbar" href="#/gastripentry">Gas Fill</a></li>
-                        <li><a class="collapsableNavbar" href="#/eventcapture">Special</a></li>
+                        <li><a class="collapsableNavbar" href="#/eventcapture">Event</a></li>
                         <li><a class="collapsableNavbar" href="#/foodcapture">Food</a></li>
                         <li><a class="collapsableNavbar" href="#/overnightcapture">Overnights</a></li>
+                        <li><a class="collapsableNavbar" href="#/friendscapture">Friends</a></li>
                         <li role="presentation" class="divider"></li>
                         <li><a class="collapsableNavbar" href="#/servicecapture">Service</a></li>
                         <li><a class="collapsableNavbar" href="#/accidentcapture">Accident</a></li>
@@ -121,7 +123,7 @@
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <img id="myview" name="navImage" class="img-responsive navImageMYRV" src="img/buttons/myrvview.png">
-                        <span class="navImageTextMYRVButton">View</span>
+                        <span class="navImageTextMYRVButton">Review</span>
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
@@ -145,21 +147,31 @@
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <img id="myrvsetup" name="navImage" class="img-responsive navImageMYRV"  src="img/buttons/myrvsetup.png">
-                        <span class="navImageTextMYRVButton">Setup</span>
+                        <span class="navImageTextMYRVButton">Manage</span>
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/membersetupmember">Member Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/membersetuptrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagemember">Member Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trip Information</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Capture Information</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/membermanagegastripentries">Gas Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanageeventtripentries">Event Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagefoodtripentries">Food Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanageovernighttripentries">Overnight Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagefriendtripentries">Friend Trip Entries</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Vehicles</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/membersetupvehiclerv">Vehicle</a></li>
-                                <li><a class="collapsableNavbar" href="#/membersetupvehicleinsurance">Insurance</a></li>
-                                <li><a class="collapsableNavbar" href="#/membersetupvehicleroadsideassistance">Roadside Assistance</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagevehiclerv">Vehicle</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagevehicleinsurance">Insurance</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagevehicleroadsideassistance">Roadside Assistance</a></li>
                             </ul>
                         </li>
-                        <li><a class="collapsableNavbar" href="#/setupcalander">Calander</a></li>    
+                        <li><a class="collapsableNavbar" href="#/managecalander">Calander</a></li>    
                     </ul>
                 </li>
             </ul>
@@ -221,7 +233,7 @@
             <ul  class="nav navbar-nav pull-right" >
                 <li style="text-align:center;padding-top:20px;padding-right:20px;">
                     <div>
-                    <a id="menubaravatarimage" name="menubaravatarimage" class="collapsableNavbar" href="#/membersetupmember">
+                    <a id="menubaravatarimage" name="menubaravatarimage" class="collapsableNavbar" href="#/membermanagemember">
                     <img id="avatarnavimg" name="navAvatarImage" class="img-circle imgAvatarNav" ng-show="memberavatar != ''" style="height:60px;" ng-src="img/avatars/{{memberavatar}}">
                     </a>
                    <!--  <br />
@@ -263,9 +275,10 @@
                     </a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a class="collapsableNavbar" href="#/gastripentry">Gas Fill</a></li>
-                        <li><a class="collapsableNavbar" href="#/eventcapture">Special</a></li>
+                        <li><a class="collapsableNavbar" href="#/eventcapture">Event</a></li>
                         <li><a class="collapsableNavbar" href="#/foodcapture">Food</a></li>
                         <li><a class="collapsableNavbar" href="#/overnightcapture">Overnights</a></li>
+                        <li><a class="collapsableNavbar" href="#/friendscapture">Friends</a></li>
                         <li role="presentation" class="divider"></li>
                         <li><a class="collapsableNavbar" href="#/servicecapture">Service</a></li>
                         <li><a class="collapsableNavbar" href="#/accidentcapture">Accident</a></li>
@@ -291,29 +304,39 @@
             <ul class="nav navbar-nav">
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
-                        <img style="vertical-align:middle;height:25px;display:inline;" class="" src="img/buttons/myrvsetup.png"><span style="padding-left:5px;">Setup</span>
+                        <img style="vertical-align:middle;height:25px;display:inline;" class="" src="img/buttons/myrvsetup.png"><span style="padding-left:5px;">Manage</span>
                    
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/membersetupmember">Member Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/membersetuptrip">Trips</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagemember">Member Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trip Information</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Capture Information</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/membermanagegastripentries">Gas Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanageeventtripentries">Event Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagefoodtripentries">Food Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanageovernighttripentries">Overnight Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membermanagefriendtripentries">Friend Trip Entries</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Vehicles</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/setupvehicleprofile">Profiles</a></li>
-                                <li><a class="collapsableNavbar" href="#/setupvehiclemaintenance">Maintenance</a></li>
-                                <li><a class="collapsableNavbar" href="#/setupvehicleservice">Service</a></li>    
+                                <li><a class="collapsableNavbar" href="#/managevehicleprofile">Profiles</a></li>
+                                <li><a class="collapsableNavbar" href="#/managevehiclemaintenance">Maintenance</a></li>
+                                <li><a class="collapsableNavbar" href="#/managevehicleservice">Service</a></li>    
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Assistance</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/setupinsurance">Insurance</a></li>
-                                <li><a class="collapsableNavbar" href="#/setuproadsideassistance">Roadside Assistance</a></li>
+                                <li><a class="collapsableNavbar" href="#/manageinsurance">Insurance</a></li>
+                                <li><a class="collapsableNavbar" href="#/manageroadsideassistance">Roadside Assistance</a></li>
                             </ul>
                         </li>
-                        <li><a class="collapsableNavbar" href="#/setupcalander">Calander</a></li>    
+                        <li><a class="collapsableNavbar" href="#/managecalander">Calander</a></li>    
                     </ul>
                 </li>
             </ul>
@@ -374,7 +397,7 @@
             <ul  class="nav navbar-nav pull-right" >
                 <li style="text-align:center;padding-top:18px;padding-right:20px;">
                     <div ng-show="memberavatar != ''" >
-                        <a id="menubaravatarimageshort" name="menubaravatarimageshort" style="color:crimson;text-decoration:none;font-weight:bold;" class="collapsableNavbar" href="#/membersetupmember">
+                        <a id="menubaravatarimageshort" name="menubaravatarimageshort" style="color:crimson;text-decoration:none;font-weight:bold;" class="collapsableNavbar" href="#/membermanagemember">
                             {{memberscreenname}}
                         </a>
                         <!-- <br />

@@ -20,30 +20,30 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'gastripentryController',
                 templateUrl: 'app/partials/gastripentry.html'
             })
-        .when('/membersetupmember',
+        .when('/membermanagemember',
             {
-                controller: 'membersetupmemberController',
-                templateUrl: 'app/partials/membersetupmember.html'
+                controller: 'membermanagememberController',
+                templateUrl: 'app/partials/membermanagemember.html'
             })
-        .when('/membersetuptrip',
+        .when('/membermanagetrip',
             {
-                controller: 'membersetuptripController',
-                templateUrl: 'app/partials/membersetuptrip.html'
+                controller: 'membermanagetripController',
+                templateUrl: 'app/partials/membermanagetrip.html'
             })
-        .when('/membersetupvehiclerv',
+        .when('/membermanagevehiclerv',
             {
-                controller: 'membersetupvehiclervController',
-                templateUrl: 'app/partials/membersetupvehicle.html'
+                controller: 'membermanagevehiclervController',
+                templateUrl: 'app/partials/membermanagevehicle.html'
             })
-        .when('/membersetupvehicleinsurance',
+        .when('/membermanagevehicleinsurance',
             {
-                controller: 'membersetupvehicleinsuranceController',
-                templateUrl: 'app/partials/membersetupvehicleinsurance.html'
+                controller: 'membermanagevehicleinsuranceController',
+                templateUrl: 'app/partials/membermanagevehicleinsurance.html'
             })
-        .when('/membersetupvehicleroadsideassistance',
+        .when('/membermanagevehicleroadsideassistance',
             {
-                controller: 'membersetupvehicleroadsideassistanceController',
-                templateUrl: 'app/partials/membersetupvehicleroadsideassistance.html'
+                controller: 'membermanagevehicleroadsideassistanceController',
+                templateUrl: 'app/partials/membermanagevehicleroadsideassistance.html'
             })
         .when('/login',
             {
