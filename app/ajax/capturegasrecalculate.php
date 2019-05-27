@@ -56,7 +56,9 @@ $datetime = date("Y-m-d H:i:s");
 // set global variables
 // 
 $enterdate = $datetime;
-$msgtext = "ok";
+$msgtext = "";
+$errtext = "";
+$msgArray = array();
 
 $firstTime = 1;
 $detailEntrys = array();
@@ -76,7 +78,9 @@ $totalsEntry[lastupdate] = "";
 
 $tripStartOdometer = 0;
 
-print "<br> Start Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
+
+
+$msgtext = $msgtext . "<br> Start Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
 
 
 // 
@@ -496,7 +500,11 @@ mysqli_close($dbConn);
 //
 // pass back info
 //
-print "<br> Finished Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
+$msgtext = $msgtext . "<br> Finished Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
+$msgArray['msgtext'] = $msgtext;
+$msgArray['errtext'] = $errtext;
+$msgArray['detailid'] = "$detailid";
+$msgArray['bodytext'] = "Successfully recalculated gas entry details and totals";
 
-exit();
+exit(json_encode($msgArray));
 ?>

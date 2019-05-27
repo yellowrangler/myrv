@@ -9,7 +9,7 @@ include_once ('../class/class.AccessLog.php');
 
 // print_r($_POST);
 
-$activetripid = $_POST['activetripid'];
+$tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
 $activetripname = $_POST['activetripname'];
 $date = $_POST['date'];
@@ -17,15 +17,29 @@ $time = $_POST['time'];
 $station = $_POST['station'];
 $location = $_POST['location'];
 $state = $_POST['state'];
-$gastripentrytotalsid = $_POST['gastripentrytotalsid'];
 
 $time = date('H:i:s', strtotime($time));
 $date = date('Y-m-d', strtotime($date));
 
-$nottankfilled = 0;
-if( isset($_POST['nottankfilled']) )
+$detailid = 0;
+if (isset($_POST['detailid']) )
 {
-     $nottankfilled = 1;
+	if (is_numeric($_POST['detailid']))
+	{
+		$detailid = $_POST['detailid'];
+	}
+}
+
+// print "detailid = $detailid";
+// die();
+
+$nottankfilled = 0;
+if (isset($_POST['nottankfilled']))
+{
+	if (is_numeric($_POST['nottankfilled']))
+	{
+		$nottankfilled = $_POST['nottankfilled'];
+	}
 }
 
 $originaltotalmiles = 0;
@@ -88,7 +102,10 @@ if (is_numeric($_POST['topoffgallons']))
 $gastotalsnottankfilled = 0;
 if (isset($_POST['gastotalsnottankfilled']))
 {
-    $gastotalsnottankfilled = $_POST['gastotalsnottankfilled'];
+	if (is_numeric($_POST['gastotalsnottankfilled']))
+	{
+		$gastotalsnottankfilled = $_POST['gastotalsnottankfilled'];
+	}
 }
 
 $totalgallons = 0;
@@ -137,47 +154,77 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to save member gas trip entry. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to save member gas trip entry. memberid = $memberid. tripid = $tripid.";
 include 'mysqlconnect.php';
 
 // print_r($msgArray);
 // exit(json_encode($msgArray));
 
-//---------------------------------------------------------------
-// save gas trip entry
-//---------------------------------------------------------------
-$sql = "INSERT INTO gastripentrytbl( 
-	memberid, 
-	tripid, 
-	odometer, 
-	amount, 
-	gallons, 
-	costpergallon, 
-	miles, 
-	mpg, 
-	date, 
-	time, 
-	station, 
-	location, 
-	state, 
-	nottankfilled, 
-	lastupdate) 
-VALUES (
-	$memberid,
-	$activetripid,
-	'$odometer', 
-	'$amount', 
-	'$gallons', 
-	'$costpergallon', 
-	'$miles', 
-	'$mpg', 
-	'$date', 
-	'$time', 
-	'$station', 
-	'$location', 
-	'$state', 
-	'$nottankfilled',
-	'$enterdate')";
+if ($detailid == 0)
+{
+	$sqlFunction == "insert";
+
+	//---------------------------------------------------------------
+	// save gas trip entry
+	//---------------------------------------------------------------
+	$sql = "INSERT INTO gastripentrytbl( 
+		memberid, 
+		tripid, 
+		odometer, 
+		amount, 
+		gallons, 
+		costpergallon, 
+		miles, 
+		mpg, 
+		date, 
+		time, 
+		station, 
+		location, 
+		state, 
+		nottankfilled, 
+		lastupdate) 
+	VALUES (
+		$memberid,
+		$tripid,
+		'$odometer', 
+		'$amount', 
+		'$gallons', 
+		'$costpergallon', 
+		'$miles', 
+		'$mpg', 
+		'$date', 
+		'$time', 
+		'$station', 
+		'$location', 
+		'$state', 
+		'$nottankfilled',
+		'$enterdate')";
+
+}
+else
+{
+	$sqlFunction == "update";
+
+	$sql = "UPDATE gastripentrytbl 
+		SET 
+		memberid = '$memberid',
+		tripid = '$tripid', 
+		odometer = '$odometer',
+		amount = '$amount',
+		gallons = '$gallons',
+		costpergallon = '$costpergallon',  
+		miles = '$miles',
+		mpg = '$mpg',
+		date = '$date',
+		time = '$time',
+		station = '$station',
+		location = '$location',
+		state = '$state',
+		nottankfilled = '$nottankfilled',
+		lastupdate='$enterdate' 
+		WHERE id = $detailid AND memberid = $memberid AND tripid = $tripid";
+
+}
 
 // print_r($_POST);
 // print("nottankfilled".$nottankfilled);
@@ -187,14 +234,17 @@ VALUES (
 //
 // sql query
 //
-$modulecontent = "Unable to save member gas trip entry. memberid = $memberid. tripid = $activetripid.";
-$function = "insert";
+$modulecontent = "Unable to save member gas trip entry. memberid = $memberid. tripid = $tripid.";
 include 'mysqlquery.php';
 
-//
-// get id
-//
-$gastripentry = mysqli_insert_id($dbConn);
+if ($sqlFunction == "insert")
+{
+	//
+	// get id
+	//
+	$detailid = mysqli_insert_id($dbConn);
+
+}
 
 // 
 // Now upsdate gas trip entry totals
@@ -202,23 +252,23 @@ $gastripentry = mysqli_insert_id($dbConn);
 $sqlFunction == "update";
 $sql = "UPDATE gastriptotalstbl 
 	SET 
-    odometer=$odometer,
-	totalamount=$totalamount,
-	totalgallons=$totalgallons,
-    nottankfilled=$gastotalsnottankfilled,
-    topoffgallons=$topoffgallons,
-	avecostpergallon=$avecostpergallon,
-	totalmiles=$totalmiles,
-	avempg=$avempg,
+    odometer='$odometer',
+	totalamount='$totalamount',
+	totalgallons='$totalgallons',
+    nottankfilled='$gastotalsnottankfilled',
+    topoffgallons='$topoffgallons',
+	avecostpergallon='$avecostpergallon',
+	totalmiles='$totalmiles',
+	avempg='$avempg',
 	lastupdate='$enterdate' 
-	WHERE id = $gastripentrytotalsid";
+	WHERE memberid = $memberid AND tripid = $tripid";
 
 // print $sql;
 
 //
 // sql query
 //
-$modulecontent = "Unable to update member trip gas total information for gas trip entry. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to update member trip gas total information for gas trip entry. memberid = $memberid. tripid = $tripid.";
 $function = 'update';
 include 'mysqlquery.php';
 
@@ -231,7 +281,8 @@ mysqli_close($dbConn);
 // pass back info
 //
 $msgArray['msgtext'] = 'ok';
-$msgArray['gastripentry'] = "$gastripentry";
+$msgArray['errtext'] = '';
+$msgArray['detailid'] = "$detailid";
 $msgArray['bodytext'] = "Successfully updated gas entry details and totals";
 
 exit(json_encode($msgArray));

@@ -106,7 +106,7 @@ controllers.membersetuptripController = function ($scope, $http, $location, memb
     function getMemberTrips() {
 
         var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getMembertrips(qdata)
+        memberFactory.getMemberTrips(qdata)
             .success( function(data) {
                 $scope.membertrips = data;
                 })

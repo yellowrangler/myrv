@@ -842,3 +842,16 @@
 	color:red;
 	font-size:16px;
 }
+
+.entryList {
+	background: white;
+}
+
+.entryList tr.notth:hover {
+	background: yellow;
+	cursor:pointer;
+}
+
+.entryList tbody th:hover {
+	background:#058689 !important;
+}

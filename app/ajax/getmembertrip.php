@@ -13,6 +13,12 @@ if( isset($_POST['memberid']) )
     $memberid = $_POST['memberid'];
 }
 
+$tripid = "";
+if( isset($_POST['tripid']) )
+{
+    $tripid = $_POST['tripid'];
+}
+
 //
 // get date time for this transaction
 //
@@ -39,7 +45,15 @@ include 'mysqlconnect.php';
 //---------------------------------------------------------------
 // get member trip information
 //---------------------------------------------------------------
-$sql = "SELECT *  FROM triptbl WHERE memberid = '$memberid' AND currenttrip = 1";
+if ($tripid == "")
+{
+	$sql = "SELECT *  FROM triptbl WHERE memberid = '$memberid' AND currenttrip = 1";
+}
+else
+{
+	$sql = "SELECT *  FROM triptbl WHERE memberid = '$memberid' AND id = $tripid";
+}
+
 
 //
 // sql query

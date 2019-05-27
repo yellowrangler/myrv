@@ -37,7 +37,7 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
-    factory.getMembertrips = function (data) {
+    factory.getMemberTrips = function (data) {
         return $http({ 
             method: 'POST', 
             url: "app/ajax/getmembertrips.php",
@@ -46,10 +46,10 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
-    factory.getActiveMembertrip = function (data) {
+    factory.getMemberTrip = function (data) {
         return $http({ 
             method: 'POST', 
-            url: "app/ajax/getactivemembertrip.php",
+            url: "app/ajax/getmembertrip.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
@@ -77,6 +77,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         return $http({ 
             method: 'POST', 
             url: "app/ajax/savemembergastripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.capturegasRecalculate = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/capturegasrecalculate.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

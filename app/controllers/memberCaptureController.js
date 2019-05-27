@@ -290,7 +290,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
     }
 
     function resetGasCapture() {
-        $scope.current.activetripname = "";
+        $scope.current.tripname = "";
         $scope.current.original = {};
 
         $scope.membertrips = "";
@@ -307,33 +307,33 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         getMembertowvehicles();
         getMemberrvehicles();
 
-        getActiveMemberTrip();
+        getMemberTrip();
     }
 
-    function getActiveMemberTrip() {
+    function getMemberTrip() {
 
-        $scope.current.activetripid = "";
+        $scope.current.tripid = "";
 
         var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getActiveMembertrip(qdata)
+        memberFactory.getMemberTrip(qdata)
             .success( function(data) {
-                $scope.current.activetrip = data;
-                $scope.current.activetripid = data.id
-                $scope.current.activetripname = data.tripname;
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id;
+                $scope.current.tripname = data.tripname;
 
-                getMemberTripGasDetais();
+                getMemberTripGasDetails();
                 })
             .error( function(edata) {
                 alert(edata);
             }); 
     }
 
-    function getMemberTripGasDetais() {
+    function getMemberTripGasDetails() {
         $scope.current.gasdetails = {};
 
         $order = "DESC";
 
-        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
         memberFactory.getMembertripgasdetails(qdata)
             .success( function(data) {
                 $scope.current.original.gasdetails = objectCopy(data);
@@ -349,7 +349,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
     function getMemberTripGasTotals() {
         $scope.current.gastotals = {};
 
-        var qdata = 'tripid='+$scope.current.activetripid+'&memberid='+$scope.current.memberid;
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
         memberFactory.getMembertripgastotals(qdata)
             .success( function(data) {
                 $scope.current.gastotals = objectCopy(data);
@@ -369,7 +369,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         memberFactory.saveMembergastripentry(formstring)
         .success( function(data) {
-            if (data.msgtext == "ok")
+            if (data.errtext == "")
             {
                 $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Success");
                 $('#memCaptureGasDialogModalBody').html(data.bodytext);
@@ -454,4 +454,166 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.capture.time = getCurrentTimeStr(12);
     }
 
+}
+
+controllers.membermanagegastripentriesController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripGasDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripGasDetails() {
+        $scope.gasdetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripgasdetails(qdata)
+            .success( function(data) {
+                $scope.gasdetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function saveGasDetail() {
+        var formstring = $("#membergasdetailForm").serialize();
+
+        memberFactory.saveMembergastripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                capturegasRecalculate();
+            }
+            else
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
+                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
+                $('#memEntryGasDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function capturegasRecalculate() {
+        // console.log(formstring);
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
+        memberFactory.capturegasRecalculate(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Success");
+                $('#memEntryGasDialogModalBody').html(data.bodytext);
+                $('#memEntryGasDialogModal').modal();
+
+                resetGasDetailUpdate();
+            }
+            else
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
+                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
+                $('#memEntryGasDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    
+
+    function resetGasDetailUpdate() {
+        $scope.membertrips = {};
+        $scope.current.gasdetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function deleteGasDetail() {
+        var i = 0;
+    }
+
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+
+        resetGasDetailUpdate();
+    };
+
+    $scope.getMemberTripGasDetails = function () {
+        getMemberTripGasDetails();
+    }
+
+    $scope.setCurrentTrip = function (gasdetail) {
+        $scope.current.gasdetail = objectCopy(gasdetail);
+    }
+
+    $scope.resetGasDetailUpdate = function () {
+        resetGasDetailUpdate();
+    }
+
+    $scope.saveGasDetail = function () {
+        saveGasDetail();
+    }
+
+    $scope.deleteGasDetail = function () {
+        deleteGasDetail();
+    }
 }
