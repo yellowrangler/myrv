@@ -369,8 +369,8 @@ for ($idx = 0; $idx < sizeof($detailEntrys); $idx++)
 
 // print "<br> detail entrys <br>"."</pre>";
 // echo "<pre>".print_r($detailEntrys, true)."</pre>";
-// print "<br> total entrys <br>";
-// echo "<pre>".print_r($totalsEntry, true)."</pre>";
+// $msgtext = $msgtext . "<br> total entrys <br>";
+// $msgtext = $msgtext . "<pre>".print_r($totalsEntry, true)."</pre>";
 
 // 
 // Now delete the trip capture gas detail totals record before we will rebuild it

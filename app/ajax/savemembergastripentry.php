@@ -11,7 +11,6 @@ include_once ('../class/class.AccessLog.php');
 
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
-$activetripname = $_POST['activetripname'];
 $date = $_POST['date'];
 $time = $_POST['time'];
 $station = $_POST['station'];
@@ -82,54 +81,6 @@ $mpg = 0;
 if (is_numeric($_POST['mpg']))
 {
 	$mpg = $_POST['mpg'];
-}
-
-// 
-// calculated totals to compare for our server side calculated totals
-//
-$totalamount = 0;
-if (is_numeric($_POST['totalamount']))
-{
-	$totalamount = $_POST['totalamount'];
-}
-
-$topoffgallons = 0;
-if (is_numeric($_POST['topoffgallons']))
-{
-    $topoffgallons = $_POST['topoffgallons'];
-}
-
-$gastotalsnottankfilled = 0;
-if (isset($_POST['gastotalsnottankfilled']))
-{
-	if (is_numeric($_POST['gastotalsnottankfilled']))
-	{
-		$gastotalsnottankfilled = $_POST['gastotalsnottankfilled'];
-	}
-}
-
-$totalgallons = 0;
-if (is_numeric($_POST['totalgallons']))
-{
-	$totalgallons = $_POST['totalgallons'];
-}
-
-$avecostpergallon = 0;
-if (is_numeric($_POST['avecostpergallon']))
-{
-	$avecostpergallon = $_POST['avecostpergallon'];
-}
-
-$totalmiles = 0;
-if (is_numeric($_POST['totalmiles']))
-{
-	$totalmiles = $_POST['totalmiles'];
-}
-
-$avempg = 0;
-if (is_numeric($_POST['avempg']))
-{
-	$avempg = $_POST['avempg'];
 }
 
 // print_r($_POST);
@@ -246,32 +197,6 @@ if ($sqlFunction == "insert")
 
 }
 
-// 
-// Now upsdate gas trip entry totals
-// 
-$sqlFunction == "update";
-$sql = "UPDATE gastriptotalstbl 
-	SET 
-    odometer='$odometer',
-	totalamount='$totalamount',
-	totalgallons='$totalgallons',
-    nottankfilled='$gastotalsnottankfilled',
-    topoffgallons='$topoffgallons',
-	avecostpergallon='$avecostpergallon',
-	totalmiles='$totalmiles',
-	avempg='$avempg',
-	lastupdate='$enterdate' 
-	WHERE memberid = $memberid AND tripid = $tripid";
-
-// print $sql;
-
-//
-// sql query
-//
-$modulecontent = "Unable to update member trip gas total information for gas trip entry. memberid = $memberid. tripid = $tripid.";
-$function = 'update';
-include 'mysqlquery.php';
-
 //
 // close db connection
 //
@@ -283,7 +208,7 @@ mysqli_close($dbConn);
 $msgArray['msgtext'] = 'ok';
 $msgArray['errtext'] = '';
 $msgArray['detailid'] = "$detailid";
-$msgArray['bodytext'] = "Successfully updated gas entry details and totals";
+$msgArray['bodytext'] = "Successfully updated gas entry details";
 
 exit(json_encode($msgArray));
 ?>

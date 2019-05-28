@@ -371,12 +371,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         .success( function(data) {
             if (data.errtext == "")
             {
-                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Success");
-                $('#memCaptureGasDialogModalBody').html(data.bodytext);
-
-                $('#memCaptureGasDialogModal').modal();
-
-                resetGasCapture();
+                saveGasCaptureTotals();
             }
             else
             {
@@ -391,6 +386,37 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             alert(edata);
         });
     }
+
+    function saveGasCaptureTotals() {
+        var formstring = $("#membercapturegasForm").serialize();
+
+        // console.log(formstring);
+
+        memberFactory.saveMembergastripentrytotals(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Success");
+                $('#memCaptureGasDialogModalBody').html("Successfully updated gas trip entry detail and totals");
+
+                $('#memCaptureGasDialogModal').modal();
+
+                resetGasCapture();
+            }
+            else
+            {
+                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+                $('#memCaptureGasDialogModalBody').html("Error saving gas trip entry entry detail and totals - "+data.dbgtext);
+                $('#memCaptureGasDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
 
     function getMembertowvehicles() {
         var qdata = 'vehicletype=towvehicle&memberid='+$scope.current.memberid;
@@ -513,17 +539,18 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
 
     function saveGasDetail() {
         var formstring = $("#membergasdetailForm").serialize();
+        var func = "save";
 
         memberFactory.saveMembergastripentry(formstring)
         .success( function(data) {
             if (data.errtext == "")
             {
-                capturegasRecalculate();
+                capturegasRecalculate(func);
             }
             else
             {
                 $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
-                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
+                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
                 $('#memEntryGasDialogModal').modal();
             }
 
@@ -534,7 +561,7 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
         });
     }
 
-    function capturegasRecalculate() {
+    function capturegasRecalculate(func) {
         // console.log(formstring);
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
@@ -542,17 +569,40 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
         .success( function(data) {
             if (data.errtext == "")
             {
-                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Success");
-                $('#memEntryGasDialogModalBody').html(data.bodytext);
-                $('#memEntryGasDialogModal').modal();
+                switch (func) 
+                {
+                    case 'save':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Success");
+                        $('#memEntryGasDialogModalBody').html(data.bodytext);
+                        $('#memEntryGasDialogModal').modal();
+                        break;
+
+                    case 'delete':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Success");
+                        $('#memEntryGasDialogModalBody').html(data.bodytext);
+                        $('#memEntryGasDialogModal').modal();
+                        break;    
+                }
 
                 resetGasDetailUpdate();
             }
             else
             {
-                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
-                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
-                $('#memEntryGasDialogModal').modal();
+                switch (func) 
+                {
+                    case 'save':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
+                        $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
+                        $('#memEntryGasDialogModal').modal();
+                        break;
+
+                    case 'delete':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
+                        $('#memEntryGasDialogModalBody').html("Error deleting detail entry - "+data);
+                        $('#memEntryGasDialogModal').modal();
+                        break;    
+                }
+                        
             }
 
             // must call for new totals and reload scope.current.original.gastotals
@@ -575,8 +625,40 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
     }
 
     function deleteGasDetail() {
-        var i = 0;
+
+        var func = "delete";
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&detailid='+$scope.current.gasdetail.id;
+
+        // console.log("trip form delete:"+qdata);
+
+        memberFactory.deleteMembergastripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.gasdetail.id = "";
+
+                capturegasRecalculate();
+            }
+            else
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
+                $('#memEntryGasDialogModalBody').text("Error deleting trip entry detail- "+data);
+                $('#memEntryGasDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
     }
+
+    function resetGasDetailAdd() {
+        $scope.current.gasdetail.id = "";
+        $('#detailid').val("");
+
+        saveGasDetail();
+    }
+    
 
 
     init();
@@ -607,6 +689,10 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
 
     $scope.resetGasDetailUpdate = function () {
         resetGasDetailUpdate();
+    }
+
+    $scope.resetGasDetailAdd = function() {
+        resetGasDetailAdd();
     }
 
     $scope.saveGasDetail = function () {

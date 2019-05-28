@@ -73,10 +73,37 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMembertripgasdetail = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripgasdetail.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.saveMembergastripentry = function (data) {
         return $http({ 
             method: 'POST', 
             url: "app/ajax/savemembergastripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.saveMembergastripentrytotals = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savemembergastripentrytotals.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMembergastripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembergastripentry.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
