@@ -843,12 +843,16 @@
 	font-size:16px;
 }
 
+.viewTotalsList {
+	color: crimson;
+}
+
 .entryList {
 	background: white;
 }
 
 .entryList tr.notth:hover {
-	background: yellow;
+	background: papayawhip;
 	cursor:pointer;
 }
 

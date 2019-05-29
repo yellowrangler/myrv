@@ -91,6 +91,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.exportGasCapture = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/exportgascapture.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.saveMembergastripentrytotals = function (data) {
         return $http({ 
             method: 'POST', 

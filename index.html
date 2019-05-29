@@ -59,6 +59,7 @@
 <script src="app/controllers/parenthomeController.js"></script>
 <script src="app/controllers/memberManageController.js"></script>
 <script src="app/controllers/memberCaptureController.js"></script>
+<script src="app/controllers/memberViewController.js"></script>
 <script src="app/controllers/lastController.js"></script>
 <!-- factories  -->
 <script src="app/factories/loginfactory.js"></script>
@@ -123,22 +124,33 @@
                 <li class="menuItems dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <img id="myview" name="navImage" class="img-responsive navImageMYRV" src="img/buttons/myrvview.png">
-                        <span class="navImageTextMYRVButton">Review</span>
+                        <span class="navImageTextMYRVButton">View</span>
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/viewtrip">My Trips</a></li>
-                        <li><a class="collapsableNavbar" href="#/viewmemberprofile">My Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/gastripview">Trips</a></li>
                         <li class="dropdown-submenu">
-                            <a tabindex="-1" href="">My Vehicles Information</a>
+                            <a tabindex="-1" href="">Capture Details</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/viewvehicles">My Vehicles</a></li>
-                                <li><a class="collapsableNavbar" href="#/viewvehicleinsurance">My Vehicle Insurance</a></li>
-                                <li><a class="collapsableNavbar" href="#/viewvehicleservice">My Vehicle Service</a></li>  
-                                <li><a class="collapsableNavbar" href="#/viewvehicleassistance">My Roadside Assistance</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewalltripentries">All Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewgastripentries">Gas Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membervieweventtripentries">Event Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewfoodtripentries">Food Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewovernighttripentries">Overnight Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewfriendtripentries">Friend Trip Entries</a></li>
                             </ul>
                         </li>
-                        <li><a class="collapsableNavbar" href="#/viewvcalander">My Calander</a></li>
+                        <li><a class="collapsableNavbar" href="#/viewmemberprofile">Profile</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Vehicles</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/viewvehicles">Vehicles</a></li>
+                                <li><a class="collapsableNavbar" href="#/viewvehicleinsurance">Vehicle Insurance</a></li>
+                                <li><a class="collapsableNavbar" href="#/viewvehicleservice">Vehicle Service</a></li>  
+                                <li><a class="collapsableNavbar" href="#/viewvehicleassistance">Roadside Assistance</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="collapsableNavbar" href="#/viewvcalander">Calander</a></li>
                     </ul>
                 </li>
             </ul>
@@ -151,8 +163,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/membermanagemember">Member Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trip Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagemember">Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trips</a></li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Capture Detail</a>
                             <ul class="dropdown-menu">
@@ -187,7 +199,7 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Team Update</a>
                             <ul class="dropdown-menu">
-                                <li><a class="collapsableNavbar" href="#/teaminfo">Team Information</a></li>
+                                <li><a class="collapsableNavbar" href="#/teaminfo">Team </a></li>
                                 <li><a class="collapsableNavbar" href="#/teamseasoninfo">Team Season Information</a></li>
                             </ul>
                         </li>
@@ -293,10 +305,21 @@
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/viewtrip">Trips</a></li>
-                        <li><a class="collapsableNavbar" href="#/viewmemberprofile">My Profile</a></li>
-                        <li><a class="collapsableNavbar" href="#/viewvehicleinformation">My Vehicle Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/viewvcalander">My Calander</a></li>
+                         <li><a class="collapsableNavbar" href="#/gastripview">Trips</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="">Capture Details</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="collapsableNavbar" href="#/memberviewalltripentries">All Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewgastripentries">Gas Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/membervieweventtripentries">Event Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewfoodtripentries">Food Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewovernighttripentries">Overnight Trip Entries</a></li>
+                                <li><a class="collapsableNavbar" href="#/memberviewfriendtripentries">Friend Trip Entries</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="collapsableNavbar" href="#/viewmemberprofile">Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/viewvehicleinformation">Vehicle</a></li>
+                        <li><a class="collapsableNavbar" href="#/viewvcalander">Calander</a></li>
                     </ul>
                 </li>
             </ul>
@@ -309,8 +332,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a class="collapsableNavbar" href="#/membermanagemember">Member Information</a></li>
-                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trip Information</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagemember">Profile</a></li>
+                        <li><a class="collapsableNavbar" href="#/membermanagetrip">Trip</a></li>
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="">Capture Detail</a>
                             <ul class="dropdown-menu">

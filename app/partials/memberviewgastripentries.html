@@ -1,0 +1,179 @@
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Gas Trip Entries</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripGasDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table pickGameTable entryList" >
+                <tr class="tableTitle">
+                    <th colspan=1>Date</th>  
+                    <th colspan=1>Time</th>     
+                    <th colspan=1>Odometer</th>    
+                    <th colspan=1>Station</th> 
+                    <th colspan=1>Location</th>  
+                    <th colspan=1>State</th>     
+                    <th colspan=1>Amount</th>    
+                    <th colspan=1>Gallons</th>
+                    <th colspan=1>TNF</th>
+                    <th colspan=1>CPG</th> 
+                    <th colspan=1>Miles</th>  
+                    <th colspan=1>MPG</th>                        
+                </tr>
+
+                <tr ng-repeat="gasdetail in gasdetails">
+                    <td class="center-column-text">
+                       {{gasdetail.date}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.time}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.odometer}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.station}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.location}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.state}}
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gasdetail.amount}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.gallons}} 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled == 1" class="center-column-text">
+                         No Fill 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled != 1" class="center-column-text">
+                         Filled 
+                    </td>
+                    
+                    <td class="center-column-text">
+                         {{gasdetail.costpergallon}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.miles}}
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gasdetail.mpg}} 
+                    </td>
+                </tr>
+                <tr class="viewTotalsList">
+                    <td class="right-column-text">
+                       Trip Totals
+                    </td>
+
+                    <td class="center-column-text">
+                        &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gastotals.odometer}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         &nbsp; 
+                    </td>
+
+                    <td class="center-column-text">
+                          &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                        &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gastotals.totalamount}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gastotals.totalgallons}} 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gastotals.nottankfilled == 1" class="center-column-text">
+                         No Fill 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gastotals.nottankfilled != 1" class="center-column-text">
+                         Filled 
+                    </td>
+                    
+                    <td class="center-column-text">
+                         {{gastotals.avecostpergallon}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gastotals.totalmiles}}
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gastotals.avempg}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<form role="form"  method="post" enctype="multipart/form-data" novalidate>
+<div style="padding-top:15px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportGasCaptureButton" download="export.csv">Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryGasDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryGasDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryGasDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryGasDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

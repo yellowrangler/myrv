@@ -658,8 +658,6 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
 
         saveGasDetail();
     }
-    
-
 
     init();
     function init() {
