@@ -23,18 +23,18 @@
         <div class="table-responsive">
             <table class="table pickGameTable entryList" >
                 <tr class="tableTitle">
-                    <th colspan=1>Date</th>  
-                    <th colspan=1>Time</th>     
-                    <th colspan=1>Odometer</th>    
-                    <th colspan=1>Station</th> 
-                    <th colspan=1>Location</th>  
-                    <th colspan=1>State</th>     
-                    <th colspan=1>Amount</th>    
-                    <th colspan=1>Gallons</th>
-                    <th colspan=1>TNF</th>
-                    <th colspan=1>CPG</th> 
-                    <th colspan=1>Miles</th>  
-                    <th colspan=1>MPG</th>                        
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th>    
+                    <th class="center-column-text">Station</th> 
+                    <th class="center-column-text">Location</th>  
+                    <th class="center-column-text">State</th>     
+                    <th class="center-column-text">Amount</th>    
+                    <th class="center-column-text">Gallons</th>
+                    <th class="center-column-text">TNF</th>
+                    <th class="center-column-text">CPG</th> 
+                    <th class="center-column-text">Miles</th>  
+                    <th class="center-column-text">MPG</th>                        
                 </tr>
 
                 <tr ng-repeat="gasdetail in gasdetails">
@@ -79,7 +79,7 @@
                     </td>
                     
                     <td class="center-column-text">
-                         {{gasdetail.costpergallon}} 
+                         $ {{gasdetail.costpergallon}} 
                     </td>
 
                     <td class="center-column-text">
@@ -87,7 +87,7 @@
                     </td>
 
                     <td class="center-column-text">
-                         $ {{gasdetail.mpg}} 
+                         {{gasdetail.mpg}} 
                     </td>
                 </tr>
                 <tr class="viewTotalsList">
@@ -132,7 +132,7 @@
                     </td>
                     
                     <td class="center-column-text">
-                         {{gastotals.avecostpergallon}} 
+                         $ {{gastotals.avecostpergallon}} 
                     </td>
 
                     <td class="center-column-text">
@@ -140,7 +140,7 @@
                     </td>
 
                     <td class="center-column-text">
-                         $ {{gastotals.avempg}} 
+                         {{gastotals.avempg}} 
                     </td>
                 </tr>
             </table>

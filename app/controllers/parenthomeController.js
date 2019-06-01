@@ -129,9 +129,8 @@ controllers.myrvParentController = function ($scope, $http, $window, $route, $lo
     }
 }
 
-controllers.loginController = function ($scope, $http, $location, $window, loginService, msgService, loginFactory) {
+controllers.loginController = function ($scope, $http, $location, $window, loginService, loginFactory) {
     $scope.login = loginService.getEmptyLogin();
-    $scope.msg = msgService.getEmptyMsg();
      
     init();
     function init() {

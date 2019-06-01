@@ -1,4 +1,4 @@
-controllers.memberviewgastripentriesController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.memberviewgastripentriesController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberTrips() {
@@ -31,7 +31,8 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
                 $scope.current.tripid = data.id
                 $scope.current.tripname = data.tripname;
 
-                $scope.downloadurl = "app/ajax/exportgascapture.php?memberid="+$scope.current.memberid+"&tripid="+$scope.current.tripid;
+                $scope.exportParms.tripid = $scope.current.tripid;
+                $scope.downloadurl = exportService.getExportUrl($scope.exportParms);
 
                 getMemberTripGasDetails();
                 })
@@ -42,8 +43,9 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
 
     function getMemberTripGasDetails() {
         $scope.gasdetails = {};
-
-        $scope.downloadurl = "app/ajax/exportgascapture.php?memberid="+$scope.current.memberid+"&tripid="+$scope.current.tripid;
+        
+        $scope.exportParms.tripid = $scope.current.tripid;
+        $scope.downloadurl = exportService.getExportUrl($scope.exportParms);
 
         $order = "ASC";
 
@@ -109,6 +111,11 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+
+        $scope.exportParms = {};
+        $scope.exportParms.tripid = $scope.current.tripid;
+        $scope.exportParms.memberid = $scope.current.memberid;
+        $scope.exportParms.exportType = "gascapture";
         $scope.downloadurl = "";
 
         resetGasDetailUpdate();

@@ -9,7 +9,7 @@
       <div class="panel panel-default">
         <form id="membermanagememberForm" name="membermanagememberForm" style="padding:10px;" class="form-horizontal">
           <div class="row" style="padding-top:35px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group" >
                 <label for="membername" class="col-md-3 control-label">Name</label>
                   <div class="col-md-4">
@@ -36,19 +36,12 @@
                 </div>
               </div> <!-- end of form-group -->
             </div> <!-- end of col-7 -->
-            <div class="col-md-4">
-                <img style="float:left;height:125px;padding-right:15px;" align="left" src='img/thinking.png'>
-
-                <div style="padding-top:35px; padding-left:15px;font-weight:bold; font-size:15px; font-style:italic;">
-                Think Carefully for the Right Name. Make it Fun & Clean!
-                </div>
-            </div> <!-- end of col-4 -->
-          </div> <!-- end of row -->
+            
 
           <hr class="hrBreak">
 
           <div class="row" style="padding-top:30px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group">
                   <label for="address" class="col-md-3 control-label">Address</label>
                   <div class="col-md-4">
@@ -78,15 +71,12 @@
                   </div>
               </div> <!-- end of form-group -->
             </div> <!-- end of col-7 -->
-            <div class="col-md-4">
-                <img style="height:155px;padding-right:15px;" align="center" src='img/postman.png'>
-            </div> <!-- end of col-4 -->
           </div> <!-- end of row -->
 
           <hr class="hrBreak">
 
           <div class="row" style="padding-top:30px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group">
                   <label for="phonenumber" class="col-md-3 control-label">Phone</label>
                   <div class="col-md-4">
@@ -107,23 +97,21 @@
 
                 <div class="form-group">
                     <label for="biography" class="col-md-3 control-label">Biography</label>
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <textarea tabindex="14" class="form-control" ng-model="current.biography" id="biography" name="biography" rows="3"></textarea>
                     </div>
                 </div> <!-- end of form-group -->
 
               </div> <!-- end of col-7 -->
 
-              <div class="col-md-4">
-                <img style="height:200px;padding-right:15px;" align="center" src='img/profilebio.png'>
-              </div> <!-- end of col-4 -->
+              \
 
           </div> <!-- end of row -->
 
           <hr class="hrBreak">
 
           <div class="row" style="padding-top:35px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group">
                   <label for="password" class="col-md-3 control-label">Password</label>
                   <div class="col-md-4">
@@ -147,7 +135,7 @@
           <hr class="hrBreak">
 
           <div class="row" style="padding-top:25px;">
-            <div class="col-md-offset-1 col-md-7">
+            <div class="col-md-offset-1 col-md-11" style="padding-bottom:25px;">
               <div class="form-group" >
                 <input tabindex="" type="checkbox" ng-model="current.membernameprofileind" ng-checked="current.membernameprofileind == '1'" id="membernameprofileind" name="membernameprofileind"> You can show members my Name
               </div> <!-- end of form-group -->
@@ -176,10 +164,10 @@
           <hr class="hrBreak">
 
           <div class="row" style="padding-top:35px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group">
                 <label for="avatar" class="col-md-3 control-label">Avatar</label>
-                  <div class="col-md-4">
+                  <div class="col-md-9">
                       <img ng-click="updateAvatar()" style="max-width:100px;" src="img/avatars/{{current.avatar}}" alt="avatar" name="avatar" id="avatar" class="showPointer img-rounded" >
                   </div>
                   <input ng-model="current.avatar" type="hidden" value="{{current.avatar}}" id="avatar" name="avatar">
@@ -188,9 +176,9 @@
           </div> <!-- end of row -->
 
           <div class="row" style="padding-top:35px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
               <div class="form-group">
-                <div class="col-md-offset-2 col-md-3">
+                <div class="col-md-offset-5 col-md-7">
                   <button tabindex="17" id="updatenewmemberbutton" data-ng-click="updatemember()" type="button" class="btn btn-primary">Update My Information</button>
                  </div>
               </div> <!-- end of form-group -->
