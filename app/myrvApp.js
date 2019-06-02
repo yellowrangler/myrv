@@ -30,6 +30,11 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'memberviewgastripentriesController',
                 templateUrl: 'app/partials/memberviewgastripentries.html'
             })
+        .when('/memberviewtrips',
+            {
+                controller: 'memberviewtripsController',
+                templateUrl: 'app/partials/memberviewtrips.html'
+            })
         .when('/membermanagemember',
             {
                 controller: 'membermanagememberController',

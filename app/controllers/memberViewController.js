@@ -74,21 +74,8 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
             });
 
     }
-
-    function exportGasCapture() {
-
-        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
-        memberFactory.exportGasCapture(qdata)
-            .success( function(data) {
-                
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
     
-    function resetGasDetailUpdate() {
+    function resetGasDetailView() {
         $scope.membertrips = {};
         $scope.current.email = $scope.current.memberlogin.email;
 
@@ -118,14 +105,50 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
         $scope.exportParms.exportType = "gascapture";
         $scope.downloadurl = "";
 
-        resetGasDetailUpdate();
+        resetGasDetailView();
     };
 
     $scope.getMemberTripGasDetails = function () {
         getMemberTripGasDetails();
     }
+}
 
-    $scope.exportGasCapture = function () {
-        exportGasCapture();
+controllers.memberviewtripsController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+
+        var qdata = 'memberid='+$scope.current.memberid+"&export=1";
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        $scope.exportParms = {};
+        $scope.exportParms.memberid = $scope.current.memberid;
+        $scope.exportParms.exportType = "trips";
+        $scope.downloadurl = exportService.getExportUrl($scope.exportParms);
+
+        getMemberTrips();
+    };
+
+    $scope.getMemberTripGasDetails = function () {
+        getMemberTripGasDetails();
     }
 }

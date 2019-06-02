@@ -101,11 +101,11 @@ if ($tripid == "")
 {
 	// insert new trip
 
-	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, 
-	endodometer, endlocation, enddate, lastupdate) 
+	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, endodometer, endlocation, enddate, lastupdate) 
 	VALUES 
 	($memberid,'$tripname','$currenttrip',$startodometer,'$towvehicle','$rv',
-		NULLIF('$startdate',''),'$startlocation',$endodometer,'$endlocation',NULLIF('$enddate',''),'$enterdate')";
+	NULLIF('$startdate',''),'$startlocation',$endodometer,'$endlocation',
+	NULLIF('$enddate',''),'$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -171,7 +171,8 @@ $count = mysqli_num_rows($sql_result);
 if ($count == 0)
 {
 	$sql = "INSERT INTO gastriptotalstbl
-		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, totalgallons, nottankfilled, lastupdate) 
+		(memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, 
+		totalmiles, avempg, topoffgallons, nottankfilled, lastupdate) 
 		VALUES 
 		($memberid,$tripid,$startodometer,0,0,0,0,0,0,0,'$enterdate')";
 

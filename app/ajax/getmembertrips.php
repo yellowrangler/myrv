@@ -13,6 +13,12 @@ if( isset($_POST['memberid']) )
     $memberid = $_POST['memberid'];
 }
 
+$export = 0;
+if( isset($_POST['export']) )
+{
+    $export = 1;
+}
+
 //
 // get date time for this transaction
 //
@@ -37,9 +43,24 @@ $modulecontent = "Unable to get member trip information. memberid = $memberid.";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
-// get member trip information
+// get member trip information. If for export add vehicle info
 //---------------------------------------------------------------
-$sql = "SELECT *  FROM triptbl WHERE memberid = '$memberid'";
+if ($export == 1)
+{
+	$sql = "SELECT *, 
+	(SELECT CONCAT_WS(' ',make, model, year, platenbr) as rvname  
+	FROM vehicletbl V
+	WHERE memberid = $memberid and V.id = T.rv) as rvname, 
+	(SELECT CONCAT_WS(' ',make, model, year, platenbr) as towvehiclename  
+	FROM vehicletbl V
+	WHERE memberid = $memberid and V.id = T.towvehicle) as towvehiclename 
+	FROM triptbl T
+	WHERE memberid = $memberid";
+}
+else
+{
+	$sql = "SELECT *  FROM triptbl WHERE memberid = '$memberid'";
+}
 
 //
 // sql query

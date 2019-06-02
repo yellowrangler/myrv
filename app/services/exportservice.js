@@ -9,6 +9,10 @@ myrvApp.service('exportService', function () {
                 exportUrl = exportUrlBase+"exportgascapture.php?memberid="+parms.memberid+"&tripid="+parms.tripid;
                 break;
 
+            case 'trips':
+                exportUrl = exportUrlBase+"exporttrips.php?memberid="+parms.memberid;
+                break;
+
            default:
                 alert("Invalid export type = "+parms.exportType); 
                 break;

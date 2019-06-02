@@ -124,8 +124,8 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
                 $scope.current.tripid = data.tripid;
                 $scope.current.tripname = data.tripname;
 
-                $('#tripmanageMemberDialogModalTitle').text("Member Trip Update Success");
-                $('#tripmanageMemberDialogModalBody').html("Trip information updated succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip Save Success");
+                $('#tripmanageMemberDialogModalBody').html("Trip information saved succesfully for Trip <span style='color:teal;font-weight:700'>"+$scope.current.tripname+"</span>!");
 
                 $('#tripmanageMemberDialogModal').modal();
 
@@ -133,8 +133,8 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
             }
             else
             {
-                $('#tripmanageMemberDialogModalTitle').text("Member Trip Update Error");
-                $('#tripmanageMemberDialogModalBody').text("Error updating trip - "+data);
+                $('#tripmanageMemberDialogModalTitle').text("Member Trip save Error");
+                $('#tripmanageMemberDialogModalBody').text("Error saving trip - "+data);
                 $('#tripmanageMemberDialogModal').modal();
             }
         })
@@ -261,11 +261,15 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         getMemberTrip(tripid);
     }
 
-    $scope.newTrip = function () {
+    $scope.clearTrip = function () {
         resetTripForm();
     }
 
     $scope.saveMemberTrip = function () {
+        saveMemberTrip();
+    }
+
+    $scope.tripAdd = function () {
         saveMemberTrip();
     }
 
