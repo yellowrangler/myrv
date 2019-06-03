@@ -91,10 +91,10 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
-    factory.exportGasCapture = function (data) {
+    factory.exportData = function (data) {
         return $http({ 
-            method: 'POST', 
-            url: "app/ajax/exportgascapture.php",
+            method: 'GET', 
+            url: "app/ajax/exportdata.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

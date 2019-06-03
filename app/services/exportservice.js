@@ -6,11 +6,11 @@ myrvApp.service('exportService', function () {
         switch (parms.exportType) 
         {
             case 'gascapture':
-                exportUrl = exportUrlBase+"exportgascapture.php?memberid="+parms.memberid+"&tripid="+parms.tripid;
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&tripid="+parms.tripid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
                 break;
 
             case 'trips':
-                exportUrl = exportUrlBase+"exporttrips.php?memberid="+parms.memberid;
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
                 break;
 
            default:

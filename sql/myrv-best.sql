@@ -375,8 +375,8 @@ COMMIT;
 -- Table structure for table OvernightStayTbl
 --
 
-DROP TABLE IF EXISTS OvernightStayTbl;
-CREATE TABLE OvernightStayTbl (
+DROP TABLE IF EXISTS overnightstaytbl;
+CREATE TABLE overnightstaytbl (
   id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   memberid bigint(20) DEFAULT NULL,
   tripid bigint(20) DEFAULT NULL,
@@ -423,8 +423,8 @@ interval - pernight/peryear/permonth  - amke this a service
 -- Table structure for table ParkClubMembershipTbl
 --
 
-DROP TABLE IF EXISTS ParkClubMembershipTbl;
-CREATE TABLE ParkClubMembershipTbl (
+DROP TABLE IF EXISTS parkclubmembershiptbl;
+CREATE TABLE parkclubmembershiptbl (
   id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   memberid bigint(20) DEFAULT NULL,
   name varchar(1000) NOT NULL,
@@ -468,4 +468,48 @@ restrictions
 rating 1-10
 remarks
 
+DROP TABLE IF EXISTS eventtripentryTbl;
+CREATE TABLE eventtripentryTbl (
+  id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL,
+  event varchar(256) DEFAULT NULL,
+  city varchar(256) NOT NULL,
+  state varchar(256) NOT NULL,
+  zipcode varchar(100) NOT NULL,
+  cost varchar(100) NOT NULL,
+  otherfees varchar(1000) NOT NULL,
+  date date DEFAULT NULL,
+  time time DEFAULT NULL,
+  websiteurl varchar(1000) NOT NULL,
+  email varchar(1000) NOT NULL,
+  contact varchar(1000) NOT NULL,
+  rating int(11) DEFAULT NULL,
+  remarks varchar(1000) NOT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS foodtripentryTbl;
+CREATE TABLE foodtripentryTbl (
+  id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL,
+  restaurant varchar(256) DEFAULT NULL,
+  venue varchar(256) DEFAULT NULL,
+  city varchar(256) NOT NULL,
+  state varchar(256) NOT NULL,
+  zipcode varchar(100) NOT NULL,
+  cost varchar(100) NOT NULL,
+  otherfees varchar(1000) NOT NULL,
+  date date DEFAULT NULL,
+  time time DEFAULT NULL,
+  websiteurl varchar(1000) NOT NULL,
+  email varchar(1000) NOT NULL,
+  contact varchar(1000) NOT NULL,
+  rating int(11) DEFAULT NULL,
+  remarks varchar(1000) NOT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

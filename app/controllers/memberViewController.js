@@ -103,6 +103,7 @@ controllers.memberviewgastripentriesController = function ($scope, $http, $locat
         $scope.exportParms.tripid = $scope.current.tripid;
         $scope.exportParms.memberid = $scope.current.memberid;
         $scope.exportParms.exportType = "gascapture";
+        $scope.exportParms.exportfilename = "exportgascapture.csv";
         $scope.downloadurl = "";
 
         resetGasDetailView();
@@ -143,6 +144,8 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
         $scope.exportParms = {};
         $scope.exportParms.memberid = $scope.current.memberid;
         $scope.exportParms.exportType = "trips";
+        $scope.exportParms.exportfilename = "exporttrips.csv";
+
         $scope.downloadurl = exportService.getExportUrl($scope.exportParms);
 
         getMemberTrips();
