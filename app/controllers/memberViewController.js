@@ -152,3 +152,42 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
         getMemberTripGasDetails();
     }
 }
+
+controllers.memberviewmemberController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMember()
+    {
+        var q = "memberid="+$scope.current.memberid;
+        memberFactory.getMember(q)
+        .success( function(data) {
+            $scope.current = data;
+
+            if ($scope.current.avatar == "")
+            {
+                $scope.current.avatar = "default.png";
+            }
+
+            $scope.current.vpassword = $scope.current.password;
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+
+        getMember();
+    };
+}
+

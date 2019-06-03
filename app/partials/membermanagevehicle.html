@@ -9,7 +9,7 @@
         <div style="margin:0 auto;width:50%;" class="form-inline">
             <label style="text-align:right;padding-right:15px;" for="membervehicle">Your Vehicles</label>
             
-            <select tabindex="1"  style="width:40%;" class="form-control " ng-change="getMemberVehicle(current.vehicleid)" ng-model="current.vehicleid" id="membervehicle" name="membervehicle">
+            <select tabindex="1"  style="width:60%;" class="form-control " ng-change="getMemberVehicle(current.vehicleid)" ng-model="current.vehicleid" id="membervehicle" name="membervehicle">
                 <!-- <option value="0">Not Selected</option> -->
                 <option ng-repeat="vehicle in membervehicles" ng-selected="current.vehicleid == vehicle.id" value="{{vehicle.id}}">{{vehicle.vehicltype}} {{vehicle.make}} {{vehicle.model}} {{vehicle.color}} {{vehicle.year}} {{vehicle.platenbr}}</option>
             </select>
