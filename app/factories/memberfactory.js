@@ -190,6 +190,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMembervehicleroadsideassitance = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembervehicleroadsideassitance.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.saveMembervehicleroadsideassistance = function (data) {
         return $http({ 
             method: 'POST', 
@@ -207,9 +216,43 @@ myrvApp.factory('memberFactory', function($q, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
     }
+
     
+    factory.getMemberRVmemberships = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmemberrvmemberships.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
 
+    factory.getMemberRVmembership = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmemberrvmembership.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
 
+    factory.saveMemberRVmembership = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savememberrvmembership.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMemberRVmembership = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletememberrvmembership.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
 
     factory.getMembers = function (data) {
         return $http({ 

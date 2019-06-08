@@ -18,6 +18,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
 
+        if (isNaN($scope.current.capture.odometer))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Odometer must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         odmgas = $scope.current.capture.odometer * 1;  
         odmb4 = $scope.current.original.gastotals.odometer * 1; 
         milgas = odmgas - odmb4;
@@ -49,6 +58,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
+        if (isNaN($scope.current.capture.amount))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         amtgas = $scope.current.capture.amount * 1; 
 
         $scope.current.capture.amount = amtgas.toFixed(2); 
@@ -57,8 +75,26 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
 
+        if (isNaN($scope.current.capture.gallons))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
+
+        if (isNaN($scope.current.capture.amount))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
 
         amtgastot = $scope.current.original.gastotals.totalamount * 1;  
         amtgastot = (amtgastot + amtgas);  
@@ -86,8 +122,26 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
+        if (isNaN($scope.current.capture.amount))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
+
+        if (isNaN($scope.current.capture.gallons))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
 
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
@@ -137,6 +191,13 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
 
+        if (isNaN($scope.current.capture.gallons))
+        {
+            alert("Gallons must be a valid number!");
+
+            return;
+        }
+
         galgas = $scope.current.capture.gallons * 1; 
         galgastot = $scope.current.original.gastotals.totalgallons * 1; 
         galgastot = (galgastot + galgas); 
@@ -179,6 +240,25 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
             return;
+
+        if (isNaN($scope.current.capture.gallons))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
+        if (isNaN($scope.current.capture.miles))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Miles must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         
         milgas = $scope.current.capture.miles * 1;  
         galgas = $scope.current.capture.gallons * 1; 
@@ -257,6 +337,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
 
+        if (isNaN($scope.current.capture.odometer))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Odometer must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         calculateMillage();
 
         //----------------------------------------------------------- 
@@ -265,6 +354,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
+        if (isNaN($scope.current.capture.amount))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         calculateAmount();
 
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
@@ -272,6 +370,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
+
+        if (isNaN($scope.current.capture.gallons))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
 
         calculateAmount();
         calculateGallons();
@@ -285,6 +392,15 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
             return;
+
+        if (isNaN($scope.current.capture.miles))
+        {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+            $('#memCaptureGasDialogModalBody').html("Miles must be a valid number!");
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
 
         calculateMPG();
     }
@@ -376,7 +492,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             else
             {
                 $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
-                $('#memCaptureGasDialogModalBody').html("Error saving gas trip entry - "+data.dbgtext);
+                $('#memCaptureGasDialogModalBody').html("Error saving gas trip entry - "+data.errtext);
                 $('#memCaptureGasDialogModal').modal();
             }
 
@@ -480,224 +596,4 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.capture.time = getCurrentTimeStr(12);
     }
 
-}
-
-controllers.membermanagegastripentriesController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
-    $scope.current = {};
-
-    function getMemberTrips() {
-
-        var qdata = 'memberid='+$scope.current.memberid;
-        memberFactory.getMemberTrips(qdata)
-            .success( function(data) {
-                $scope.membertrips = data;
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
-    function getMemberTrip() {
-
-        var qdata = "";
-        if ($scope.current.tripid == "")
-        {
-            qdata = 'memberid='+$scope.current.memberid;
-        }
-        else
-        {
-            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
-        }
-
-        memberFactory.getMemberTrip(qdata)
-            .success( function(data) {
-                $scope.current.trip = data;
-                $scope.current.tripid = data.id
-                $scope.current.tripname = data.tripname;
-
-                getMemberTripGasDetails();
-                })
-            .error( function(edata) {
-                alert(edata);
-            }); 
-    }
-
-    function getMemberTripGasDetails() {
-        $scope.gasdetails = {};
-
-        $order = "DESC";
-
-        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
-        memberFactory.getMembertripgasdetails(qdata)
-            .success( function(data) {
-                $scope.gasdetails = objectCopy(data);
-            })
-            .error( function(edata) {
-                alert(edata);
-            });
-    }
-
-    function saveGasDetail() {
-        var formstring = $("#membergasdetailForm").serialize();
-        var func = "save";
-
-        memberFactory.saveMembergastripentry(formstring)
-        .success( function(data) {
-            if (data.errtext == "")
-            {
-                capturegasRecalculate(func);
-            }
-            else
-            {
-                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
-                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
-                $('#memEntryGasDialogModal').modal();
-            }
-
-            // must call for new totals and reload scope.current.original.gastotals
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
-
-    function capturegasRecalculate(func) {
-        // console.log(formstring);
-
-        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
-        memberFactory.capturegasRecalculate(qdata)
-        .success( function(data) {
-            if (data.errtext == "")
-            {
-                switch (func) 
-                {
-                    case 'save':
-                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Success");
-                        $('#memEntryGasDialogModalBody').html(data.bodytext);
-                        $('#memEntryGasDialogModal').modal();
-                        break;
-
-                    case 'delete':
-                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Success");
-                        $('#memEntryGasDialogModalBody').html(data.bodytext);
-                        $('#memEntryGasDialogModal').modal();
-                        break;    
-                }
-
-                resetGasDetailUpdate();
-            }
-            else
-            {
-                switch (func) 
-                {
-                    case 'save':
-                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
-                        $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
-                        $('#memEntryGasDialogModal').modal();
-                        break;
-
-                    case 'delete':
-                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
-                        $('#memEntryGasDialogModalBody').html("Error deleting detail entry - "+data);
-                        $('#memEntryGasDialogModal').modal();
-                        break;    
-                }
-                        
-            }
-
-            // must call for new totals and reload scope.current.original.gastotals
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-    }
-
-    
-
-    function resetGasDetailUpdate() {
-        $scope.membertrips = {};
-        $scope.current.gasdetail = {};
-
-        $scope.current.email = $scope.current.memberlogin.email;
-
-        getMemberTrips();
-        getMemberTrip();
-    }
-
-    function deleteGasDetail() {
-
-        var func = "delete";
-        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&detailid='+$scope.current.gasdetail.id;
-
-        // console.log("trip form delete:"+qdata);
-
-        memberFactory.deleteMembergastripentry(qdata)
-        .success( function(data) {
-            if (data.errtext == "")
-            {
-                $scope.current.gasdetail.id = "";
-
-                capturegasRecalculate();
-            }
-            else
-            {
-                $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
-                $('#memEntryGasDialogModalBody').text("Error deleting trip entry detail- "+data);
-                $('#memEntryGasDialogModal').modal();
-            }
-        })
-        .error( function(edata) {
-            alert(edata);
-        });
-
-    }
-
-    function resetGasDetailAdd() {
-        $scope.current.gasdetail.id = "";
-        $('#detailid').val("");
-
-        saveGasDetail();
-    }
-
-    init();
-    function init() {
-        //
-        // this is not getting called at right time for definig top offset
-        // in jquery ready. So adding it here
-        //
-        setviewpadding();
-
-        $scope.states = selectListService.getList('states');
-
-        $scope.current.memberlogin = loginService.getLogin();
-        $scope.current.memberid = $scope.current.memberlogin.memberid;
-        $scope.current.membername = $scope.current.memberlogin.membername;
-        $scope.current.tripid = "";
-
-        resetGasDetailUpdate();
-    };
-
-    $scope.getMemberTripGasDetails = function () {
-        getMemberTripGasDetails();
-    }
-
-    $scope.setCurrentTrip = function (gasdetail) {
-        $scope.current.gasdetail = objectCopy(gasdetail);
-    }
-
-    $scope.resetGasDetailUpdate = function () {
-        resetGasDetailUpdate();
-    }
-
-    $scope.resetGasDetailAdd = function() {
-        resetGasDetailAdd();
-    }
-
-    $scope.saveGasDetail = function () {
-        saveGasDetail();
-    }
-
-    $scope.deleteGasDetail = function () {
-        deleteGasDetail();
-    }
 }

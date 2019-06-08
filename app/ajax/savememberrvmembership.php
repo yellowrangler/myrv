@@ -7,15 +7,14 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-$roadsideassistanceid = $_POST['roadsideassistanceid'];
+$id = $_POST['id'];
 $memberid = $_POST['memberid'];
-$roadsideassistancename = $_POST['roadsideassistancename'];
-$polcynumber = $_POST['polcynumber'];
-$policyholder = $_POST['policyholder'];
-$policytype = $_POST['policytype'];
+$rvmembershipname = $_POST['rvmembershipname'];
+$rvmembername = $_POST['rvmembername'];
+$rvmembershipid = $_POST['rvmembershipid'];
 $expirationdate = $_POST['expirationdate'];
 $cost = $_POST['cost'];
-$emergencyphonenbr = $_POST['emergencyphonenbr'];
+$phonenumber = $_POST['phonenumber'];
 $websiteurl = $_POST['websiteurl'];
 $comments = $_POST['comments'];
 $status = $_POST['status'];
@@ -41,25 +40,41 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to save member vehicle roadsideassitance information. memberid = $memberid. roadsideassistanceid = $roadsideassistanceid.";
+$modulecontent = "Unable to save member rv membership information. memberid = $memberid. roadsideassistanceid = $roadsideassistanceid.";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // update an existing roadsideassistance. Insert a new one
 //---------------------------------------------------------------
 $sqlFunction = "";
-if ($roadsideassistanceid == "")
+if ($id == "")
 {
 	// insert new vehicle
 
-	$sql = "INSERT INTO vechileroadsideassistancetbl(memberid,
-		roadsideassistancename,polcynumber,policyholder,
-		expirationdate,cost,emergencyphonenbr,websiteurl,comments,
-		status,lastupdate) 
+	$sql = "INSERT INTO rvmembershiptbl(
+		memberid,
+		rvmembershipname,
+		rvmembershipid,
+		rvmembername,
+		expirationdate,
+		cost,
+		phonenumber,
+		websiteurl,
+		comments,
+		status,
+		lastupdate) 
 	VALUES 
-	($memberid,'$roadsideassistancename','$polcynumber','$policyholder',
-	'$expirationdate','$cost','$emergencyphonenbr','$websiteurl',
-	'$comments','$status','$enterdate')";
+	($memberid,
+	'$rvmembershipname',
+	'$rvmembershipid',
+	'$rvmembername',
+	'$expirationdate',
+	'$cost',
+	'$phonenumber',
+	'$websiteurl',
+	'$comments',
+	'$status',
+	'$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -67,19 +82,19 @@ else
 {
 	// update existing trip
 
-	$sql = "UPDATE vechileroadsideassistancetbl SET 
+	$sql = "UPDATE rvmembershiptbl SET 
 	    memberid = '$memberid',
-		roadsideassistancename = '$roadsideassistancename',
-		polcynumber = '$polcynumber',
-		policyholder = '$policyholder',
+		rvmembershipname = '$rvmembershipname',
+		rvmembershipid = '$rvmembershipid',
+		rvmembername = '$rvmembername',
 		expirationdate = '$expirationdate',
 		cost = '$cost',
-		emergencyphonenbr = '$emergencyphonenbr',
+		phonenumber = '$phonenumber',
 		websiteurl = '$websiteurl',
 		comments = '$comments',
 		status = '$status',
 	    lastupdate = '$enterdate'
-	WHERE memberid = '$memberid' AND id = '$roadsideassistanceid'";
+	WHERE memberid = '$memberid' AND id = '$id'";
 
 	$sqlFunction = "update";
 }
@@ -98,7 +113,7 @@ include 'mysqlquery.php';
 //
 if ($sqlFunction == "insert")
 {
-	$roadsideassistanceid = mysqli_insert_id($dbConn);
+	$id = mysqli_insert_id($dbConn);
 }
 
 // print "sqlFunction=$sqlFunction   :   vehicleid=$vehicleid";
@@ -113,8 +128,8 @@ mysqli_close($dbConn);
 // pass back info
 //
 $msg["msgtext"] = $msgtext;
-$msg["roadsideassistanceid"] = $roadsideassistanceid;
-$msg["roadsideassistancename"] = $roadsideassistancename;
+$msg["id"] = $id;
+$msg["rvmembershipname"] = $rvmembershipname;
 
 exit(json_encode($msg));
 ?>

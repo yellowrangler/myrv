@@ -95,7 +95,8 @@
                         Amount  
                     </div>
                     <div class="col-md-7 form-inline">
-                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
                         <input style="display:inline;width:135px;" tabindex="8" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
                     </div>
                 </div> <!-- end of form-group -->
@@ -120,7 +121,9 @@
                         Cost/Gallon
                     </div>
                     <div class="col-md-7 form-inline">
-                    	<span style="text-align:right;padding-right:4px;">$</span>
+                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
+
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
                         <input style="display:inline;width:135px;"  type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
                     </div>
                 </div> <!-- end of form-group -->
@@ -170,8 +173,10 @@
                         Total Cost 
                     </div>
                     <div class="col-md-6  form-inline">
-                    	<span style="text-align:right;padding-right:4px;">$</span>
-                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.totalamount" id="totalamount" name="totalamount">
+                        <span style="display:inline;" class="input-group-addon">$</span>
+
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="display:inline;width:70%;" type="text" readonly class="form-control" ng-model="current.gastotals.totalamount" id="totalamount" name="totalamount">
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -189,8 +194,9 @@
                         Ave Cost/Gallon
                     </div>
                     <div class="col-md-6 form-inline">
-                    	<span style="text-align:right;padding-right:4px;">$</span>
-                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.avecostpergallon" id="avecostpergallon" name="avecostpergallon">
+                        <span style="display:inline;" class="input-group-addon" >$</span>
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="width:70%;" type="text" readonly class="form-control" ng-model="current.gastotals.avecostpergallon" id="avecostpergallon" name="avecostpergallon">
                     </div>
                 </div> <!-- end of form-group -->
 

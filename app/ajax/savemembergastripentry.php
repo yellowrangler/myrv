@@ -19,6 +19,7 @@ $state = $_POST['state'];
 
 $time = date('H:i:s', strtotime($time));
 $date = date('Y-m-d', strtotime($date));
+$errmsg = "";
 
 $detailid = 0;
 if (isset($_POST['detailid']) )
@@ -42,45 +43,93 @@ if (isset($_POST['nottankfilled']))
 }
 
 $originaltotalmiles = 0;
-if (is_numeric($_POST['originaltotalmiles']))
+$number = floatval(str_replace(',', '', $_POST['originaltotalmiles']));
+if (is_numeric($number))
 {
-	$originaltotalmiles = $_POST['originaltotalmiles'];
+	$originaltotalmiles = $number;
+}
+else
+{
+	$errmsg = $errmsg . "originaltotalmiles not a number! value=$number <br><br>";
 }
 
 $odometer = 0;
-if (is_numeric($_POST['odometer']))
+$number = floatval(str_replace(',', '', $_POST['odometer']));
+if (is_numeric($number))
 {
-	$odometer = $_POST['odometer'];
+	$odometer = $number;
+}
+else
+{
+	$errmsg = $errmsg . "odometer not a number!  value=$number <br><br>";
 }
 
 $amount = 0;
-if (is_numeric($_POST['amount']))
+$number = floatval(str_replace(',', '', $_POST['amount']));
+if (is_numeric($number))
 {
-	$amount = $_POST['amount'];
+	$amount = $number;
+}
+else
+{
+	$errmsg = $errmsg . "amount not a number!  value=$number <br><br>";
 }
 
 $gallons = 0;
-if (is_numeric($_POST['gallons']))
+$number = floatval(str_replace(',', '', $_POST['gallons']));
+if (is_numeric($number))
 {
-	$gallons = $_POST['gallons'];
+	$gallons = $number;
+}
+else
+{
+	$errmsg = $errmsg . "gallons not a number!  value=$number <br><br>";
 }
 
 $costpergallon = 0;
-if (is_numeric($_POST['costpergallon']))
+$number = floatval(str_replace(',', '', $_POST['costpergallon']));
+if (is_numeric($number))
 {
-	$costpergallon = $_POST['costpergallon'];
+	$costpergallon = $number;
+}
+else
+{
+	$errmsg = $errmsg . "costpergallon not a number!  value=$number <br><br>";
 }
 
 $miles = 0;
-if (is_numeric($_POST['miles']))
+$number = floatval(str_replace(',', '', $_POST['miles']));
+if (is_numeric($number))
 {
-	$miles = $_POST['miles'];
+	$miles = $number;
+}
+else
+{
+	$errmsg = $errmsg . "miles not a number!  value=$number <br><br>";
 }
 
 $mpg = 0;
-if (is_numeric($_POST['mpg']))
+$number = floatval(str_replace(',', '', $_POST['mpg']));
+if (is_numeric($number))
 {
-	$mpg = $_POST['mpg'];
+	$mpg = $number;
+}
+else
+{
+	$errmsg = $errmsg . "mpg not a number!  value=$number <br><br>";
+}
+
+// 
+// if error pass back error message
+//
+if ($errmsg != "")
+{
+	$msgArray['msgtext'] = 'error';
+	$msgArray['errtext'] = $errmsg;
+	$msgArray['detailid'] = "$detailid";
+	$msgArray['bodytext'] = "Error updating gas entry details";
+
+	exit(json_encode($msgArray));
 }
 
 // print_r($_POST);

@@ -223,7 +223,11 @@ CREATE TABLE vechileroadsideassistancetbl (
   policyholder varchar(256) DEFAULT NULL,
   expirationdate varchar(256) DEFAULT NULL,
   emergencyphonenbr varchar(256) DEFAULT NULL,
+  businessphonenbr varchar(256) DEFAULT NULL,
   websiteurl varchar(256) DEFAULT NULL,
+  cost varchar(100)DEFAULT NULL,
+  costinterval varchar(100) DEFAULT NULL,
+  email varchar(256) DEFAULT NULL,
   comments varchar(1000) DEFAULT NULL,
   status varchar(256) DEFAULT NULL,
   lastupdate datetime DEFAULT NULL,
@@ -420,29 +424,31 @@ interval - pernight/peryear/permonth  - amke this a service
 
 
 --
--- Table structure for table ParkClubMembershipTbl
+-- Table structure for table rvmembershiptbl
 --
 
-DROP TABLE IF EXISTS parkclubmembershiptbl;
-CREATE TABLE parkclubmembershiptbl (
+DROP TABLE IF EXISTS rvmembershiptbl;
+CREATE TABLE rvmembershiptbl (
   id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   memberid bigint(20) DEFAULT NULL,
-  name varchar(1000) NOT NULL,
-  membershipid varchar(1000) NOT NULL,
+  rvmembershipname varchar(1000) DEFAULT NULL,
+  rvmembershipid varchar(1000) DEFAULT NULL,
+  rvmembername varchar(1000) DEFAULT NULL,
   startdate date DEFAULT NULL,
-  expires date DEFAULT NULL,
-  city varchar(256) NOT NULL,
-  state varchar(256) NOT NULL,
-  zipcode varchar(100) NOT NULL,
-  phonenumber varchar(1000) NOT NULL,
-  membercost varchar(100) NOT NULL,
-  costinterval varchar(100) NOT NULL,
-  websiteurl varchar(1000) NOT NULL,
-  email varchar(1000) NOT NULL,
-  contact varchar(1000) NOT NULL,
-  restrictions varchar(1000) NOT NULL,
+  expirationdate varchar(100) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  phonenumber varchar(1000)DEFAULT NULL,
+  cost varchar(100)DEFAULT NULL,
+  costinterval varchar(100) DEFAULT NULL,
+  websiteurl varchar(1000) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  contact varchar(1000) DEFAULT NULL,
+  restrictions varchar(1000) DEFAULT NULL,
   rating int(11) DEFAULT NULL,
-  remarks varchar(1000) NOT NULL,
+  comments varchar(1000) DEFAULT NULL,
+  status varchar(256) DEFAULT NULL,
   lastupdate datetime DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

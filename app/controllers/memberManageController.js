@@ -110,7 +110,51 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+
+        $scope.current.trip.startdate = $("#startdate").val();
+        if (!isValidDate($scope.current.trip.startdate))
+        {
+            errmsg += "Start date must be a valid date! <br><br>";
+            $scope.current.trip.startdate = "";
+        }
+
+        $scope.current.trip.startodometer = $("#startodometer").val();
+        if (isNaN($scope.current.trip.startodometer))
+        {
+            errmsg += "Starting odometer must be a valid number! <br><br>";
+            $scope.current.trip.startodometer = "";
+        }
+
+        $scope.current.trip.endodometer = $("#endodometer").val();
+        if (isNaN($scope.current.trip.endodometer) && $scope.current.trip.endodometer != "")
+        {
+            errmsg += "Starting odometer must be a valid number! <br><br>";
+            $scope.current.trip.endodometer = "";
+        }
+
+        $scope.current.trip.endodometer = $("#enddate").val();
+        if (!isValidDate($scope.current.trip.enddate) && $scope.current.trip.enddate != "")
+        {
+            errmsg += "End date must be a valid date! <br><br>";
+            $scope.current.trip.enddate = "";
+        }
+
+        return errmsg;
+    }
+
     function saveMemberTrip() {
+
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#tripmanageMemberDialogModalTitle').text("The Following errors must be fixed");
+            $('#tripmanageMemberDialogModalBody').html(retmsg);
+            $('#tripmanageMemberDialogModal').modal();
+
+            return;
+        }
 
         var formstring = $("#membermanagetripForm").serialize();
         // var formstringClean = encodeURIComponent(formstring);
@@ -572,32 +616,33 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
     $scope.current = {};
 
     function resetMemberRoadsideAssistanceForm() {
-        $scope.current.roadsideassistanceid ="";
-        $scope.current.roadsideassistancename ="";
-        $scope.current.roadsideassistance ="";
+        $scope.roadsideassistances ="";
+        $scope.roadsideassistance ="";
+
+        getMemberVehicleRoadsideAssitances();
     }
 
     function getMemberVehicleRoadsideAssitances() {
         var qdata = 'memberid='+$scope.current.memberid;
         memberFactory.getMembervehicleroadsideassitances(qdata)
             .success( function(data) {
-                $scope.membervehicleroadsideassistances = data;
+                $scope.roadsideassistances = data;
                 })
             .error( function(edata) {
                 alert(edata);
             });
     }
 
-    function getMemberVehicleRoadsideAssitance(roadsideassistanceid) {
-        $scope.current.roadsideassistanceid = roadsideassistanceid;
+    function getMemberVehicleRoadsideAssitance(id) {
+        // $scope.current.roadsideassistanceid = roadsideassistanceid;
         // console.log("insuranceid get:"+insuranceid);
 
-        for (var i = 0; i < $scope.membervehicleroadsideassistances.length; i++)
+        for (var i = 0; i < $scope.roadsideassistances.length; i++)
         {
-            if ($scope.membervehicleroadsideassistances[i].id == roadsideassistanceid)
+            if ($scope.roadsideassistances[i].id == id)
             {
-                $scope.current.roadsideassistance = $scope.membervehicleroadsideassistances[i];
-                $scope.current.roadsideassistancename = $scope.membervehicleroadsideassistances[i].roadsideassistancename;
+                $scope.roadsideassistance = $scope.roadsideassistances[i];
+                // $scope.current.roadsideassistancename = $scope.roadsideassistances[i].roadsideassistancename;
                 // console.log($scope.current.waypoint);
             }
         }
@@ -611,25 +656,24 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
         .success( function(data) {
             if (data.msgtext == "ok")
             {
-                $scope.current.roadsideassistanceid = data.roadsideassistanceid;
-                $scope.current.roadsideassistancename = data.roadsideassistancename;
+                // $scope.current.roadsideassistanceid = data.roadsideassistanceid;
+                // $scope.current.roadsideassistancename = data.roadsideassistancename;
 
                 // console.log("after return tripid="+$scope.current.tripid);
 
                 $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Success");
-                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Vehicle information updated succesfully for Roadside Assitance <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>");
-                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Vehicle information updated succesfully for Roadside Assitance <span style='color:teal;font-weight:700'>"+data.roadsideassistancename+"</span>");
+                $('#membermanageVehicleRoadsideAssistanceDialogModal').modal();
  
-                $scope.membervehicleroadsideassistances = "";
+                // $scope.roadsideassistances = "";
 
                 resetMemberRoadsideAssistanceForm();
-                getMemberVehicleRoadsideAssitances();
             }
             else
             {
                 $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Update Roadside Assitance Error");
                 $('#membermanageVehicleRoadsideAssistanceDialogModalBody').text("Error updating Roadside Assitance - "+data);
-                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -639,7 +683,7 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
 
     
     function deletememberVehicleRoadsideAssistance() {
-        var qdata = 'memberid='+$scope.current.memberid+'&roadsideassistanceid='+$scope.current.roadsideassistanceid+"&roadsideassistancename="+$scope.current.roadsideassistancename;
+        var qdata = 'memberid='+$scope.current.memberid+'&roadsideassistanceid='+$scope.roadsideassistance.id+"&roadsideassistancename="+$scope.roadsideassistance.roadsideassistancename;
 
         // console.log("after return waypointid="+$scope.current.waypointid);
 
@@ -647,24 +691,23 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
         .success( function(data) {
             if (data.msgtext == "ok")
             {
-                $scope.current.roadsideassistanceid = data.roadsideassistanceid;
-                $scope.current.roadsideassistancename = data.roadsideassistancename;
+                // $scope.current.roadsideassistanceid = data.roadsideassistanceid;
+                // $scope.current.roadsideassistancename = data.roadsideassistancename;
 
                 $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Success");
-                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for <span style='color:teal;font-weight:700'>"+$scope.current.roadsideassistancename+"</span>!");
-                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModalBody').html("Roadside Assitance information deleted succesfully for <span style='color:teal;font-weight:700'>"+data.roadsideassistancename+"</span>!");
+                $('#membermanageVehicleRoadsideAssistanceDialogModal').modal();
 
-                $scope.current.roadsideassistanceid = "";
-                $scope.current.roadsideassistancename = "";
+                // $scope.current.roadsideassistanceid = "";
+                // $scope.current.roadsideassistancename = "";
 
                 resetMemberRoadsideAssistanceForm();
-                getMemberVehicleRoadsideAssitances();
             }
             else
             {
                 $('#membermanageVehicleRoadsideAssistanceDialogModalTitle').text("Member Roadside Assitance Delete Error");
                 $('#membermanageVehicleRoadsideAssistanceDialogModalBody').text("Error deleting Roadside Assitance- "+data);
-                $('#membermanageVehicleRoadsideAssistanceeDialogModal').modal();
+                $('#membermanageVehicleRoadsideAssistanceDialogModal').modal();
             }
         })
         .error( function(edata) {
@@ -682,17 +725,17 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
 
-        $scope.membervehicleroadsideassistances = "";
+        $scope.roadsideassistances = "";
 
         getMemberVehicleRoadsideAssitances();
     };
 
-    $scope.getMemberVehicleRoadsideAssitance = function(roadsideassistanceid) {
-        getMemberVehicleRoadsideAssitance(roadsideassistanceid);
+    $scope.getMemberVehicleRoadsideAssitance = function(id) {
+        getMemberVehicleRoadsideAssitance(id);
     }
 
     $scope.updateMemberVehicleRoadsideAssistance = function() {
-        updateMemberVehicleRoadsideAssistance(roadsideassistanceid);
+        updateMemberVehicleRoadsideAssistance();
     }
 
     $scope.NewRoadsideAssistance = function () {
@@ -701,5 +744,402 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
 
     $scope.deletememberVehicleRoadsideAssistance = function () {
         deletememberVehicleRoadsideAssistance();
+    }
+}
+
+controllers.membermanagegastripentriesController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripGasDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripGasDetails() {
+        $scope.gasdetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripgasdetails(qdata)
+            .success( function(data) {
+                $scope.gasdetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function validateForm() {
+        var errmsg = "";
+        if (isNaN($scope.current.gasdetail.odometer))
+        {
+            errmsg += "Odometer must be a valid number! <br><br>";
+        }
+
+        if (isNaN($scope.current.gasdetail.amount))
+        {
+            errmsg += "Amount must be a valid number!  <br><br>";
+        }
+
+        if (isNaN($scope.current.gasdetail.gallons))
+        {
+            errmsg += "Gallons must be a valid number!   <br>";
+        }
+
+        if (!isValidDate($scope.current.gasdetail.date))
+        {
+            errmsg += "Start date must be a valid date! <br><br>";
+            $scope.current.trip.startdate = "";
+        }
+
+
+
+        return errmsg;
+    }
+
+    function saveGasDetail() {
+
+        // 
+        // Validate values
+        // 
+        
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#memEntryGasDialogModalTitle').text("The Following errors must be fixed");
+            $('#memEntryGasDialogModalBody').html(retmsg);
+            $('#memEntryGasDialogModal').modal();
+
+            return;
+        }
+
+        var formstring = $("#membergasdetailForm").serialize();
+
+        memberFactory.saveMembergastripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.func = "save";
+
+                capturegasRecalculate();
+            }
+            else
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
+                $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
+                $('#memEntryGasDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function capturegasRecalculate() {
+        // console.log(formstring);
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
+        memberFactory.capturegasRecalculate(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                switch ($scope.current.func) 
+                {
+                    case 'save':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Success");
+                        $('#memEntryGasDialogModalBody').html(data.bodytext);
+                        $('#memEntryGasDialogModal').modal();
+                        break;
+
+                    case 'delete':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Success");
+                        $('#memEntryGasDialogModalBody').html(data.bodytext);
+                        $('#memEntryGasDialogModal').modal();
+                        break;    
+                }
+
+                resetGasDetailUpdate();
+            }
+            else
+            {
+                switch ($scope.current.func) 
+                {
+                    case 'save':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Update Error");
+                        $('#memEntryGasDialogModalBody').html("Error saving gas trip entry - "+data);
+                        $('#memEntryGasDialogModal').modal();
+                        break;
+
+                    case 'delete':
+                        $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
+                        $('#memEntryGasDialogModalBody').html("Error deleting detail entry - "+data);
+                        $('#memEntryGasDialogModal').modal();
+                        break;    
+                }     
+            }
+
+            $scope.current.func = "";
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function resetGasDetailUpdate() {
+        $scope.membertrips = {};
+        $scope.current.gasdetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function deleteGasDetail() {
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&detailid='+$scope.current.gasdetail.id;
+
+        // console.log("trip form delete:"+qdata);
+
+        memberFactory.deleteMembergastripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.gasdetail.id = "";
+                $scope.current.func = "delete";
+
+                capturegasRecalculate();
+            }
+            else
+            {
+                $('#memEntryGasDialogModalTitle').text("Gas Trip Detail Entry Delete Error");
+                $('#memEntryGasDialogModalBody').text("Error deleting trip entry detail- "+data);
+                $('#memEntryGasDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    function resetGasDetailAdd() {
+        $scope.current.gasdetail.id = "";
+        $('#detailid').val("");
+
+        saveGasDetail();
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+        $scope.current.func = "";
+
+        resetGasDetailUpdate();
+    };
+
+    $scope.getMemberTripGasDetails = function () {
+        getMemberTripGasDetails();
+    }
+
+    $scope.setCurrentTrip = function (gasdetail) {
+        $scope.current.gasdetail = objectCopy(gasdetail);
+    }
+
+    $scope.resetGasDetailUpdate = function () {
+        resetGasDetailUpdate();
+    }
+
+    $scope.resetGasDetailAdd = function() {
+        resetGasDetailAdd();
+    }
+
+    $scope.saveGasDetail = function () {
+        saveGasDetail();
+    }
+
+    $scope.deleteGasDetail = function () {
+        deleteGasDetail();
+    }
+}
+
+controllers.membermanagervmembershipController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function resetMemberRVmembershipForm() {
+        // $scope.current.rvmembershipid ="";
+        $scope.rvmemberships = "";
+        $scope.rvmembership = "";
+
+        getMemberRVmemberships();
+    }
+
+    function getMemberRVmemberships() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberRVmemberships(qdata)
+            .success( function(data) {
+                $scope.rvmemberships = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function getMemberRvMembership(id) {
+        // $scope.current.rvmembershipid = rvmembershipid;
+        // console.log("insuranceid get:"+insuranceid);
+
+        for (var i = 0; i < $scope.rvmemberships.length; i++)
+        {
+            if ($scope.rvmemberships[i].id == id)
+            {
+                $scope.rvmembership = $scope.rvmemberships[i];
+            }
+        }
+    }
+
+    function updateMemberRVmembership() {
+        var formstring = $("#membermanagerrvmembershipForm").serialize();
+        // console.log(formstring);
+
+        memberFactory.saveMemberRVmembership(formstring)
+        .success( function(data) {
+            if (data.msgtext == "ok")
+            {
+                // $scope.current.rvmembershipid = data.rvmembershipid;
+                // $scope.current.rvmembershipname = data.rvmembershipname;
+
+                // console.log("after return tripid="+$scope.current.tripid);
+
+                $('#membermanageRvMembershipDialogModalTitle').text("Member RV Membership Success");
+                $('#membermanageRvMembershipDialogModalBody').html("RV Membership information saved succesfully for RV Membership <span style='color:teal;font-weight:700'>"+data.rvmembershipname+"</span>");
+                $('#membermanageRvMembershipDialogModal').modal();
+ 
+                // $scope.roadsideassistances = "";
+
+                resetMemberRVmembershipForm();
+            }
+            else
+            {
+                $('#membermanageRvMembershipDialogModalTitle').text("Member RV Membership Error");
+                $('#membermanageRvMembershipDialogModalBody').text("Error updating RV Membership - "+data);
+                $('#membermanageRvMembershipDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    
+    function deleteMemberRVmembership() {
+        var qdata = 'memberid='+$scope.current.memberid+'&id='+$scope.rvmembership.id+"&rvmembershipname="+$scope.rvmembership.rvmembershipname;
+
+        // console.log("after return waypointid="+$scope.current.waypointid);
+
+        memberFactory.deleteMemberRVmembership(qdata)
+        .success( function(data) {
+            if (data.msgtext == "ok")
+            {
+                // $scope.current.rvmembershipid = data.rvmembershipid;
+                // $scope.current.rvmembershipname = data.rvmembershipname;
+
+
+                $('#membermanageRvMembershipDialogModalTitle').text("RV Membership information Delete Success");
+                $('#membermanageRvMembershipDialogModalBody').html("RV Membership information deleted succesfully for <span style='color:teal;font-weight:700'>"+data.rvmembershipname+"</span>!");
+                $('#membermanageRvMembershipDialogModal').modal();
+
+                // $scope.current.roadsideassistanceid = "";
+                // $scope.current.roadsideassistancename = "";
+
+                resetMemberRVmembershipForm();
+            }
+            else
+            {
+                $('#membermanageRvMembershipDialogModalTitle').text("RV Membership Delete Error");
+                $('#membermanageRvMembershipDialogModalBody').text("Error deleting Roadside Assitance- "+data);
+                $('#membermanageRvMembershipDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    init();
+    function init() {
+        setviewpadding();
+
+        $scope.rvmembershipstatuses = selectListService.getList('memberstatus');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        resetMemberRVmembershipForm();
+    };
+
+    $scope.getMemberRvMembership = function(rvmembership) {
+        getMemberRvMembership(rvmembership);
+    }
+
+    $scope.updateMemberRVmembership = function() {
+        updateMemberRVmembership();
+    }
+
+    $scope.NewMemberRVmembership = function () {
+        resetMemberRVmembershipForm();
+    }
+
+    $scope.deleteMemberRVmembership = function () {
+        deleteMemberRVmembership();
     }
 }
