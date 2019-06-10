@@ -595,5 +595,118 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
     $scope.setNow = function () {
         $scope.current.capture.time = getCurrentTimeStr(12);
     }
+}
+
+controllers.overnightetryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+
+
+    function calculateChange() {
+
+       
+    }
+
+    function resetOvernightCapture() {
+        $scope.membertrips = "";
+        $scope.current.activestatetripid = "";
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        $scope.current.capture = {};
+        // $scope.current.capture.datein = getCurrentDateStr();
+
+        getMemberTrip();
+    }
+
+    function getMemberTrip() {
+
+        $scope.current.tripid = "";
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id;
+                $scope.current.tripname = data.tripname;
+
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function saveOvernightCapture() {
+        var formstring = $("#membercaptureovernightForm").serialize();
+
+        // console.log(formstring);
+
+        memberFactory.saveMemberovernighttripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Success");
+                $('#memCaptureOvernightDialogModalBody').html(data.bodytext);
+                $('#memCaptureOvernightDialogModal').modal();
+
+                // resetOvernightCapture();
+            }
+            else
+            {
+                $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Error");
+                $('#memCaptureOvernightDialogModalBody').html("Error saving overnight trip entry - "+data.errtext);
+                $('#memCaptureOvernightDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.current = {};
+
+        $scope.states = selectListService.getList('states');
+        $scope.typestays = selectListService.getList('typestay');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        resetOvernightCapture();
+    };
+
+    $scope.resetOvernightCapture = function () {
+        resetOvernightCapture();
+    }
+
+    $scope.saveOvernightCapture = function () {
+        saveOvernightCapture();
+    }
+
+    $scope.setToday = function () {
+        $scope.current.capture.datein = getCurrentDateStr();
+
+        // $("#date").val($scope.current.capture.datein);
+    }
+
+    $scope.setNow = function () {
+        $scope.current.capture.timein = getCurrentTimeStr(12);
+    }
+
+    $scope.checkBoxValue = function (field) {
+        var check = $("#"+field).val();
+        if (check == "on")
+        {
+            $("#"+field).val("1");
+        }
+
+    }
 
 }

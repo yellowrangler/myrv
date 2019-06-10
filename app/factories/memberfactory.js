@@ -91,6 +91,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.saveMemberovernighttripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savememberovernighttripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.exportData = function (data) {
         return $http({ 
             method: 'GET', 

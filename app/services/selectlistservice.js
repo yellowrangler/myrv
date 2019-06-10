@@ -13,6 +13,10 @@ myrvApp.service('selectListService', function () {
                 thisList = stateList;
                 break;
 
+            case 'typestay':
+                thisList = typestayList;
+                break;
+
            case 'memberstatus':
                 thisList = memberstatusList;
                 break; 
@@ -61,6 +65,20 @@ myrvApp.service('selectListService', function () {
         { title :  "Ooops Moment", url : "oops-email.html", type : "normal", recipients : "all" }, 
         { title :  "Site Problems", url : "siteproblems-email.html", type : "normal", recipients : "all" },  
         { title :  "Site Down", url : "sitedown-email.html", type : "normal", recipients : "all" }
+    ];
+
+    var typestayList = [ 
+        { title :  "Walmart", value : "Walmart" },
+        { title :  "Truckstop", value : "Truckstop" },
+        { title :  "City Park", value : "City Park" },
+        { title :  "County Park", value : "County Park" },
+        { title :  "State Park", value : "State Park" },
+        { title :  "National Park", value : "National Park" },
+        { title :  "Independent Park", value : "Independent Park" },
+        { title :  "Other Park", value : "Independent Park" },
+        { title :  "Boondock", value : "Boondock" },
+        { title :  "Walmart", value : "Walmart" },
+        { title :  "Friendly", value : "Friendly" }
     ];
 
     var memberstatusList = [ 
