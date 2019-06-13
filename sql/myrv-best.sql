@@ -476,47 +476,52 @@ restrictions
 rating 1-10
 remarks
 
-DROP TABLE IF EXISTS eventtripentryTbl;
-CREATE TABLE eventtripentryTbl (
+DROP TABLE IF EXISTS eventtripentrytbl;
+CREATE TABLE eventtripentrytbl (
   id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   memberid bigint(20) DEFAULT NULL,
   tripid bigint(20) DEFAULT NULL,
   event varchar(256) DEFAULT NULL,
-  city varchar(256) NOT NULL,
-  state varchar(256) NOT NULL,
-  zipcode varchar(100) NOT NULL,
-  cost varchar(100) NOT NULL,
-  otherfees varchar(1000) NOT NULL,
+  venue varchar(256) DEFAULT NULL,
+  address varchar(256) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  cost varchar(100) DEFAULT NULL,
+  otherfees varchar(1000) DEFAULT NULL,
   date date DEFAULT NULL,
   time time DEFAULT NULL,
-  websiteurl varchar(1000) NOT NULL,
-  email varchar(1000) NOT NULL,
-  contact varchar(1000) NOT NULL,
+  websiteurl varchar(1000) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  phonenumber varchar(1000)DEFAULT NULL,
+  contact varchar(1000) DEFAULT NULL,
   rating int(11) DEFAULT NULL,
-  remarks varchar(1000) NOT NULL,
+  comments varchar(1000) NOT NULL,
   lastupdate datetime DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS foodtripentryTbl;
-CREATE TABLE foodtripentryTbl (
+DROP TABLE IF EXISTS foodtripentrytbl;
+CREATE TABLE foodtripentrytbl (
   id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   memberid bigint(20) DEFAULT NULL,
   tripid bigint(20) DEFAULT NULL,
   restaurant varchar(256) DEFAULT NULL,
   venue varchar(256) DEFAULT NULL,
-  city varchar(256) NOT NULL,
-  state varchar(256) NOT NULL,
-  zipcode varchar(100) NOT NULL,
-  cost varchar(100) NOT NULL,
-  otherfees varchar(1000) NOT NULL,
+  address varchar(256) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  cost varchar(100) DEFAULT NULL,
+  otherfees varchar(1000) DEFAULT NULL,
   date date DEFAULT NULL,
   time time DEFAULT NULL,
-  websiteurl varchar(1000) NOT NULL,
-  email varchar(1000) NOT NULL,
-  contact varchar(1000) NOT NULL,
+  websiteurl varchar(1000) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  phonenumber varchar(1000)DEFAULT NULL,
+  contact varchar(1000) DEFAULT NULL,
   rating int(11) DEFAULT NULL,
-  remarks varchar(1000) NOT NULL,
+  comments varchar(1000) DEFAULT NULL,
   lastupdate datetime DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

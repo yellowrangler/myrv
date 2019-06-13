@@ -1,6 +1,6 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Overnight Entry</h2>
+        <h2 class="headerTitle">Overnight Stay Entry</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -9,7 +9,7 @@
     <div class="col-md-offset-1 col-md-6">
         <div class="panel panel-success">
             <div class="panel-heading panelTitlelMYRV">
-                Gas Station Detail
+                Overnight Stay Information
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
                 <div class="form-group" >
@@ -60,7 +60,7 @@
                 <div class="form-group">
                     <label for="timein" class="col-md-4 control-label capture-detail-labels-input">Time In</label>
                     <div class="col-md-7">
-                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.timein" id="timein" name="timein" myrvdatepicker>
+                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.timein" id="timein" name="timein">
 
                         <span style="padding-right:10px">&nbsp;</span>
 
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
                     <div class="col-md-7">
-                        <textarea tabindex="8" class="form-control" ng-model="current.capture.comments" id="restrictions" name="comments" rows="3"></textarea>
+                        <textarea tabindex="8" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="3"></textarea>
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -211,11 +211,12 @@
 
 <div style="padding-top:15px;padding-left:40%;" class="row">
     <div class="">
-        <button tabindex="29" class="btn btn-info btn-lg" ng-click="resetOvernightCapture()" id="cleareButton">Clear</button>
+        <button tabindex="29" class="btn btn-success btn-lg" ng-click="saveOvernightCapture()" id="updateButton">Save</button>
 
         <span style="padding-left:15px;">&nbsp;</span>
 
-        <button tabindex="30" class="btn btn-success btn-lg" ng-click="saveOvernightCapture()" id="updateButton">Save</button>
+        <button tabindex="30" class="btn btn-info btn-lg" ng-click="resetOvernightCapture()" id="cleareButton">Clear</button>
+    </div>
 </div> <!-- end of row --> 
 
 </form>

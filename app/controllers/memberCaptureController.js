@@ -599,7 +599,6 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
 controllers.overnightetryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
 
-
     function calculateChange() {
 
        
@@ -707,6 +706,208 @@ controllers.overnightetryController = function ($scope, $http, $location, member
             $("#"+field).val("1");
         }
 
+    }
+}
+
+controllers.foodentryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+
+    function calculateChange() {
+
+       
+    }
+
+    function resetFoodCapture() {
+        $scope.membertrips = "";
+        $scope.current.activestatetripid = "";
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        $scope.current.capture = {};
+        // $scope.current.capture.datein = getCurrentDateStr();
+
+        getMemberTrip();
+    }
+
+    function getMemberTrip() {
+
+        $scope.current.tripid = "";
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id;
+                $scope.current.tripname = data.tripname;
+
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function saveFoodCapture() {
+        var formstring = $("#membercapturefoodForm").serialize();
+
+        // console.log(formstring);
+
+        memberFactory.saveMemberfoodtripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memCaptureEventDialogModalTitle').text("Restaurant Entry Success");
+                $('#memCaptureEventDialogModalBody').html(data.bodytext);
+                $('#memCaptureEventDialogModal').modal();
+
+                // resetFoodCapture();
+            }
+            else
+            {
+                $('#memCaptureEventDialogModalTitle').text("Restaurant Entry Error");
+                $('#memCaptureEventDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
+                $('#memCaptureEventDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.current = {};
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        resetFoodCapture();
+    };
+
+    $scope.resetFoodCapture = function () {
+        resetFoodCapture();
+    }
+
+    $scope.saveFoodCapture = function () {
+        saveFoodCapture();
+    }
+
+    $scope.setToday = function () {
+        $scope.current.capture.date = getCurrentDateStr();
+
+        // $("#date").val($scope.current.capture.datein);
+    }
+
+    $scope.setNow = function () {
+        $scope.current.capture.time = getCurrentTimeStr(12);
+    }
+}
+
+controllers.evententryController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+
+    function calculateChange() {
+
+       
+    }
+
+    function resetEventCapture() {
+        $scope.membertrips = "";
+        $scope.current.activestatetripid = "";
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        $scope.current.capture = {};
+        // $scope.current.capture.datein = getCurrentDateStr();
+
+        getMemberTrip();
+    }
+
+    function getMemberTrip() {
+
+        $scope.current.tripid = "";
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id;
+                $scope.current.tripname = data.tripname;
+
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function saveEventCapture() {
+        var formstring = $("#membercaptureentryForm").serialize();
+
+        // console.log(formstring);
+
+        memberFactory.saveMembereventtripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memCaptureEventDialogModalTitle').text("Special Event Entry Success");
+                $('#memCaptureEventDialogModalBody').html(data.bodytext);
+                $('#memCaptureEventDialogModal').modal();
+
+                // resetEventCapture();
+            }
+            else
+            {
+                $('#memCaptureEventDialogModalTitle').text("Special Event Entry Error");
+                $('#memCaptureEventDialogModalBody').html("Error saving special event entry - "+data.errtext);
+                $('#memCaptureEventDialogModal').modal();
+            }
+
+            // must call for new totals and reload scope.current.original.gastotals
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.current = {};
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        resetEventCapture();
+    };
+
+    $scope.resetEventCapture = function () {
+        resetEventCapture();
+    }
+
+    $scope.saveEventCapture = function () {
+        saveEventCapture();
+    }
+
+    $scope.setToday = function () {
+        $scope.current.capture.date = getCurrentDateStr();
+    }
+
+    $scope.setNow = function () {
+        $scope.current.capture.time = getCurrentTimeStr(12);
     }
 
 }

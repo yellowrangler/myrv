@@ -100,6 +100,24 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.saveMemberfoodtripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savememberfoodtripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.saveMembereventtripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/savemembereventtripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.exportData = function (data) {
         return $http({ 
             method: 'GET', 

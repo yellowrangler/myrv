@@ -25,6 +25,16 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'overnightetryController',
                 templateUrl: 'app/partials/overnightentry.html'
             })
+        .when('/foodentry',
+            {
+                controller: 'foodentryController',
+                templateUrl: 'app/partials/foodentry.html'
+            })
+        .when('/evententry',
+            {
+                controller: 'evententryController',
+                templateUrl: 'app/partials/evententry.html'
+            })
         .when('/membermanagegastripentries',
             {
                 controller: 'membermanagegastripentriesController',
