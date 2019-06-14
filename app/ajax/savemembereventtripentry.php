@@ -65,7 +65,14 @@ if ($id == 0)
 
 			case 'event':
 				$event = $value;
-				break;		
+				$value = mysqli_real_escape_string($dbConn, $value);
+				break;	
+
+			case 'venue':
+			case 'comments':
+			case 'contact':
+				$value = mysqli_real_escape_string($dbConn, $value);
+				break;			
 
 			case 'date':
 				$value = date('Y-m-d', strtotime($value));

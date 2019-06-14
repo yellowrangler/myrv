@@ -1,15 +1,15 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Special Event Entry</h2>
+        <h2 class="headerTitle">Friend Entry</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
-<form id="membercaptureentryForm" name="membercaptureentryForm" style="" class="form-horizontal">
+<form id="membercapturefriendForm" name="membercapturefriendForm" style="" class="form-horizontal">
 <div class="pageStandardOffset row">
     <div class="col-md-offset-2 col-md-8">
         <div class="panel panel-success">
             <div class="panel-heading panelTitlelMYRV">
-                Special Event Information
+                Friend Information
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
                 <div class="form-group" >
@@ -23,31 +23,23 @@
                 </div> <!-- end of form-group -->
 
                 <div class="form-group" >
-                    <label for="event" class="col-md-4 control-label capture-detail-labels-input">Event</label>
+                    <label for="friend" class="col-md-4 control-label capture-detail-labels-input">Friend</label>
                     <div class="col-md-7">
-                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.event" id="event" name="event" placeholder="Event name">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.friend" id="friend" name="friend" placeholder="Friend full name">
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
-                    <label for="typestay" class="col-md-4 control-label capture-detail-labels-input">Venue</label>
-                    <div class="col-md-6">
-                        <input tabindex="3" type="text" class="form-control" ng-model="current.capture.venue" id="venue" name="venue" placeholder="Event venue">
-                    </div>
-                </div> <!-- end of form-group -->
-
-                <div class="form-group">
-                    <label for="cost" class="col-md-4 control-label capture-detail-labels-input">Cost</label>
+                    <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
                     <div class="col-md-7">
-                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
-                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
+                        <textarea tabindex="3" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="5"></textarea>
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
                     <label for="datein" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date</label>
                     <div class="col-md-7">
-                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
+                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
 
                         <span style="padding-right:10px">&nbsp;</span>
 
@@ -58,18 +50,11 @@
                 <div class="form-group">
                     <label for="time" class="col-md-4 control-label capture-detail-labels-input">Time</label>
                     <div class="col-md-7">
-                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
+                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
 
                         <span style="padding-right:10px">&nbsp;</span>
 
                         <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
-                    </div>
-                </div> <!-- end of form-group -->
-
-                <div class="form-group">
-                    <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
-                    <div class="col-md-7">
-                        <textarea tabindex="7" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="3"></textarea>
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -111,20 +96,6 @@
                     </div>
                 </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="websiteurl" class="col-md-4 control-label capture-detail-labels-input">Website URL</label>
-                    <div class="col-md-4">
-                        <input tabindex="13" type="text" class="form-control" ng-model="current.capture.websiteurl" id="websiteurl" name="websiteurl" >
-                    </div>
-                </div> <!-- end of form-group -->
-
-                <div class="form-group">
-                    <label for="contact" class="col-md-4 control-label capture-detail-labels-input">Contact</label>
-                    <div class="col-md-4">
-                        <input tabindex="14" type="text" class="form-control" ng-model="current.capture.contact" id="contact" name="contact" >
-                    </div>
-                </div> <!-- end of form-group -->
-                
             </div> <!-- end of col 7 -->
         </div> <!-- end of panel body -->
     </div> <!-- end of panel success -->            
@@ -132,26 +103,26 @@
 
 <div style="padding-top:15px;padding-left:40%;" class="row">
     <div class="">
-        <button tabindex="29" class="btn btn-success btn-lg" ng-click="saveEventCapture()" id="updateButton">Save</button>
+        <button tabindex="29" class="btn btn-success btn-lg" ng-click="saveFriendCapture()" id="updateButton">Save</button>
 
         <span style="padding-left:15px;">&nbsp;</span>
 
-        <button tabindex="30" class="btn btn-info btn-lg" ng-click="resetEventCapture()" id="cleareButton">Clear</button>
+        <button tabindex="30" class="btn btn-info btn-lg" ng-click="resetFriendCapture()" id="cleareButton">Clear</button>
     </div>
 </div> <!-- end of row --> 
 
 </form>
 
 <!-- dialogs -->
-<div class="modal fade" id="memCaptureEventDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureEventDialogModalTitle" aria-hidden="true">
+<div class="modal fade" id="memCaptureFriendDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureFriendDialogModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="memCaptureEventDialogModalTitle"></h4>
+        <h4 class="modal-title" id="memCaptureFriendDialogModalTitle"></h4>
       </div>
       <div class="modal-body">
-        <p id="memCaptureEventDialogModalBody">
+        <p id="memCaptureFriendDialogModalBody">
         </p>
       </div>
       <div class="modal-footer">

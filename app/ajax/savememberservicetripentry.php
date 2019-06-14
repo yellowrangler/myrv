@@ -21,7 +21,7 @@ if (isset($_POST['id']) )
 	}
 }
 
-$overnightname = "";	
+$serviceplace = "";	
 
 
 // get date time for this transaction
@@ -42,7 +42,7 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to save member overnight trip entry. memberid = $memberid. tripid = $tripid.";
+$modulecontent = "Unable to save member service trip entry. memberid = $memberid. tripid = $tripid.";
 include 'mysqlconnect.php';
 
 // print_r($_POST);
@@ -63,24 +63,22 @@ if ($id == 0)
 				continue 2;
 				break;
 
-			case 'overnightname':
-				$overnightname = $value;
-				$value = mysqli_real_escape_string($dbConn, $value);
+			case 'serviceplace':
+				$serviceplace = $value;
 				break;		
 
-			case 'restrictions':
+			case 'servicedone':
 			case 'comments':
 			case 'contact':
 				$value = mysqli_real_escape_string($dbConn, $value);
 				break;		
+				
 
-			case 'datein':
-			case 'dateout':
+			case 'date':
 				$value = date('Y-m-d', strtotime($value));
 				break;		
 
-			case 'timein':
-			case 'timeout':
+			case 'time':
 				$value = date('H:i:s', strtotime($value));
 				break;	
 			
@@ -98,7 +96,7 @@ if ($id == 0)
 	$k = $k."lastupdate";
 	$v = $v."'".$enterdate."'";
 
-	$sql = "INSERT INTO overnightstaytbl(".$k.")VALUES(".$v.")";
+	$sql = "INSERT INTO serviceentrytbl(".$k.")VALUES(".$v.")";
 }
 else
 {
@@ -115,8 +113,8 @@ else
 				continue 2;
 				break;
 
-			case 'overnightname':
-				$overnightname = $value;
+			case 'serviceplace':
+				$serviceplace = $value;
 				break;	
 
 			case 'tripid':
@@ -127,13 +125,11 @@ else
 				$memberid = $value;
 				break;						
 
-			case 'datein':
-			case 'dateout':
+			case 'date':
 				$value = date('Y-m-d', strtotime($value));
 				break;		
 
-			case 'timein':
-			case 'timeout':
+			case 'time':
 				$value = date('H:i:s', strtotime($value));
 				break;	
 			
@@ -149,13 +145,13 @@ else
 
 	$l = $l."lastupdate='".$enterdate."'";
 
-	$sql = "UPDATE overnightstaytbl SET ".$l." WHERE id = $id AND memberid = $memberid AND tripid = $tripid";
+	$sql = "UPDATE serviceentrytbl SET ".$l." WHERE id = $id AND memberid = $memberid AND tripid = $tripid";
 }
 	
 //
 // sql query
 //
-$modulecontent = "Unable to save member overnight trip entry. func = $sqlFunction. memberid = $memberid. tripid = $tripid.";
+$modulecontent = "Unable to save member service trip entry. func = $sqlFunction. memberid = $memberid. tripid = $tripid.";
 include 'mysqlquery.php';
 
 if ($sqlFunction == "insert")
@@ -164,7 +160,6 @@ if ($sqlFunction == "insert")
 	// get id
 	//
 	$id = mysqli_insert_id($dbConn);
-
 }
 
 //
@@ -178,7 +173,7 @@ mysqli_close($dbConn);
 $msgArray['msgtext'] = 'ok';
 $msgArray['errtext'] = '';
 $msgArray['id'] = "$id";
-$msgArray['bodytext'] = "Successfully saved overnight entry for $overnightname";
+$msgArray['bodytext'] = "Successfully saved service entry for $serviceplace";
 
 exit(json_encode($msgArray));
 ?>

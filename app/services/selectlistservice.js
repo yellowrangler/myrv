@@ -17,6 +17,10 @@ myrvApp.service('selectListService', function () {
                 thisList = typestayList;
                 break;
 
+            case 'autorvservicetype':
+                thisList = autorvservicetypeList;
+                break;    
+
            case 'memberstatus':
                 thisList = memberstatusList;
                 break; 
@@ -84,6 +88,11 @@ myrvApp.service('selectListService', function () {
     var memberstatusList = [ 
         { title :  "active", value : "active" },
         { title :  "inactive", value : "inactive" }
+    ];
+
+    var autorvservicetypeList = [ 
+        { title :  "scheduled", value : "scheduled" },
+        { title :  "unscheduled", value : "unscheduled" }
     ];
 
     var memberroleList = [ 

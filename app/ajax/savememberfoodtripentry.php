@@ -65,6 +65,13 @@ if ($id == 0)
 
 			case 'restaurant':
 				$restaurant = $value;
+				$value = mysqli_real_escape_string($dbConn, $value);
+				break;	
+
+			case 'venue':
+			case 'comments':
+			case 'contact':
+				$value = mysqli_real_escape_string($dbConn, $value);
 				break;		
 
 			case 'date':

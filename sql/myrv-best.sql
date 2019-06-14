@@ -526,3 +526,49 @@ CREATE TABLE foodtripentrytbl (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS serviceentrytbl;
+CREATE TABLE serviceentrytbl (
+  id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL,
+  serviceplace varchar(256) DEFAULT NULL,
+  servicetype varchar(256) DEFAULT NULL, - scheduled, unscheduled
+  vehicleid bigint(20) UNSIGNED DEFAULT NULL,
+  servicedone varchar(1000) NOT NULL,
+  cost varchar(100) DEFAULT NULL,
+  odometer varchar(100) DEFAULT NULL,
+  date date DEFAULT NULL,
+  time time DEFAULT NULL,  
+  address varchar(256) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  otherfees varchar(1000) DEFAULT NULL,
+  websiteurl varchar(1000) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  phonenumber varchar(1000)DEFAULT NULL,
+  contact varchar(1000) DEFAULT NULL,
+  rating int(11) DEFAULT NULL,
+  comments varchar(1000) NOT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS friendtripentrytbl;
+CREATE TABLE friendtripentrytbl (
+  id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL,
+  friend varchar(256) DEFAULT NULL,
+  comments varchar(1000) DEFAULT NULL,
+  date date DEFAULT NULL,
+  time time DEFAULT NULL,
+  address varchar(256) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  phonenumber varchar(1000) DEFAULT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
