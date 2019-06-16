@@ -35,13 +35,13 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to get member event trip entries. memberid = $memberid. tripid = $activetripid.";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
 // get gas trip entries
 //---------------------------------------------------------------
-$sql = "SELECT * FROM gastripentrytbl
+$sql = "SELECT * FROM eventtripentrytbl
 WHERE tripid = $tripid AND memberid = $memberid
 ORDER BY date $order, time $order";
 
@@ -50,7 +50,7 @@ ORDER BY date $order, time $order";
 //
 // sql query
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to get member event trip entries. memberid = $memberid. tripid = $activetripid.";
 $function = "select";
 include 'mysqlquery.php';
 
@@ -65,7 +65,7 @@ while($r = mysqli_fetch_assoc($sql_result))
 		$time = strtotime($r[date]);
 		$r[date] = date("m/d/Y", $time);
 	}
-
+	
     $detailEntrys[] = $r;
 }
 

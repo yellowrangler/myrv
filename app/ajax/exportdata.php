@@ -82,10 +82,46 @@ switch ($exportType) {
         $sql = "SELECT * FROM gastripentrytbl
         WHERE tripid = $tripid AND memberid = $memberid";
 
-        break;    
+        break;  
+
+    case 'eventcapture':
+        //---------------------------------------------------------------
+        // get gas trip capture entries
+        //---------------------------------------------------------------
+        $sql = "SELECT * FROM eventtripentrytbl
+        WHERE tripid = $tripid AND memberid = $memberid";
+
+        break; 
+
+    case 'foodcapture':
+        //---------------------------------------------------------------
+        // get gas trip capture entries
+        //---------------------------------------------------------------
+        $sql = "SELECT * FROM foodtripentrytbl
+        WHERE tripid = $tripid AND memberid = $memberid";
+
+        break; 
+        
+    case 'friendcapture':
+        //---------------------------------------------------------------
+        // get gas trip capture entries
+        //---------------------------------------------------------------
+        $sql = "SELECT * FROM friendtripentrytbl
+        WHERE tripid = $tripid AND memberid = $memberid";
+
+        break; 
+        
+    case 'overnightcapture':
+        //---------------------------------------------------------------
+        // get gas trip capture entries
+        //---------------------------------------------------------------
+        $sql = "SELECT * FROM overnightstaytbl
+        WHERE tripid = $tripid AND memberid = $memberid";
+
+        break;                     
     
     default:
-    alert("No export data sent");
+        alert("No export data sent");
         die();
         break;
 }

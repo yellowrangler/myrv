@@ -35,22 +35,22 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to get member event overnight entries. memberid = $memberid. tripid = $activetripid.";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
-// get gas trip entries
+// get gas overnight entries
 //---------------------------------------------------------------
-$sql = "SELECT * FROM gastripentrytbl
+$sql = "SELECT * FROM overnightstaytbl
 WHERE tripid = $tripid AND memberid = $memberid
-ORDER BY date $order, time $order";
+ORDER BY datein $order, timein $order";
 
 // print $sql;
 
 //
 // sql query
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to get member event overnight entries. memberid = $memberid. tripid = $activetripid.";
 $function = "select";
 include 'mysqlquery.php';
 
@@ -60,10 +60,16 @@ include 'mysqlquery.php';
 $detailEntrys = array();
 while($r = mysqli_fetch_assoc($sql_result)) 
 {
-	if ( !is_null($r[date]) )
+	if ( !is_null($r[datein]) )
 	{
-		$time = strtotime($r[date]);
-		$r[date] = date("m/d/Y", $time);
+		$time = strtotime($r[datein]);
+		$r[datein] = date("m/d/Y", $time);
+	}
+
+	if ( !is_null($r[dateout]) )
+	{
+		$time = strtotime($r[dateout]);
+		$r[dateout] = date("m/d/Y", $time);
 	}
 
     $detailEntrys[] = $r;

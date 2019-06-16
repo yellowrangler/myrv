@@ -327,7 +327,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
 
   }
 
-  controllers.membermanagevehiclervController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagevehiclervController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberVehicles() {
@@ -747,11 +747,10 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
     }
 }
 
-controllers.membermanagegastripentriesController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+controllers.membermanagegasController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberTrips() {
-
         var qdata = 'memberid='+$scope.current.memberid;
         memberFactory.getMemberTrips(qdata)
             .success( function(data) {
@@ -763,7 +762,6 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
     }
 
     function getMemberTrip() {
-
         var qdata = "";
         if ($scope.current.tripid == "")
         {
@@ -821,7 +819,7 @@ controllers.membermanagegastripentriesController = function ($scope, $http, $loc
 
         if (!isValidDate($scope.current.gasdetail.date))
         {
-            errmsg += "Start date must be a valid date! <br><br>";
+            errmsg += "Date must be a valid date! <br><br>";
             $scope.current.trip.startdate = "";
         }
 
@@ -1142,4 +1140,791 @@ controllers.membermanagervmembershipController = function ($scope, $http, $locat
     $scope.deleteMemberRVmembership = function () {
         deleteMemberRVmembership();
     }
+}
+
+controllers.membermanageeventController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripEventDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripEventDetails() {
+        $scope.eventdetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripeventdetails(qdata)
+            .success( function(data) {
+                $scope.eventdetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function resetEventDetail() {
+        $scope.membertrips = {};
+        $scope.current.eventdetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function validateForm() {
+        var errmsg = "";
+        
+        if (!isValidDate($scope.current.eventdetail.date))
+        {
+            errmsg += "Date must be a valid date! <br><br>";
+            $scope.current.eventdetail.date = "";
+        }
+
+
+
+        return errmsg;
+    }
+
+    function saveEventDetail() {
+
+        // 
+        // Validate values
+        // 
+        
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#memEntryEventDialogModalTitle').text("The Following errors must be fixed");
+            $('#memEntryEventDialogModalBody').html(retmsg);
+            $('#memEntryEventDialogModal').modal();
+            return;
+        }
+
+        var formstring = $("#membereventdetailForm").serialize();
+        memberFactory.saveMembereventtripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memEntryEventDialogModalTitle').text("Special Event Update Success");
+                $('#memEntryEventDialogModalBody').html(data.bodytext);
+                $('#memEntryEventDialogModal').modal();
+
+                resetEventDetail();
+            }
+            else
+            {
+                $('#memEntryEventDialogModalTitle').text("Special Event Update Error");
+                $('#memEntryEventDialogModalBody').html("Error saving gas trip entry - "+data);
+                $('#memEntryEventDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function deleteEventDetail() {
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.eventdetail.id;
+        memberFactory.deleteMembereventtripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.eventdetail.id = "";
+
+                $('#memEntryEventDialogModalTitle').text("Special Event Delete Success");
+                $('#memEntryEventDialogModalBody').html(data.bodytext);
+                $('#memEntryEventDialogModal').modal();
+
+                resetEventDetail();
+            }
+            else
+            {
+                $('#memEntryEventDialogModalTitle').text("Special Event Detail Delete Error");
+                $('#memEntryEventDialogModalBody').text("Error deleting event entry detail- "+data);
+                $('#memEntryEventDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    function addEventDetail() {
+        $scope.current.eventdetail.id = "";
+        $('#id').val("");
+
+        saveEventDetail();
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+
+        resetEventDetail();
+    };
+
+    $scope.getMemberTripEventDetails = function () {
+        getMemberTripEventDetails();
+    }
+
+    $scope.setCurrentTrip = function (eventdetail) {
+        $scope.current.eventdetail = objectCopy(eventdetail);
+    }
+
+    $scope.resetEventDetail = function () {
+        resetEventDetail();
+    }
+
+    $scope.addEventDetail = function() {
+        addEventDetail();
+    }
+
+    $scope.saveEventDetail = function () {
+        saveEventDetail();
+    }
+
+    $scope.deleteEventDetail = function () {
+        deleteEventDetail();
+    }
+
+}
+
+controllers.membermanagefoodController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripFoodDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripFoodDetails() {
+        $scope.fooddetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripfooddetails(qdata)
+            .success( function(data) {
+                $scope.fooddetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function resetFoodDetail() {
+        $scope.membertrips = {};
+        $scope.current.fooddetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function validateForm() {
+        var errmsg = "";
+        
+        if (!isValidDate($scope.current.fooddetail.date))
+        {
+            errmsg += "Date must be a valid date! <br><br>";
+            $scope.current.fooddetail.date = "";
+        }
+
+        return errmsg;
+    }
+
+    function saveFoodDetail() {
+        // 
+        // Validate values
+        // 
+        
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#memEntryFoodDialogModalTitle').text("The Following errors must be fixed");
+            $('#memEntryFoodDialogModalBody').html(retmsg);
+            $('#memEntryFoodDialogModal').modal();
+            return;
+        }
+
+        var formstring = $("#memberfooddetailForm").serialize();
+        memberFactory.saveMemberfoodtripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memEntryFoodDialogModalTitle').text("Restaurant Update Success");
+                $('#memEntryFoodDialogModalBody').html(data.bodytext);
+                $('#memEntryFoodDialogModal').modal();
+
+                resetFoodDetail();
+            }
+            else
+            {
+                $('#memEntryFoodDialogModalTitle').text("Restaurant Update Error");
+                $('#memEntryFoodDialogModalBody').html("Error saving gas trip entry - "+data);
+                $('#memEntryFoodDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function deleteFoodDetail() {
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.fooddetail.id;
+        memberFactory.deleteMemberfoodtripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.fooddetail.id = "";
+
+                $('#memEntryFoodDialogModalTitle').text("Restaurant Delete Success");
+                $('#memEntryFoodDialogModalBody').html(data.bodytext);
+                $('#memEntryFoodDialogModal').modal();
+
+                resetFoodDetail();
+            }
+            else
+            {
+                $('#memEntryFoodDialogModalTitle').text("Restaurant Detail Delete Error");
+                $('#memEntryFoodDialogModalBody').text("Error deleting event entry detail- "+data);
+                $('#memEntryFoodDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    function addFoodDetail() {
+        $scope.current.fooddetail.id = "";
+        $('#id').val("");
+
+        saveFoodDetail();
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+
+        resetFoodDetail();
+    };
+
+    $scope.getMemberTripFoodDetails = function () {
+        getMemberTripFoodDetails();
+    }
+
+    $scope.setCurrentTrip = function (fooddetail) {
+        $scope.current.fooddetail = objectCopy(fooddetail);
+    }
+
+    $scope.resetFoodDetail = function () {
+        resetFoodDetail();
+    }
+
+    $scope.addFoodDetail = function() {
+        addFoodDetail();
+    }
+
+    $scope.saveFoodDetail = function () {
+        saveFoodDetail();
+    }
+
+    $scope.deleteFoodDetail = function () {
+        deleteFoodDetail();
+    }
+
+}
+
+controllers.membermanageovernightController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripOvernightDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripOvernightDetails() {
+        $scope.overnightdetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripovernightdetails(qdata)
+            .success( function(data) {
+                $scope.overnightdetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function resetOvernightDetail() {
+        $scope.membertrips = {};
+        $scope.current.overnightdetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function validateForm() {
+        var errmsg = "";
+        
+        if (!isEmpty($scope.current.overnightdetail.datein))
+        {
+            if (!isValidDate($scope.current.overnightdetail.datein))
+            {
+                errmsg += "Date In must be a valid date! <br><br>";
+                $scope.current.overnightdetail.datein = "";
+            }
+        }
+            
+        if (!isEmpty($scope.current.overnightdetail.dateout))
+        {
+            if (!isValidDate($scope.current.overnightdetail.dateout))
+            {
+                errmsg += "Date Out must be a valid date! <br><br>";
+                $scope.current.overnightdetail.dateout = "";
+            }
+        }
+       
+        return errmsg;
+    }
+
+    function saveOvernightDetail() {
+        // 
+        // Validate values
+        // 
+        
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#memEntryOvernightDialogModalTitle').text("The Following errors must be fixed");
+            $('#memEntryOvernightDialogModalBody').html(retmsg);
+            $('#memEntryOvernightDialogModal').modal();
+            return;
+        }
+
+        var formstring = $("#memberovernightdetailForm").serialize();
+        memberFactory.saveMemberovernighttripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memEntryOvernightDialogModalTitle').text("Overnight Update Success");
+                $('#memEntryOvernightDialogModalBody').html(data.bodytext);
+                $('#memEntryOvernightDialogModal').modal();
+
+                resetOvernightDetail();
+            }
+            else
+            {
+                $('#memEntryOvernightDialogModalTitle').text("Overnight Update Error");
+                $('#memEntryOvernightDialogModalBody').html("Error saving gas trip entry - "+data);
+                $('#memEntryOvernightDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function deleteOvernightDetail() {
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.overnightdetail.id;
+        memberFactory.deleteMemberovernighttripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.overnightdetail.id = "";
+
+                $('#memEntryOvernightDialogModalTitle').text("Overnight Delete Success");
+                $('#memEntryOvernightDialogModalBody').html(data.bodytext);
+                $('#memEntryOvernightDialogModal').modal();
+
+                resetOvernightDetail();
+            }
+            else
+            {
+                $('#memEntryOvernightDialogModalTitle').text("Overnight Detail Delete Error");
+                $('#memEntryOvernightDialogModalBody').text("Error deleting overnight entry detail- "+data);
+                $('#memEntryOvernightDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    function addOvernightDetail() {
+        $scope.current.overnightdetail.id = "";
+        $('#id').val("");
+
+        saveOvernightDetail();
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+        $scope.typestays = selectListService.getList('typestay');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+
+        resetOvernightDetail();
+    };
+
+    $scope.getMemberTripOvernightDetails = function () {
+        getMemberTripOvernightDetails();
+    }
+
+    $scope.setCurrentTrip = function (overnightdetail) {
+        $scope.current.overnightdetail = objectCopy(overnightdetail);
+    }
+
+    $scope.resetOvernightDetail = function () {
+        resetOvernightDetail();
+    }
+
+    $scope.addOvernightDetail = function() {
+        addOvernightDetail();
+    }
+
+    $scope.saveOvernightDetail = function () {
+        saveOvernightDetail();
+    }
+
+    $scope.deleteOvernightDetail = function () {
+        deleteOvernightDetail();
+    }
+
+    $scope.checkBoxValue = function (field) {
+        var check = $("#"+field).val();
+        if (check == "on")
+        {
+            $("#"+field).val("1");
+        }
+    }
+}
+
+controllers.membermanagefriendController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberTrips() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberTrips(qdata)
+            .success( function(data) {
+                $scope.membertrips = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTrip() {
+        var qdata = "";
+        if ($scope.current.tripid == "")
+        {
+            qdata = 'memberid='+$scope.current.memberid;
+        }
+        else
+        {
+            qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid;
+        }
+
+        memberFactory.getMemberTrip(qdata)
+            .success( function(data) {
+                $scope.current.trip = data;
+                $scope.current.tripid = data.id
+                $scope.current.tripname = data.tripname;
+
+                getMemberTripFriendDetails();
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberTripFriendDetails() {
+        $scope.frienddetails = {};
+
+        $order = "DESC";
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
+        memberFactory.getMembertripfrienddetails(qdata)
+            .success( function(data) {
+                $scope.frienddetails = objectCopy(data);
+            })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function resetFriendDetail() {
+        $scope.membertrips = {};
+        $scope.current.frienddetail = {};
+
+        $scope.current.email = $scope.current.memberlogin.email;
+
+        getMemberTrips();
+        getMemberTrip();
+    }
+
+    function validateForm() {
+        var errmsg = "";
+        
+        if (!isValidDate($scope.current.frienddetail.date))
+        {
+            errmsg += "Date must be a valid date! <br><br>";
+            $scope.current.frienddetail.date = "";
+        }
+
+        return errmsg;
+    }
+
+    function saveFriendDetail() {
+        // 
+        // Validate values
+        // 
+        
+        var retmsg = validateForm();
+        if (retmsg != "")
+        {
+            $('#memEntryFriendDialogModalTitle').text("The Following errors must be fixed");
+            $('#memEntryFriendDialogModalBody').html(retmsg);
+            $('#memEntryFriendDialogModal').modal();
+            return;
+        }
+
+        var formstring = $("#memberfrienddetailForm").serialize();
+        memberFactory.saveMemberfriendtripentry(formstring)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $('#memEntryFriendDialogModalTitle').text("Friend Update Success");
+                $('#memEntryFriendDialogModalBody').html(data.bodytext);
+                $('#memEntryFriendDialogModal').modal();
+
+                resetFriendDetail();
+            }
+            else
+            {
+                $('#memEntryFriendDialogModalTitle').text("Friend Update Error");
+                $('#memEntryFriendDialogModalBody').html("Error saving gas trip entry - "+data);
+                $('#memEntryFriendDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+    }
+
+    function deleteFriendDetail() {
+
+        var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.frienddetail.id;
+        memberFactory.deleteMemberfriendtripentry(qdata)
+        .success( function(data) {
+            if (data.errtext == "")
+            {
+                $scope.current.frienddetail.id = "";
+
+                $('#memEntryFriendDialogModalTitle').text("Friend Delete Success");
+                $('#memEntryFriendDialogModalBody').html(data.bodytext);
+                $('#memEntryFriendDialogModal').modal();
+
+                resetFriendDetail();
+            }
+            else
+            {
+                $('#memEntryFriendDialogModalTitle').text("Friend Detail Delete Error");
+                $('#memEntryFriendDialogModalBody').text("Error deleting event entry detail- "+data);
+                $('#memEntryFriendDialogModal').modal();
+            }
+        })
+        .error( function(edata) {
+            alert(edata);
+        });
+
+    }
+
+    function addFriendDetail() {
+        $scope.current.frienddetail.id = "";
+        $('#id').val("");
+
+        saveFriendDetail();
+    }
+
+    init();
+    function init() {
+        //
+        // this is not getting called at right time for definig top offset
+        // in jquery ready. So adding it here
+        //
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.tripid = "";
+
+        resetFriendDetail();
+    };
+
+    $scope.getMemberTripFriendDetails = function () {
+        getMemberTripFriendDetails();
+    }
+
+    $scope.setCurrentTrip = function (frienddetail) {
+        $scope.current.frienddetail = objectCopy(frienddetail);
+    }
+
+    $scope.resetFriendDetail = function () {
+        resetFriendDetail();
+    }
+
+    $scope.addFriendDetail = function() {
+        addFriendDetail();
+    }
+
+    $scope.saveFriendDetail = function () {
+        saveFriendDetail();
+    }
+
+    $scope.deleteFriendDetail = function () {
+        deleteFriendDetail();
+    }
+
 }

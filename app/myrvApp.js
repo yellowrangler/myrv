@@ -45,20 +45,40 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'friendentryController',
                 templateUrl: 'app/partials/friendentry.html'
             })
-        .when('/membermanagegastripentries',
+        .when('/membermanagegas',
             {
-                controller: 'membermanagegastripentriesController',
-                templateUrl: 'app/partials/membermanagegastripentries.html'
+                controller: 'membermanagegasController',
+                templateUrl: 'app/partials/membermanagegas.html'
             })
-        .when('/memberviewgastripentries',
+        .when('/memberviewgas',
             {
-                controller: 'memberviewgastripentriesController',
-                templateUrl: 'app/partials/memberviewgastripentries.html'
+                controller: 'memberviewgasController',
+                templateUrl: 'app/partials/memberviewgas.html'
             })
         .when('/memberviewtrips',
             {
                 controller: 'memberviewtripsController',
                 templateUrl: 'app/partials/memberviewtrips.html'
+            })
+        .when('/memberviewevents',
+            {
+                controller: 'membervieweventsController',
+                templateUrl: 'app/partials/memberviewevents.html'
+            })
+        .when('/memberviewfoods',
+            {
+                controller: 'memberviewfoodsController',
+                templateUrl: 'app/partials/memberviewfoods.html'
+            })
+        .when('/memberviewfriends',
+            {
+                controller: 'memberviewfriendsController',
+                templateUrl: 'app/partials/memberviewfriends.html'
+            })
+        .when('/memberviewovernights',
+            {
+                controller: 'memberviewovernightsController',
+                templateUrl: 'app/partials/memberviewovernights.html'
             })
         .when('/memberviewmember',
             {
@@ -74,6 +94,26 @@ myrvApp.config(function ($routeProvider) {
             {
                 controller: 'membermanagetripController',
                 templateUrl: 'app/partials/membermanagetrip.html'
+            })
+        .when('/membermanageevent',
+            {
+                controller: 'membermanageeventController',
+                templateUrl: 'app/partials/membermanageevent.html'
+            })
+        .when('/membermanagefood',
+            {
+                controller: 'membermanagefoodController',
+                templateUrl: 'app/partials/membermanagefood.html'
+            })
+        .when('/membermanageovernight',
+            {
+                controller: 'membermanageovernightController',
+                templateUrl: 'app/partials/membermanageovernight.html'
+            })
+        .when('/membermanagefriend',
+            {
+                controller: 'membermanagefriendController',
+                templateUrl: 'app/partials/membermanagefriend.html'
             })
         .when('/membermanagevehiclerv',
             {

@@ -52,6 +52,14 @@ include 'mysqlquery.php';
 // 
 $detailEntry = mysqli_fetch_assoc($sql_result);
 
+if ( !is_null($detailEntry[date]) )
+{
+	$time = strtotime($detailEntry[date]);
+	$detailEntry[date] = date("m/d/Y", $time);
+}
+
+
+
 //
 // close db connection
 //

@@ -60,34 +60,56 @@ if ($id == 0)
 	{
 		switch ($key) {
 			case 'tripname':
+			case 'id':
 				continue 2;
 				break;
 
 			case 'friend':
 				$friend = $value;
 				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;	
 
 			case 'comments':
 			case 'contact':
 				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;			
 
 			case 'date':
-				$value = date('Y-m-d', strtotime($value));
+				if ($value == "")
+				{
+					$k = $k.$key.",";
+					$v = $v."NULL,";	
+				}
+				else
+				{
+					$value = date('Y-m-d', strtotime($value));
+
+					$k = $k.$key.",";
+					$v = $v."'".$value."'".",";
+				}
 				break;		
 
 			case 'time':
 				$value = date('H:i:s', strtotime($value));
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;	
 			
 			default:
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;
 		}
 
-		$k = $k.$key.",";
-		$v = $v."'".$value."'".",";
-	    
+		// $k = $k.$key.",";
+		// $v = $v."'".$value."'".",";
 	    // print "key = $key, value = $value<br><br>";
 
 	} // end of foreach
@@ -114,30 +136,55 @@ else
 
 			case 'friend':
 				$friend = $value;
+				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$l = $l.$key."='".$value."',";
+				break;	
+
+			case 'comments':
+			case 'contact':
+				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$l = $l.$key."='".$value."',";
 				break;	
 
 			case 'tripid':
 				$tripid = $value;
+
+				$l = $l.$key."='".$value."',";
 				break;
 
 			case 'memberid':
 				$memberid = $value;
+
+				$l = $l.$key."='".$value."',";
 				break;						
 
 			case 'date':
-				$value = date('Y-m-d', strtotime($value));
+				if ($value == "")
+				{
+					$l = $l.$key."=NULL,";
+				}
+				else
+				{
+					$value = date('Y-m-d', strtotime($value));
+
+					$l = $l.$key."='".$value."',";
+				}
 				break;		
 
 			case 'time':
 				$value = date('H:i:s', strtotime($value));
+
+				$l = $l.$key."='".$value."',";
 				break;	
 			
 			default:
+				$l = $l.$key."='".$value."',";
 				break;
 		}
 
-		$l = $l.$key."='".$value."',";
-	    
+		// $l = $l.$key."='".$value."',";
 	    // print "key = $key, value = $value<br><br>";
 
 	} // end of foreach

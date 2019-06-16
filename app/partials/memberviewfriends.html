@@ -1,0 +1,117 @@
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Friend Trip Entries</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripFriendDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table exportDataTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th> 
+                    <th class="center-column-text">Friend</th>    
+                    <th class="center-column-text">Address</th>
+                    <th class="center-column-text">City</th>  
+                    <th class="center-column-text">State</th> 
+                    <th class="center-column-text">Zipcode</th>     
+                    <th class="center-column-text">eMail</th>
+                    <th class="center-column-text">Phone</th>   
+                    <th class="center-column-text">Comments</th>                        
+                </tr>
+
+                <tr ng-repeat="frienddetail in frienddetails">
+                    <td class="center-column-text">
+                       {{frienddetail.date}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{frienddetail.time}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{frienddetail.odometer}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.friend}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.address}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.city}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{frienddetail.state}}
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.zipcode}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.email}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.phonenumber}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.comments}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<form role="form"  method="post" enctype="multipart/form-data" novalidate>
+<div style="padding-top:15px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportFriendCaptureButton" >Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryFriendDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryFriendDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryFriendDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryFriendDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

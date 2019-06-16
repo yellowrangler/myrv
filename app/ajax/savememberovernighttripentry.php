@@ -60,36 +60,79 @@ if ($id == 0)
 	{
 		switch ($key) {
 			case 'tripname':
+			case 'id':
 				continue 2;
 				break;
 
 			case 'overnightname':
 				$overnightname = $value;
 				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;		
+
+			case 'electric':
+			case 'water':
+			case 'sewer':
+			case 'dumpsite':
+			case 'showers':
+			case 'bathrooms':
+			case 'laundry':
+			case 'food':
+			case 'shopping':
+			case 'firepit':
+			case 'fires':
+			case 'wifi':
+			case 'propane':
+			case 'pets':
+				$value = 1;
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
+				break;	
 
 			case 'restrictions':
 			case 'comments':
 			case 'contact':
 				$value = mysqli_real_escape_string($dbConn, $value);
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;		
 
 			case 'datein':
 			case 'dateout':
-				$value = date('Y-m-d', strtotime($value));
+				if ($value == "")
+				{
+					$k = $k.$key.",";
+					$v = $v."NULL,";	
+				}
+				else
+				{
+					$value = date('Y-m-d', strtotime($value));
+
+					$k = $k.$key.",";
+					$v = $v."'".$value."'".",";
+				}
 				break;		
 
 			case 'timein':
 			case 'timeout':
 				$value = date('H:i:s', strtotime($value));
+
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;	
 			
 			default:
+				$k = $k.$key.",";
+				$v = $v."'".$value."'".",";
 				break;
 		}
 
-		$k = $k.$key.",";
-		$v = $v."'".$value."'".",";
+		// $k = $k.$key.",";
+		// $v = $v."'".$value."'".",";
 	    
 	    // print "key = $key, value = $value<br><br>";
 
@@ -115,34 +158,70 @@ else
 				continue 2;
 				break;
 
+			case 'electric':
+			case 'water':
+			case 'sewer':
+			case 'dumpsite':
+			case 'showers':
+			case 'bathrooms':
+			case 'laundry':
+			case 'food':
+			case 'shopping':
+			case 'firepit':
+			case 'fires':
+			case 'wifi':
+			case 'propane':
+			case 'pets':
+					$value = 1;
+
+					$l = $l.$key."='".$value."',";
+					break;	
+		
 			case 'overnightname':
 				$overnightname = $value;
+
+				$l = $l.$key."='".$value."',";
 				break;	
 
 			case 'tripid':
 				$tripid = $value;
+
+				$l = $l.$key."='".$value."',";
 				break;
 
 			case 'memberid':
 				$memberid = $value;
+
+				$l = $l.$key."='".$value."',";
 				break;						
 
 			case 'datein':
 			case 'dateout':
-				$value = date('Y-m-d', strtotime($value));
+				if ($value == "")
+				{
+					$l = $l.$key."=NULL,";
+				}
+				else
+				{
+					$value = date('Y-m-d', strtotime($value));
+
+					$l = $l.$key."='".$value."',";
+				}
 				break;		
 
 			case 'timein':
 			case 'timeout':
 				$value = date('H:i:s', strtotime($value));
+
+				$l = $l.$key."='".$value."',";
 				break;	
 			
 			default:
+				$l = $l.$key."='".$value."',";
 				break;
 		}
 
-		$l = $l.$key."='".$value."',";
-	    
+		// $l = $l.$key."='".$value."',";
 	    // print "key = $key, value = $value<br><br>";
 
 	} // end of foreach

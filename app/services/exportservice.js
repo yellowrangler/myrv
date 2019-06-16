@@ -13,7 +13,23 @@ myrvApp.service('exportService', function () {
                 exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
                 break;
 
-           default:
+            case 'eventcapture':
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&tripid="+parms.tripid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
+                break;
+
+             case 'foodcapture':
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&tripid="+parms.tripid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
+                break;   
+                
+            case 'friendcapture':
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&tripid="+parms.tripid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
+                break;        
+         
+            case 'overnightcapture':
+                exportUrl = exportUrlBase+"exportdata.php?memberid="+parms.memberid+"&tripid="+parms.tripid+"&exportfilename="+parms.exportfilename+"&exportType="+parms.exportType;
+                break;  
+
+            default:
                 alert("Invalid export type = "+parms.exportType); 
                 break;
         }

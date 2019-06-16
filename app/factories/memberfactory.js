@@ -73,6 +73,42 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMembertripeventdetails = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripeventdetails.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.getMembertripfooddetails = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripfooddetails.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.getMembertripovernightdetails = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripovernightdetails.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.getMembertripfrienddetails = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmembertripfrienddetails.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.getMembertripgasdetail = function (data) {
         return $http({ 
             method: 'POST', 
@@ -158,6 +194,42 @@ myrvApp.factory('memberFactory', function($q, $http) {
         return $http({ 
             method: 'POST', 
             url: "app/ajax/deletemembergastripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMembereventtripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletemembereventtripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMemberovernighttripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletememberovernighttripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMemberfoodtripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletememberfoodtripentry.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
+    factory.deleteMemberfriendtripentry = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/deletememberfriendtripentry.php",
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

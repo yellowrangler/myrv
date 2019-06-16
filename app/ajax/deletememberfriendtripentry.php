@@ -8,11 +8,13 @@ include_once ('../class/class.AccessLog.php');
 //
 $memberid = $_POST['memberid'];
 $tripid = $_POST['tripid'];
-$order = $_POST['order'];
-
-if ($order == "")
+$id = 0;
+if (isset($_POST['id']) )
 {
-	$order = "DESC";
+	if (is_numeric($_POST['id']))
+	{
+		$id = $_POST['id'];
+	}
 }
 
 // print_r($_POST);
@@ -35,45 +37,35 @@ $returnArrayLog = new AccessLog("logs/");
 //
 // db connect
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
+$modulecontent = "Unable to delete member friend trip entry. memberid = $memberid. tripid = $activetripid.";
 include 'mysqlconnect.php';
 
 //---------------------------------------------------------------
-// get gas trip entries
+// get food trip entry
 //---------------------------------------------------------------
-$sql = "SELECT * FROM gastripentrytbl
-WHERE tripid = $tripid AND memberid = $memberid
-ORDER BY date $order, time $order";
+$sql = "DELETE FROM friendtripentrytbl 
+WHERE tripid = $tripid AND memberid = $memberid AND id = $id";
 
 // print $sql;
 
 //
 // sql query
 //
-$modulecontent = "Unable to get member gas trip entries. memberid = $memberid. tripid = $activetripid.";
-$function = "select";
+$modulecontent = "Unable to delete member friend trip entry. memberid = $memberid. tripid = $tripid id = $id.";
+$function = "delete";
 include 'mysqlquery.php';
-
-// 
-// Get the results
-// 
-$detailEntrys = array();
-while($r = mysqli_fetch_assoc($sql_result)) 
-{
-	if ( !is_null($r[date]) )
-	{
-		$time = strtotime($r[date]);
-		$r[date] = date("m/d/Y", $time);
-	}
-
-    $detailEntrys[] = $r;
-}
-
 
 //
 // close db connection
 //
 mysqli_close($dbConn);
 
-exit(json_encode($detailEntrys));
+//
+// pass back info
+//
+$msgArray['msgtext'] = 'ok';
+$msgArray['errtext'] = '';
+$msgArray['bodytext'] = "Successfully deleted friend entry detail!";
+
+exit(json_encode($msgArray));
 ?>

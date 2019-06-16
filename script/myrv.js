@@ -38,6 +38,21 @@ function isValidTime(t) {
   	return retvalue;
 }
 
+function isEmpty(elementvalue) {
+	var retvalue = false;
+
+	switch (elementvalue)
+	{
+		case "undefined":
+		case "":
+		case null:
+			retvalue = true;
+			break;
+	}
+
+  	return retvalue;
+}
+
 function objectCopy(src) {
   let target = {};
   for (let prop in src) {
