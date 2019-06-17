@@ -85,6 +85,26 @@ myrvApp.config(function ($routeProvider) {
                 controller: 'memberviewmemberController',
                 templateUrl: 'app/partials/memberviewmember.html'
             })
+        .when('/memberviewrvmembership',
+            {
+                controller: 'memberviewrvmembershipController',
+                templateUrl: 'app/partials/memberviewrvmembership.html'
+            })
+        .when('/memberviewvehiclerv',
+            {
+                controller: 'memberviewvehiclervController',
+                templateUrl: 'app/partials/memberviewvehiclerv.html'
+            })
+        .when('/memberviewvehicleinsurance',
+            {
+                controller: 'memberviewvehicleinsuranceController',
+                templateUrl: 'app/partials/memberviewvehicleinsurance.html'
+            })
+        .when('/memberviewvehicleroadsideassistance',
+            {
+                controller: 'memberviewvehicleroadsideassistanceController',
+                templateUrl: 'app/partials/memberviewvehicleroadsideassistance.html'
+            })
         .when('/membermanagemember',
             {
                 controller: 'membermanagememberController',

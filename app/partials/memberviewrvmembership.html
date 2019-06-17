@@ -1,6 +1,6 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your RV Memberships</h2>
+        <h2 class="headerTitle">View Your RV Memberships</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -8,54 +8,44 @@
     <div class="col-md-12">
         <div style="margin:0 auto;width:50%;" class="form-inline">
             <label style="text-align:right;padding-right:15px;" for="memberrvmembership">Your RV Membership</label>
-            
             <select tabindex="1"  style="width:40%;" class="form-control " 
             ng-change="getMemberRvMembership(id)" 
             ng-model="id" >
                 <option ng-repeat="rvmembership in rvmemberships" value="{{rvmembership.id}}">{{rvmembership.rvmembershipname}}</option>
             </select>
-            
-            <span style="padding-left:15px;">&nbsp;</span>
-
-            <button style="line-height:.75;" class="btn btn-info btn-sm"  ng-click="NewMemberRVmembership()" id="newrvmembershipButton">New</button>
         </div> <!-- end of form-inline -->
     </div> <!-- end of 12 -->
 </div><!-- end of row -->
 
-
 <div style="padding-top:15px;padding-left:35px;" class="row">
-    <form id="membermanagerrvmembershipForm" name="membermanagerrvmembershipForm" style="padding:5px;">
+    <form id="memberviewrrvmembershipForm" name="memberviewrrvmembershipForm" style="padding:5px;">
     <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
         <div class="col-md-5">
             <div style="padding-top:15px;" class="form-group" >
                 <label for="name" class="col-md-5 control-label">RV Membership</label>
                 <div class="col-md-7">
-                    <input tabindex="2" type="text" class="form-control" ng-model="rvmembership.rvmembershipname" id="rvmembershipname" name="rvmembershipname" placeholder="RV Membership Name">
+                    <input readonly tabindex="2" type="text" class="form-control" ng-model="rvmembership.rvmembershipname" id="rvmembershipname" name="rvmembershipname" >
                 </div>
-
-                <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
-                <input type="hidden" value="{{rvmembership.id}}" id="id" name="id">
-
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="membershipid" class="col-md-5 control-label">Membership ID</label>
                 <div class="col-md-7">
-                    <input tabindex="3" type="text" class="form-control" ng-model="rvmembership.rvmembershipid" id="rvmembershipid" name="rvmembershipid" placeholder="Membership ID">
+                    <input readonly tabindex="3" type="text" class="form-control" ng-model="rvmembership.rvmembershipid" id="rvmembershipid" name="rvmembershipid" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="policyholder" class="col-md-5 control-label">Member name</label>
                 <div class="col-md-7">
-                    <input tabindex="4" type="text" class="form-control" ng-model="rvmembership.rvmembername" id="rvmembername" name="rvmembername" placeholder="Member Name">
+                    <input readonly tabindex="4" type="text" class="form-control" ng-model="rvmembership.rvmembername" id="rvmembername" name="rvmembername" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="expirationdate" class="col-md-5 control-label">Expiration date</label>
                 <div class="col-md-5">
-                    <input tabindex="5" type="text" class="form-control" ng-model="rvmembership.expirationdate" id="expirationdate" name="expirationdate" myrvdatepicker>
+                    <input readonly tabindex="5" type="text" class="form-control" ng-model="rvmembership.expirationdate" id="expirationdate" name="expirationdate">
                 </div>
             </div> <!-- end of form-group -->
 
@@ -63,42 +53,38 @@
                 <label for="membercost" class="col-md-5 control-label">Cost</label>
                 <div class="col-md-7">
                     <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
-                    <input style="display:inline;width:70%;" tabindex="6" type="text" class="form-control" ng-model="rvmembership.cost" id="cost" name="cost" placeholder="Cost">
+                    <input readonly style="display:inline;width:70%;" tabindex="6" type="text" class="form-control" ng-model="rvmembership.cost" id="cost" name="cost" >
                 </div>
             </div> <!-- end of form-group -->
 
         </div> <!-- end of col 7 -->
 
         <div class="col-md-7">
-
             <div style="padding-top:15px;" class="form-group">
                 <label for="phonenumber" class="col-md-5 control-label">Phone Number</label>
                 <div class="col-md-6">
-                    <input tabindex="7" type="text" class="form-control" ng-model="rvmembership.phonenumber" id="phonenumber" name="phonenumber" placeholder="Phone Number">
+                    <input readonly tabindex="7" type="text" class="form-control" ng-model="rvmembership.phonenumber" id="phonenumber" name="phonenumber" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div style="padding-top:15px;" class="form-group">
                 <label for="websiteurl" class="col-md-5 control-label">Website URL</label>
                 <div class="col-md-7">
-                    <input tabindex="8" type="text" class="form-control" ng-model="rvmembership.websiteurl" id="websiteurl" name="websiteurl" placeholder="Website URL">
+                    <input readonly tabindex="8" type="text" class="form-control" ng-model="rvmembership.websiteurl" id="websiteurl" name="websiteurl">
                 </div>
             </div> <!-- end of form-group -->
             
             <div class="form-group">
                 <label for="comments" class="col-md-5 control-label">Comments</label>
                 <div class="col-md-7">
-                    <textarea tabindex="9" class="form-control" ng-model="rvmembership.comments" id="comments" name="comments" rows="3"></textarea>
+                    <textarea readonly tabindex="9" class="form-control" ng-model="rvmembership.comments" id="comments" name="comments" rows="3"></textarea>
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group" >
                 <label for="status" class="col-md-5 control-label">Membership status</label>
-                <div class="col-md-4">
-                    <select tabindex="10" class="form-control" ng-model="rvmembership.status" id="status" name="status" >
-                      <option value="Not Selected">Not Selected</option>
-                      <option ng-repeat="rvmembershipstatus in rvmembershipstatuses" value="{{rvmembershipstatus.value}}">{{rvmembershipstatus.title}}</option>
-                    </select>
+                <div class="col-md-7">
+                    <input readonly tabindex="8" type="text" class="form-control" ng-model="rvmembership.status" id="status" name="status">
                 </div>
             </div> <!-- end of form-group -->
         </div> <!-- end of col 4 -->
@@ -106,24 +92,16 @@
     </form>   
 </div> <!-- end of row --> 
 
-<div style="padding-top:15px;padding-left:40%;" class="row">
-    <button tabindex="11" class="btn btn-info btn-lg" ng-click="updateMemberRVmembership()" id="updateVehiclervmembershipButton">Save</button>
-
-    <span style="padding-left:15px;">&nbsp;</span>
-
-    <button tabindex="12" class="btn btn-danger btn-lg" ng-click="deleteMemberRVmembership()" id="deleteVehiclervmembershipButton">Delete</button>
-</div> <!-- end of row --> 
-
 <!-- dialogs -->
-<div class="modal fade" id="membermanageRvMembershipDialogModal" tabindex="-1" role="dialog" aria-labelledby="membermanageRvMembershipDialogModalTitle" aria-hidden="true">
+<div class="modal fade" id="memberviewRvMembershipDialogModal" tabindex="-1" role="dialog" aria-labelledby="memberviewRvMembershipDialogModalTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="membermanageRvMembershipDialogModalTitle"></h4>
+        <h4 class="modal-title" id="memberviewRvMembershipDialogModalTitle"></h4>
       </div>
       <div class="modal-body">
-        <p id="membermanageRvMembershipDialogModalBody"></p>
+        <p id="memberviewRvMembershipDialogModalBody"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

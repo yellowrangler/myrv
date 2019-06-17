@@ -1,6 +1,6 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your Vehicle Roadside Assistance</h2>
+        <h2 class="headerTitle">View Your Vehicle Roadside Assistance</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -8,63 +8,60 @@
     <div class="col-md-12">
         <div style="margin:0 auto;width:50%;" class="form-inline">
             <label style="text-align:right;padding-right:15px;" for="memberroadsideassistance">Your Roadside Assistance</label>
-            
-            <select tabindex="1"  style="width:40%;" class="form-control " 
-            ng-change="getMemberVehicleRoadsideAssitance(id)" 
-            ng-model="id" id="memberroadsideassistance" name="memberroadsideassistance">
+            <select tabindex="1"  style="width:40%;" class="form-control" 
+                ng-change="getMemberVehicleRoadsideAssitance(id)" 
+                ng-model="id" 
+                id="memberroadsideassistance" name="memberroadsideassistance">
                 <option ng-repeat="roadsideassistance in roadsideassistances" value="{{roadsideassistance.id}}">{{roadsideassistance.roadsideassistancename}}</option>
             </select>
-            
-            <span style="padding-left:15px;">&nbsp;</span>
 
-            <button style="line-height:.75;" class="btn btn-info btn-sm"  ng-click="NewRoadsideAssistance()" id="newRoadsideAssistanceButton">New</button>
+           <!--  <select tabindex="1"  style="width:40%;" class="form-control" 
+                ng-change="getMemberVehicleRoadsideAssitance(roadsideassistance)" 
+                ng-model="roadsideassistance" 
+                ng-options="roadsideassistance.roadsideassistancename for roadsideassistance in roadsideassistances"
+                id="memberroadsideassistance" name="memberroadsideassistance">
+            </select> -->
         </div> <!-- end of form-inline -->
     </div> <!-- end of 12 -->
 </div><!-- end of row -->
 
 
 <div style="padding-top:15px;padding-left:35px;" class="row">
-    <form id="membermanagevehicleroadsideassistanceForm" name="membermanagevehicleroadsideassistanceForm" style="padding:5px;">
+    <form id="memberviewvehicleroadsideassistanceForm" name="memberviewvehicleroadsideassistanceForm" style="padding:5px;">
     <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
         <div class="col-md-5">
             <div style="padding-top:15px;" class="form-group" >
                 <label for="roadsideassistancename" class="col-md-5 control-label">Roadside Assistant</label>
                 <div class="col-md-7">
-                    <input tabindex="1" type="text" class="form-control" ng-model="roadsideassistance.roadsideassistancename" id="roadsideassistancename" name="roadsideassistancename" placeholder="Roadside Assistant">
+                    <input readonly tabindex="1" type="text" class="form-control" ng-model="roadsideassistance.roadsideassistancename" id="roadsideassistancename" name="roadsideassistancename" >
                 </div>
-
-                <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
-                <input type="hidden" value="{{roadsideassistance.id}}" id="roadsideassistanceid" name="roadsideassistanceid">
-
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="polcynumber" class="col-md-5 control-label">Polcy number</label>
                 <div class="col-md-7">
-                    <input tabindex="2" type="text" class="form-control" ng-model="roadsideassistance.polcynumber" id="polcynumber" name="polcynumber" placeholder="Polcy number">
+                    <input readonly tabindex="2" type="text" class="form-control" ng-model="roadsideassistance.polcynumber" id="polcynumber" name="polcynumber">
                 </div>
             </div> <!-- end of form-group -->
-
             <div class="form-group">
                 <label for="policyholder" class="col-md-5 control-label">Policy holder</label>
                 <div class="col-md-7">
-                    <input tabindex="3" type="text" class="form-control" ng-model="roadsideassistance.policyholder" id="policyholder" name="policyholder" placeholder="Policy holder">
+                    <input readonly tabindex="3" type="text" class="form-control" ng-model="roadsideassistance.policyholder" id="policyholder" name="policyholder" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="expirationdate" class="col-md-5 control-label">Expiration date</label>
                 <div class="col-md-5">
-                    <input tabindex="4" type="text" class="form-control" ng-model="roadsideassistance.expirationdate" id="expirationdate" name="expirationdate" myrvdatepicker>
+                    <input readonly tabindex="4" type="text" class="form-control" ng-model="roadsideassistance.expirationdate" id="expirationdate" name="expirationdate" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group">
                 <label for="membercost" class="col-md-5 control-label">Cost</label>
                 <div class="col-md-7">
-                    <!-- <span style="display:inline;">$</span> -->
                     <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
-                    <input style="display:inline;width:70%;" tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.cost" id="cost" name="cost" placeholder="Cost">
+                    <input readonly style="display:inline;width:80%;" tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.cost" id="cost" name="cost">
                 </div>
             </div> <!-- end of form-group -->
 
@@ -75,31 +72,28 @@
             <div style="padding-top:15px;" class="form-group">
                 <label for="emergencyphonenbr" class="col-md-5 control-label">Emergency phone nbr</label>
                 <div class="col-md-6">
-                    <input tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.emergencyphonenbr" id="emergencyphonenbr" name="emergencyphonenbr" placeholder="Emergency phone nbr">
+                    <input readonly tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.emergencyphonenbr" id="emergencyphonenbr" name="emergencyphonenbr" >
                 </div>
             </div> <!-- end of form-group -->
 
             <div style="padding-top:15px;" class="form-group">
                 <label for="websiteurl" class="col-md-5 control-label">Website URL</label>
                 <div class="col-md-7">
-                    <input tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.websiteurl" id="websiteurl" name="websiteurl" placeholder="Website URL">
+                    <input readonly tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.websiteurl" id="websiteurl" name="websiteurl" >
                 </div>
             </div> <!-- end of form-group -->
             
             <div class="form-group">
                 <label for="comments" class="col-md-5 control-label">Comments</label>
                 <div class="col-md-6">
-                    <textarea tabindex="6" class="form-control" ng-model="roadsideassistance.comments" id="comments" name="comments" rows="3"></textarea>
+                    <textarea readonly tabindex="6" class="form-control" ng-model="roadsideassistance.comments" id="comments" name="comments" rows="3"></textarea>
                 </div>
             </div> <!-- end of form-group -->
 
             <div class="form-group" >
                 <label for="status" class="col-md-5 control-label">Membership status</label>
-                <div class="col-md-4">
-                    <select tabindex="7" class="form-control" ng-model="roadsideassistance.status" id="status" name="status" >
-                      <option value="Not Selected">Not Selected</option>
-                      <option ng-repeat="roadsideassistancestatus in roadsideassistancestatuses" value="{{roadsideassistancestatus.value}}">{{roadsideassistancestatus.title}}</option>
-                    </select>
+                <div class="col-md-7">
+                    <input readonly tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.status" id="status" name="status">
                 </div>
             </div> <!-- end of form-group -->
         </div> <!-- end of col 4 -->
@@ -107,24 +101,16 @@
     </form>   
 </div> <!-- end of row --> 
 
-<div style="padding-top:15px;padding-left:40%;" class="row">
-    <button tabindex="14" class="btn btn-info btn-lg" ng-click="updateMemberVehicleRoadsideAssistance()" id="updateVehicleRoadsideAssistanceButton">Save</button>
-
-    <span style="padding-left:15px;">&nbsp;</span>
-
-    <button tabindex="15" class="btn btn-danger btn-lg" ng-click="deletememberVehicleRoadsideAssistance()" id="deleteVehicleRoadsideAssistanceButton">Delete</button>
-</div> <!-- end of row --> 
-
 <!-- dialogs -->
-<div class="modal fade" id="membermanageVehicleRoadsideAssistanceDialogModal" tabindex="-1" role="dialog" aria-labelledby="membermanageVehicleRoadsideAssistanceDialogModalTitle" aria-hidden="true">
+<div class="modal fade" id="memberviewVehicleRoadsideAssistanceDialogModal" tabindex="-1" role="dialog" aria-labelledby="memberviewVehicleRoadsideAssistanceDialogModalTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="membermanageVehicleRoadsideAssistanceDialogModalTitle"></h4>
+        <h4 class="modal-title" id="memberviewVehicleRoadsideAssistanceDialogModalTitle"></h4>
       </div>
       <div class="modal-body">
-        <p id="membermanageVehicleRoadsideAssistanceDialogModalBody"></p>
+        <p id="memberviewVehicleRoadsideAssistanceDialogModalBody"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

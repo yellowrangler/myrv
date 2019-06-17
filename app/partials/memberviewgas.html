@@ -1,6 +1,6 @@
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">View Gas Trip Entries</h2>
+        <h2 class="headerTitle">View Gas Trip Information</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -8,17 +8,23 @@
 <div class="row">
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
-            <div class="form-group horizontalFieldOffset">
+            <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
                 <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
                 <select class="customSelect form-control" ng-change="getMemberTripGasDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
                     <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
                 </select>
             </div> <!-- end of form-group -->
+
+            <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
+                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                  <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
+                </div> <!-- end of div-->  
+            </div> <!-- end of form-group -->
         </div> <!-- end of panelOffset -->
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div style="padding-top:35px;" class="pageStandardOffset row">
+<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table exportDataTable entryList" >
@@ -37,7 +43,7 @@
                     <th class="center-column-text">MPG</th>                        
                 </tr>
 
-                <tr ng-repeat="gasdetail in gasdetails">
+                <tr ng-repeat="gasdetail in gasdetails" class="notth" ng-click="showTripDetail(gasdetail)">
                     <td class="center-column-text">
                        {{gasdetail.date}}
                     </td>
@@ -148,8 +154,102 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
+<div style="padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+    <div class="col-md-offset-3 col-md-6 form-horizontal">
+        <div class="pageStandardOffset row">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Gas Fill Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Date
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly  tabindex="2" type="text" class="form-control" size="8" ng-model="current.gasdetail.date" id="date" name="date" myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Time
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="3" type="text" class="form-control" size="8" ng-model="current.gasdetail.time" id="time" name="time"  />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Odometer
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="4" type="text" class="form-control" ng-model="current.gasdetail.odometer" id="odometer" name="odometer" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Station
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="5" type="text" class="form-control" ng-model="current.gasdetail.station" id="station" name="station" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Location
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="6" type="text" class="form-control" ng-model="current.gasdetail.location" id="location" name="location" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-3  capture-detail-labels-input">
+                            State
+                        </div>
+                    
+                        <div class="col-md-8">
+                            <input readonly tabindex="6" type="text" class="form-control" ng-model="current.gasdetail.state" id="state" name="state" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Amount  
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input readonly style="display:inline;width:80%;" tabindex="8" type="text" class="form-control" ng-model="current.gasdetail.amount" id="amount" name="amount">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Gallons
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="9" type="text" class="form-control" ng-model="current.gasdetail.gallons" id="gallons" name="gallons">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-offset-3 col-md-8 capture-detail-checkbox-input">
+                            <input readonly style="padding-top:10px;" tabindex="10" type="checkbox" ng-model="current.gasdetail.nottankfilled" id="nottankfilled" name="nottankfilled"> Tank not filled
+                        </div>
+                    </div> <!-- end of form-group -->
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
 <form role="form"  method="post" enctype="multipart/form-data" novalidate>
-<div style="padding-top:15px;" class="pageStandardOffset row">
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
     <div class="col-md-12">
         <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
             <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportGasCaptureButton" >Export CSV</a>

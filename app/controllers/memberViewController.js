@@ -83,6 +83,18 @@ controllers.memberviewgasController = function ($scope, $http, $location, member
         getMemberTrip();
     }
 
+    function showTripDetail(detail) {
+        $scope.current.gasdetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.gasdetail = {};
+    }
+
 
     init();
     function init() {
@@ -98,6 +110,8 @@ controllers.memberviewgasController = function ($scope, $http, $location, member
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+        $scope.current.gasdetail = {};
+         $scope.current.showtable = 1;
 
         $scope.exportParms = {};
         $scope.exportParms.tripid = $scope.current.tripid;
@@ -112,13 +126,20 @@ controllers.memberviewgasController = function ($scope, $http, $location, member
     $scope.getMemberTripGasDetails = function () {
         getMemberTripGasDetails();
     }
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
+    }
 }
 
 controllers.memberviewtripsController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberTrips() {
-
         var qdata = 'memberid='+$scope.current.memberid+"&export=1";
         memberFactory.getMemberTrips(qdata)
             .success( function(data) {
@@ -127,6 +148,18 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
             .error( function(edata) {
                 alert(edata);
             }); 
+    }
+
+    function showTripDetail(detail) {
+        $scope.current.tripdetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.tripdetail = {};
     }
 
     init();
@@ -140,6 +173,8 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
+        $scope.current.showtable = 1;
+        $scope.current.tripdetail = {};
 
         $scope.exportParms = {};
         $scope.exportParms.memberid = $scope.current.memberid;
@@ -150,6 +185,14 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
 
         getMemberTrips();
     };
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
+    }
 }
 
 controllers.membervieweventsController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
@@ -671,5 +714,218 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+    }
+}
+
+controllers.memberviewrvmembershipController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function resetMemberRVmembershipForm() {
+        // $scope.current.rvmembershipid ="";
+        $scope.rvmemberships = "";
+        $scope.rvmembership = "";
+
+        getMemberRVmemberships();
+    }
+
+    function getMemberRVmemberships() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberRVmemberships(qdata)
+            .success( function(data) {
+                $scope.rvmemberships = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function getMemberRvMembership(id) {
+        for (var i = 0; i < $scope.rvmemberships.length; i++)
+        {
+            if ($scope.rvmemberships[i].id == id)
+            {
+                $scope.rvmembership = $scope.rvmemberships[i];
+            }
+        }
+    }
+
+    init();
+    function init() {
+        setviewpadding();
+
+        $scope.rvmembershipstatuses = selectListService.getList('memberstatus');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        resetMemberRVmembershipForm();
+    };
+
+    $scope.getMemberRvMembership = function(rvmembership) {
+        getMemberRvMembership(rvmembership);
+    }
+}
+
+
+controllers.memberviewvehiclervController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function getMemberVehicles() {
+        var qdata = 'vehicletype=all&memberid='+$scope.current.memberid;
+        memberFactory.getMembervehicles(qdata)
+            .success( function(data) {
+                $scope.membervehicles = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberVehicle(vehicleid) {
+        $scope.current.vehicleid = vehicleid;
+        for (var i = 0; i < $scope.membervehicles.length; i++)
+        {
+            if ($scope.membervehicles[i].id == vehicleid)
+            {
+                $scope.current.vehicle = $scope.membervehicles[i];
+                $scope.current.vehiclename = composeMemberVehicleName($scope.current.vehicle);
+            }
+        }
+    }
+
+    function composeMemberVehicleName(vehicle) {
+        var vehiclename = "";
+       
+        vehiclename = vehicle.vehicletype+" "+vehicle.make+" "+vehicle.model+" "+vehicle.color+" "+vehicle.year+" "+vehicle.platenbr;
+
+        return vehiclename;
+    }
+
+    init();
+    function init() {
+        setviewpadding();
+
+        $scope.states = selectListService.getList('states');
+        $scope.vehiclestatuses = selectListService.getList('vehiclestatus');
+        $scope.vehicletypes = selectListService.getList('vehicletypes');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        $scope.membervehicles = "";
+
+        getMemberVehicles();
+    };
+
+    $scope.getMemberVehicle = function(vehicleid) {
+        getMemberVehicle(vehicleid);
+    }
+}
+
+controllers.memberviewvehicleinsuranceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function resetMemberVehicleInsuranceForm() {
+        $scope.current.insuranceid ="";
+        $scope.current.inssurancename ="";
+        $scope.current.insurance ="";
+    }
+
+    function getMemberVehicleInsurances() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMembervehicleinsurances(qdata)
+            .success( function(data) {
+                $scope.membervehicleinsurances = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function getMemberVehicleInsurance(insuranceid) {
+        $scope.current.insuranceid = insuranceid;
+        console.log("insuranceid get:"+insuranceid);
+
+        for (var i = 0; i < $scope.membervehicleinsurances.length; i++)
+        {
+            if ($scope.membervehicleinsurances[i].id == insuranceid)
+            {
+                $scope.current.insurance = $scope.membervehicleinsurances[i];
+                $scope.current.insurancename = $scope.membervehicleinsurances[i].insurancename;
+                // console.log($scope.current.waypoint);
+            }
+        }
+    }
+
+    init();
+    function init() {
+        setviewpadding();
+
+        $scope.insurancestatuses = selectListService.getList('insurancestatus');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        $scope.membervehicleinsurances = "";
+
+        getMemberVehicleInsurances();
+    };
+
+    $scope.getMemberVehicleInsurance = function(insuranceid) {
+        getMemberVehicleInsurance(insuranceid);
+    }
+}
+
+controllers.memberviewvehicleroadsideassistanceController = function ($scope, $http, $location, memberFactory, loginService, selectListService) {
+    $scope.current = {};
+
+    function resetMemberRoadsideAssistanceForm() {
+        $scope.roadsideassistances ="";
+        $scope.roadsideassistance ="";
+
+        getMemberVehicleRoadsideAssitances();
+    }
+
+    function getMemberVehicleRoadsideAssitances() {
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMembervehicleroadsideassitances(qdata)
+            .success( function(data) {
+                $scope.roadsideassistances = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            });
+    }
+
+    function getMemberVehicleRoadsideAssitance(id) {
+        for (var i = 0; i < $scope.roadsideassistances.length; i++)
+        {
+            if ($scope.roadsideassistances[i].id == id)
+            {
+                $scope.roadsideassistance = $scope.roadsideassistances[i];
+            }
+        }
+    }
+
+    init();
+    function init() {
+        setviewpadding();
+
+        $scope.roadsideassistancestatuses = selectListService.getList('memberstatus');
+
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+
+        $scope.roadsideassistances = "";
+
+        getMemberVehicleRoadsideAssitances();
+    };
+
+    $scope.getMemberVehicleRoadsideAssitance = function(id) {
+        getMemberVehicleRoadsideAssitance(id);
     }
 }

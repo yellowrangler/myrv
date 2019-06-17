@@ -1,0 +1,118 @@
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Your Vehicle Insurance</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="margin:0 auto;width:50%;" class="form-inline">
+            <label style="text-align:right;padding-right:15px;" for="membervehicleinsurance">Your Vehicle Insurance</label>
+            
+            <select tabindex="1"  style="width:40%;" class="form-control " 
+            ng-change="getMemberVehicleInsurance(id)" 
+            ng-model="id" 
+            id="membervehicleinsurance" name="membervehicleinsurance">
+                <option ng-repeat="insurance in membervehicleinsurances" ng-selected="current.insuranceid == insurance.id" value="{{insurance.id}}">{{insurance.insurancename}}</option>
+            </select>
+        </div> <!-- end of form-inline -->
+    </div> <!-- end of 12 -->
+</div><!-- end of row -->
+
+<div style="padding-top:15px;padding-left:35px;" class="row">
+    <form id="memberviewvehicleinsuranceForm" name="memberviewvehicleForm" style="padding:5px;">
+    <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
+        <div class="col-md-5">
+            <div style="padding-top:15px;" class="form-group" >
+                <label for="insurancename" class="col-md-5 control-label">Insurance Provider</label>
+                <div class="col-md-7">
+                    <input readonly tabindex="1" type="text" class="form-control" ng-model="current.insurance.insurancename" id="insurancename" name="insurancename">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="polcynumber" class="col-md-5 control-label">Polcy number</label>
+                <div class="col-md-7">
+                    <input readonly tabindex="2" type="text" class="form-control" ng-model="current.insurance.polcynumber" id="polcynumber" name="polcynumber">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="policyholder" class="col-md-5 control-label">Policy holder</label>
+                <div class="col-md-7">
+                    <input readonly tabindex="3" type="text" class="form-control" ng-model="current.insurance.policyholder" id="policyholder" name="policyholder">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="policytype" class="col-md-5 control-label">Policy type</label>
+                <div class="col-md-7">
+                    <input readonly tabindex="4" type="text" class="form-control" ng-model="current.insurance.policytype" id="policytype" name="policytype">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="effectivedate" class="col-md-5 control-label">Effective date</label>
+                <div class="col-md-5">
+                    <input readonly tabindex="5" type="text" class="form-control" ng-model="current.insurance.effectivedate" id="effectivedate" name="effectivedate" >
+                </div>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of col 7 -->
+
+        <div class="col-md-6">
+            <div style="padding-top:15px;" class="form-group">
+                <label for="agentname" class="col-md-4 control-label">Agent name</label>
+                <div class="col-md-8">
+                    <input readonly tabindex="6" type="text" class="form-control" ng-model="current.insurance.agentname" id="agentname" name="agentname">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="agentphonenbr" class="col-md-4 control-label">Agent phone nbr</label>
+                <div class="col-md-7">
+                    <input readonly tabindex="7" type="text" class="form-control" ng-model="current.insurance.agentphonenbr" id="agentphonenbr" name="agentphonenbr">
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="VIN" class="col-md-4 control-label">Website URL</label>
+                <div class="col-md-8">
+                    <input readonly tabindex="8" type="text" class="form-control" ng-model="current.insurance.websiteurl" id="websiteurl" name="websiteurl" >
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                <label for="comments" class="col-md-4 control-label">Comments</label>
+                <div class="col-md-8">
+                    <textarea readonly tabindex="12" class="form-control" ng-model="current.insurance.comments" id="comments" name="comments" rows="3"></textarea>
+                </div>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group" >
+                <label for="status" class="col-md-4 control-label">Insurance status</label>
+                <div class="col-md-8">
+                    <input readonly tabindex="13" type="text" class="form-control" ng-model="current.insurance.status" id="status" name="status">
+                </div>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of col 4 -->
+    </div> <!-- end of panel   --> 
+    </form>   
+</div> <!-- end of row --> 
+
+<!-- dialogs -->
+<div class="modal fade" id="memberviewVehicleInsuranceDialogModal" tabindex="-1" role="dialog" aria-labelledby="memberviewVehicleInsuranceDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memberviewVehicleInsuranceDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memberviewVehicleInsuranceDialogModalBody"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
