@@ -210,6 +210,19 @@ controllers.membervieweventsController = function ($scope, $http, $location, mem
                 alert(edata);
             });
     }
+
+    function showTripDetail(detail) {
+        $scope.current.eventdetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.eventdetail = {};
+    }
+
     
     function resetEventDetailView() {
         $scope.membertrips = {};
@@ -234,6 +247,9 @@ controllers.membervieweventsController = function ($scope, $http, $location, mem
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+        $scope.current.showtable = 1;
+        $scope.eventdetails = {};
+        $scope.current.eventdetail = {};
 
         $scope.exportParms = {};
         $scope.exportParms.tripid = $scope.current.tripid;
@@ -247,6 +263,14 @@ controllers.membervieweventsController = function ($scope, $http, $location, mem
 
     $scope.getMemberTripEventDetails = function () {
         getMemberTripEventDetails();
+    }
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
     }
 }
 
@@ -289,7 +313,7 @@ controllers.memberviewmemberController = function ($scope, $http, $location, mem
     };
 }
 
-controllers.memberviewfriendsController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
+controllers.memberviewfoodsController = function ($scope, $http, $location, memberFactory, exportService, loginService, selectListService) {
     $scope.current = {};
 
     function getMemberTrips() {
@@ -331,7 +355,7 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
     }
 
     function getMemberTripFoodDetails() {
-        $scope.frienddetails = {};
+        $scope.fooddetails = {};
         
         $scope.exportParms.tripid = $scope.current.tripid;
         $scope.downloadurl = exportService.getExportUrl($scope.exportParms);
@@ -339,13 +363,25 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         $order = "ASC";
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&order='+$order;
-        memberFactory.getMembertripfrienddetails(qdata)
+        memberFactory.getMembertripfooddetails(qdata)
             .success( function(data) {
-                $scope.frienddetails = objectCopy(data);
+                $scope.fooddetails = objectCopy(data);
             })
             .error( function(edata) {
                 alert(edata);
             });
+    }
+
+    function showTripDetail(detail) {
+        $scope.current.fooddetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.fooddetail = {};
     }
     
     function resetFoodDetailView() {
@@ -355,7 +391,6 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         getMemberTrips();
         getMemberTrip();
     }
-
 
     init();
     function init() {
@@ -371,12 +406,15 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+        $scope.current.showtable = 1;
+        $scope.fooddetails = {};
+        $scope.current.fooddetail = {};
 
         $scope.exportParms = {};
         $scope.exportParms.tripid = $scope.current.tripid;
         $scope.exportParms.memberid = $scope.current.memberid;
-        $scope.exportParms.exportType = "friendcapture";
-        $scope.exportParms.exportfilename = "exportfriendcapture.csv";
+        $scope.exportParms.exportType = "foodcapture";
+        $scope.exportParms.exportfilename = "exportfoodcapture.csv";
         $scope.downloadurl = "";
 
         resetFoodDetailView();
@@ -384,6 +422,14 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
 
     $scope.getMemberTripFoodDetails = function () {
         getMemberTripFoodDetails();
+    }
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
     }
 }
 
@@ -445,7 +491,7 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
                 alert(edata);
             });
     }
-    
+
     function resetFriendDetailView() {
         $scope.membertrips = {};
         $scope.current.email = $scope.current.memberlogin.email;
@@ -454,6 +500,17 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         getMemberTrip();
     }
 
+    function showTripDetail(detail) {
+        $scope.current.frienddetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.frienddetail = {};
+    }
 
     init();
     function init() {
@@ -469,6 +526,9 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+        $scope.current.showtable = 1;
+        $scope.frienddetails = {};
+        $scope.current.frienddetail = {};
 
         $scope.exportParms = {};
         $scope.exportParms.tripid = $scope.current.tripid;
@@ -482,6 +542,14 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
 
     $scope.getMemberTripFriendDetails = function () {
         getMemberTripFriendDetails();
+    }
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
     }
 }
 
@@ -552,6 +620,17 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
         getMemberTrip();
     }
 
+    function showTripDetail(detail) {
+        $scope.current.overnightdetail = detail;
+
+        $scope.current.showtable = 0;
+    }
+
+    function hideTripDetail() {
+        $scope.current.showtable = 1;
+
+        $scope.current.overnightdetail = {};
+    }
 
     init();
     function init() {
@@ -567,6 +646,10 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
         $scope.current.memberid = $scope.current.memberlogin.memberid;
         $scope.current.membername = $scope.current.memberlogin.membername;
         $scope.current.tripid = "";
+        $scope.current.showtable = 1;
+        $scope.overnightdetails = {};
+        $scope.current.overnightdetail = {};
+
 
         $scope.exportParms = {};
         $scope.exportParms.tripid = $scope.current.tripid;
@@ -580,5 +663,13 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
 
     $scope.getMemberTripOvernightDetails = function () {
         getMemberTripOvernightDetails();
+    }
+
+    $scope.showTripDetail = function (detail) {
+        showTripDetail(detail);
+    }
+
+    $scope.hideTripDetail = function () {
+        hideTripDetail();
     }
 }
