@@ -540,7 +540,6 @@ LOCK TABLES `vechileroadsideassistancetbl` WRITE;
 /*!40000 ALTER TABLE `vechileroadsideassistancetbl` DISABLE KEYS */;
 INSERT INTO `vechileroadsideassistancetbl` (`id`, `memberid`, `roadsideassistancename`, `polcynumber`, `policyholder`, `expirationdate`, `emergencyphonenbr`, `businessphonenbr`, `websiteurl`, `cost`, `costinterval`, `email`, `comments`, `status`, `lastupdate`) VALUES (1,1,'Coach-net','10134633','Tarrant Cutler','12/02/2021','800-759-6999',NULL,'https://coach-net.com','free',NULL,NULL,'Comes with Airstream purchase. Fir RV Only','active','2019-06-09 18:18:26');
 INSERT INTO `vechileroadsideassistancetbl` (`id`, `memberid`, `roadsideassistancename`, `polcynumber`, `policyholder`, `expirationdate`, `emergencyphonenbr`, `businessphonenbr`, `websiteurl`, `cost`, `costinterval`, `email`, `comments`, `status`, `lastupdate`) VALUES (2,1,'AAA','620 240 682525200 2','Tarrant Cutler Jr','03/01/2020','800-222-4357',NULL,'aaa.com','Gift',NULL,NULL,'For F150 only','active','2019-06-09 18:18:50');
-INSERT INTO `vechileroadsideassistancetbl` (`id`, `memberid`, `roadsideassistancename`, `polcynumber`, `policyholder`, `expirationdate`, `emergencyphonenbr`, `businessphonenbr`, `websiteurl`, `cost`, `costinterval`, `email`, `comments`, `status`, `lastupdate`) VALUES (3,1,'','','','','',NULL,'aaa.com','Gift',NULL,NULL,'For Car and Truck only','? undefined:undefined ?','2019-06-08 14:43:49');
 /*!40000 ALTER TABLE `vechileroadsideassistancetbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -594,4 +593,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-16 16:30:13
+-- Dump completed on 2019-06-17 19:06:10
