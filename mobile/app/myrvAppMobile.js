@@ -13,6 +13,11 @@ myrvAppMobile.config(function ($routeProvider) {
                 controller: 'homeController',
                 templateUrl: 'app/partials/home.html'
             }) 
+        .when('/myrvsnapshot',
+            {
+                controller: 'myrvsnapshotController',
+                templateUrl: 'app/partials/myrvsnapshot.html'
+            }) 
         .when('/gastripentry',
             {
                 controller: 'gastripentryController',

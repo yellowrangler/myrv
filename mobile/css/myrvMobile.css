@@ -108,8 +108,8 @@
 }
 
 .hrBreak {
-	width: 85%;
-	height: 5px;
+	width: 90%;
+	height: 3px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:#058689;
@@ -832,13 +832,25 @@
 }
 
 .capture-detail-checkbox-input {
-	padding-right:15px;
+	padding-left:40%;
+	/*text-align:center; */
+	vertical-align:middle;
 	padding-top:5px;
-	text-align:left;
 	font-weight:400;
 	color:teal;
 	font-size:16px;
 }
+
+.capture-detail-checkbox-input-left {
+	padding-left:10%;
+	/*text-align:center; */
+	vertical-align:middle;
+	padding-top:5px;
+	font-weight:400;
+	color:teal;
+	font-size:16px;
+}
+
 
 .capture-detail-labels-calculated {
 	padding-right:15px;
@@ -886,8 +898,9 @@
 }
 
 .currentSnapshotDetails {
-	padding-left:25px;
-	padding-top:25px;
+	/*padding-left:10px;*/
+	display:inline-block;
+	padding-top:15px;
 	font-weight:400;
 	color:teal;
 	font-size:18px;

@@ -750,17 +750,17 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
         .success( function(data) {
             if (data.errtext == "")
             {
-                $('#memCaptureEventDialogModalTitle').text("Restaurant Entry Success");
-                $('#memCaptureEventDialogModalBody').html(data.bodytext);
-                $('#memCaptureEventDialogModal').modal();
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Success");
+                $('#memCaptureFoodDialogModalBody').html(data.bodytext);
+                $('#memCaptureFoodDialogModal').modal();
 
                 // resetFoodCapture();
             }
             else
             {
-                $('#memCaptureEventDialogModalTitle').text("Restaurant Entry Error");
-                $('#memCaptureEventDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
-                $('#memCaptureEventDialogModal').modal();
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Error");
+                $('#memCaptureFoodDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
+                $('#memCaptureFoodDialogModal').modal();
             }
 
             // must call for new totals and reload scope.current.original.gastotals

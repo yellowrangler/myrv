@@ -2,58 +2,55 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your Trip Information</h2>
+        <h2 class="headerTitle">Manage Trip Information</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
-<div class="pageStandardOffset row">
-    <div style="padding-top:35px;" class="row">
-    <div class="col-md-7">
-        <div class="pageStandardOffset row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table pickGameTable entryList" >
-                        <tr class="tableTitle">
-                            <th class="center-column-text">Start Date</th>  
-                            <th class="center-column-text">Trip Name</th>     
-                            <th class="center-column-text">Odometer</th>    
-                            <th class="center-column-text">Start Location</th> 
-                            <th class="center-column-text">End Location</th>
-                            <th class="center-column-text">End Date</th>               
-                        </tr>
+<div style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table pickGameTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Start Date</th>  
+                    <th class="center-column-text">Trip Name</th>     
+                    <th class="center-column-text">Odometer</th>    
+                    <th class="center-column-text">Start Location</th> 
+                    <th class="center-column-text">End Location</th>
+                    <th class="center-column-text">End Date</th>               
+                </tr>
 
-                        <tr ng-repeat="trip in membertrips" class="notth" ng-click="getMemberTrip(trip.id)">
-                            <td class="center-column-text">
-                               {{trip.startdate}}
-                            </td>
+                <tr ng-repeat="trip in membertrips" class="notth" ng-click="getMemberTrip(trip.id)">
+                    <td class="center-column-text">
+                       {{trip.startdate}}
+                    </td>
 
-                            <td class="left-column-text">
-                               {{trip.tripname}}
-                            </td>
+                    <td class="left-column-text">
+                       {{trip.tripname}}
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{trip.startodometer}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{trip.startodometer}} 
+                    </td>
 
-                            <td class="left-column-text">
-                                 {{trip.startlocation}} 
-                            </td>
+                    <td class="left-column-text">
+                         {{trip.startlocation}} 
+                    </td>
 
-                            <td class="left-column-text">
-                                 {{trip.endlocation}} 
-                            </td>
+                    <td class="left-column-text">
+                         {{trip.endlocation}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{trip.enddate}} 
-                            </td>
-                        </tr>
-                    </table>
-                </div> <!-- end of table responsive -->
-            </div> <!-- end of col 12 -->
-        </div> <!-- end of row -->
-    </div> <!-- end of col-md-7 form-inline -->
+                    <td class="center-column-text">
+                         {{trip.enddate}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end oftable responsive -->
+    </div> <!-- end of col 12 -->
+</div>  <!-- end of row -->
 
-    <div class="col-md-4">
+<div style="margin:10px;padding-top:35px;"  class="pageStandardOffset row">
+    <div class="col-md-12">
         <form id="membermanagetripForm" name="membermanagetripForm" style="" class="form-horizontal">
             <div class="panel panel-success">
                 <div class="panel-heading panelTitlelMYRV">
@@ -140,7 +137,6 @@
                         </div>
                     </div> <!-- end of form-group -->
 
-
                     <div class="form-group">
                         <div class="col-md-12 formLabel">
                             Travel Date End
@@ -174,7 +170,7 @@
                 <button style="width:20%;" class="btn btn-danger" ng-click="DeleteMemberTrip()" id="DeleteMemberTripButton">Delete</button>
             </div> <!-- end of div-->                  
         </form>
-    </div> <!-- end of div col md 4 -->
+    </div> <!-- end of div col md 12 -->
 </div> <!-- end of row -->
 
 <!-- dialogs -->

@@ -2,13 +2,13 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your Vehicle Roadside Assistance</h2>
+        <h2 class="headerTitle">Manage Vehicle Roadside Assistance</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
 <div class="pageStandardOffset row">
     <div class="col-md-12">
-        <div style="margin:0 auto;width:50%;" class="form-inline">
+        <div class="form-group horizontalFieldOffset">
             <label style="text-align:right;padding-right:15px;" for="memberroadsideassistance">Your Roadside Assistance</label>
             
             <select tabindex="1"  style="width:40%;" class="form-control " 
@@ -16,16 +16,12 @@
             ng-model="id" id="memberroadsideassistance" name="memberroadsideassistance">
                 <option ng-repeat="roadsideassistance in roadsideassistances" value="{{roadsideassistance.id}}">{{roadsideassistance.roadsideassistancename}}</option>
             </select>
-            
-            <span style="padding-left:15px;">&nbsp;</span>
-
-            <button style="line-height:.75;" class="btn btn-info btn-sm"  ng-click="NewRoadsideAssistance()" id="newRoadsideAssistanceButton">New</button>
         </div> <!-- end of form-inline -->
     </div> <!-- end of 12 -->
 </div><!-- end of row -->
 
 
-<div style="padding-top:15px;padding-left:35px;" class="row">
+<div style="margin:10px;padding-top:15px;" class="row">
     <form id="membermanagevehicleroadsideassistanceForm" name="membermanagevehicleroadsideassistanceForm" style="padding:5px;">
     <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
         <div class="col-md-5">
@@ -109,12 +105,16 @@
     </form>   
 </div> <!-- end of row --> 
 
-<div style="padding-top:15px;padding-left:40%;" class="row">
+<div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;" class="row">
     <button tabindex="14" class="btn btn-info btn-lg" ng-click="updateMemberVehicleRoadsideAssistance()" id="updateVehicleRoadsideAssistanceButton">Save</button>
 
     <span style="padding-left:15px;">&nbsp;</span>
 
     <button tabindex="15" class="btn btn-danger btn-lg" ng-click="deletememberVehicleRoadsideAssistance()" id="deleteVehicleRoadsideAssistanceButton">Delete</button>
+
+    <span style="padding-left:15px;">&nbsp;</span>
+
+    <button class="btn btn-info btn-lg"  ng-click="NewRoadsideAssistance()" id="newRoadsideAssistanceButton">New</button>
 </div> <!-- end of row --> 
 
 <!-- dialogs -->

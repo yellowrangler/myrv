@@ -21,58 +21,55 @@
 </div> <!-- end of row -->
 
 <div style="padding-top:35px;" class="row">
-    <div class="col-md-7">
-        <div class="pageStandardOffset row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table pickGameTable entryList" >
-                        <tr class="tableTitle">
-                            <th class="center-column-text">Date</th>  
-                            <th class="center-column-text">Time</th>     
-                            <th class="center-column-text">Event</th>    
-                            <th class="center-column-text">Venue</th> 
-                            <th class="center-column-text">Odometer</th>     
-                            <th class="center-column-text">City</th>
-                            <th class="center-column-text">State</th>                    
-                        </tr>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table pickGameTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Event</th>    
+                    <th class="center-column-text">Venue</th> 
+                    <th class="center-column-text">Odometer</th>     
+                    <th class="center-column-text">City</th>
+                    <th class="center-column-text">State</th>                    
+                </tr>
 
-                        <tr ng-repeat="eventdetail in eventdetails" class="notth" ng-click="setCurrentTrip(eventdetail)">
-                            <td class="center-column-text">
-                               {{eventdetail.date}}
-                            </td>
+                <tr ng-repeat="eventdetail in eventdetails" class="notth" ng-click="setCurrentTrip(eventdetail)">
+                    <td class="center-column-text">
+                       {{eventdetail.date}}
+                    </td>
 
-                            <td class="center-column-text">
-                               {{eventdetail.time}}
-                            </td>
+                    <td class="center-column-text">
+                       {{eventdetail.time}}
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{eventdetail.event}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{eventdetail.event}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{eventdetail.venue}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{eventdetail.venue}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{eventdetail.odometer}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{eventdetail.odometer}} 
+                    </td>
 
-                            <td class="center-column-text">
-                               {{eventdetail.city}}
-                            </td>
+                    <td class="center-column-text">
+                       {{eventdetail.city}}
+                    </td>
 
-                            <td class="center-column-text">
-                               {{eventdetail.state}}
-                            </td>
-                        </tr>
-                    </table>
-                </div> <!-- end of table responsive -->
-            </div> <!-- end of col 12 -->
-        </div> <!-- end of row -->
+                    <td class="center-column-text">
+                       {{eventdetail.state}}
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
     </div> <!-- end of col-md-7 form-inline -->
+</div> <!-- end of row -->
 
-
-    <div class="col-md-4">
+<div style="margin:10px;padding-top:35px;" class="row">
+    <div class="col-md-12">
         <form id="membereventdetailForm" name="membereventdetailForm" style="" class="form-horizontal">
         <div class="pageStandardOffset row">
             <div class="panel panel-success">

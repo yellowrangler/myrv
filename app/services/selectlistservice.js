@@ -127,7 +127,7 @@ myrvApp.service('selectListService', function () {
 
     var stateList = [ 
         { value : "AL", title : "Alabama" },
-        { value : "AK", title : "Alaskan" },
+        { value : "AK", title : "Alaska" },
         { value : "AZ", title : "Arizona" },
         { value : "AR", title : "Arkansas" },
         { value : "CA", title : "California" },

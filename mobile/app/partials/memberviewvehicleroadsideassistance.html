@@ -2,15 +2,15 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">View Your Vehicle Roadside Assistance</h2>
+        <h2 class="headerTitle">View Vehicle Roadside Assistance</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
 <div class="pageStandardOffset row">
     <div class="col-md-12">
-        <div style="margin:0 auto;width:50%;" class="form-inline">
+        <div style="margin:10px;width:100%;" class="form-inline">
             <label style="text-align:right;padding-right:15px;" for="memberroadsideassistance">Your Roadside Assistance</label>
-            <select tabindex="1"  style="width:40%;" class="form-control" 
+            <select tabindex="1"  style="width:60%;" class="form-control" 
                 ng-change="getMemberVehicleRoadsideAssitance(id)" 
                 ng-model="id" 
                 id="memberroadsideassistance" name="memberroadsideassistance">
@@ -28,9 +28,9 @@
 </div><!-- end of row -->
 
 
-<div style="padding-top:15px;padding-left:35px;" class="row">
+<div style="margin:10px;" class="row">
     <form id="memberviewvehicleroadsideassistanceForm" name="memberviewvehicleroadsideassistanceForm" style="padding:5px;">
-    <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
+    <div class="panel panel-default form-horizontal col-md-12">
         <div class="col-md-5">
             <div style="padding-top:15px;" class="form-group" >
                 <label for="roadsideassistancename" class="col-md-5 control-label">Roadside Assistant</label>
@@ -67,11 +67,7 @@
                 </div>
             </div> <!-- end of form-group -->
 
-        </div> <!-- end of col 7 -->
-
-        <div class="col-md-6">
-
-            <div style="padding-top:15px;" class="form-group">
+            <div class="form-group">
                 <label for="emergencyphonenbr" class="col-md-5 control-label">Emergency phone nbr</label>
                 <div class="col-md-6">
                     <input readonly tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.emergencyphonenbr" id="emergencyphonenbr" name="emergencyphonenbr" >
@@ -98,7 +94,7 @@
                     <input readonly tabindex="5" type="text" class="form-control" ng-model="roadsideassistance.status" id="status" name="status">
                 </div>
             </div> <!-- end of form-group -->
-        </div> <!-- end of col 4 -->
+        </div> <!-- end of col 12 -->
     </div> <!-- end of panel   --> 
     </form>   
 </div> <!-- end of row --> 

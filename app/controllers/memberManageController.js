@@ -174,6 +174,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
                 $('#tripmanageMemberDialogModal').modal();
 
                 getMemberTrips();
+                resetTripForm();
             }
             else
             {

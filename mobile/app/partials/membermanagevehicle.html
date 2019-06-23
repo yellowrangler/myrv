@@ -2,33 +2,27 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Manage Your Vehicle & RV Information</h2>
+        <h2 class="headerTitle">Manage Vehicle & RV Information</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
 <div class="pageStandardOffset row">
-    <div class="col-md-12">
-        <div style="margin:0 auto;width:50%;" class="form-inline">
-            <label style="text-align:right;padding-right:15px;" for="membervehicle">Your Vehicles</label>
+     <div class="col-md-12  form-inline">
+        <div class="form-group horizontalFieldOffset">
+            <label style="font-size:20px;padding-right:10px;" for="membervehicle">Your Vehicles</label>
             
-            <select tabindex="1"  style="width:60%;" class="form-control " 
+            <select tabindex="1"   class="form-control" 
             ng-change="getMemberVehicle(id)" 
             ng-model="id" id="membervehicle" name="membervehicle">
-                <!-- <option value="0">Not Selected</option> -->
                 <option ng-repeat="vehicle in membervehicles" ng-selected="current.vehicleid == vehicle.id" value="{{vehicle.id}}">{{vehicle.vehicltype}} {{vehicle.make}} {{vehicle.model}} {{vehicle.color}} {{vehicle.year}} {{vehicle.platenbr}}</option>
             </select>
-            
-            <span style="padding-left:15px;">&nbsp;</span>
-
-            <button style="line-height:.75;" class="btn btn-info btn-sm"  ng-click="newVehicle()" id="newVehicleButton">New</button>
         </div> <!-- end of form-inline -->
     </div> <!-- end of 12 -->
 </div><!-- end of row -->
 
-
-<div style="padding-top:15px;padding-left:35px;" class="row">
+<div style="margin:10px;padding-top:15px;" class="row">
     <form id="membermanagevehicleForm" name="membermanagevehicleForm" style="padding:5px;">
-    <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
+    <div class="panel panel-default form-horizontal col-md-12">
         <div class="col-md-5">
             <div style="padding-top:15px;" class="form-group" >
                 <label for="vehicletype" class="col-md-4 control-label">Vehicle Type</label>
@@ -86,68 +80,66 @@
                 </div>
             </div> <!-- end of form-group -->
                 
-        </div> <!-- end of col 7 -->
+            <div style="padding-top:15px;" class="form-group">
+                <label for="VIN" class="col-md-4 control-label">VIN</label>
+                <div class="col-md-6">
+                    <input tabindex="8" type="text" class="form-control" ng-model="current.vehicle.VIN" id="VIN" name="VIN" placeholder="VIN">
+                </div>
+            </div> <!-- end of form-group -->
 
-        <div class="col-md-6">
+            <div class="form-group">
+                <label for="tirenumber" class="col-md-4 control-label">Tire number</label>
+                <div class="col-md-4">
+                    <input tabindex="9" type="text" class="form-control" ng-model="current.vehicle.tirenumber" id="tirenumber" name="tirenumber" placeholder="Tire number">
+                </div>
+            </div> <!-- end of form-group -->
 
-            <!-- <div class="panel panel-default form-horizontal"> -->
-                <div style="padding-top:15px;" class="form-group">
-                    <label for="VIN" class="col-md-4 control-label">VIN</label>
-                    <div class="col-md-6">
-                        <input tabindex="8" type="text" class="form-control" ng-model="current.vehicle.VIN" id="VIN" name="VIN" placeholder="VIN">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="tiresize" class="col-md-4 control-label">Tire size</label>
+                <div class="col-md-4">
+                    <input tabindex="10" type="text" class="form-control" ng-model="current.vehicle.tiresize" id="tiresize" name="tiresize" placeholder="Tire size">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="tirenumber" class="col-md-4 control-label">Tire number</label>
-                    <div class="col-md-4">
-                        <input tabindex="9" type="text" class="form-control" ng-model="current.vehicle.tirenumber" id="tirenumber" name="tirenumber" placeholder="Tire number">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="vehiclelength" class="col-md-4 control-label">Vehicle Length</label>
+                <div class="col-md-4">
+                    <input tabindex="11" type="text" class="form-control" ng-model="current.vehicle.vehiclelength" id="vehiclelength" name="vehiclelength" placeholder="Vehicle Length">
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="tiresize" class="col-md-4 control-label">Tire size</label>
-                    <div class="col-md-4">
-                        <input tabindex="10" type="text" class="form-control" ng-model="current.vehicle.tiresize" id="tiresize" name="tiresize" placeholder="Tire size">
-                    </div>
-                </div> <!-- end of form-group -->
+            <div class="form-group">
+                <label for="comments" class="col-md-4 control-label">Comments</label>
+                <div class="col-md-7">
+                    <textarea tabindex="12" class="form-control" ng-model="current.vehicle.comments" id="comments" name="comments" rows="3"></textarea>
+                </div>
+            </div> <!-- end of form-group -->
 
-                <div class="form-group">
-                    <label for="vehiclelength" class="col-md-4 control-label">Vehicle Length</label>
-                    <div class="col-md-4">
-                        <input tabindex="11" type="text" class="form-control" ng-model="current.vehicle.vehiclelength" id="vehiclelength" name="vehiclelength" placeholder="Vehicle Length">
-                    </div>
-                </div> <!-- end of form-group -->
-
-                <div class="form-group">
-                    <label for="comments" class="col-md-4 control-label">Comments</label>
-                    <div class="col-md-7">
-                        <textarea tabindex="12" class="form-control" ng-model="current.vehicle.comments" id="comments" name="comments" rows="3"></textarea>
-                    </div>
-                </div> <!-- end of form-group -->
-
-                <div class="form-group" >
-                    <label for="status" class="col-md-4 control-label">Vehicle status</label>
-                    <div class="col-md-3">
-                        <select tabindex="13" class="form-control" ng-model="current.vehicle.status" id="status" name="status" >
-                          <option value="Not Selected">Not Selected</option>
-                          <option ng-repeat="vehiclestatus in vehiclestatuses" value="{{vehiclestatus.value}}">{{vehiclestatus.title}}</option>
-                        </select>
-                    </div>
-                </div> <!-- end of form-group -->
-            <!-- </div> end of panel -->
-        </div> <!-- end of col 4 -->
+            <div class="form-group" >
+                <label for="status" class="col-md-4 control-label">Vehicle status</label>
+                <div class="col-md-3">
+                    <select tabindex="13" class="form-control" ng-model="current.vehicle.status" id="status" name="status" >
+                      <option value="Not Selected">Not Selected</option>
+                      <option ng-repeat="vehiclestatus in vehiclestatuses" value="{{vehiclestatus.value}}">{{vehiclestatus.title}}</option>
+                    </select>
+                </div>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of col 12 -->
     </div> <!-- end of panel   --> 
     </form>   
 </div> <!-- end of row --> 
 
-<div style="padding-top:15px;padding-left:40%;" class="row">
+<div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;" class="row">
     <div class="">
         <button tabindex="14" class="btn btn-info btn-lg" ng-click="updateMemberVehicle()" id="updateButton">Save</button>
 
         <span style="padding-left:15px;">&nbsp;</span>
 
         <button tabindex="15" class="btn btn-danger btn-lg" ng-click="deleteMemberVehicle()" id="deleteButton">Delete</button>
+
+        <span style="padding-left:15px;">&nbsp;</span>
+
+        <button class="btn btn-info btn-lg"  ng-click="newVehicle()" id="newVehicleButton">New</button>
 
 </div> <!-- end of row --> 
 

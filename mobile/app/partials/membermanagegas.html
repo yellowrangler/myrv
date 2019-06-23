@@ -2,7 +2,7 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">Gas Station Information</h2>
+        <h2 class="headerTitle">Manage Gas Information</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -20,72 +20,70 @@
 </div> <!-- end of row -->
 
 <div style="padding-top:35px;" class="row">
-    <div class="col-md-7">
-        <div class="pageStandardOffset row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table pickGameTable entryList" >
-                        <tr class="tableTitle">
-                            <th class="center-column-text">Date</th>  
-                            <th class="center-column-text">Time</th>     
-                            <th class="center-column-text">Odometer</th>    
-                            <th class="center-column-text">Station</th> 
-                            <th class="center-column-text">Location</th>  
-                            <th class="center-column-text">State</th>     
-                            <th class="center-column-text">Amount</th>    
-                            <th class="center-column-text">Gallons</th>
-                            <th class="center-column-text">TNF</th>                    
-                        </tr>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table pickGameTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th>    
+                    <th class="center-column-text">Station</th> 
+                    <th class="center-column-text">Location</th>  
+                    <th class="center-column-text">State</th>     
+                    <th class="center-column-text">Amount</th>    
+                    <th class="center-column-text">Gallons</th>
+                    <th class="center-column-text">TNF</th>                    
+                </tr>
 
-                        <tr ng-repeat="gasdetail in gasdetails" class="notth" ng-click="setCurrentTrip(gasdetail)">
-                            <td class="center-column-text">
-                               {{gasdetail.date}}
-                            </td>
+                <tr ng-repeat="gasdetail in gasdetails" class="notth" ng-click="setCurrentTrip(gasdetail)">
+                    <td class="center-column-text">
+                       {{gasdetail.date}}
+                    </td>
 
-                            <td class="center-column-text">
-                               {{gasdetail.time}}
-                            </td>
+                    <td class="center-column-text">
+                       {{gasdetail.time}}
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{gasdetail.odometer}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{gasdetail.odometer}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{gasdetail.station}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{gasdetail.station}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{gasdetail.location}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{gasdetail.location}} 
+                    </td>
 
-                            <td class="center-column-text">
-                               {{gasdetail.state}}
-                            </td>
+                    <td class="center-column-text">
+                       {{gasdetail.state}}
+                    </td>
 
-                            <td class="center-column-text">
-                                 $ {{gasdetail.amount}} 
-                            </td>
+                    <td class="center-column-text">
+                         $ {{gasdetail.amount}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{gasdetail.gallons}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{gasdetail.gallons}} 
+                    </td>
 
-                            <td class="center-column-text" ng-if="gasdetail.nottankfilled == 1" class="center-column-text">
-                                 No Fill 
-                            </td>
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled == 1" class="center-column-text">
+                         No Fill 
+                    </td>
 
-                            <td class="center-column-text" ng-if="gasdetail.nottankfilled != 1" class="center-column-text">
-                                 Filled 
-                            </td>
-                        </tr>
-                    </table>
-                </div> <!-- end of table responsive -->
-            </div> <!-- end of col 12 -->
-        </div> <!-- end of row -->
-    </div> <!-- end of col-md-7 form-inline -->
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled != 1" class="center-column-text">
+                         Filled 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
 
+    </div> <!-- end of col-md-12 form-inline -->
+</div> <!-- end of row -->
 
-    <div class="col-md-4">
+<div style="margin:10px;padding-top:35px;" class="row">
+    <div class="col-md-12">
         <form id="membergasdetailForm" name="membergasdetailForm" style="" class="form-horizontal">
         <div class="pageStandardOffset row">
             <div class="panel panel-success">

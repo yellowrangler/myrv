@@ -6,7 +6,6 @@
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
-
 <div class="row">
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
@@ -21,58 +20,55 @@
 </div> <!-- end of row -->
 
 <div style="padding-top:35px;" class="row">
-    <div class="col-md-7">
-        <div class="pageStandardOffset row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table pickGameTable entryList" >
-                        <tr class="tableTitle">
-                            <th class="center-column-text">Date</th>  
-                            <th class="center-column-text">Time</th>     
-                            <th class="center-column-text">Restaurant</th>    
-                            <th class="center-column-text">Venue</th> 
-                            <th class="center-column-text">Odometer</th>     
-                            <th class="center-column-text">City</th>
-                            <th class="center-column-text">State</th>                    
-                        </tr>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table pickGameTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Restaurant</th>    
+                    <th class="center-column-text">Venue</th> 
+                    <th class="center-column-text">Odometer</th>     
+                    <th class="center-column-text">City</th>
+                    <th class="center-column-text">State</th>                    
+                </tr>
 
-                        <tr ng-repeat="fooddetail in fooddetails" class="notth" ng-click="setCurrentTrip(fooddetail)">
-                            <td class="center-column-text">
-                               {{fooddetail.date}}
-                            </td>
+                <tr ng-repeat="fooddetail in fooddetails" class="notth" ng-click="setCurrentTrip(fooddetail)">
+                    <td class="center-column-text">
+                       {{fooddetail.date}}
+                    </td>
 
-                            <td class="center-column-text">
-                               {{fooddetail.time}}
-                            </td>
+                    <td class="center-column-text">
+                       {{fooddetail.time}}
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{fooddetail.restaurant}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{fooddetail.restaurant}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{fooddetail.venue}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{fooddetail.venue}} 
+                    </td>
 
-                            <td class="center-column-text">
-                                 {{fooddetail.odometer}} 
-                            </td>
+                    <td class="center-column-text">
+                         {{fooddetail.odometer}} 
+                    </td>
 
-                            <td class="center-column-text">
-                               {{fooddetail.city}}
-                            </td>
+                    <td class="center-column-text">
+                       {{fooddetail.city}}
+                    </td>
 
-                            <td class="center-column-text">
-                               {{fooddetail.state}}
-                            </td>
-                        </tr>
-                    </table>
-                </div> <!-- end of table responsive -->
-            </div> <!-- end of col 12 -->
-        </div> <!-- end of row -->
-    </div> <!-- end of col-md-7 form-inline -->
+                    <td class="center-column-text">
+                       {{fooddetail.state}}
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col-md-12 form-inline -->
+</div> <!-- end of row -->
 
-
-    <div class="col-md-4">
+<div style="margin:10px;padding-top:35px;" class="row">
+    <div class="col-md-12">
         <form id="memberfooddetailForm" name="memberfooddetailForm" style="" class="form-horizontal">
         <div class="pageStandardOffset row">
             <div class="panel panel-success">

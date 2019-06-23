@@ -86,7 +86,9 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
 
         $scope.current.tripid = tripid;
 
-        for (var i = 0; i < $scope.membertrips.length; i++)
+        var tripObjArrayLength = objectArraySize($scope.membertrips);
+
+        for (var i = 0; i < tripObjArrayLength; i++)
         {
             if ($scope.membertrips[i].id == tripid)
             {
@@ -103,7 +105,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         var qdata = 'memberid='+$scope.current.memberid;
         memberFactory.getMemberTrips(qdata)
             .success( function(data) {
-                $scope.membertrips = data;
+                $scope.membertrips = objectCopy(data);;
                 })
             .error( function(edata) {
                 alert(edata);
@@ -174,6 +176,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
                 $('#tripmanageMemberDialogModal').modal();
 
                 getMemberTrips();
+                resetTripForm();
             }
             else
             {
@@ -187,7 +190,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         });
     }
 
-     function DeleteMemberTrip() {
+    function DeleteMemberTrip() {
         var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+"&tripname="+$scope.current.tripname;
 
         // console.log("trip form delete:"+qdata);

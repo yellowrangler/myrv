@@ -2,16 +2,15 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">View Your Vehicle Insurance</h2>
+        <h2 class="headerTitle">View Vehicle Insurance</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
 <div class="pageStandardOffset row">
     <div class="col-md-12">
-        <div style="margin:0 auto;width:50%;" class="form-inline">
+        <div style="margin:10px;width:100%;" class="form-inline">
             <label style="text-align:right;padding-right:15px;" for="membervehicleinsurance">Your Vehicle Insurance</label>
-            
-            <select tabindex="1"  style="width:40%;" class="form-control " 
+            <select tabindex="1"  style="width:60%;" class="form-control " 
             ng-change="getMemberVehicleInsurance(id)" 
             ng-model="id" 
             id="membervehicleinsurance" name="membervehicleinsurance">
@@ -21,9 +20,9 @@
     </div> <!-- end of 12 -->
 </div><!-- end of row -->
 
-<div style="padding-top:15px;padding-left:35px;" class="row">
+<div style="margin:10px;" class="row">
     <form id="memberviewvehicleinsuranceForm" name="memberviewvehicleForm" style="padding:5px;">
-    <div class="panel panel-default form-horizontal col-sm-offset-1 col-lg-10">
+    <div class="panel panel-default form-horizontal col-md-12">
         <div class="col-md-5">
             <div style="padding-top:15px;" class="form-group" >
                 <label for="insurancename" class="col-md-5 control-label">Insurance Provider</label>
@@ -59,10 +58,8 @@
                     <input readonly tabindex="5" type="text" class="form-control" ng-model="current.insurance.effectivedate" id="effectivedate" name="effectivedate" >
                 </div>
             </div> <!-- end of form-group -->
-        </div> <!-- end of col 7 -->
 
-        <div class="col-md-6">
-            <div style="padding-top:15px;" class="form-group">
+            <div class="form-group">
                 <label for="agentname" class="col-md-4 control-label">Agent name</label>
                 <div class="col-md-8">
                     <input readonly tabindex="6" type="text" class="form-control" ng-model="current.insurance.agentname" id="agentname" name="agentname">
