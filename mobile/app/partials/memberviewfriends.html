@@ -1,0 +1,239 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Friend Trip Entries</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripFriendDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+
+            <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
+                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                  <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
+              </div> <!-- end of div-->  
+                </select>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" ng-if="current.showtable == 1" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table exportDataTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th> 
+                    <th class="center-column-text">Friend</th>    
+                    <th class="center-column-text">Address</th>
+                    <th class="center-column-text">City</th>  
+                    <th class="center-column-text">State</th> 
+                    <th class="center-column-text">Zipcode</th>     
+                    <th class="center-column-text">eMail</th>
+                    <th class="center-column-text">Phone</th>   
+                    <th class="center-column-text">Comments</th>                        
+                </tr>
+
+                <tr ng-repeat="frienddetail in frienddetails" class="notth" ng-click="showTripDetail(frienddetail)">
+                    <td class="center-column-text">
+                       {{frienddetail.date}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{frienddetail.time}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{frienddetail.odometer}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.friend}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.address}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.city}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{frienddetail.state}}
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.zipcode}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.email}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.phonenumber}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{frienddetail.comments}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+    <div class="col-md-offset-3 col-md-6 form-horizontal">
+        <div class="pageStandardOffset row">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Friend Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Date
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly readonlytabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.frienddetail.date" id="date" name="date" myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Time
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="30" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.frienddetail.time" id="time" name="time"  />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Friend
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="40" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.frienddetail.friend" id="friend" name="friend" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Odometer
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="60" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.frienddetail.odometer" id="odometer" name="odometer" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Comments
+                        </div>
+                        <div class="col-md-8">
+                            <textarea readonly tabindex="80" style="display:inline;width:90%;" class="form-control" ng-model="current.frienddetail.comments" id="comments" name="comments" rows="3"></textarea>
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Address
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="90" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.frienddetail.address" id="address" name="address" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            City
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="100" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.frienddetail.city" id="city" name="city" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-4  capture-detail-labels-input">
+                            State
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <input readonly tabindex="100" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.frienddetail.state" id="state" name="state" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Zip Code
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="120" type="text" class="form-control"  style="display:inline;width:50%;"  ng-model="current.frienddetail.zipcode" id="zipcode" name="zipcode" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            eMail
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="140" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.frienddetail.email" id="email" name="email">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Phone
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="150" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.frienddetail.phonenumber" id="phonenumber" name="phonenumber">
+                        </div>
+                    </div> <!-- end of form-group -->
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
+  <form role="form"  method="post" enctype="multipart/form-data" novalidate>
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportFriendCaptureButton" >Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+    </form>
+</div> <!-- end of row -->
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryFriendDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryFriendDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryFriendDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryFriendDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

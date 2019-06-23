@@ -1,0 +1,1 @@
+myrvAppMobile.controller(controllers); 

@@ -233,10 +233,32 @@ controllers.loginController = function ($scope, $http, $location, $window, login
         
 }
 
-controllers.homeController = function ($scope, $http, $location, $window, $route, loginService) {
+controllers.homeController = function ($scope, $http, $location, $window, $route, memberFactory, loginService) {
+
+    function getMemberDashboardSnapshot() {
+        getMemberInfo();
+
+        var qdata = 'memberid='+$scope.current.memberid;
+        memberFactory.getMemberDashboardSnapshot(qdata)
+            .success( function(data) {
+                $scope.current.snapshot = data;
+                })
+            .error( function(edata) {
+                alert(edata);
+            }); 
+    }
+
+    function getMemberInfo() {
+        $scope.current.memberlogin = loginService.getLogin();
+        $scope.current.memberid = $scope.current.memberlogin.memberid;
+        $scope.current.membername = $scope.current.memberlogin.membername;
+    }
 
     init();
     function init() {
+        $scope.current = {};
+        $scope.current.snapshot = {};
+
         //
         // this is not getting called at right time for definig top offset 
         // in jquery ready. So adding it here
@@ -247,9 +269,15 @@ controllers.homeController = function ($scope, $http, $location, $window, $route
 
         var loggedIn = loginService.isLoggedIn();
         if (loggedIn)
+        {
             $("#loginHomeButton").text("Logoff");
+
+            getMemberDashboardSnapshot();
+        }
         else
+        {
             $("#loginHomeButton").text("Login");
+        }
     };
 
     $scope.homepagelogin = function () {

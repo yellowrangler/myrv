@@ -1,0 +1,136 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Friend Capture</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<form id="membercapturefriendForm" name="membercapturefriendForm" style="" class="form-horizontal">
+<div class="pageStandardOffset row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="panel panel-success">
+            <div class="panel-heading panelTitlelMYRV">
+                Friend Information
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group" >
+                    <label for="tripname" class="col-md-4 control-label capture-detail-labels-input">Active Trip</label>
+                    <div class="col-md-4">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.tripname" readonly id="tripname" name="tripname">
+                    </div> <!-- end of col -->
+
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                    <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <label for="friend" class="col-md-4 control-label capture-detail-labels-input">Friend</label>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.friend" id="friend" name="friend" placeholder="Friend full name">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
+                    <div class="col-md-7">
+                        <textarea tabindex="3" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="5"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="datein" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date</label>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setToday()" id="settoday">Today</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="time" class="col-md-4 control-label capture-detail-labels-input">Time</label>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="city" class="col-md-4 control-label capture-detail-labels-input">Address</label>
+                    <div class="col-md-4">
+                        <input tabindex="8" type="text" class="form-control" ng-model="current.capture.address" id="address" name="address" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="city" class="col-md-4 control-label capture-detail-labels-input">City</label>
+                    <div class="col-md-4">
+                        <input tabindex="9" type="text" class="form-control" ng-model="current.capture.city" id="city" name="city" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+
+                <div class="form-group">
+                    <label for="state" class="col-md-4 control-label capture-detail-labels-input">State</label>
+                    <div class="col-md-4">
+                        <select tabindex="10" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                            <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+                        </select>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="phonenumber" class="col-md-4 control-label capture-detail-labels-input">Phone Number</label>
+                    <div class="col-md-4">
+                        <input tabindex="11" type="text" class="form-control" ng-model="current.capture.phonenumber" id="phonenumber" name="phonenumber" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label capture-detail-labels-input">eMail</label>
+                    <div class="col-md-7">
+                        <input tabindex="12" type="text" class="form-control" ng-model="current.capture.email" id="email" name="email" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+            </div> <!-- end of col 7 -->
+        </div> <!-- end of panel body -->
+    </div> <!-- end of panel success -->            
+</div> <!-- end of row --> 
+
+<div style="padding-top:15px;padding-left:40%;" class="row">
+    <div class="">
+        <button tabindex="29" class="btn btn-success btn-lg" ng-click="saveFriendCapture()" id="updateButton">Save</button>
+
+        <span style="padding-left:15px;">&nbsp;</span>
+
+        <button tabindex="30" class="btn btn-info btn-lg" ng-click="resetFriendCapture()" id="cleareButton">Clear</button>
+    </div>
+</div> <!-- end of row --> 
+
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memCaptureFriendDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureFriendDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memCaptureFriendDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memCaptureFriendDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

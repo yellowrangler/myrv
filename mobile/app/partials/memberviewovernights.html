@@ -1,0 +1,447 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Overnight Trip Entries</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripOvernightDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+
+            <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
+                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                  <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
+              </div> <!-- end of div-->  
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table exportDataTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date in</th>  
+                    <th class="center-column-text">Time in</th>     
+                    <th class="center-column-text">Odometer</th> 
+                    <th class="center-column-text">Name</th> 
+                    <th class="center-column-text">Type</th>    
+                    <th class="center-column-text">Cost</th>  
+                    <th class="center-column-text">Other fees</th> 
+                    <th class="center-column-text">Date out</th>  
+                    <th class="center-column-text">Time out</th>      
+                    <th class="center-column-text">Address</th>
+                    <th class="center-column-text">City</th>  
+                    <th class="center-column-text">State</th> 
+                    <th class="center-column-text">Zipcode</th>     
+                    <th class="center-column-text">Website url</th>
+                    <th class="center-column-text">eMail</th>
+                    <th class="center-column-text">Phone</th>   
+                    <th class="center-column-text">Comments</th>
+                    <th class="center-column-text">elec</th>
+                    <th class="center-column-text">water</th>
+                    <th class="center-column-text">sewer</th>
+                    <th class="center-column-text">dump</th>
+                    <th class="center-column-text">show</th>
+                    <th class="center-column-text">bath</th>
+                    <th class="center-column-text">laun</th>
+                    <th class="center-column-text">food</th>
+                    <th class="center-column-text">shop</th>
+                    <th class="center-column-text">firpt</th>
+                    <th class="center-column-text">fire</th>
+                    <th class="center-column-text">wifi</th>
+                    <th class="center-column-text">prop</th>  
+                    <th class="center-column-text">pets</th>                        
+                </tr>
+
+                <tr ng-repeat="overnightdetail in overnightdetails" class="notth" ng-click="showTripDetail(overnightdetail)">
+                    <td class="center-column-text">
+                       {{overnightdetail.datein}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{overnightdetail.timein}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{overnightdetail.odometer}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.overnightname}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.typestay}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.cost}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{overnightdetail.otherfees}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{overnightdetail.dateout}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{overnightdetail.timeout}}
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.address}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.city}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{overnightdetail.state}}
+                    </td>
+
+                    <td class="left-column-text">
+                       {{overnightdetail.zipcode}}
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.websiteurl}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.email}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.phonenumber}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.comments}} 
+                    </td>
+
+                    <td class="center-column-text">{{overnightdetail.electric}}</td>
+                    <td class="center-column-text">{{overnightdetail.water}}</td>
+                    <td class="center-column-text">{{overnightdetail.sewer}}</td>
+                    <td class="center-column-text">{{overnightdetail.dumpsite}}</td>
+                    <td class="center-column-text">{{overnightdetail.showers}}</td>
+                    <td class="center-column-text">{{overnightdetail.bathrooms}}</td>
+                    <td class="center-column-text">{{overnightdetail.laundry}}</td>
+                    <td class="center-column-text">{{overnightdetail.food}}</td>
+                    <td class="center-column-text">{{overnightdetail.shopping}}</td>
+                    <td class="center-column-text">{{overnightdetail.firepit}}</td>
+                    <td class="center-column-text">{{overnightdetail.fires}}</td>
+                    <td class="center-column-text">{{overnightdetail.wifi}}</td>
+                    <td class="center-column-text">{{overnightdetail.propane}}</td>
+                    <td class="center-column-text">{{overnightdetail.pets}}</td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+    <div class="col-md-offset-1 col-md-4 form-horizontal">
+        <div class="panel panel-success">
+            <div class="panel-heading panelTitlelMYRV">
+                Overnight Detail
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Date in
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly  tabindex="20" type="text" class="form-control" size="8" ng-model="current.overnightdetail.datein" id="datein" name="datein" myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Time in
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="30" type="text" class="form-control" size="8"  ng-model="current.overnightdetail.timein" id="timein" name="timein"  />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                 <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Name
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="40" type="text" class="form-control" ng-model="current.overnightdetail.overnightname" id="overnightname" name="overnightname" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Type Stay
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="40" type="text" class="form-control" ng-model="current.overnightdetail.typestay" id="typestay" name="typestay" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Odometer
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="42" type="text" class="form-control" ng-model="current.overnightdetail.odometer" id="odometer" name="odometer" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Date out
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly  tabindex="43" type="text" class="form-control" size="8" ng-model="current.overnightdetail.dateout" id="dateout" name="dateout" myrvdatepicker />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Time out
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="44" type="text" class="form-control" size="8"  ng-model="current.overnightdetail.timeout" id="timeout" name="timeout"  />
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Cost  
+                    </div>
+                    <div class="col-md-8 form-inline">
+                        <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <span style="display:inline;" class="input-group-addon">$</span>
+                        <input readonly style="display:inline;width:80%;" tabindex="70" type="text" class="form-control" ng-model="current.overnightdetail.cost" id="cost" name="cost">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Other fees  
+                    </div>
+                    <div class="col-md-8 form-inline">
+                        <textarea style="display:inline;width:100%;" readonly tabindex="80" class="form-control" ng-model="current.overnightdetail.otherfees" id="otherfees" name="otherfees" rows="4"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Comments
+                    </div>
+                    <div class="col-md-8 form-inline">
+                        <textarea style="display:inline;width:100%;" readonly tabindex="80" class="form-control" ng-model="current.overnightdetail.comments" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Restrictions
+                    </div>
+                    <div class="col-md-8 form-inline">
+                        <textarea style="display:inline;width:100%;" readonly tabindex="81" class="form-control" ng-model="current.overnightdetail.restrictions" id="restrictions" name="restrictions" rows="4"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Address
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="90" type="text" class="form-control"  ng-model="current.overnightdetail.address" id="address" name="address" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        City
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="100" type="text" class="form-control"  ng-model="current.overnightdetail.city" id="city" name="city" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <div class="col-md-4  capture-detail-labels-input">
+                        State
+                    </div>
+                
+                    <div class="col-md-8">
+                         <input readonly tabindex="100" type="text" class="form-control"  ng-model="current.overnightdetail.state" id="state" name="state" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Zip Code
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="120" type="text" class="form-control"   ng-model="current.overnightdetail.zipcode" id="zipcode" name="zipcode" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Website
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="130" type="text" class="form-control" ng-model="current.overnightdetail.websiteurl" id="websiteurl" name="websiteurl">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                 <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        eMail
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="140" type="text" class="form-control" ng-model="current.overnightdetail.email" id="email" name="email">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Phone
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="150" type="text" class="form-control" ng-model="current.overnightdetail.phonenumber" id="phonenumber" name="phonenumber">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Contact
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly tabindex="160" type="text" class="form-control" ng-model="current.overnightdetail.contact" id="contact" name="contact">
+                    </div>
+                </div> <!-- end of form-group -->
+
+            </div> <!--end of pannel body  -->
+        </div> <!-- end of pannel -->
+    </div> <!-- end of col 6 -->
+        
+    <div class="col-md-offset-1 col-md-3 form-horizontal">
+        <div class="panel panel-info">
+            <div class="panel-heading panelTitlelMYRV">
+                Amenities
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="15" type="checkbox" ng-model="current.overnightdetail.electric" ng-checked="current.overnightdetail.electric == '1'" ng-change="checkBoxValue('electric')" id="electric" name="electric"> Electric
+                    </div>
+
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="16" type="checkbox" ng-model="current.overnightdetail.water" ng-change="checkBoxValue('water')" ng-checked="current.overnightdetail.water == '1'" id="water" name="water"> Water
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="17" type="checkbox" ng-model="current.overnightdetail.sewer" ng-change="checkBoxValue('sewer')" ng-checked="current.overnightdetail.sewer == '1'" id="sewer" name="sewer"> Sewer
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="18" type="checkbox" ng-model="current.overnightdetail.dumpsite" ng-change="checkBoxValue('dumpsite')" ng-checked="current.overnightdetail.dumpsite == '1'" id="dumpsite" name="dumpsite"> Dump site
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="19" type="checkbox" ng-model="current.overnightdetail.showers" ng-change="checkBoxValue('showers')" ng-checked="current.overnightdetail.showers == '1'" id="showers" name="showers"> Showers
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="20" type="checkbox" ng-model="current.overnightdetail.bathrooms" ng-change="checkBoxValue('bathrooms')" ng-checked="current.overnightdetail.bathrooms == '1'" id="bathrooms" name="bathrooms"> Bathrooms
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="21" type="checkbox" ng-model="current.overnightdetail.laundry" ng-change="checkBoxValue('laundry')" ng-checked="current.overnightdetail.laundry == '1'" id="laundry" name="laundry"> Laundry
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="22" type="checkbox" ng-model="current.overnightdetail.food" ng-change="checkBoxValue('food')" ng-checked="current.overnightdetail.food == '1'" id="food" name="food"> Food
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="23" type="checkbox" ng-model="current.overnightdetail.shopping" ng-change="checkBoxValue('shopping')" ng-checked="current.overnightdetail.shopping == '1'" id="shopping" name="shopping"> Shopping
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="24" type="checkbox" ng-model="current.overnightdetail.firepit" ng-change="checkBoxValue('firepit')" ng-checked="current.overnightdetail.firepit == '1'" id="firepit" name="firepit"> Firepit
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="25" type="checkbox" ng-model="current.overnightdetail.fires" ng-change="checkBoxValue('fires')" ng-checked="current.overnightdetail.fires == '1'" id="fires" name="fires"> Fires
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="26" type="checkbox" ng-model="current.overnightdetail.wifi" ng-change="checkBoxValue('wifi')" ng-checked="current.overnightdetail.wifi == '1'" id="wifi" name="wifi"> wifi
+                    </div>
+
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="27" type="checkbox" ng-model="current.overnightdetail.propane" ng-change="checkBoxValue('propane')" ng-checked="current.overnightdetail.propane == '1'" id="propane" name="propane"> Propane
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input readonly  tabindex="28" type="checkbox" ng-model="current.overnightdetail.pets" ng-change="checkBoxValue('pets')" ng-checked="current.overnightdetail.pets == '1'" id="pets" name="pets"> Pets
+                    </div>
+                </div> <!-- end of form-group -->
+            </div> <!-- end of panel body -->
+        </div> <!-- end of panel success -->
+    </div>    <!-- end of col 3 -->
+</div> <!-- end of row -->
+
+<form role="form"  method="post" enctype="multipart/form-data" novalidate>
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportOvernightCaptureButton" >Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryOvernightDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryOvernightDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryOvernightDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryOvernightDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

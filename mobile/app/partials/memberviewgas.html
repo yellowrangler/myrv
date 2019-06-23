@@ -1,0 +1,281 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Gas Trip Information</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripGasDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+
+            <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
+                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                  <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
+                </div> <!-- end of div-->  
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table exportDataTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th>    
+                    <th class="center-column-text">Station</th> 
+                    <th class="center-column-text">Location</th>  
+                    <th class="center-column-text">State</th>     
+                    <th class="center-column-text">Amount</th>    
+                    <th class="center-column-text">Gallons</th>
+                    <th class="center-column-text">TNF</th>
+                    <th class="center-column-text">CPG</th> 
+                    <th class="center-column-text">Miles</th>  
+                    <th class="center-column-text">MPG</th>                        
+                </tr>
+
+                <tr ng-repeat="gasdetail in gasdetails" class="notth" ng-click="showTripDetail(gasdetail)">
+                    <td class="center-column-text">
+                       {{gasdetail.date}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.time}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.odometer}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.station}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.location}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.state}}
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gasdetail.amount}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.gallons}} 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled == 1" class="center-column-text">
+                         No Fill 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gasdetail.nottankfilled != 1" class="center-column-text">
+                         Filled 
+                    </td>
+                    
+                    <td class="center-column-text">
+                         $ {{gasdetail.costpergallon}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gasdetail.miles}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gasdetail.mpg}} 
+                    </td>
+                </tr>
+                <tr class="viewTotalsList">
+                    <td class="right-column-text">
+                       Trip Totals
+                    </td>
+
+                    <td class="center-column-text">
+                        &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gastotals.odometer}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         &nbsp; 
+                    </td>
+
+                    <td class="center-column-text">
+                          &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                        &nbsp;
+                    </td>
+
+                    <td class="center-column-text">
+                         $ {{gastotals.totalamount}} 
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gastotals.totalgallons}} 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gastotals.nottankfilled == 1" class="center-column-text">
+                         No Fill 
+                    </td>
+
+                    <td class="center-column-text" ng-if="gastotals.nottankfilled != 1" class="center-column-text">
+                         Filled 
+                    </td>
+                    
+                    <td class="center-column-text">
+                         $ {{gastotals.avecostpergallon}} 
+                    </td>
+
+                    <td class="center-column-text">
+                       {{gastotals.totalmiles}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{gastotals.avempg}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+    <div class="col-md-offset-3 col-md-6 form-horizontal">
+        <div class="pageStandardOffset row">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Gas Fill Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Date
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly  tabindex="2" type="text" class="form-control" size="8" ng-model="current.gasdetail.date" id="date" name="date" myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Time
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="3" type="text" class="form-control" size="8" ng-model="current.gasdetail.time" id="time" name="time"  />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Odometer
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="4" type="text" class="form-control" ng-model="current.gasdetail.odometer" id="odometer" name="odometer" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Station
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="5" type="text" class="form-control" ng-model="current.gasdetail.station" id="station" name="station" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Location
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="6" type="text" class="form-control" ng-model="current.gasdetail.location" id="location" name="location" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-3  capture-detail-labels-input">
+                            State
+                        </div>
+                    
+                        <div class="col-md-8">
+                            <input readonly tabindex="6" type="text" class="form-control" ng-model="current.gasdetail.state" id="state" name="state" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Amount  
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input readonly style="display:inline;width:80%;" tabindex="8" type="text" class="form-control" ng-model="current.gasdetail.amount" id="amount" name="amount">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-3  capture-detail-labels-input">
+                            Gallons
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="9" type="text" class="form-control" ng-model="current.gasdetail.gallons" id="gallons" name="gallons">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-offset-3 col-md-8 capture-detail-checkbox-input">
+                            <input readonly style="padding-top:10px;" tabindex="10" type="checkbox" ng-model="current.gasdetail.nottankfilled" id="nottankfilled" ng-checked="current.gasdetail.nottankfilled == '1'" name="nottankfilled"> Tank not filled
+                        </div>
+                    </div> <!-- end of form-group -->
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<form role="form"  method="post" enctype="multipart/form-data" novalidate>
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportGasCaptureButton" >Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryGasDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryGasDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryGasDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryGasDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

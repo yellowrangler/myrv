@@ -1,0 +1,244 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Overnight Stay Capture</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<form id="membercaptureovernightForm" name="membercaptureovernightForm" style="" class="form-horizontal">
+<div class="pageStandardOffset row">
+    <div class="col-md-offset-1 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading panelTitlelMYRV">
+                Overnight Stay Information
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group" >
+                    <label for="tripname" class="col-md-4 control-label capture-detail-labels-input">Active Trip</label>
+                    <div class="col-md-4">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.tripname" readonly id="tripname" name="tripname">
+                    </div> <!-- end of col -->
+
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                    <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <label for="overnightname" class="col-md-4 control-label capture-detail-labels-input">Name</label>
+                    <div class="col-md-7">
+                        <input tabindex="2" type="text" class="form-control" ng-model="current.capture.overnightname" id="overnightname" name="overnightname" placeholder="Overnight stay name">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="typestay" class="col-md-4 control-label capture-detail-labels-input">Type Stay</label>
+                    <div class="col-md-4">
+                        <select tabindex="3" class="form-control" ng-model="current.capture.typestay" id="typestay" name="typestay" >
+                            <option ng-repeat="typestay in typestays" value="{{typestay.value}}">{{typestay.title}}</option>
+                        </select>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="cost" class="col-md-4 control-label capture-detail-labels-input">Cost</label>
+                    <div class="col-md-7">
+                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
+                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="datein" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date In</label>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.datein" id="datein" size="8" name="datein" myrvdatepicker>
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setToday()" id="settoday">Today</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="timein" class="col-md-4 control-label capture-detail-labels-input">Time In</label>
+                    <div class="col-md-7">
+                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.timein" id="timein" name="timein">
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="restrictions" class="col-md-4 control-label capture-detail-labels-input">Restrictions</label>
+                    <div class="col-md-7">
+                        <textarea tabindex="7" class="form-control" ng-model="current.capture.restrictions" id="restrictions" name="restrictions" rows="3"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
+                    <div class="col-md-7">
+                        <textarea tabindex="8" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="city" class="col-md-4 control-label capture-detail-labels-input">City</label>
+                    <div class="col-md-4">
+                        <input tabindex="9" type="text" class="form-control" ng-model="current.capture.city" id="city" name="city" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="state" class="col-md-4 control-label capture-detail-labels-input">State</label>
+                    <div class="col-md-4">
+                        <select tabindex="10" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                            <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+                        </select>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="phonenumber" class="col-md-4 control-label capture-detail-labels-input">Phone Number</label>
+                    <div class="col-md-4">
+                        <input tabindex="11" type="text" class="form-control" ng-model="current.capture.phonenumber" id="phonenumber" name="phonenumber" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label capture-detail-labels-input">eMail</label>
+                    <div class="col-md-7">
+                        <input tabindex="12" type="text" class="form-control" ng-model="current.capture.email" id="email" name="email" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="websiteurl" class="col-md-4 control-label capture-detail-labels-input">Website URL</label>
+                    <div class="col-md-4">
+                        <input tabindex="13" type="text" class="form-control" ng-model="current.capture.websiteurl" id="websiteurl" name="websiteurl" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="contact" class="col-md-4 control-label capture-detail-labels-input">Contact Name</label>
+                    <div class="col-md-4">
+                        <input tabindex="14" type="text" class="form-control" ng-model="current.capture.contact" id="contact" name="contact" >
+                    </div>
+                </div> <!-- end of form-group -->
+            </div> <!-- end of col 7 -->
+        </div> <!-- end of panel body -->
+    </div> <!-- end of panel success -->
+
+        
+    <div class="col-md-offset-1 col-md-3 col-md-offset-1">
+        <div class="panel panel-info">
+            <div class="panel-heading panelTitlelMYRV">
+                Amenities
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="15" type="checkbox" ng-model="current.capture.electric" ng-checked="current.capture.electric == '1'" ng-change="checkBoxValue('electric')" id="electric" name="electric"> Electric
+                    </div>
+
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="16" type="checkbox" ng-model="current.capture.water" ng-change="checkBoxValue('water')" ng-checked="current.capture.water == '1'" id="water" name="water"> Water
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="17" type="checkbox" ng-model="current.capture.sewer" ng-change="checkBoxValue('sewer')" ng-checked="current.capture.sewer == '1'" id="sewer" name="sewer"> Sewer
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="18" type="checkbox" ng-model="current.capture.dumpsite" ng-change="checkBoxValue('dumpsite')" ng-checked="current.capture.dumpsite == '1'" id="dumpsite" name="dumpsite"> Dump site
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="19" type="checkbox" ng-model="current.capture.showers" ng-change="checkBoxValue('showers')" ng-checked="current.capture.showers == '1'" id="showers" name="showers"> Showers
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="20" type="checkbox" ng-model="current.capture.bathrooms" ng-change="checkBoxValue('bathrooms')" ng-checked="current.capture.bathrooms == '1'" id="bathrooms" name="bathrooms"> Bathrooms
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="21" type="checkbox" ng-model="current.capture.laundry" ng-change="checkBoxValue('laundry')" ng-checked="current.capture.laundry == '1'" id="laundry" name="laundry"> Laundry
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="22" type="checkbox" ng-model="current.capture.food" ng-change="checkBoxValue('food')" ng-checked="current.capture.food == '1'" id="food" name="food"> Food
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="23" type="checkbox" ng-model="current.capture.shopping" ng-change="checkBoxValue('shopping')" ng-checked="current.capture.shopping == '1'" id="shopping" name="shopping"> Shopping
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="24" type="checkbox" ng-model="current.capture.firepit" ng-change="checkBoxValue('firepit')" ng-checked="current.capture.firepit == '1'" id="firepit" name="firepit"> Firepit
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="25" type="checkbox" ng-model="current.capture.fires" ng-change="checkBoxValue('fires')" ng-checked="current.capture.fires == '1'" id="fires" name="fires"> Fires
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="26" type="checkbox" ng-model="current.capture.wifi" ng-change="checkBoxValue('wifi')" ng-checked="current.capture.wifi == '1'" id="wifi" name="wifi"> wifi
+                    </div>
+
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="27" type="checkbox" ng-model="current.capture.propane" ng-change="checkBoxValue('propane')" ng-checked="current.capture.propane == '1'" id="propane" name="propane"> Propane
+                    </div>
+
+                    
+                     <div style="padding-top:25px" class="col-md-offset-4 capture-detail-checkbox-input">
+                        <input  tabindex="28" type="checkbox" ng-model="current.capture.pets" ng-change="checkBoxValue('pets')" ng-checked="current.capture.pets == '1'" id="pets" name="pets"> Pets
+                    </div>
+                </div> <!-- end of form-group -->
+             </div> <!-- end of panel body -->
+        </div> <!-- end of panel success -->
+    </div> <!-- end of col-4 -->                
+</div> <!-- end of row --> 
+
+<div style="padding-top:15px;padding-left:40%;" class="row">
+    <div class="">
+        <button tabindex="29" class="btn btn-success btn-lg" ng-click="saveOvernightCapture()" id="updateButton">Save</button>
+
+        <span style="padding-left:15px;">&nbsp;</span>
+
+        <button tabindex="30" class="btn btn-info btn-lg" ng-click="resetOvernightCapture()" id="cleareButton">Clear</button>
+    </div>
+</div> <!-- end of row --> 
+
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memCaptureOvernightDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureOvernightDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memCaptureOvernightDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memCaptureOvernightDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

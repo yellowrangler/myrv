@@ -1,0 +1,196 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Manage Your Trip Information</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="pageStandardOffset row">
+    <div style="padding-top:35px;" class="row">
+    <div class="col-md-7">
+        <div class="pageStandardOffset row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table pickGameTable entryList" >
+                        <tr class="tableTitle">
+                            <th class="center-column-text">Start Date</th>  
+                            <th class="center-column-text">Trip Name</th>     
+                            <th class="center-column-text">Odometer</th>    
+                            <th class="center-column-text">Start Location</th> 
+                            <th class="center-column-text">End Location</th>
+                            <th class="center-column-text">End Date</th>               
+                        </tr>
+
+                        <tr ng-repeat="trip in membertrips" class="notth" ng-click="getMemberTrip(trip.id)">
+                            <td class="center-column-text">
+                               {{trip.startdate}}
+                            </td>
+
+                            <td class="left-column-text">
+                               {{trip.tripname}}
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{trip.startodometer}} 
+                            </td>
+
+                            <td class="left-column-text">
+                                 {{trip.startlocation}} 
+                            </td>
+
+                            <td class="left-column-text">
+                                 {{trip.endlocation}} 
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{trip.enddate}} 
+                            </td>
+                        </tr>
+                    </table>
+                </div> <!-- end of table responsive -->
+            </div> <!-- end of col 12 -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col-md-7 form-inline -->
+
+    <div class="col-md-4">
+        <form id="membermanagetripForm" name="membermanagetripForm" style="" class="form-horizontal">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Trip Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group" >
+                        <div class="col-md-12  formLabel">
+                            This is the name of your trip
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="1" type="text" class="form-control" ng-model="current.trip.tripname" id="tripname" name="tripname" placeholder="Trip name">
+                        </div> <!-- end of col -->
+
+                        <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                        <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-12 formLabel">
+                            <input tabindex="2" type="checkbox" ng-model="current.trip.currenttrip" ng-checked="current.trip.currenttrip == '1'" id="currenttrip" name="currenttrip"> Make trip Active
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-12  formLabel">
+                            Where does your trip begin?
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="3" type="text" class="form-control" ng-model="current.trip.startlocation" id="startlocation" name="startlocation" placeholder="Start Location">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-12 formLabel">
+                            Where are you going?
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="4" type="text" class="form-control" ng-model="current.trip.endlocation" id="endlocation" name="endlocation" placeholder="Destination">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-12 formLabel">
+                            What is your Tow Vehicle?
+                        </div>
+                    
+                        <div class="col-md-9">
+                            <select tabindex="5" class="form-control" ng-model="current.trip.towvehicle" id="towvehicle" name="towvehicle" >
+                                <option value="Not Selected">Not Selected</option>
+                                <option ng-repeat="towvehicle in membertowvehicles" value="{{towvehicle.id}}">{{towvehicle.make}} {{towvehicle.model}} {{towvehicle.platenbr}}</option>
+                            </select>
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-12 formLabel">
+                            What is your RV?
+                        </div>
+                    
+                        <div class="col-md-9">
+                            <select tabindex="6" class="form-control" ng-model="current.trip.rv" id="rv" name="rv" >
+                                <option value="Not Selected">Not Selected</option>
+                                <option ng-repeat="rv in memberrvvehicles" value="{{rv.id}}">{{rv.make}} {{rv.model}} {{rv.platenbr}}</option>
+                            </select>
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-12 formLabel">
+                            Travel Date Start
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="7" type="text" class="form-control" ng-model="current.trip.startdate" id="startdate" name="startdate"  myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-12 formLabel">
+                            Starting Odometer 
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="8" type="text" class="form-control" ng-model="current.trip.startodometer" id="startodometer" ng-blur="odometerChange('startodometer')" ng-readonly="current.tripid != ''" name="startodometer" placeholder="Start Odometer">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+
+                    <div class="form-group">
+                        <div class="col-md-12 formLabel">
+                            Travel Date End
+                        </div>
+                        <div class="col-md-12">
+                            <input tabindex="9" type="text" class="form-control" ng-model="current.trip.enddate" id="enddate" name="enddate"  myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+                    <div class="form-group">
+                        <div class="col-md-12 formLabel">
+                            Ending Odometer 
+                        </div>
+                        <div class="col-md-7">
+                            <input tabindex="10" type="text" class="form-control" ng-model="current.trip.endodometer" id="endodometer" name="endodometer" ng-blur="odometerChange('endodometer')" placeholder="End Odometer">
+                        </div>
+                    </div> <!-- end of form-group --> 
+                </div>  <!-- end of inner pannel body -->  
+            </div> <!-- end of inner pannel -->
+
+             <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">  
+                <span style="padding-left:5px;">&nbsp;</span>
+                <button style="width:20%;" class="btn btn-default" ng-click="clearTrip()" id="clearTripButton">Clear</button>
+
+                <span style="padding-left:5px;">&nbsp;</span>
+                <button style="width:20%;" class="btn btn-info" ng-click="tripAdd()" id="tripAddButton">Add</button>
+           
+                <span style="padding-left:5px;">&nbsp;</span>
+                <button style="width:20%;" class="btn btn-success" ng-click="saveMemberTrip()" id="saveMemberTripButton">Save</button>
+
+                <span style="padding-left:5px;">&nbsp;</span>
+                <button style="width:20%;" class="btn btn-danger" ng-click="DeleteMemberTrip()" id="DeleteMemberTripButton">Delete</button>
+            </div> <!-- end of div-->                  
+        </form>
+    </div> <!-- end of div col md 4 -->
+</div> <!-- end of row -->
+
+<!-- dialogs -->
+<div class="modal fade" id="tripmanageMemberDialogModal" role="dialog" aria-labelledby="tripmanageMemberDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="tripmanageMemberDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="tripmanageMemberDialogModalBody"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

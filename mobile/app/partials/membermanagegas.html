@@ -1,0 +1,221 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Gas Station Information</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripGasDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" class="row">
+    <div class="col-md-7">
+        <div class="pageStandardOffset row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table pickGameTable entryList" >
+                        <tr class="tableTitle">
+                            <th class="center-column-text">Date</th>  
+                            <th class="center-column-text">Time</th>     
+                            <th class="center-column-text">Odometer</th>    
+                            <th class="center-column-text">Station</th> 
+                            <th class="center-column-text">Location</th>  
+                            <th class="center-column-text">State</th>     
+                            <th class="center-column-text">Amount</th>    
+                            <th class="center-column-text">Gallons</th>
+                            <th class="center-column-text">TNF</th>                    
+                        </tr>
+
+                        <tr ng-repeat="gasdetail in gasdetails" class="notth" ng-click="setCurrentTrip(gasdetail)">
+                            <td class="center-column-text">
+                               {{gasdetail.date}}
+                            </td>
+
+                            <td class="center-column-text">
+                               {{gasdetail.time}}
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{gasdetail.odometer}} 
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{gasdetail.station}} 
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{gasdetail.location}} 
+                            </td>
+
+                            <td class="center-column-text">
+                               {{gasdetail.state}}
+                            </td>
+
+                            <td class="center-column-text">
+                                 $ {{gasdetail.amount}} 
+                            </td>
+
+                            <td class="center-column-text">
+                                 {{gasdetail.gallons}} 
+                            </td>
+
+                            <td class="center-column-text" ng-if="gasdetail.nottankfilled == 1" class="center-column-text">
+                                 No Fill 
+                            </td>
+
+                            <td class="center-column-text" ng-if="gasdetail.nottankfilled != 1" class="center-column-text">
+                                 Filled 
+                            </td>
+                        </tr>
+                    </table>
+                </div> <!-- end of table responsive -->
+            </div> <!-- end of col 12 -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col-md-7 form-inline -->
+
+
+    <div class="col-md-4">
+        <form id="membergasdetailForm" name="membergasdetailForm" style="" class="form-horizontal">
+        <div class="pageStandardOffset row">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Gas Entry Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Date
+                        </div>
+                        <div class="col-md-8">
+                            <input  tabindex="2" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.gasdetail.date" id="date" name="date" myrvdatepicker />
+
+                            <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                            <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                            <input type="hidden" value="{{current.gasdetail.id}}" id="detailid" name="detailid">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Time
+                        </div>
+                        <div class="col-md-8">
+                            <input tabindex="3" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.gasdetail.time" id="time" name="time"  />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Odometer
+                        </div>
+                        <div class="col-md-8">
+                            <input tabindex="4" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.gasdetail.odometer" id="odometer" name="odometer" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Station
+                        </div>
+                        <div class="col-md-8">
+                            <input tabindex="5" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.gasdetail.station" id="station" name="station" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Location
+                        </div>
+                        <div class="col-md-8">
+                            <input tabindex="6" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.gasdetail.location" id="location" name="location" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-4  capture-detail-labels-input">
+                            State
+                        </div>
+                    
+                        <div class="col-md-8">
+                            <select tabindex="7" class="form-control" style="display:inline;width:90%;" ng-model="current.gasdetail.state" id="state" name="state" >
+                                <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+                            </select>
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Amount  
+                        </div>
+                        <div class="col-md-8 form-inline">
+                        	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input style="display:inline;width:70%;" tabindex="8" type="text" class="form-control" ng-model="current.gasdetail.amount" id="amount" name="amount">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Gallons
+                        </div>
+                        <div class="col-md-8">
+                            <input tabindex="9" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.gasdetail.gallons" id="gallons" name="gallons">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-offset-4 col-md-7 capture-detail-checkbox-input">
+                            <input style="padding-top:10px;" tabindex="10" type="checkbox" ng-model="current.gasdetail.nottankfilled" ng-checked="current.gasdetail.nottankfilled == '1'" id="nottankfilled" name="nottankfilled"> Tank not filled
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                        <button style="width:20%;" class="btn btn-default" ng-click="resetGasDetailUpdate()" id="resetGasDetailUpdateButton">Clear</button>
+                        
+                        <span style="padding-left:5px;">&nbsp;</span>
+                        <button style="width:20%;" class="btn btn-info" ng-click="resetGasDetailAdd()" id="resetGasDetailAddButton">Add</button>
+                   
+                        <span style="padding-left:5px;">&nbsp;</span>
+                        <button style="width:20%;" class="btn btn-success" ng-click="saveGasDetail()" id="saveGasDetailButton">Save</button>
+
+                        <span style="padding-left:5px;">&nbsp;</span>
+                        <button style="width:20%;" class="btn btn-danger" ng-click="deleteGasDetail()" id="deleteGasDetailButton">Delete</button>
+                    </div> <!-- end of div-->  
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of row -->
+        </form>
+    </div> <!-- end of col-md-4 form-inline -->
+</div> <!-- end of row -->
+
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryGasDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryGasDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryGasDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryGasDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

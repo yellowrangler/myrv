@@ -1,0 +1,295 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">View Special Event Information</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<div class="row">
+    <div class="col-md-12 form-inline">
+        <div class="pageStandardOffset">
+            <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
+                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
+                <select class="customSelect form-control" ng-change="getMemberTripEventDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                </select>
+            </div> <!-- end of form-group -->
+
+            <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
+                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                  <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
+                </div> <!-- end of div-->  
+            </div> <!-- end of form-group -->
+        </div> <!-- end of panelOffset -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table exportDataTable entryList" >
+                <tr class="tableTitle">
+                    <th class="center-column-text">Date</th>  
+                    <th class="center-column-text">Time</th>     
+                    <th class="center-column-text">Odometer</th>    
+                    <th class="center-column-text">Event</th> 
+                    <th class="center-column-text">Venue</th>
+                    <th class="center-column-text">Address</th>
+                    <th class="center-column-text">City</th>  
+                    <th class="center-column-text">State</th> 
+                    <th class="center-column-text">Zipcode</th>     
+                    <th class="center-column-text">Cost</th>    
+                    <th class="center-column-text">Website url</th>
+                    <th class="center-column-text">eMail</th>
+                    <th class="center-column-text">Phone</th> 
+                    <th class="center-column-text">Contact</th>  
+                    <th class="center-column-text">Comments</th>                        
+                </tr>
+
+                <tr ng-repeat="eventdetail in eventdetails" class="notth" ng-click="showTripDetail(eventdetail)">
+                    <td class="center-column-text">
+                       {{eventdetail.date}}
+                    </td>
+
+                    <td class="center-column-text">
+                       {{eventdetail.time}}
+                    </td>
+
+                    <td class="center-column-text">
+                         {{eventdetail.odometer}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.event}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.venue}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.address}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.city}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{eventdetail.state}}
+                    </td>
+
+                    <td class="left-column-text">
+                       {{eventdetail.zipcode}}
+                    </td>
+
+                    <td class="left-column-text">
+                        $ {{eventdetail.cost}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.websiteurl}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.email}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.phonenumber}} 
+                    </td>
+
+                    <td class="left-column-text">
+                       {{eventdetail.contact}}
+                    </td>
+
+                    <td class="left-column-text">
+                         {{eventdetail.comments}} 
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end of table responsive -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<div style="padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+    <div class="col-md-offset-3 col-md-6 form-horizontal">
+        <div class="pageStandardOffset row">
+            <div class="panel panel-success">
+                <div class="panel-heading panelTitlelMYRV">
+                    Special Event Detail
+                </div> <!-- end of inner pannel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Date
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly  tabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.eventdetail.date" id="date" name="date" myrvdatepicker />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Time
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="30" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.eventdetail.time" id="time" name="time"  />
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Event
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="40" type="text" class="form-control" ng-model="current.eventdetail.event" id="event" name="event" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Venue
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="50" type="text" class="form-control" ng-model="current.eventdetail.venue" id="venue" name="venue" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Odometer
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="60" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.eventdetail.odometer" id="odometer" name="odometer" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Cost  
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input readonly style="display:inline;width:70%;" tabindex="70" type="text" class="form-control" ng-model="current.eventdetail.cost" id="cost" name="cost">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Comments
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <textarea readonly style="display:inline;width:90%;" tabindex="80" class="form-control" ng-model="current.eventdetail.comments" id="comments" name="comments" rows="3"></textarea>
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Address
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="90" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.eventdetail.address" id="address" name="address" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            City
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="100" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.eventdetail.city" id="city" name="city" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group" >
+                        <div class="col-md-4  capture-detail-labels-input">
+                            State
+                        </div>
+                    
+                        <div class="col-md-8">
+                            <input readonly tabindex="100" type="text" class="form-control" style="display:inline;width:90%;" ng-model="current.eventdetail.state" id="state" name="state" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Zip Code
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="120" type="text" class="form-control"  style="display:inline;width:50%;"  ng-model="current.eventdetail.zipcode" id="zipcode" name="zipcode" >
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Website
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="130" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.eventdetail.websiteurl" id="websiteurl" name="websiteurl">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                     <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            eMail
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="140" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.eventdetail.email" id="email" name="email">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Phone
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="150" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.eventdetail.phonenumber" id="phonenumber" name="phonenumber">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Contact
+                        </div>
+                        <div class="col-md-8">
+                            <input readonly tabindex="160" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.eventdetail.contact" id="contact" name="contact">
+                        </div>
+                    </div> <!-- end of form-group -->
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of row -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+
+<form role="form"  method="post" enctype="multipart/form-data" novalidate>
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
+    <div class="col-md-12">
+        <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+            <a href="{{ downloadurl }}" style="width:20%;" class="btn btn-success" id="exportEventCaptureButton" >Export CSV</a>
+        </div> <!-- end of div-->  
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memEntryEventDialogModal" tabindex="-1" role="dialog" aria-labelledby="memEntryEventDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memEntryEventDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memEntryEventDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

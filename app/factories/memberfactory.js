@@ -19,6 +19,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.getMemberDashboardSnapshot = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/getmemberdashboardsnapshot.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.savememberTrip = function (data) {
         return $http({ 
             method: 'POST', 

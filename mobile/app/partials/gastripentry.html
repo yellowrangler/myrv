@@ -1,0 +1,283 @@
+<div class="pageNavbarOffset">&nbsp;</div>
+
+<div class="pageCaption row">
+    <div class="col-md-12">
+        <h2 class="headerTitle">Gas Fill Capture</h2>
+    </div> <!-- end of column -->
+</div> <!-- end of row -->
+
+<form id="membercapturegasForm" name="membercapturegasForm" style="" class="form-horizontal">
+<div class="pageStandardOffset row">
+	<div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-heading panelTitlelMYRV">
+                Gas Fill Detail
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group" >
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Active Trip
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="1" type="text" class="form-control" ng-model="current.tripname" readonly id="tripname" name="tripname">
+                    </div> <!-- end of col -->
+
+                    <input type="hidden" value="{{current.original.gastotals.totalmiles}}" id="originaltotalmiles" name="originaltotalmiles">
+                    <input type="hidden" value="{{current.tripid}}" id="tripid" name="tripid">
+                    <input type="hidden" value="{{current.memberid}}" id="memberid" name="memberid">
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Date
+                    </div>
+                    <div class="col-md-7">
+                        <input  tabindex="2" type="text" class="form-control" size="8" style="display:inline;width:225px;" ng-model="current.capture.date" id="date" name="date" myrvdatepicker />
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setToday()" id="settoday">Today</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Time
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="3" type="text" class="form-control" size="8" style="display:inline;width:225px;" ng-model="current.capture.time" id="time" name="time"  />
+
+                        <span style="padding-right:10px">&nbsp;</span>
+
+                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Odometer
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="4" type="text" style="display:inline;width:135px;" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Station
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="5" type="text" class="form-control" ng-model="current.capture.station" id="station" name="station" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Location
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="6" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <div class="col-md-4  capture-detail-labels-input">
+                        State
+                    </div>
+                
+                    <div class="col-md-7">
+                        <select tabindex="7" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                            <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+                        </select>
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Amount  
+                    </div>
+                    <div class="col-md-7 form-inline">
+                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="display:inline;width:135px;" tabindex="8" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Gallons
+                    </div>
+                    <div class="col-md-7">
+                        <input tabindex="9" style="display:inline;width:135px;" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group" >
+                    <div class="col-md-offset-4 col-md-7 capture-detail-checkbox-input">
+                        <input style="padding-top:10px;" ng-click="calculateChange()" tabindex="10" type="checkbox" ng-model="current.capture.nottankfilled" ng-checked="current.capture.nottankfilled == '1'" id="nottankfilled" name="nottankfilled"> Tank not filled
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-calculated">
+                        Cost/Gallon
+                    </div>
+                    <div class="col-md-7 form-inline">
+                        <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
+
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="display:inline;width:135px;"  type="text" readonly class="form-control" ng-model="current.capture.costpergallon" id="costpergallon" name="costpergallon">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-calculated">
+                        Miles
+                    </div>
+                    <div class="col-md-7">
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.capture.miles" id="miles" name="miles" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4 capture-detail-labels-calculated">
+                        MPG
+                    </div>
+                    <div class="col-md-7">
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.capture.mpg" id="mpg" name="mpg" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+            </div>  <!-- end of inner pannel body -->  
+        </div> <!-- end of inner pannel -->
+
+        <div style="padding-top:15px;" >
+            <div class="col-md-12">
+                <button style="width:100%" class="btn btn-success btn-lg" ng-click="saveGasCapture()" id="saveGasCaptureButton">Save</button>
+            </div>  
+            <div style="padding-top:10px;padding-bottom:25px;"  class="col-md-12">
+                <button style="width:100%" class="btn btn-info btn-lg" ng-click="resetGasCapture()" id="resetGasCaptureButton">Clear</button>
+            </div> <!-- end of col 12 -->
+        </div> <!-- end of form-group -->  
+    </div> <!-- end of col-12 -->
+</div> <!-- end of row -->    
+
+<div class="row pageStandardOffset">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading panelTitlelMYRV">
+                Gas Totals
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Total Cost 
+                    </div>
+                    <div class="col-md-6  form-inline">
+                        <span style="display:inline;" class="input-group-addon">$</span>
+
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.gastotals.totalamount" id="totalamount" name="totalamount">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Total Gallons
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.totalgallons" id="totalgallons" name="totalgallons">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-5  capture-detail-labels-calculated">
+                        Ave Cost/Gallon
+                    </div>
+                    <div class="col-md-6">
+                        <span style="display:inline;" class="input-group-addon" >$</span>
+                    	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <input style="display:inline;width:135px;" type="text" readonly class="form-control" ng-model="current.gastotals.avecostpergallon" id="avecostpergallon" name="avecostpergallon">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-5  capture-detail-labels-calculated">
+                        Total Miles
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.totalmiles" id="totalmiles" name="totalmiles" >
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Ave MPG
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.gastotals.avempg" id="avempg" name="avempg" >
+
+                        <input type="hidden" ng-model="current.gastotals.nottankfilled" id="gastotalsnottankfilled" name="gastotalsnottankfilled" value="{{current.gastotals.nottankfilled}}">
+
+                        <input type="hidden" ng-model="current.gastotals.gastripentrytotalsid" id="gastripentrytotalsid" name="gastripentrytotalsid" value="{{current.gastotals.gastripentrytotalsid}}">
+                    </div>
+                </div> <!-- end of form-group -->
+            </div>  <!-- end of inner pannel body -->  
+        </div> <!-- end of inner pannel -->
+    </div> <!-- end of col 12 -->
+</div> <!-- end of row -->    
+
+<div class="row pageStandardOffset">
+    <div class="col-md-12">
+        <div style="padding-top:35px;" ></div>
+        <div class="panel panel-warning">
+            <div class="panel-heading panelTitlelMYRV">
+                Gas Calculation Friends
+            </div> <!-- end of inner pannel heading-->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Topoff Gallons 
+                    </div>
+                    <div class="col-md-6  form-inline">
+                       <!--  <input type="hidden" ng-model="current.gastotals.topoffgallons" id="topoffgallons" name="topoffgallons" value="{{current.gastotals.topoffgallons}}"> -->
+
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.topoffgallons" id="topoffgallons" name="topoffgallons">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-5 capture-detail-labels-calculated">
+                        Prev Odometer
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" readonly class="form-control" ng-model="current.original.gastotals.odometer" id="prevodometer" name="prevodometer">
+                    </div>
+                </div> <!-- end of form-group -->
+
+            </div>  <!-- end of inner pannel body -->  
+        </div> <!-- end of inner pannel -->
+
+    </div> <!-- end of col-12 -->
+</div> <!-- end of row -->
+</form>
+
+<!-- dialogs -->
+<div class="modal fade" id="memCaptureGasDialogModal" tabindex="-1" role="dialog" aria-labelledby="memCaptureGasDialogModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memCaptureGasDialogModalTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="memCaptureGasDialogModalBody">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  
+    

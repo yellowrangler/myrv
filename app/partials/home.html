@@ -8,12 +8,64 @@
 	</div>
 
 	<div class="row" style="padding-top:30px;">
-		<div style="padding-top:40px;" class="col-md-5">
-			<div>
-				<!-- <a href="#fireworks">
-					<img style="width:100%;" src="img/HomePage.png" alt="daredevil ducks mascot" class="img-rounded">
-				</a> -->
-			</div>
+		<div style="" class="col-md-6">
+			<div style="text-align:center;padding-bottom:30px;">
+		        <h3 class="headerTitle2">Current Snapshot</h3>
+		     </div>
+
+			<div id="currentsnapshot" class="panel panel-primary" style="">
+				<div class="panel-body">
+					<div class="col-md-4 right-column-text currentSnapshotDetails">
+	                    Active Trip:
+	                </div> <!-- end of col -->
+	                <div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.tripname}}
+	                </div> <!-- end of col -->
+
+
+	                <div class="col-md-4 right-column-text currentSnapshotDetails">
+	                    Odometer:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.odometer}}
+	                </div> <!-- end of col -->
+
+	                <div class="col-md-4 right-column-text currentSnapshotDetails">
+	                    Miles:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.totalmiles}}
+	                </div> <!-- end of col -->
+
+	                <div class="col-md-4 right-column-text currentSnapshotDetails">
+	                     Gallons:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.totalgallons}}
+	                </div> <!-- end of col -->
+
+	                <div class="col-md-4 right-column-text currentSnapshotDetails">
+	                    Ave MPG:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.avempg}}
+	                </div> <!-- end of col -->
+
+	                <div class="col-md-4 right-column-text currentSnapshotDetails">
+	                    Ave CPG:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;">
+	                    {{current.snapshot.avecostpergallon}}
+	                </div> <!-- end of col -->
+
+					<div class="col-md-4 right-column-text currentSnapshotDetails">
+	                     Gas Cost:
+	                </div> <!-- end of col -->
+					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;padding-bottom:25px;">
+	                    {{current.snapshot.totalamount}}
+	                </div> <!-- end of col -->
+              </div> <!-- end of panel body -->
+			</div> <!-- end of panel  -->
 
 			<p style="padding-top: 30px;">
 				<a id="loginHomeButton" class="btn btn-primary btn-lg" ng-click="homepagelogin()" role="button">Login</a>
@@ -21,12 +73,13 @@
 
 			<br />
 		</div> <!-- end of col 6 -->
-		<div class="col-md-offset-1 col-md-6" style="padding-top:15px;" >
-		      <div style="text-align:center;">
-		        <h3 class="headerTitle2">Current Snapshot</h3>
+
+		<div class="col-md-6" style="padding-top:15px;" >
+		      <div class="">
+		        <h3 class="headerTitle2">RV News & Information</h3>
 		      </div>
 
-		      <div id="currentsnapshot" class="panel panel-primary" style="height:275px;">
+		      <div id="newsopinion" class="newsOpinion" ng-include="'app/partials/irvnewsandinformation.html'">
 		      	<!-- style="display:block;overflow-y:auto;height:{{current.homeNewsOpinionesize}}px;"> -->
 		      </div> <!-- end of panel body -->
 		</div> <!-- end of col 6 -->
