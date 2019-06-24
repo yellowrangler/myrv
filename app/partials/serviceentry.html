@@ -58,14 +58,14 @@
                     <label for="cost" class="col-md-4 control-label capture-detail-labels-input">Cost</label>
                     <div class="col-md-7">
                         <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
-                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
+                        <input ng-keypress="dollarRealtimeValidation($event)" tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
                     <label for="typestay" class="col-md-4 control-label capture-detail-labels-input">Odometer</label>
                     <div class="col-md-6">
-                        <input tabindex="7" type="text" class="form-control" ng-model="current.capture.odometer" id="odometer" name="odometer" placeholder="Odometer">
+                        <input ng-keypress="odometerRealtimeValidation($event)" tabindex="7" type="text" class="form-control" ng-model="current.capture.odometer" id="odometer" name="odometer" placeholder="Odometer">
                     </div>
                 </div> <!-- end of form-group -->
 

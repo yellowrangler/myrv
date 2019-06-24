@@ -134,7 +134,7 @@
                             Starting Odometer 
                         </div>
                         <div class="col-md-12">
-                            <input tabindex="8" type="text" class="form-control" ng-model="current.trip.startodometer" id="startodometer" ng-blur="odometerChange('startodometer')" ng-readonly="current.tripid != ''" name="startodometer" placeholder="Start Odometer">
+                            <input ng-keypress="odometerRealtimeValidation($event)" tabindex="8" type="text" class="form-control" ng-model="current.trip.startodometer" id="startodometer" ng-blur="odometerChange($event)" ng-readonly="current.tripid != ''" name="startodometer" placeholder="Start Odometer">
                         </div>
                     </div> <!-- end of form-group -->
 
@@ -152,7 +152,7 @@
                             Ending Odometer 
                         </div>
                         <div class="col-md-7">
-                            <input tabindex="10" type="text" class="form-control" ng-model="current.trip.endodometer" id="endodometer" name="endodometer" ng-blur="odometerChange('endodometer')" placeholder="End Odometer">
+                            <input ng-keypress="odometerRealtimeValidation($event)" tabindex="10" type="text" class="form-control" ng-model="current.trip.endodometer" id="endodometer" name="endodometer" ng-blur="odometerChange($event)" placeholder="End Odometer">
                         </div>
                     </div> <!-- end of form-group --> 
                 </div>  <!-- end of inner pannel body -->  

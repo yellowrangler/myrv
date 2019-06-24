@@ -30,9 +30,16 @@
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
-                    <label for="typestay" class="col-md-4 control-label capture-detail-labels-input">Venue</label>
+                    <label for="venue" class="col-md-4 control-label capture-detail-labels-input">Venue</label>
                     <div class="col-md-6">
                         <input tabindex="3" type="text" class="form-control" ng-model="current.capture.venue" id="venue" name="venue" placeholder="Event venue">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <label for="odometer" class="col-md-4 control-label capture-detail-labels-input">Odometer</label>
+                    <div class="col-md-4">
+                        <input ng-keypress="odometerRealtimeValidation($event)" tabindex="4" type="text" class="form-control" ng-model="current.capture.odometer" id="odometer" name="odometer" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -40,14 +47,14 @@
                     <label for="cost" class="col-md-4 control-label capture-detail-labels-input">Cost</label>
                     <div class="col-md-7">
                         <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
-                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
+                        <input ng-keypress="dollarRealtimeValidation($event)" tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.cost" id="cost" name="cost" >
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
                     <label for="datein" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date</label>
                     <div class="col-md-7">
-                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
+                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
 
                         <span style="padding-right:10px">&nbsp;</span>
 

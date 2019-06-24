@@ -56,7 +56,7 @@
                         Odometer
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="4" type="text" style="display:inline;width:135px;" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
+                        <input ng-keypress="odometerRealtimeValidation($event)" tabindex="4" type="text" style="display:inline;width:135px;" class="form-control" ng-model="current.capture.odometer" ng-blur="calculateChange()" id="odometer" name="odometer" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -97,7 +97,7 @@
                     <div class="col-md-7 form-inline">
                         <span style="display:inline;" class="input-group-addon" id="basic-addon1">$</span>
                     	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
-                        <input style="display:inline;width:135px;" tabindex="8" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
+                        <input ng-keypress="dollarRealtimeValidation($event)" style="display:inline;width:135px;" tabindex="8" ng-blur="calculateChange()" type="text" class="form-control" ng-model="current.capture.amount" id="amount" name="amount">
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -106,7 +106,7 @@
                         Gallons
                     </div>
                     <div class="col-md-7">
-                        <input tabindex="9" style="display:inline;width:135px;" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
+                        <input tabindex="9" ng-keypress="gallonsRealtimeValidation($event)" style="display:inline;width:135px;" type="text" ng-blur="calculateChange()" class="form-control" ng-model="current.capture.gallons" id="gallons" name="gallons">
                     </div>
                 </div> <!-- end of form-group -->
 

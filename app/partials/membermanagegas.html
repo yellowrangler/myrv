@@ -118,7 +118,7 @@
                             Odometer
                         </div>
                         <div class="col-md-8">
-                            <input tabindex="4" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.gasdetail.odometer" id="odometer" name="odometer" >
+                            <input ng-keypress="odometerRealtimeValidation($event)" tabindex="4" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.gasdetail.odometer" id="odometer" name="odometer" >
                         </div>
                     </div> <!-- end of form-group -->
 
@@ -159,7 +159,7 @@
                         <div class="col-md-8 form-inline">
                         	<!-- <span style="text-align:right;padding-right:4px;">$</span> -->
                             <span style="display:inline;" class="input-group-addon">$</span>
-                            <input style="display:inline;width:70%;" tabindex="8" type="text" class="form-control" ng-model="current.gasdetail.amount" id="amount" name="amount">
+                            <input ng-keypress="dollarRealtimeValidation($event)" style="display:inline;width:70%;" tabindex="8" type="text" class="form-control" ng-model="current.gasdetail.amount" id="amount" name="amount">
                         </div>
                     </div> <!-- end of form-group -->
 
@@ -168,7 +168,7 @@
                             Gallons
                         </div>
                         <div class="col-md-8">
-                            <input tabindex="9" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.gasdetail.gallons" id="gallons" name="gallons">
+                            <input ng-keypress="gallonsRealtimeValidation($event)" tabindex="9" style="display:inline;width:90%;" type="text" class="form-control" ng-model="current.gasdetail.gallons" id="gallons" name="gallons">
                         </div>
                     </div> <!-- end of form-group -->
 
