@@ -807,17 +807,17 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
 
     function validateForm() {
         var errmsg = "";
-        if (isNaN($scope.current.gasdetail.odometer))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.odometer))
         {
             errmsg += "Odometer must be a valid number! <br><br>";
         }
 
-        if (isNaN($scope.current.gasdetail.amount))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.amount))
         {
             errmsg += "Amount must be a valid number!  <br><br>";
         }
 
-        if (isNaN($scope.current.gasdetail.gallons))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.gallons))
         {
             errmsg += "Gallons must be a valid number!   <br>";
         }
@@ -827,8 +827,6 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
             errmsg += "Date must be a valid date! <br><br>";
             $scope.current.trip.startdate = "";
         }
-
-
 
         return errmsg;
     }
@@ -1231,8 +1229,6 @@ controllers.membermanageeventController = function ($scope, $http, $location, me
             $scope.current.eventdetail.date = "";
         }
 
-
-
         return errmsg;
     }
 
@@ -1526,6 +1522,14 @@ controllers.membermanagefoodController = function ($scope, $http, $location, mem
         resetFoodDetail();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.getMemberTripFoodDetails = function () {
         getMemberTripFoodDetails();
     }
@@ -1730,6 +1734,14 @@ controllers.membermanageovernightController = function ($scope, $http, $location
         resetOvernightDetail();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.getMemberTripOvernightDetails = function () {
         getMemberTripOvernightDetails();
     }
@@ -1927,6 +1939,10 @@ controllers.membermanagefriendController = function ($scope, $http, $location, m
 
         resetFriendDetail();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
 
     $scope.getMemberTripFriendDetails = function () {
         getMemberTripFriendDetails();

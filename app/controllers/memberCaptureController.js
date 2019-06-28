@@ -729,6 +729,10 @@ controllers.overnightetryController = function ($scope, $http, $location, member
         resetOvernightCapture();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
     $scope.dollarRealtimeValidation = function (e) {
         dollarRealtimeValidation(e);
     }
@@ -841,6 +845,10 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
 
         resetFoodCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
 
     $scope.dollarRealtimeValidation = function (e) {
         dollarRealtimeValidation(e);
@@ -1170,6 +1178,10 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
 
         resetFriendCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
 
     $scope.resetFriendCapture = function () {
         resetFriendCapture();

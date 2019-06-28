@@ -125,7 +125,7 @@
                             Odometer
                         </div>
                         <div class="col-md-8">
-                            <input tabindex="42" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.overnightdetail.odometer" id="odometer" name="odometer" >
+                            <input ng-keypress="odometerRealtimeValidation($event)" tabindex="42" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.overnightdetail.odometer" id="odometer" name="odometer" >
                         </div>
                     </div> <!-- end of form-group -->
 
@@ -154,7 +154,7 @@
                         <div class="col-md-8 form-inline">
                             <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
                             <span style="display:inline;" class="input-group-addon">$</span>
-                            <input style="display:inline;width:70%;" tabindex="70" type="text" class="form-control" ng-model="current.overnightdetail.cost" id="cost" name="cost">
+                            <input ng-keypress="dollarRealtimeValidation($event)" style="display:inline;width:70%;" tabindex="70" type="text" class="form-control" ng-model="current.overnightdetail.cost" id="cost" name="cost">
                         </div>
                     </div> <!-- end of form-group -->
 

@@ -18,7 +18,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
 
-        if (isNaN($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Odometer must be a valid number!");
@@ -58,7 +58,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
-        if (isNaN($scope.current.capture.amount))
+        if (!positiveDecimalPostValidation($scope.current.capture.amount))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
@@ -75,7 +75,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
 
-        if (isNaN($scope.current.capture.gallons))
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
@@ -87,7 +87,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
 
-        if (isNaN($scope.current.capture.amount))
+        if (!positiveDecimalPostValidation($scope.current.capture.amount))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
@@ -122,7 +122,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
-        if (isNaN($scope.current.capture.amount))
+        if (!positiveDecimalPostValidation($scope.current.capture.amount))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
@@ -134,7 +134,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
 
-        if (isNaN($scope.current.capture.gallons))
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
@@ -191,7 +191,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
 
-        if (isNaN($scope.current.capture.gallons))
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons))
         {
             alert("Gallons must be a valid number!");
 
@@ -241,7 +241,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
             return;
 
-        if (isNaN($scope.current.capture.gallons))
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
@@ -250,7 +250,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        if (isNaN($scope.current.capture.miles))
+        if (!positiveDecimalPostValidation($scope.current.capture.miles))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Miles must be a valid number!");
@@ -337,7 +337,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
 
-        if (isNaN($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Odometer must be a valid number!");
@@ -354,7 +354,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
 
-        if (isNaN($scope.current.capture.amount))
+        if (!positiveDecimalPostValidation($scope.current.capture.amount))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Amount must be a valid number!");
@@ -371,7 +371,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
 
-        if (isNaN($scope.current.capture.gallons))
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Gallons must be a valid number!");
@@ -393,7 +393,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.miles == "" || $scope.current.capture.gallons == "")
             return;
 
-        if (isNaN($scope.current.capture.miles))
+        if (!positiveDecimalPostValidation($scope.current.capture.miles))
         {
             $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
             $('#memCaptureGasDialogModalBody').html("Miles must be a valid number!");
@@ -478,7 +478,45 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer must be a valid number! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.amount) || isEmptyField($scope.current.capture.amount))
+        {
+            errmsg += "Amount must be a valid number!  <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.gallons) || isEmptyField($scope.current.capture.gallons))
+        {
+            errmsg += "Gallons must be a valid number!   <br><br>";
+        }
+
+        if (!isValidDate($scope.current.capture.date) || isEmptyField($scope.current.capture.date))
+        {
+            errmsg += "Date must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
+
     function saveGasCapture() {
+
+        var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureGasDialogModalTitle').text("Gas Trip Form Error");
+            $('#memCaptureGasDialogModalBody').html(errmsg);
+            $('#memCaptureGasDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercapturegasForm").serialize();
 
         // console.log(formstring);
@@ -573,6 +611,18 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
         resetGasCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
+    $scope.gallonsRealtimeValidation = function (e) {
+        gallonsRealtimeValidation(e);
+    }
 
     $scope.resetGasCapture = function () {
         resetGasCapture();
@@ -679,6 +729,14 @@ controllers.overnightetryController = function ($scope, $http, $location, member
 
         resetOvernightCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
 
     $scope.resetOvernightCapture = function () {
         resetOvernightCapture();
@@ -789,6 +847,14 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
         resetFoodCapture();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.resetFoodCapture = function () {
         resetFoodCapture();
     }
@@ -888,6 +954,14 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
 
         resetEventCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
 
     $scope.resetEventCapture = function () {
         resetEventCapture();
@@ -1001,6 +1075,14 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
         resetServiceCapture();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.resetServiceCapture = function () {
         resetServiceCapture();
     }
@@ -1097,6 +1179,10 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
 
         resetFriendCapture();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
 
     $scope.resetFriendCapture = function () {
         resetFriendCapture();

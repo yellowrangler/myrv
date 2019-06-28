@@ -123,14 +123,14 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         }
 
         $scope.current.trip.startodometer = $("#startodometer").val();
-        if (isNaN($scope.current.trip.startodometer))
+        if (!positiveDecimalPostValidation($scope.current.trip.startodometer))
         {
             errmsg += "Starting odometer must be a valid number! <br><br>";
             $scope.current.trip.startodometer = "";
         }
 
         $scope.current.trip.endodometer = $("#endodometer").val();
-        if (isNaN($scope.current.trip.endodometer) && $scope.current.trip.endodometer != "")
+        if (!positiveDecimalPostValidation($scope.current.trip.endodometer) && $scope.current.trip.endodometer != "")
         {
             errmsg += "Starting odometer must be a valid number! <br><br>";
             $scope.current.trip.endodometer = "";
@@ -259,21 +259,21 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
             }); 
     }
 
-    function odometerChange(name)
+    function odometerChange(e)
     {
         var odometer = 0;
+        var errmsg = "";
 
-        switch (name) 
+        if (!positiveDecimalPostValidation(e.currentTarget.value))
         {
-            case 'startodometer':
-                odometer = $scope.current.trip.startodometer * 1;
-                $scope.current.trip.startodometer = odometer.toFixed(1);
-                break;
+            errmsg = "Field " + e.currentTarget.id + "must be a valid number! \n\n";
 
-            case 'endodometer':
-                odometer = $scope.current.trip.endodometer * 1;
-                $scope.current.trip.endodometer = odometer.toFixed(1);
-                break;    
+            $scope.current.trip.startodometer = "";
+            e.currentTarget.value = "";
+
+            $('#tripmanageMemberDialogModalTitle').text("Odometer Error");
+            $('#tripmanageMemberDialogModalBody').text(errmsg);
+            $('#tripmanageMemberDialogModal').modal();
         }
     }
 
@@ -304,6 +304,10 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         getMemberTrips();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
     $scope.getMemberTrip = function (tripid) {
         getMemberTrip(tripid);
     }
@@ -324,8 +328,8 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         DeleteMemberTrip();
     }
 
-    $scope.odometerChange = function (name) {
-        odometerChange(name);
+    $scope.odometerChange = function (e) {
+        odometerChange(e);
     }
 
   }
@@ -805,17 +809,17 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
 
     function validateForm() {
         var errmsg = "";
-        if (isNaN($scope.current.gasdetail.odometer))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.odometer))
         {
             errmsg += "Odometer must be a valid number! <br><br>";
         }
 
-        if (isNaN($scope.current.gasdetail.amount))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.amount))
         {
             errmsg += "Amount must be a valid number!  <br><br>";
         }
 
-        if (isNaN($scope.current.gasdetail.gallons))
+        if (!positiveDecimalPostValidation($scope.current.gasdetail.gallons))
         {
             errmsg += "Gallons must be a valid number!   <br>";
         }
@@ -825,8 +829,6 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
             errmsg += "Date must be a valid date! <br><br>";
             $scope.current.trip.startdate = "";
         }
-
-
 
         return errmsg;
     }
@@ -986,6 +988,18 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
 
         resetGasDetailUpdate();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
+    $scope.gallonsRealtimeValidation = function (e) {
+        gallonsRealtimeValidation(e);
+    }
 
     $scope.getMemberTripGasDetails = function () {
         getMemberTripGasDetails();
@@ -1313,6 +1327,14 @@ controllers.membermanageeventController = function ($scope, $http, $location, me
         resetEventDetail();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.getMemberTripEventDetails = function () {
         getMemberTripEventDetails();
     }
@@ -1503,6 +1525,14 @@ controllers.membermanagefoodController = function ($scope, $http, $location, mem
 
         resetFoodDetail();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
 
     $scope.getMemberTripFoodDetails = function () {
         getMemberTripFoodDetails();
@@ -1708,6 +1738,14 @@ controllers.membermanageovernightController = function ($scope, $http, $location
         resetOvernightDetail();
     };
 
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
+
+    $scope.dollarRealtimeValidation = function (e) {
+        dollarRealtimeValidation(e);
+    }
+
     $scope.getMemberTripOvernightDetails = function () {
         getMemberTripOvernightDetails();
     }
@@ -1905,6 +1943,10 @@ controllers.membermanagefriendController = function ($scope, $http, $location, m
 
         resetFriendDetail();
     };
+
+    $scope.odometerRealtimeValidation = function (e) {
+        odometerRealtimeValidation(e);
+    }
 
     $scope.getMemberTripFriendDetails = function () {
         getMemberTripFriendDetails();

@@ -31,17 +31,24 @@
                     </div>
                 </div> <!-- end of form-group -->
 
+                <div class="form-group" >
+                    <label for="odometer" class="col-md-4 control-label capture-detail-labels-input">Odometer</label>
+                    <div class="col-md-7">
+                        <input ng-keypress="odometerRealtimeValidation($event)"tabindex="3" type="text" class="form-control" ng-model="current.capture.odometer" id="odometer" name="odometer" placeholder="Odometer">
+                    </div>
+                </div> <!-- end of form-group -->
+
                 <div class="form-group">
                     <label for="comments" class="col-md-4 control-label capture-detail-labels-input">Comments</label>
                     <div class="col-md-7">
-                        <textarea tabindex="3" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="5"></textarea>
+                        <textarea tabindex="4" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="5"></textarea>
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
                     <label for="datein" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date</label>
                     <div class="col-md-7">
-                        <input tabindex="4" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
+                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
 
                         <span style="padding-right:10px">&nbsp;</span>
 
@@ -52,7 +59,7 @@
                 <div class="form-group">
                     <label for="time" class="col-md-4 control-label capture-detail-labels-input">Time</label>
                     <div class="col-md-7">
-                        <input tabindex="5" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
+                        <input tabindex="6" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
 
                         <span style="padding-right:10px">&nbsp;</span>
 
@@ -63,14 +70,14 @@
                 <div class="form-group">
                     <label for="city" class="col-md-4 control-label capture-detail-labels-input">Address</label>
                     <div class="col-md-4">
-                        <input tabindex="8" type="text" class="form-control" ng-model="current.capture.address" id="address" name="address" >
+                        <input tabindex="7" type="text" class="form-control" ng-model="current.capture.address" id="address" name="address" >
                     </div>
                 </div> <!-- end of form-group -->
 
                 <div class="form-group">
                     <label for="city" class="col-md-4 control-label capture-detail-labels-input">City</label>
                     <div class="col-md-4">
-                        <input tabindex="9" type="text" class="form-control" ng-model="current.capture.city" id="city" name="city" >
+                        <input tabindex="8" type="text" class="form-control" ng-model="current.capture.city" id="city" name="city" >
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -78,7 +85,7 @@
                 <div class="form-group">
                     <label for="state" class="col-md-4 control-label capture-detail-labels-input">State</label>
                     <div class="col-md-4">
-                        <select tabindex="10" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+                        <select tabindex="9" class="form-control" ng-model="current.capture.state" id="state" name="state" >
                             <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
                         </select>
                     </div>

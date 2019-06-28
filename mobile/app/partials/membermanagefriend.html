@@ -117,7 +117,7 @@
                             Odometer
                         </div>
                         <div class="col-md-8">
-                            <input tabindex="60" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.frienddetail.odometer" id="odometer" name="odometer" >
+                            <input ng-keypress="odometerRealtimeValidation($event)" tabindex="60" type="text" style="display:inline;width:90%;" class="form-control" ng-model="current.frienddetail.odometer" id="odometer" name="odometer" >
                         </div>
                     </div> <!-- end of form-group -->
 
