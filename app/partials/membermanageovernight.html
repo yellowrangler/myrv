@@ -149,7 +149,18 @@
 
                     <div class="form-group">
                         <div class="col-md-4  capture-detail-labels-input">
-                            Cost  
+                            Cost per day
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input ng-keypress="dollarRealtimeValidation($event)" style="display:inline;width:70%;" tabindex="45" type="text" class="form-control" ng-model="current.overnightdetail.costperday" id="costperday" name="costperday">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Total Cost  
                         </div>
                         <div class="col-md-8 form-inline">
                             <!-- <span style="text-align:right;padding-right:4px;">$</span> -->

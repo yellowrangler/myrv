@@ -190,6 +190,7 @@
 	height:75px;
 }
 .headerTitle {
+	font-size: 22px;
 	color:teal;
 	font-family: 'aileronthin', 'Oleo Script Swash Caps', Helvetica, sans-serif;
 	font-weight: 700;
@@ -341,7 +342,9 @@
 
 .panelTitlelMYRV {
 	text-align:center;
-	font-weight:700;
+	font-weight:900;
+	font-family: 'aileronthin', 'Oleo Script Swash Caps', Helvetica, sans-serif;
+	font-size:18px;
 }
 
 .iconImage {
@@ -906,6 +909,11 @@
 	font-size:18px;
 }
 
+.selectLabel {
+	font-size:22px;
+	padding-right:10px;
+	color:#8BA890;
+}
 
 /*.exportDataTable tr  {
 	line-height: 35px;

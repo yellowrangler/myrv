@@ -124,16 +124,33 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         var errmsg = "";
 
         $scope.current.trip.startdate = $("#startdate").val();
-        if (!isValidDate($scope.current.trip.startdate))
+        if (!isEmptyField($scope.current.trip.startdate))
         {
-            errmsg += "Start date must be a valid date! <br><br>";
+            if (!isValidDate($scope.current.trip.startdate))
+            {
+                errmsg += "Start date must be a valid date! <br><br>";
+                $scope.current.trip.startdate = "";
+            }
+        }
+        else
+        {
+            errmsg += "Start date must be entered! <br><br>";
             $scope.current.trip.startdate = "";
         }
+            
 
         $scope.current.trip.startodometer = $("#startodometer").val();
-        if (!positiveDecimalPostValidation($scope.current.trip.startodometer))
+        if (!isEmptyField($scope.current.trip.startodometer))
         {
-            errmsg += "Starting odometer must be a valid number! <br><br>";
+            if (!positiveDecimalPostValidation($scope.current.trip.startodometer))
+            {
+                errmsg += "Starting odometer must be a valid number! <br><br>";
+                $scope.current.trip.startodometer = "";
+            }
+        }
+        else
+        {
+            errmsg += "Starting odometer must be entered! <br><br>";
             $scope.current.trip.startodometer = "";
         }
 
@@ -149,6 +166,20 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         {
             errmsg += "End date must be a valid date! <br><br>";
             $scope.current.trip.enddate = "";
+        }
+
+        $scope.current.trip.towvehicle = $("#towvehicle").val();
+        if (selectFieldBadValue($scope.current.trip.towvehicle))
+        {
+            $scope.current.trip.towvehicle = "";
+            $("#towvehicle").val("");
+        }
+
+        $scope.current.trip.rv = $("#rv").val();
+        if (selectFieldBadValue($scope.current.trip.rv))
+        {
+            $scope.current.trip.rv = "";
+            $("#rv").val("");
         }
 
         return errmsg;
@@ -199,6 +230,13 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
     }
 
      function DeleteMemberTrip() {
+
+        var str = "Trip " + $scope.current.tripname;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+"&tripname="+$scope.current.tripname;
 
         // console.log("trip form delete:"+qdata);
@@ -434,6 +472,13 @@ controllers.membermanagevehiclervController = function ($scope, $http, $location
     }
 
     function deleteMemberVehicle() {
+
+        var str = "Vehicle " + $scope.current.vehiclename;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'memberid='+$scope.current.memberid+'&vehicleid='+$scope.current.vehicleid+"&vehiclename="+$scope.current.vehiclename;
 
         // console.log("after return waypointid="+$scope.current.waypointid);
@@ -582,6 +627,13 @@ controllers.membermanagevehicleinsuranceController = function ($scope, $http, $l
     }
 
     function deleteMemberVehicleInsurance() {
+
+        var str = "Insurance " + $scope.current.insurancename;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'memberid='+$scope.current.memberid+'&insuranceid='+$scope.current.insuranceid+"&insurancename="+$scope.current.insurancename;
 
         // console.log("after return waypointid="+$scope.current.waypointid);
@@ -728,6 +780,13 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
 
     
     function deletememberVehicleRoadsideAssistance() {
+
+        var str = "Road Assistance " + $scope.current.roadsideassistancename;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'memberid='+$scope.current.memberid+'&roadsideassistanceid='+$scope.roadsideassistance.id+"&roadsideassistancename="+$scope.roadsideassistance.roadsideassistancename;
 
         // console.log("after return waypointid="+$scope.current.waypointid);
@@ -985,6 +1044,12 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
 
     function deleteGasDetail() {
 
+        var str = "Gas detail ";
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&detailid='+$scope.current.gasdetail.id;
 
         // console.log("trip form delete:"+qdata);
@@ -1154,6 +1219,13 @@ controllers.membermanagervmembershipController = function ($scope, $http, $locat
 
     
     function deleteMemberRVmembership() {
+
+        var str = "RV Membership " + $scope.rvmembership.rvmembershipname;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'memberid='+$scope.current.memberid+'&id='+$scope.rvmembership.id+"&rvmembershipname="+$scope.rvmembership.rvmembershipname;
 
         // console.log("after return waypointid="+$scope.current.waypointid);
@@ -1341,6 +1413,12 @@ controllers.membermanageeventController = function ($scope, $http, $location, me
     }
 
     function deleteEventDetail() {
+
+        var str = "Special Event " + $scope.current.event;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.eventdetail.id;
         memberFactory.deleteMembereventtripentry(qdata)
@@ -1551,6 +1629,12 @@ controllers.membermanagefoodController = function ($scope, $http, $location, mem
 
     function deleteFoodDetail() {
 
+        var str = "Restaurant " + $scope.current.restaurant;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
+
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.fooddetail.id;
         memberFactory.deleteMemberfoodtripentry(qdata)
         .success( function(data) {
@@ -1712,7 +1796,7 @@ controllers.membermanageovernightController = function ($scope, $http, $location
     function validateForm() {
         var errmsg = "";
         
-        if (!isEmpty($scope.current.overnightdetail.datein))
+        if (!isEmptyField($scope.current.overnightdetail.datein))
         {
             if (!isValidDate($scope.current.overnightdetail.datein))
             {
@@ -1721,7 +1805,7 @@ controllers.membermanageovernightController = function ($scope, $http, $location
             }
         }
             
-        if (!isEmpty($scope.current.overnightdetail.dateout))
+        if (!isEmptyField($scope.current.overnightdetail.dateout))
         {
             if (!isValidDate($scope.current.overnightdetail.dateout))
             {
@@ -1771,6 +1855,12 @@ controllers.membermanageovernightController = function ($scope, $http, $location
     }
 
     function deleteOvernightDetail() {
+
+        var str = "Overnight " + $scope.current.overnightname;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.overnightdetail.id;
         memberFactory.deleteMemberovernighttripentry(qdata)
@@ -1988,6 +2078,12 @@ controllers.membermanagefriendController = function ($scope, $http, $location, m
     }
 
     function deleteFriendDetail() {
+
+        var str = "Friend " + $scope.current.friend;
+        if (!confirmDelete(str))
+        {
+            return;
+        }
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid+'&id='+$scope.current.frienddetail.id;
         memberFactory.deleteMemberfriendtripentry(qdata)

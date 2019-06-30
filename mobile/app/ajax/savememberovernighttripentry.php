@@ -64,14 +64,6 @@ if ($id == 0)
 				continue 2;
 				break;
 
-			case 'overnightname':
-				$overnightname = $value;
-				$value = mysqli_real_escape_string($dbConn, $value);
-
-				$k = $k.$key.",";
-				$v = $v."'".$value."'".",";
-				break;		
-
 			case 'electric':
 			case 'water':
 			case 'sewer':
@@ -92,6 +84,7 @@ if ($id == 0)
 				$v = $v."'".$value."'".",";
 				break;	
 
+			case 'overnightname':	
 			case 'restrictions':
 			case 'comments':
 			case 'contact':
@@ -177,11 +170,14 @@ else
 					$l = $l.$key."='".$value."',";
 					break;	
 		
-			case 'overnightname':
-				$overnightname = $value;
+			case 'overnightname':	
+			case 'restrictions':
+			case 'comments':
+			case 'contact':
+				$value = mysqli_real_escape_string($dbConn, $value);
 
 				$l = $l.$key."='".$value."',";
-				break;	
+				break;			
 
 			case 'tripid':
 				$tripid = $value;

@@ -101,7 +101,6 @@
                     
                         <div class="col-md-9">
                             <select tabindex="5" class="form-control" ng-model="current.trip.towvehicle" id="towvehicle" name="towvehicle" >
-                                <option value="Not Selected">Not Selected</option>
                                 <option ng-repeat="towvehicle in membertowvehicles" value="{{towvehicle.id}}">{{towvehicle.make}} {{towvehicle.model}} {{towvehicle.platenbr}}</option>
                             </select>
                         </div>
@@ -114,7 +113,6 @@
                     
                         <div class="col-md-9">
                             <select tabindex="6" class="form-control" ng-model="current.trip.rv" id="rv" name="rv" >
-                                <option value="Not Selected">Not Selected</option>
                                 <option ng-repeat="rv in memberrvvehicles" value="{{rv.id}}">{{rv.make}} {{rv.model}} {{rv.platenbr}}</option>
                             </select>
                         </div>

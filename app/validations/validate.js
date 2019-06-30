@@ -14,6 +14,32 @@ function validateLoginForm()
 	return 0;
 }
 
+function selectFieldBadValue(selectFieldValue) {
+	var pos = 0;
+	var rval = 0;
+
+	$pos = selectFieldValue.indexOf("undefined");
+	if ($pos !== -1)
+	{
+		rval = 1;
+	}
+	
+	$pos = selectFieldValue.indexOf("null");
+	if ($pos !== -1)
+	{
+		rval = 1;
+	}
+
+	$pos = selectFieldValue.indexOf("?");
+	if ($pos !== -1)
+	{
+		rval = 1;
+	}
+	
+
+	return rval;
+}
+
 function isValidDate(d) {
 	var retvalue = false;
 

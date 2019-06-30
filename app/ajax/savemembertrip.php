@@ -10,8 +10,52 @@ include_once ('../class/class.AccessLog.php');
 $tripid = $_POST['tripid'];
 $memberid = $_POST['memberid'];
 $tripname = $_POST['tripname'];
-$towvehicle = $_POST['towvehicle'];
-$rv = $_POST['rv'];
+// $towvehicle = $_POST['towvehicle'];
+// $rv = $_POST['rv'];
+
+$towvehicle = "";
+if( isset($_POST['towvehicle']) )
+{
+	if (!empty($_POST['towvehicle'])) 
+	{
+		$towvehicle = $_POST['towvehicle'];
+		$pos = strpos($towvehicle, "undefined");
+		if ($pos !== false)
+		{
+			$towvehicle = '';
+		}
+		else
+		{
+			$pos = strpos($towvehicle, "null");
+			if ($pos !== false)
+			{
+				$towvehicle = '';
+			}
+		}
+	}
+}
+	
+$rv = "";
+if( isset($_POST['rv']) )
+{
+	if (!empty($_POST['rv'])) 
+	{
+		$rv = $_POST['rv'];
+		$pos = strpos($rv, "undefined");
+		if ($pos !== false)
+		{
+			$rv = '';
+		}
+		else
+		{
+			$pos = strpos($rv, "null");
+			if ($pos !== false)
+			{
+				$rv = '';
+			}
+		}
+	}
+}
 
 $startdate = "";
 if (!empty($_POST['startdate'])) 
@@ -101,11 +145,32 @@ if ($tripid == "")
 {
 	// insert new trip
 
-	$sql = "INSERT INTO triptbl(memberid, tripname, currenttrip, startodometer, towvehicle, rv, startdate, startlocation, endodometer, endlocation, enddate, lastupdate) 
+	$sql = "INSERT INTO triptbl
+		(memberid, 
+		tripname, 
+		currenttrip, 
+		startodometer, 
+		towvehicle, 
+		rv, 
+		startdate, 
+		startlocation, 
+		endodometer, 
+		endlocation, 
+		enddate, 
+		lastupdate) 
 	VALUES 
-	($memberid,'$tripname','$currenttrip',$startodometer,'$towvehicle','$rv',
-	NULLIF('$startdate',''),'$startlocation',$endodometer,'$endlocation',
-	NULLIF('$enddate',''),'$enterdate')";
+	($memberid,
+	'$tripname',
+	'$currenttrip',
+	$startodometer,
+	NULLIF('$towvehicle',''),
+	NULLIF('$rv',''),
+	NULLIF('$startdate',''),
+	'$startlocation',
+	NULLIF($endodometer,''),
+	'$endlocation',
+	NULLIF('$enddate',''),
+	'$enterdate')";
 
 	 $sqlFunction = "insert";
 }
@@ -118,8 +183,8 @@ else
 	    tripname = '$tripname',
 	    currenttrip = '$currenttrip',
 	    -- startodometer = $startodometer,
-	    towvehicle = '$towvehicle',
-	    rv = '$rv',
+	    towvehicle = NULLIF('$towvehicle',''),
+	    rv = NULLIF('$rv',''),
 	    startdate = NULLIF('$startdate',''),
 	    startlocation = '$startlocation',
 	    endodometer = $endodometer,

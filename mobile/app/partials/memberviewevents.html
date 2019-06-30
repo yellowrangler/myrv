@@ -7,17 +7,22 @@
 </div> <!-- end of row -->
 
 <div class="row">
-    <div class="col-md-12 form-inline">
+    <div class="col-md-12">
         <div class="pageStandardOffset">
             <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripEventDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripEventDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
 
             <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
-                <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
+                <div style="padding-top:0px;margin-left: auto; margin-right: auto;text-align:center;">
                   <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
                 </div> <!-- end of div-->  
             </div> <!-- end of form-group -->
@@ -25,7 +30,7 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table exportDataTable entryList" >
@@ -113,7 +118,7 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div id="viewdetail" style="margin:5px;padding-top:35px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
+<div id="viewdetail" style="margin:5px;padding-top:15px;" ng-if="current.showtable != 1" class="pageStandardOffset row">
     <div class="col-md-12 form-horizontal">
         <div class="pageStandardOffset row">
             <div class="panel panel-success">
@@ -126,7 +131,7 @@
                             Date
                         </div>
                         <div class="col-md-8">
-                            <input readonly  tabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.eventdetail.date" id="date" name="date" myrvdatepicker />
+                            <input readonly  tabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.eventdetail.date" id="date" name="date" />
                         </div>
                     </div> <!-- end of form-group -->
 

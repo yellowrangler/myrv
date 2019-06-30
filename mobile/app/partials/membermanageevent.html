@@ -11,16 +11,21 @@
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
             <div class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripEventDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripEventDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
         </div> <!-- end of panelOffset -->
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div style="padding-top:35px;" class="row">
+<div style="padding-top:15px;" class="row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table pickGameTable entryList" >

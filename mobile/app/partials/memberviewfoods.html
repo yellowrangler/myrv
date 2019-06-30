@@ -11,10 +11,15 @@
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
             <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripFoodDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripFoodDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
 
             <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
@@ -26,7 +31,7 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div ng-if="current.showtable == 1"  style="padding-top:35px;" class="pageStandardOffset row">
+<div ng-if="current.showtable == 1"  style="padding-top:15px;" class="pageStandardOffset row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table exportDataTable entryList" >
@@ -127,7 +132,7 @@
                             Date
                         </div>
                         <div class="col-md-8">
-                            <input readonly  tabindex="20" type="text" class="form-control" size="8"  ng-model="current.fooddetail.date" id="date" name="date" myrvdatepicker />
+                            <input readonly  tabindex="20" type="text" class="form-control" size="8"  ng-model="current.fooddetail.date" id="date" name="date" />
                       </div>
                     </div> <!-- end of form-group -->
 

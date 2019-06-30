@@ -9,6 +9,13 @@ $(document).ready( function(){
 	adjustNavbarImages();
 });  
 
+function confirmDelete(str) {
+
+	var r = confirm("Please confirm that you wish to delete " + str + "!");
+	
+	return r;
+}
+
 function isEmpty(elementvalue) {
 	var retvalue = false;
 

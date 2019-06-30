@@ -3,33 +3,11 @@ $(document).ready( function(){
 	
 });  
 
-function isValidDate(d) {
-	var retvalue = false;
+function confirmDelete(str) {
 
-	var dateArray = d.split("/");
-
-	if (dateArray.length == 3)
-	{
-		if (dateArray[0] > 0 && dateArray[0] < 13)
-		{
-			if (dateArray[1] > 0 && dateArray[1] < 32)
-			{
-				if (dateArray[2] > 1900 && dateArray[2].length == 4)
-				{
-					var retvalue = true;
-				}
-			}
-		}
-	}
+	var r = confirm("Please confirm that you wish to delete " + str + "!");
 	
-  	return retvalue;
-}
-
-function isValidTime(t) {
-	var retvalue = true;
-
-	
-  	return retvalue;
+	return r;
 }
 
 function isEmpty(elementvalue) {

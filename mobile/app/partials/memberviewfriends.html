@@ -11,23 +11,27 @@
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
             <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripFriendDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripFriendDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
 
             <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
                 <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
                   <a  href="" tabindex="100" style="width:150px;" class="btn btn-info" ng-click="hideTripDetail()" id="hideDetailButton">Back to List</a>
               </div> <!-- end of div-->  
-                </select>
             </div> <!-- end of form-group -->
         </div> <!-- end of panelOffset -->
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div style="padding-top:35px;" ng-if="current.showtable == 1" class="pageStandardOffset row">
+<div style="padding-top:15px;" ng-if="current.showtable == 1" class="pageStandardOffset row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table exportDataTable entryList" >
@@ -108,7 +112,7 @@
                             Date
                         </div>
                         <div class="col-md-8">
-                            <input readonly readonlytabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.frienddetail.date" id="date" name="date" myrvdatepicker />
+                            <input readonly readonlytabindex="20" type="text" class="form-control" size="8" style="display:inline;width:90%;" ng-model="current.frienddetail.date" id="date" name="date" />
                         </div>
                     </div> <!-- end of form-group -->
 

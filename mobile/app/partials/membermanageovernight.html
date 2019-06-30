@@ -10,16 +10,21 @@
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
             <div class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripOvernightDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripOvernightDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
         </div> <!-- end of panelOffset -->
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div style="padding-top:35px;" class="row">
+<div style="padding-top:15px;" class="row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table pickGameTable entryList" >
@@ -147,7 +152,18 @@
 
                     <div class="form-group">
                         <div class="col-md-4  capture-detail-labels-input">
-                            Cost  
+                            Cost per day
+                        </div>
+                        <div class="col-md-8 form-inline">
+                            <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                            <span style="display:inline;" class="input-group-addon">$</span>
+                            <input ng-keypress="dollarRealtimeValidation($event)" style="display:inline;width:70%;" tabindex="50" type="text" class="form-control" ng-model="current.overnightdetail.costperday" id="costperday" name="costperday">
+                        </div>
+                    </div> <!-- end of form-group -->
+
+                    <div class="form-group">
+                        <div class="col-md-4  capture-detail-labels-input">
+                            Total Cost  
                         </div>
                         <div class="col-md-8 form-inline">
                             <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
@@ -267,7 +283,7 @@
                 Amenities
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
-                <div class="form-group capture-detail-checkbox-input">
+                <div class="form-group capture-detail-checkbox-input-left">
                      <div style="padding-top:25px" class="">
                         <input  tabindex="15" type="checkbox" ng-model="current.overnightdetail.electric" ng-checked="current.overnightdetail.electric == '1'" ng-change="checkBoxValue('electric')" id="electric" name="electric"> Electric
                     </div>

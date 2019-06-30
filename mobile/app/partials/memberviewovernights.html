@@ -10,10 +10,15 @@
     <div class="col-md-12 form-inline">
         <div class="pageStandardOffset">
             <div ng-if="current.showtable == 1" class="form-group horizontalFieldOffset">
-                <label for="season" class="control-label"><span style="font-size:20px;padding-right:10px;">Trip</span></label>
-                <select class="customSelect form-control" ng-change="getMemberTripOvernightDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
-                    <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
-                </select>
+                <div style="display:inline-block">
+                    <span class='selectLabel'>Trip</span>
+                </div>
+                
+                <div style="display:inline-block;width:60%;">
+                    <select class="customSelect form-control" ng-change="getMemberTripOvernightDetails()" ng-model="current.tripid" id="membertrips" name="membertrips">
+                        <option ng-repeat="membertrip in membertrips" ng-selected="current.tripid == membertrip.id" value="{{membertrip.id}}">{{membertrip.tripname}}</option>
+                    </select>
+                </div>
             </div> <!-- end of form-group -->
 
             <div  ng-if="current.showtable != 1" class="form-group horizontalFieldOffset">
@@ -25,7 +30,7 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->
 
-<div ng-if="current.showtable == 1" style="padding-top:35px;" class="pageStandardOffset row">
+<div ng-if="current.showtable == 1" style="padding-top:15px;" class="pageStandardOffset row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table exportDataTable entryList" >
@@ -35,7 +40,8 @@
                     <th class="center-column-text">Odometer</th> 
                     <th class="center-column-text">Name</th> 
                     <th class="center-column-text">Type</th>    
-                    <th class="center-column-text">Cost</th>  
+                    <th class="center-column-text">Cost/Day</th> 
+                    <th class="center-column-text">Total Cost</th>  
                     <th class="center-column-text">Other fees</th> 
                     <th class="center-column-text">Date out</th>  
                     <th class="center-column-text">Time out</th>      
@@ -82,6 +88,10 @@
 
                     <td class="left-column-text">
                          {{overnightdetail.typestay}} 
+                    </td>
+
+                    <td class="left-column-text">
+                         {{overnightdetail.costperday}} 
                     </td>
 
                     <td class="left-column-text">
@@ -164,7 +174,7 @@
                         Date in
                     </div>
                     <div class="col-md-8">
-                        <input readonly  tabindex="20" type="text" class="form-control" size="8" ng-model="current.overnightdetail.datein" id="datein" name="datein" myrvdatepicker />
+                        <input readonly  tabindex="20" type="text" class="form-control" size="8" ng-model="current.overnightdetail.datein" id="datein" name="datein" />
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -209,7 +219,7 @@
                         Date out
                     </div>
                     <div class="col-md-8">
-                        <input readonly  tabindex="43" type="text" class="form-control" size="8" ng-model="current.overnightdetail.dateout" id="dateout" name="dateout" myrvdatepicker />
+                        <input readonly  tabindex="43" type="text" class="form-control" size="8" ng-model="current.overnightdetail.dateout" id="dateout" name="dateout" />
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -224,7 +234,18 @@
 
                 <div class="form-group">
                     <div class="col-md-4  capture-detail-labels-input">
-                        Cost  
+                        Cost per day
+                    </div>
+                    <div class="col-md-8 form-inline">
+                        <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
+                        <span style="display:inline;" class="input-group-addon">$</span>
+                        <input readonly style="display:inline;width:80%;" tabindex="70" type="text" class="form-control" ng-model="current.overnightdetail.costperday" id="costperday" name="costperday">
+                    </div>
+                </div> <!-- end of form-group -->
+
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Total Cost
                     </div>
                     <div class="col-md-8 form-inline">
                         <!-- <span style="text-align:right;padding-right:4px;">$</span> -->
