@@ -602,6 +602,16 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         setviewpadding();
 
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
+
         $scope.states = selectListService.getList('states');
 
         $scope.current.memberlogin = loginService.getLogin();
@@ -716,6 +726,16 @@ controllers.overnightetryController = function ($scope, $http, $location, member
         // in jquery ready. So adding it here
         //
         setviewpadding();
+
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -835,6 +855,16 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
         //
         setviewpadding();
 
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
+
         $scope.current = {};
 
         $scope.states = selectListService.getList('states');
@@ -942,6 +972,16 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
         // in jquery ready. So adding it here
         //
         setviewpadding();
+
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -1062,6 +1102,16 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
         //
         setviewpadding();
 
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
+
         $scope.current = {};
 
         $scope.states = selectListService.getList('states');
@@ -1167,6 +1217,16 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
         // in jquery ready. So adding it here
         //
         setviewpadding();
+
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            $scope.$parent.showAlert("Whoops!", "You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 

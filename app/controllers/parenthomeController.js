@@ -1,8 +1,4 @@
 controllers.myrvParentController = function ($scope, $http, $window, $route, $location, loginService) {
-    $("#adminselect").hide();
-    
-    $scope.memberavatar = "";
-
     function checkRole() {
         var role = loginService.getMemberRole();
         if (role == "admin")
@@ -258,6 +254,7 @@ controllers.homeController = function ($scope, $http, $location, $window, $route
     function init() {
         $scope.current = {};
         $scope.current.snapshot = {};
+        $scope.loggedin = false;
 
         //
         // this is not getting called at right time for definig top offset 
@@ -270,12 +267,16 @@ controllers.homeController = function ($scope, $http, $location, $window, $route
         var loggedIn = loginService.isLoggedIn();
         if (loggedIn)
         {
+            $scope.loggedin = true;
+
             $("#loginHomeButton").text("Logoff");
 
             getMemberDashboardSnapshot();
         }
         else
         {
+            $scope.loggedin = false;
+            
             $("#loginHomeButton").text("Login");
         }
     };
@@ -285,9 +286,13 @@ controllers.homeController = function ($scope, $http, $location, $window, $route
 
         var loggedIn = loginService.isLoggedIn();
         if (loggedIn)
+        {
             $("#loginHomeButton").text("Logoff");
+        }
         else
+        {
             $("#loginHomeButton").text("Login");
+        }
 
         $route.reload();
     }

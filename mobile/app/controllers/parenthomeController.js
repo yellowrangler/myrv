@@ -71,28 +71,7 @@ controllers.myrvParentController = function ($scope, $http, $window, $route, $lo
 
         $scope.mobileDevice = isMobile();
 
-        // setviewpadding();
-
-        // $(window).scroll(function() {  
-
-        //     var windowCurrentPos = $(window).scrollTop();
-        //     var viewTopPos = $('#myrv-view').offset().top;
-
-            
-        //     if (windowCurrentPos >= 100) 
-        //     {
-        //         $("#nav-bar-menu-bar-tall").hide();
-        //         $("#nav-bar-menu-bar-short").show();
-                
-        //     } 
-        //     else 
-        //     {
-        //         $("#nav-bar-menu-bar-short").hide();
-        //         $("#nav-bar-menu-bar-tall").show();
-        //     }
-        // });
-
-        // var windowHeight = window.innerHeight;
+        setviewpadding();
 
         getAvatar();
         getScreenName();
@@ -106,10 +85,6 @@ controllers.myrvParentController = function ($scope, $http, $window, $route, $lo
     $scope.loginlogoff = function (request) {
         loginlogoff(request);
     }
-
-    // $scope.goMobile = function () {
-    //     window.location.href = "mobile/index.html";
-    // }
 
     $scope.showMemberAvatar = function () {
         getAvatar();
@@ -135,8 +110,6 @@ controllers.loginController = function ($scope, $http, $location, $window, login
         // this is not getting called at right time for definig top offset 
         // in jquery ready. So adding it here
         //
-        $window.scrollTo(0, 0);
-
         setviewpadding();
         
     };
@@ -261,7 +234,7 @@ controllers.homeController = function ($scope, $http, $location, $window, $route
         // in jquery ready. So adding it here
         //
 
-        // setviewpadding();
+        setviewpadding();
 
         var navButtons = $('#navbarButtons');
         navButtons.on('show.bs.collapse','.collapse', function() {

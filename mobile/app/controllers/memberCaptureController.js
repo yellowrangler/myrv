@@ -601,7 +601,16 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -716,7 +725,16 @@ controllers.overnightetryController = function ($scope, $http, $location, member
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -834,7 +852,16 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -942,7 +969,16 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -1061,7 +1097,16 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 
@@ -1167,7 +1212,16 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
         // this is not getting called at right time for definig top offset
         // in jquery ready. So adding it here
         //
-        // setviewpadding();
+        setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current = {};
 

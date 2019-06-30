@@ -67,53 +67,24 @@ function objectArraySize(obj) {
 
 function setviewpadding()
 {	
+
+	window.scrollTo(0, 0);
+}
+
+function mobileScroll(element)
+{	
 	// var navTypeMobile = isMobile();
 	// var navTypeSmall = isSmall();
 
-	window.scrollTo(0, 0);
-	
-	// var viewoffset = 0;
+	var mobileOffset = -45
 
-	// var wd = windowDimentions();
-	// var navHeight = $("#navBarHeader").height();	
+	var elementOffset = $("#"+element).offset().top;	
 
-	// var tallNavDisplay = $("#nav-bar-menu-bar-tall").css('display');
-	// if (tallNavDisplay == 'block')
-	// {
-	// 	var navHeightNormal = 170;
-	// 	var navHeight = $("#nav-bar-menu-bar-tall").height();
-	// }
-	// else
-	// {
-	// 	var navHeightNormal = 65;
-	// 	var navHeight = $("#nav-bar-menu-bar-short").height();
-	// }
+	viewoffset = mobileOffset + elementOffset;
 
-	// // var navHeight = $("#nav-bar-menu-bar").height();
-
-	// if (navHeight  > navHeightNormal) 
-	// {
-	//  	viewoffset = navHeight - navHeightNormal;
-	// }
-	// else
-	// {
-	// 	viewoffset = navHeight;
-	// }
-
-	// viewoffset = navHeight;
-
-	// setTimeout(function() { 
-	// 	// $('html,body').animate({
-	// 	// 	scrollTop: $('#myrv-view').position().top + viewoffset
-	// 	// }, 1000);
-	// 	// $('#myrv-view').animate({
-	// 	// 	scrollTop: $('#myrv-view').offset().top + viewoffset
-	// 	// }, 1000);
- //  		$( "#myrv-view" ).animate({paddingTop: viewoffset}, 1000);
-	// }, 1000);
-
-	// window.scrollTo(0,400);
+	window.scrollTo(0,viewoffset);
 }
+
 
 function getUserAgent()
 {

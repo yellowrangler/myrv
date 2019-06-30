@@ -103,6 +103,15 @@ controllers.memberviewgasController = function ($scope, $http, $location, member
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -129,10 +138,14 @@ controllers.memberviewgasController = function ($scope, $http, $location, member
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -169,6 +182,15 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
@@ -188,10 +210,14 @@ controllers.memberviewtripsController = function ($scope, $http, $location, memb
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -283,6 +309,15 @@ controllers.membervieweventsController = function ($scope, $http, $location, mem
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -310,10 +345,14 @@ controllers.membervieweventsController = function ($scope, $http, $location, mem
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -348,6 +387,15 @@ controllers.memberviewmemberController = function ($scope, $http, $location, mem
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
@@ -442,6 +490,15 @@ controllers.memberviewfoodsController = function ($scope, $http, $location, memb
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -469,10 +526,14 @@ controllers.memberviewfoodsController = function ($scope, $http, $location, memb
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -562,6 +623,15 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -589,10 +659,14 @@ controllers.memberviewfriendsController = function ($scope, $http, $location, me
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -682,6 +756,15 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -710,10 +793,14 @@ controllers.memberviewovernightsController = function ($scope, $http, $location,
 
     $scope.showTripDetail = function (detail) {
         showTripDetail(detail);
+
+        setviewpadding();
     }
 
     $scope.hideTripDetail = function () {
         hideTripDetail();
+
+        setviewpadding();
     }
 }
 
@@ -752,6 +839,15 @@ controllers.memberviewrvmembershipController = function ($scope, $http, $locatio
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.rvmembershipstatuses = selectListService.getList('memberstatus');
 
@@ -805,6 +901,15 @@ controllers.memberviewvehiclervController = function ($scope, $http, $location, 
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
         $scope.vehiclestatuses = selectListService.getList('vehiclestatus');
@@ -862,6 +967,15 @@ controllers.memberviewvehicleinsuranceController = function ($scope, $http, $loc
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.insurancestatuses = selectListService.getList('insurancestatus');
 
@@ -913,6 +1027,15 @@ controllers.memberviewvehicleroadsideassistanceController = function ($scope, $h
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.roadsideassistancestatuses = selectListService.getList('memberstatus');
 

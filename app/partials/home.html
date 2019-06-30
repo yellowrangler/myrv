@@ -13,7 +13,7 @@
 		        <h3 class="headerTitle2">Current Snapshot</h3>
 		     </div>
 
-			<div id="currentsnapshot" class="panel panel-primary" style="">
+			<div ng-if="loggedin == true" id="currentsnapshot" class="panel panel-primary" style="">
 				<div class="panel-body">
 					<div class="col-md-4 right-column-text currentSnapshotDetails">
 	                    Active Trip:
@@ -64,7 +64,13 @@
 					<div class="col-md-8 currentSnapshotDetails" style="color:#6C0000;padding-bottom:25px;">
 	                    {{current.snapshot.totalamount}}
 	                </div> <!-- end of col -->
-              </div> <!-- end of panel body -->
+             	</div> <!-- end of panel body -->
+			</div> <!-- end of panel  -->
+
+			<div ng-if="loggedin == false" id="currentsnapshot" class="panel panel-primary" style="">
+				<div style="height:375px;" class="panel-body">
+					
+              	</div> <!-- end of panel body -->
 			</div> <!-- end of panel  -->
 
 			<p style="padding-top: 30px;">

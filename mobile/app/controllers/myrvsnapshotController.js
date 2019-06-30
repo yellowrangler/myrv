@@ -24,6 +24,16 @@ controllers.myrvsnapshotController = function ($scope, $http, $location, $window
     function init() {
         $scope.current = {};
 
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
+
         $scope.current.memberlogin = loginService.getLogin();
         $scope.current.memberid = $scope.current.memberlogin.memberid;
 

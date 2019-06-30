@@ -28,6 +28,15 @@ controllers.membermanagememberController = function ($scope, $http, $location, m
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
         $scope.membergenders = selectListService.getList('membergenders');  
@@ -284,6 +293,15 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -310,6 +328,8 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
 
     $scope.getMemberTrip = function (tripid) {
         getMemberTrip(tripid);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.clearTrip = function () {
@@ -452,6 +472,15 @@ controllers.membermanagevehiclervController = function ($scope, $http, $location
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
         $scope.vehiclestatuses = selectListService.getList('vehiclestatus');
@@ -590,6 +619,15 @@ controllers.membermanagevehicleinsuranceController = function ($scope, $http, $l
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.insurancestatuses = selectListService.getList('insurancestatus');
 
@@ -725,6 +763,15 @@ controllers.membermanagevehicleroadsideassistanceController = function ($scope, 
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.roadsideassistancestatuses = selectListService.getList('memberstatus');
 
@@ -977,6 +1024,15 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -1007,6 +1063,8 @@ controllers.membermanagegasController = function ($scope, $http, $location, memb
 
     $scope.setCurrentTrip = function (gasdetail) {
         $scope.current.gasdetail = objectCopy(gasdetail);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.resetGasDetailUpdate = function () {
@@ -1132,6 +1190,15 @@ controllers.membermanagervmembershipController = function ($scope, $http, $locat
     init();
     function init() {
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.rvmembershipstatuses = selectListService.getList('memberstatus');
 
@@ -1316,6 +1383,15 @@ controllers.membermanageeventController = function ($scope, $http, $location, me
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -1341,6 +1417,8 @@ controllers.membermanageeventController = function ($scope, $http, $location, me
 
     $scope.setCurrentTrip = function (eventdetail) {
         $scope.current.eventdetail = objectCopy(eventdetail);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.resetEventDetail = function () {
@@ -1515,6 +1593,15 @@ controllers.membermanagefoodController = function ($scope, $http, $location, mem
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -1540,6 +1627,8 @@ controllers.membermanagefoodController = function ($scope, $http, $location, mem
 
     $scope.setCurrentTrip = function (fooddetail) {
         $scope.current.fooddetail = objectCopy(fooddetail);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.resetFoodDetail = function () {
@@ -1726,6 +1815,15 @@ controllers.membermanageovernightController = function ($scope, $http, $location
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
         $scope.typestays = selectListService.getList('typestay');
@@ -1747,11 +1845,13 @@ controllers.membermanageovernightController = function ($scope, $http, $location
     }
 
     $scope.getMemberTripOvernightDetails = function () {
-        getMemberTripOvernightDetails();
+        getMemberTripOvernightDetails();       
     }
 
     $scope.setCurrentTrip = function (overnightdetail) {
         $scope.current.overnightdetail = objectCopy(overnightdetail);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.resetOvernightDetail = function () {
@@ -1933,6 +2033,15 @@ controllers.membermanagefriendController = function ($scope, $http, $location, m
         // in jquery ready. So adding it here
         //
         setviewpadding();
+        var loggedIn = loginService.isLoggedIn();
+        if (!loggedIn)
+        {
+            // new code
+            alert("Whoops! You must login in order to continue!");
+                
+            // alert ("You must login in order to continue!")
+            $location.path("#home");
+        }
 
         $scope.states = selectListService.getList('states');
 
@@ -1954,6 +2063,8 @@ controllers.membermanagefriendController = function ($scope, $http, $location, m
 
     $scope.setCurrentTrip = function (frienddetail) {
         $scope.current.frienddetail = objectCopy(frienddetail);
+
+        mobileScroll("viewdetail");
     }
 
     $scope.resetFriendDetail = function () {
