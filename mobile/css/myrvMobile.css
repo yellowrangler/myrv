@@ -757,7 +757,7 @@
 
 /*myrv footer*/
 .myrv-footer {
-	padding-top:35px;
+	padding-top:0px;
 	background:white;
 	/*height:125px;*/
 	color:red;
@@ -913,6 +913,13 @@
 	font-size:22px;
 	padding-right:10px;
 	color:#8BA890;
+}
+
+.mainnavButtons
+{
+	background-color:#9BF6AD;
+	text-align:left;
+	margin-top:0;
 }
 
 /*.exportDataTable tr  {
