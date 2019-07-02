@@ -146,7 +146,7 @@
                 Amenities
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
-                <div class="form-group capture-detail-checkbox-input">
+                <div class="form-group capture-detail-checkbox-input-left">
                      <div style="padding-top:25px;" >
                         <input  tabindex="115" type="checkbox" ng-model="current.capture.electric" ng-checked="current.capture.electric == '1'" ng-change="checkBoxValue('electric')" id="electric" name="electric"> Electric
                     </div>
@@ -216,19 +216,19 @@
                 </div> <!-- end of form-group -->
              </div> <!-- end of panel body -->
         </div> <!-- end of panel success -->
-    </div> <!-- end of col-12 -->                
+    </div> <!-- end of col-12 -->  
+
+    <div style="padding-top:15px;margin:15px;" class="row">
+        <div style="" >
+                <div class="col-md-12">
+                <button style="width:100%" class="btn btn-success btn-lg" ng-click="saveOvernightCapture()" id="updateButton">Save</button>
+            </div>  
+            <div style="padding-top:10px;padding-bottom:25px;"  class="col-md-12">
+                <button style="width:100%" class="btn btn-info btn-lg" ng-click="resetOvernightCapture()" id="cleareButton">Clear</button>
+            </div> <!-- end of col 12 -->
+        </div> <!-- end of form-group -->  
+    </div>              
 </div> <!-- end of row --> 
-
-<div style="padding-top:15px;padding-left:40%;" class="row">
-    <div class="">
-        <button tabindex="229" class="btn btn-success btn-lg" ng-click="saveOvernightCapture()" id="updateButton">Save</button>
-
-        <span style="padding-left:15px;">&nbsp;</span>
-
-        <button tabindex="230" class="btn btn-info btn-lg" ng-click="resetOvernightCapture()" id="cleareButton">Clear</button>
-    </div>
-</div> <!-- end of row --> 
-
 </form>
 
 <!-- dialogs -->

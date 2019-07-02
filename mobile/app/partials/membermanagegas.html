@@ -183,18 +183,22 @@
                         </div>
                     </div> <!-- end of form-group -->
 
-                    <div style="padding-top:15px;margin-left: auto; margin-right: auto;text-align:center;">
-                        <button style="width:20%;" class="btn btn-default" ng-click="resetGasDetailUpdate()" id="resetGasDetailUpdateButton">Clear</button>
-                        
-                        <span style="padding-left:5px;">&nbsp;</span>
-                        <button style="width:20%;" class="btn btn-info" ng-click="resetGasDetailAdd()" id="resetGasDetailAddButton">Add</button>
-                   
-                        <span style="padding-left:5px;">&nbsp;</span>
-                        <button style="width:20%;" class="btn btn-success" ng-click="saveGasDetail()" id="saveGasDetailButton">Save</button>
+                    <div style="padding-top:15px;margin:15px;" class="row">
 
-                        <span style="padding-left:5px;">&nbsp;</span>
-                        <button style="width:20%;" class="btn btn-danger" ng-click="deleteGasDetail()" id="deleteGasDetailButton">Delete</button>
-                    </div> <!-- end of div-->  
+                    <div style="" >
+                        <div class="col-md-12">
+                            <button tabindex="100" style="width:100%" class="btn btn-success btn-lg" ng-click="saveGasDetail()" id="updateButton">Save</button>
+                        </div>  
+                        <div style="padding-top:10px;" class="col-md-12">
+                            <button style="width:100%" class="btn btn-default btn-lg" ng-click="resetGasDetailUpdate()" id="cleareButton">Clear</button>
+                        </div> <!-- end of col 12 -->
+                        <div style="padding-top:10px;" class="col-md-12">
+                            <button tabindex="110" style="width:100%" class="btn btn-info btn-lg" ng-click="resetGasDetailAdd()" id="addButton">Add</button>
+                        </div>  
+                        <div style="padding-top:10px;padding-bottom:25px;"  class="col-md-12">
+                            <button tabindex="115" style="width:100%" class="btn btn-danger btn-lg" ng-click="deleteGasDetail()" id="deleteButton">Delete</button>
+                        </div> <!-- end of col 12 -->
+                    </div> <!-- end of form-group -->  
                 </div>
             </div> <!-- end of row -->
         </div> <!-- end of row -->
