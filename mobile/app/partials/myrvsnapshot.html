@@ -11,71 +11,74 @@
         <div style="margin:10px;" class="pageStandardOffset row">
   			<div id="currentsnapshot" class="panel panel-primary" style="">
 				<div class="panel-body">
-					<div style="display:block;" > 
-						<div style="width:50%;" class="right-column-text currentSnapshotDetails">
-	                    Active Trip:
-		                </div> <!-- end of col -->
-		                <div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.tripname}}
-		                </div> <!-- end of col -->
-					</div>
-					
-					<div style="display:block;" > 
-		                <div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                    Odometer:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.odometer}}
-		                </div> <!-- end of col -->
-		            </div>
+		            <table class="snapshotTable" >
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Active Trip:
+		                    </td>
 
-					<div style="display:block;" > 
-		                <div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                    Miles:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.totalmiles}}
-		                </div> <!-- end of col -->
-		            </div>
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.tripname}}
+		                    </td>
+		                </tr>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Odometer:
+		                    </td>
 
-					<div style="display:block;" > 
-		                <div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                     Gallons:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.totalgallons}}
-		                </div> <!-- end of col -->
-		            </div>
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.odometer}}
+		                    </td>
+		                </tr>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Miles:
+		                    </td>
 
-					<div style="display:block;" > 
-		                <div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                    Ave MPG:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.avempg}}
-		                </div> <!-- end of col -->
-		            </div>
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.totalmiles}}
+		                    </td>
+		                </tr>
 
-					<div style="display:block;" > 
-		                <div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                    Ave CPG:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.avecostpergallon}}
-		                </div> <!-- end of col -->
-		            </div>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Gallons:
+		                    </td>
 
-					<div style="display:block;" > 
-						<div style="width:50%;" class="right-column-text currentSnapshotDetails">
-		                     Gas Cost:
-		                </div> <!-- end of col -->
-						<div class="left-column-text currentSnapshotDetails" style="color:#6C0000;">
-		                    {{current.snapshot.totalamount}}
-		                </div> <!-- end of col -->
-		            </div>
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.totalgallons}}
+		                    </td>
+		                </tr>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Ave MPG:
+		                    </td>
 
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.avempg}}
+		                    </td>
+		                </tr>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Ave CPG:
+		                    </td>
+
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.avecostpergallon}}
+		                    </td>
+		                </tr>
+		                <tr class="currentSnapshotDetails">
+		                    <td class="right-column-text">
+		                       Cost:
+		                    </td>
+
+		                    <td class="left-column-text" style="color:#6C0000;">
+		                       {{current.snapshot.totalamount}}
+		                    </td>
+		                </tr>
+		            </table>
 		            <div style="padding-bottom:15px;"> </div>
-              </div> <!-- end of panel body -->
+              	</div> <!-- end of panel body -->
 			</div> <!-- end of panel  -->
 		</div>
 	</div>

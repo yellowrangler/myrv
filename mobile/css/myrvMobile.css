@@ -902,12 +902,30 @@
 
 .currentSnapshotDetails {
 	/*padding-left:10px;*/
-	display:inline-block;
+	/*display:inline-block;*/
 	padding-top:15px;
 	font-weight:400;
 	color:teal;
-	font-size:18px;
+	font-size:14px;
 }
+
+.snapshotTable {
+	background-color:white;
+	border:0;
+}
+
+.snapshotTable tr {
+	padding:10px;
+	border:0;
+}
+
+.snapshotTable tr td {
+	padding-left:15px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border:0;
+}
+
 
 .selectLabel {
 	font-size:22px;

@@ -106,6 +106,9 @@ function CalculateMilage($tripStartOdometer, $idx, &$detailEntrys, &$totalsEntry
     $detailEntrys[$idx][miles] = $detailEntrys[$idx][odometer] - $prevOdometer;
     $detailEntrys[$idx][miles] = round($detailEntrys[$idx][miles], 1);
 
+    if ($detailEntrys[$idx][miles] < 0)
+        die("Negative miles");
+
     //
     // Totals
     //
@@ -124,6 +127,9 @@ function calculateAmount($idx, &$detailEntrys, &$totalsEntry)
      
     $detailEntrys[$idx][amount] = round($detailEntrys[$idx][amount], 2);
 
+    if ($detailEntrys[$idx][amount] < 0)
+        die("Negative detail amount");
+
     //
     // Totals
     //
@@ -141,6 +147,9 @@ function calculateGallons($idx, &$detailEntrys, &$totalsEntry)
         die("No detail gallons");
 
     $detailEntrys[$idx][gallons] = round($detailEntrys[$idx][gallons], 3); 
+
+    if ($detailEntrys[$idx][gallons] < 0)
+        die("Negative detail gallons");
     
     //
     // Totals
@@ -156,6 +165,9 @@ function calculateCPG($idx, &$detailEntrys, &$totalsEntry)
     // 
     $detailEntrys[$idx][costpergallon] = $detailEntrys[$idx][amount] / $detailEntrys[$idx][gallons];
     $detailEntrys[$idx][costpergallon] = round($detailEntrys[$idx][costpergallon], 3);
+
+    if ($detailEntrys[$idx][costpergallon] < 0)
+        die("Negative detail costpergallon");
 
     //
     // Totals
@@ -229,6 +241,8 @@ function calculateMPG($idx, &$detailEntrys, &$totalsEntry)
     }
 
     $detailEntrys[$idx][mpg] = round($detailEntrys[$idx][mpg], 3);
+    if ($detailEntrys[$idx][mpg] < 0)
+        die("Negative detail mpg");
     
 
     //
@@ -310,7 +324,8 @@ $tripStartOdometer = $trip[startodometer];
 // 
 $sql = "SELECT * FROM gastripentrytbl
 WHERE tripid = $tripid AND memberid = $memberid
-ORDER BY date, time";
+ORDER BY odometer";
+// ORDER BY date, time";
 
 //
 // sql query

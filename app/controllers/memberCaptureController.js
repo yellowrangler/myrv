@@ -482,22 +482,22 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         var errmsg = "";
         if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
         {
-            errmsg += "Odometer must be a valid number! <br><br>";
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
         }
 
         if (!positiveDecimalPostValidation($scope.current.capture.amount) || isEmptyField($scope.current.capture.amount))
         {
-            errmsg += "Amount must be a valid number!  <br><br>";
+            errmsg += "Amount is required and must be a valid number!  <br><br>";
         }
 
         if (!positiveDecimalPostValidation($scope.current.capture.gallons) || isEmptyField($scope.current.capture.gallons))
         {
-            errmsg += "Gallons must be a valid number!   <br><br>";
+            errmsg += "Gallons are required and must be a valid number!   <br><br>";
         }
 
-        if (!isValidDate($scope.current.capture.date) || isEmptyField($scope.current.capture.date))
+        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
         {
-            errmsg += "Date must be a valid date! <br><br>";
+            errmsg += "Date is required and must be a valid date! <br><br>";
             $scope.current.capture.date = "";
         }
 
@@ -690,7 +690,49 @@ controllers.overnightetryController = function ($scope, $http, $location, member
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (isEmptyField($scope.current.capture.overnightname))
+        {
+            errmsg += "Overnight name is required! <br><br>";
+        }
+
+        if (selectFieldBadValue($scope.current.capture.typestay))
+        {
+            errmsg += "Type stay is required! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.costperday) || isEmptyField($scope.current.capture.costperday))
+        {
+            errmsg += "Cost per day is required and must be a valid number!  <br><br>";
+        }
+
+        if (isEmptyField($scope.current.capture.datein) || !isValidDate($scope.current.capture.datein))
+        {
+            errmsg += "Date In is required and must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
     function saveOvernightCapture() {
+
+        var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Form Error");
+            $('#memCaptureOvernightDialogModalBody').html(errmsg);
+            $('#memCaptureOvernightDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercaptureovernightForm").serialize();
 
         // console.log(formstring);
@@ -818,7 +860,44 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (isEmptyField($scope.current.capture.restaurant))
+        {
+            errmsg += "Restaurant name is required! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        {
+            errmsg += "Cost is required and must be a valid number!  <br><br>";
+        }
+
+        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        {
+            errmsg += "Date is required and must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
     function saveFoodCapture() {
+
+         var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Form Error");
+            $('#memCaptureFoodDialogModalBody').html(errmsg);
+            $('#memCaptureFoodDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercapturefoodForm").serialize();
 
         // console.log(formstring);
@@ -936,7 +1015,44 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (isEmptyField($scope.current.capture.event))
+        {
+            errmsg += "Event name is required! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        {
+            errmsg += "Cost is required and must be a valid number!  <br><br>";
+        }
+
+        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        {
+            errmsg += "Date is required and must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
     function saveEventCapture() {
+
+        var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureEventDialogModalTitle').text("Special Event Entry Form Error");
+            $('#memCaptureEventDialogModalBody').html(errmsg);
+            $('#memCaptureEventDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercaptureentryForm").serialize();
 
         // console.log(formstring);
@@ -1065,7 +1181,54 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (isEmptyField($scope.current.capture.serviceplace))
+        {
+            errmsg += "Service Establishment is required! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        {
+            errmsg += "Cost is required and must be a valid number!  <br><br>";
+        }
+
+        if (selectFieldBadValue($scope.current.capture.servicetype))
+        {
+            errmsg += "Service type is required! <br><br>";
+        }
+
+        if (selectFieldBadValue($scope.current.capture.vehicleid))
+        {
+            errmsg += "Vehicle is required! <br><br>";
+        }
+
+        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        {
+            errmsg += "Date is required and must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
     function saveServiceCapture() {
+
+        var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureServiceDialogModalTitle').text("Auto RV Service Entry Form Error");
+            $('#memCaptureServiceDialogModalBody').html(errmsg);
+            $('#memCaptureServiceDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercaptureserviceForm").serialize();
 
         // console.log(formstring);
@@ -1181,7 +1344,39 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
             }); 
     }
 
+    function validateForm() {
+        var errmsg = "";
+        if (isEmptyField($scope.current.capture.friend))
+        {
+            errmsg += "Friend name is required! <br><br>";
+        }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        {
+            errmsg += "Odometer is required and must be a valid number! <br><br>";
+        }
+
+        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        {
+            errmsg += "Date is required and must be a valid date! <br><br>";
+            $scope.current.capture.date = "";
+        }
+
+        return errmsg;
+    }
+
     function saveFriendCapture() {
+
+        var errmsg = validateForm();
+
+        if (errmsg != "") {
+            $('#memCaptureFriendDialogModalTitle').text("Friend Entry Form Error");
+            $('#memCaptureFriendDialogModalBody').html(errmsg);
+            $('#memCaptureFriendDialogModal').modal();
+
+            return;
+        }
+
         var formstring = $("#membercapturefriendForm").serialize();
 
         // console.log(formstring);
@@ -1190,7 +1385,7 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
         .success( function(data) {
             if (data.errtext == "")
             {
-                $('#memCaptureFriendDialogModalTitle').text("Special Event Entry Success");
+                $('#memCaptureFriendDialogModalTitle').text("Friend Entry Success");
                 $('#memCaptureFriendDialogModalBody').html(data.bodytext);
                 $('#memCaptureFriendDialogModal').modal();
 
@@ -1198,8 +1393,8 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
             }
             else
             {
-                $('#memCaptureFriendDialogModalTitle').text("Special Event Entry Error");
-                $('#memCaptureFriendDialogModalBody').html("Error saving special event entry - "+data.errtext);
+                $('#memCaptureFriendDialogModalTitle').text("Friend Entry Error");
+                $('#memCaptureFriendDialogModalBody').html("Error saving friend entry - "+data.errtext);
                 $('#memCaptureFriendDialogModal').modal();
             }
 

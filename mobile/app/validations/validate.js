@@ -18,6 +18,13 @@ function selectFieldBadValue(selectFieldValue) {
 	var pos = 0;
 	var rval = 0;
 
+	if (isEmptyField(selectFieldValue))
+	{
+		rval = 1;
+
+		return rval;
+	}
+
 	$pos = selectFieldValue.indexOf("undefined");
 	if ($pos !== -1)
 	{
@@ -36,6 +43,7 @@ function selectFieldBadValue(selectFieldValue) {
 		rval = 1;
 	}
 	
+
 	return rval;
 }
 
