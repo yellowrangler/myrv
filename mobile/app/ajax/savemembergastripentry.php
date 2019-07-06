@@ -16,6 +16,7 @@ $time = $_POST['time'];
 $station = $_POST['station'];
 $location = $_POST['location'];
 $state = $_POST['state'];
+$comments = $_POST['comments'];
 
 $time = date('H:i:s', strtotime($time));
 $date = date('Y-m-d', strtotime($date));
@@ -241,6 +242,7 @@ if ($detailid == 0)
 		station, 
 		location, 
 		state, 
+		comments,
 		nottankfilled, 
 		lastupdate) 
 	VALUES (
@@ -257,6 +259,7 @@ if ($detailid == 0)
 		'$station', 
 		'$location', 
 		'$state', 
+		'$comments',
 		'$nottankfilled',
 		'$enterdate')";
 
@@ -280,6 +283,7 @@ else
 		station = '$station',
 		location = '$location',
 		state = '$state',
+		comments = '$comments',
 		nottankfilled = '$nottankfilled',
 		lastupdate='$enterdate' 
 		WHERE id = $detailid AND memberid = $memberid AND tripid = $tripid";
@@ -303,7 +307,6 @@ if ($sqlFunction == "insert")
 	// get id
 	//
 	$detailid = mysqli_insert_id($dbConn);
-
 }
 
 //

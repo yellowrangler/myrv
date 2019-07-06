@@ -7,8 +7,41 @@ include_once ('../class/class.AccessLog.php');
 //
 // post input
 //
-$tripid = $_POST['tripid'];
-$memberid = $_POST['memberid'];
+if (isset($_POST["tripid"]))
+{
+  $tripid = $_POST["tripid"];
+}
+else
+{
+  if (isset($_GET["tripid"]))
+  {
+    $tripid = $_GET["tripid"];
+  }
+  else
+  {
+    $msg = $msg . "No tripid passed - terminated";
+    exit($msg);
+
+  }
+}
+
+if (isset($_POST["memberid"]))
+{
+  $memberid = $_POST["memberid"];
+}
+else
+{
+  if (isset($_GET["memberid"]))
+  {
+    $memberid = $_GET["memberid"];
+  }
+  else
+  {
+    $msg = $msg . "No memberid passed - terminated";
+    exit($msg);
+
+  }
+}
 
 //
 // get date time for this transaction
@@ -37,10 +70,9 @@ include 'mysqlconnect.php';
 // 
 // Now get gas trip totals
 // 
-$sql = "SELECT id as gastripentrytotalsid, memberid, tripid, odometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, topoffgallons, nottankfilled, lastupdate 
+$sql = "SELECT id as gastripentrytotalsid, memberid, tripid, odometer, startgasodometer, totalamount, totalgallons, avecostpergallon, totalmiles, avempg, topoffgallons, nottankfilled, lastupdate 
 	FROM gastriptotalstbl 
-	WHERE memberid = $memberid AND tripid = $tripid 
-	ORDER BY id DESC LIMIT 1";
+	WHERE memberid = $memberid AND tripid = $tripid";
 
 //
 // sql query

@@ -57,16 +57,17 @@ $datetime = date("Y-m-d H:i:s");
 // 
 $enterdate = $datetime;
 $msgtext = "";
+$dbgtext = "";
 $errtext = "";
 $msgArray = array();
 
-$firstTime = 1;
 $detailEntrys = array();
 
 $totalsEntry = array();
 $totalsEntry[memberid] = $memberid;
 $totalsEntry[tripid] = $tripid;
 $totalsEntry[odometer] = 0;
+$totalsEntry[startgasodometer] = 0;
 $totalsEntry[totalamount] = 0;
 $totalsEntry[totalgallons] = 0;
 $totalsEntry[avecostpergallon] = 0;
@@ -76,17 +77,13 @@ $totalsEntry[topoffgallons] = 0;
 $totalsEntry[nottankfilled] = 0;
 $totalsEntry[lastupdate] = "";
 
-$tripStartOdometer = 0;
-
-
-
 $msgtext = $msgtext . "<br> Start Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
 
 
 // 
 //  functions
 // 
-function CalculateMilage($tripStartOdometer, $idx, &$detailEntrys, &$totalsEntry)
+function CalculateMilage($idx, &$detailEntrys, &$totalsEntry)
 {  
     //
     // Detail
@@ -96,7 +93,8 @@ function CalculateMilage($tripStartOdometer, $idx, &$detailEntrys, &$totalsEntry
 
     if ($idx == 0)
     {
-        $prevOdometer = $tripStartOdometer;
+        $prevOdometer = $detailEntrys[$idx][odometer];
+        $totalsEntry[startgasodometer] = $detailEntrys[$idx][odometer];
     }
     else
     {
@@ -112,7 +110,6 @@ function CalculateMilage($tripStartOdometer, $idx, &$detailEntrys, &$totalsEntry
     //
     // Totals
     //
-       
     $totalsEntry[totalmiles] = $totalsEntry[totalmiles] + $detailEntrys[$idx][miles];
     $totalsEntry[totalmiles] = round($totalsEntry[totalmiles], 1);
 }
@@ -192,7 +189,6 @@ function calculateMPG($idx, &$detailEntrys, &$totalsEntry)
     if ($detailEntrys[$idx][nottankfilled] == 1)
     {
         $detailEntrys[$idx][mpg] = 0.000;
-        // $totalsEntry[avempg] = $scope.current.original.gastotals.avempg; - dont change this keep previous value
         $totalsEntry[nottankfilled] = 1;
 
         return;
@@ -244,7 +240,6 @@ function calculateMPG($idx, &$detailEntrys, &$totalsEntry)
     if ($detailEntrys[$idx][mpg] < 0)
         die("Negative detail mpg");
     
-
     //
     // Totals
     // 
@@ -252,16 +247,16 @@ function calculateMPG($idx, &$detailEntrys, &$totalsEntry)
     // 
     // if we had initial fill with no miles remove that gal amount for totals calc
     // 
-    if ($totalsEntry[totalmiles] > 0)
+    if ($idx == 0)
     {
-        $adjustedTotalGallons = $totalsEntry[totalgallons] - $totalsEntry[topoffgallons];
-    }
-    else
-    {
-        $totalsEntry[topoffgallons] = $totalsEntry[totalgallons];
+        $totalsEntry[topoffgallons] = $detailEntrys[$idx][gallons];
         $adjustedTotalGallons = $totalsEntry[topoffgallons];
 
         $totalsEntry[topoffgallons] = round($totalsEntry[topoffgallons], 3);
+    }
+    else
+    {
+        $adjustedTotalGallons = $totalsEntry[totalgallons] - $totalsEntry[topoffgallons];
     }
 
     if ($totalsEntry[totalgallons] == 0)
@@ -291,33 +286,13 @@ function calculateMPG($idx, &$detailEntrys, &$totalsEntry)
 // messaging
 //
 $returnArrayLog = new AccessLog("logs/");
-// $returnArrayLog->writeLog("Member List request started" );
+$returnArrayLog->writeLog("Member List request started" );
 
 //
 // db connect
 //
 $modulecontent = "Unable to recalculate member trip capture gas information. memberid = $memberid. tripid = $tripid.";
 include 'mysqlconnect.php';
-
-// 
-// Now get trip information
-// 
-$sql = "SELECT * FROM triptbl
-WHERE id = $tripid AND memberid = $memberid";
-
-//
-// sql query
-//
-$modulecontent = "Unable to get member trip information. memberid = $memberid. tripid = $tripid.";
-$function = 'select';
-include 'mysqlquery.php';
-
-// 
-// Get the results and set starting odometer
-// 
-$trip = mysqli_fetch_assoc($sql_result);
-
-$tripStartOdometer = $trip[startodometer];
 
 // 
 // Now get trip capture gas details information and recalculate trip totals
@@ -330,7 +305,7 @@ ORDER BY odometer";
 //
 // sql query
 //
-$modulecontent = "Unable to get member trip gas capture detail information. memberid = $memberid. tripid = $tripid.";
+$modulecontent = "Unable to get member trip gas capture detail information - recaclculate. memberid = $memberid. tripid = $tripid.";
 $function = 'select';
 include 'mysqlquery.php';
 
@@ -347,10 +322,11 @@ while($r = mysqli_fetch_assoc($sql_result))
 // 
 for ($idx = 0; $idx < sizeof($detailEntrys); $idx++) 
 {
+
     // 
     //  calculate detail & total milage 
     // 
-    CalculateMilage($tripStartOdometer, $idx, $detailEntrys, $totalsEntry);
+    CalculateMilage($idx, $detailEntrys, $totalsEntry);
 
     // 
     //  calculate detail & total amount 
@@ -384,41 +360,16 @@ for ($idx = 0; $idx < sizeof($detailEntrys); $idx++)
 
 // print "<br> detail entrys <br>"."</pre>";
 // echo "<pre>".print_r($detailEntrys, true)."</pre>";
-// $msgtext = $msgtext . "<br> total entrys <br>";
-// $msgtext = $msgtext . "<pre>".print_r($totalsEntry, true)."</pre>";
 
-// 
-// Now delete the trip capture gas detail totals record before we will rebuild it
-// 
-$sql = "DELETE FROM gastripentrytbl
-WHERE tripid = $tripid AND memberid = $memberid";
-
-//
-// sql query
-//
-$modulecontent = "Unable to delete member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
-$function = 'delete';
-include 'mysqlquery.php';
-
-// 
-// Now do mass insert for trip capture gas detail totals record as we will rebuild it
-// 
-$sql = "INSERT INTO gastripentrytbl 
-    (id, memberid, tripid, odometer, amount, gallons, 
-    costpergallon, miles, mpg, date, time, station, 
-    location, state, comments, nottankfilled, lastupdate) VALUES ";
-
-
-$firstTime = 1;
+$startgasodometer = 0;
+$counter = 0;
 for ($idx = 0; $idx < sizeof($detailEntrys); $idx++) 
 {
-    if ($firstTime == 1) 
+    $counter++;
+
+    if ($idx == 0) 
     {
-        $firstTime = 0;
-    }
-    else
-    {
-        $sql = $sql . ", ";
+        $startgasodometer = $detailEntrys[$idx][odometer];
     }
 
     $detailEntrysid = $detailEntrys[$idx][id];
@@ -438,41 +389,65 @@ for ($idx = 0; $idx < sizeof($detailEntrys); $idx++)
     $detailEntryscomments = $detailEntrys[$idx][comments];
     $detailEntrysnottankfilled = $detailEntrys[$idx][nottankfilled];
 
-    $sql = $sql . "(
-        $detailEntrysid,
-        $detailEntrysmemberid,
-        $detailEntrystripid,
-        '$detailEntrysodometer',
-        '$detailEntrysamount',
-        '$detailEntrysgallons',
-        '$detailEntryscostpergallon',
-        '$detailEntrysmiles',
-        '$detailEntrysmpg',
-        '$detailEntrysdate',
-        '$detailEntrystime',
-        '$detailEntrysstation',
-        '$detailEntryslocation',
-        '$detailEntrysstate',
-        '$detailEntryscomments',
-        '$detailEntrysnottankfilled',
-        '$enterdate')";
+    $sql = "UPDATE gastripentrytbl 
+        SET 
+        memberid = '$detailEntrysmemberid',
+        tripid = '$detailEntrystripid', 
+        odometer = '$detailEntrysodometer',
+        amount = '$detailEntrysamount',
+        gallons = '$detailEntrysgallons',
+        costpergallon = '$detailEntryscostpergallon',  
+        miles = '$detailEntrysmiles',
+        mpg = '$detailEntrysmpg',
+        date = '$detailEntrysdate',
+        time = '$detailEntrystime',
+        station = '$detailEntrysstation',
+        location = '$detailEntryslocation',
+        state = '$detailEntrysstate',
+        comments ='$detailEntryscomments',
+        nottankfilled = '$detailEntrysnottankfilled',
+        lastupdate='$enterdate' 
+        WHERE id = $detailEntrysid AND memberid = $detailEntrysmemberid AND tripid = $detailEntrystripid";
+
+        //
+        // sql query
+        //
+        $modulecontent = "Unable to update member trip gas capture details records - recaclculate. memberid = $memberid. tripid = $tripid. detailsid = $detailEntrysid";
+        $function = 'update';
+        include 'mysqlquery.php';  
+
+        // print "<br> detail sql updates <br>"."</pre>";
+        // echo "<pre>".print_r($sql, true)."</pre>";
 }
 
-$sql = $sql . "; ";
+$dbgtext = "$counter detail records.";
 
-// print "<pre><br> detail entry inserts <br>"."</pre>";
-// print "<pre><br> $sql <br></pre>";
+// 
+//  see if gas trip entry totals exists 
+// 
+$sql = "SELECT COUNT(*) AS total FROM gastriptotalstbl 
+    WHERE memberid = $memberid AND tripid = $tripid";
 
 //
 // sql query
 //
-$modulecontent = "Unable to insert member trip gas capture details records. memberid = $memberid. tripid = $tripid.";
-$function = 'insert';
-include 'mysqlquery.php';  
+$modulecontent = "Unable to SELECT member trip gas total information for gas trip entry - recaclculate. memberid = $memberid. tripid = $tripid.";
+$function = 'select';
+include 'mysqlquery.php';
 
+// 
+// Get the results
+// 
+$r = mysqli_fetch_assoc($sql_result);
+$totalrecords = $r['total'];
+
+//
+// sql query
+//
 $totalsEntrymemberid = $totalsEntry[memberid];
 $totalsEntrytripid = $totalsEntry[tripid];
 $totalsEntryodometer = $totalsEntry[odometer];
+$totalsEntrystartgasodometer = $startgasodometer;
 $totalsEntrytotalamount = $totalsEntry[totalamount];
 $totalsEntrytotalgallons = $totalsEntry[totalgallons];
 $totalsEntryavecostpergallon = $totalsEntry[avecostpergallon];
@@ -481,10 +456,55 @@ $totalsEntryavempg = $totalsEntry[avempg];
 $totalsEntrytopoffgallons = $totalsEntry[topoffgallons];
 $totalsEntrynottankfilled = $totalsEntry[nottankfilled];
 
-$sql = "UPDATE  gastriptotalstbl  
+if ($totalrecords == 0)
+{
+    // 
+    //  insert gas trip entry totals
+    // 
+    $sqlFunction == "insert";
+    $sql = "INSERT INTO gastriptotalstbl
+        (
+            memberid, 
+            tripid, 
+            odometer, 
+            startgasodometer, 
+            totalamount, 
+            totalgallons, 
+            avecostpergallon, 
+            totalmiles, 
+            avempg, 
+            topoffgallons, 
+            nottankfilled, 
+            lastupdate
+        ) 
+        VALUES 
+        (
+            '$totalsEntrymemberid', 
+            '$totalsEntrytripid', 
+            '$totalsEntryodometer', 
+            '$totalsEntrystartgasodometer', 
+            '$totalsEntrytotalamount', 
+            '$totalsEntrytotalgallons', 
+            '$totalsEntryavecostpergallon', 
+            '$totalsEntrytotalmiles', 
+            '$totalsEntryavempg', 
+            '$totalsEntrytopoffgallons', 
+            '$totalsEntrynottankfilled',
+            '$enterdate' 
+        )";
+}
+else
+{
+    // 
+    //  Update gas trip entry totals
+    // 
+    $sqlFunction == "update";
+    
+    $sql = "UPDATE  gastriptotalstbl  
     SET memberid = $totalsEntrymemberid, 
     tripid = $totalsEntrytripid, 
     odometer = '$totalsEntryodometer', 
+    startgasodometer = '$totalsEntrystartgasodometer', 
     totalamount = '$totalsEntrytotalamount', 
     totalgallons = '$totalsEntrytotalgallons', 
     avecostpergallon = '$totalsEntryavecostpergallon', 
@@ -494,8 +514,7 @@ $sql = "UPDATE  gastriptotalstbl
     nottankfilled = '$totalsEntrynottankfilled', 
     lastupdate = '$enterdate' 
     WHERE tripid = $tripid AND memberid = $memberid";
-
-
+}
 
 // print "<pre><br> total entry updates <br>"."</pre>";
 // print "<pre><br> $sql <br></pre>";
@@ -503,8 +522,7 @@ $sql = "UPDATE  gastriptotalstbl
 //
 // sql query
 //
-$modulecontent = "Unable to update member trip gas capture totals record. memberid = $memberid. tripid = $tripid.";
-$function = 'update';
+$modulecontent = "Unable to update member trip gas capture totals record - recaclculate. memberid = $memberid. tripid = $tripid.";
 include 'mysqlquery.php';
 
 //
@@ -518,6 +536,7 @@ mysqli_close($dbConn);
 $msgtext = $msgtext . "<br> Finished Gas Capture Member Trip recalculate for tripid = $tripid and memberid = $memberid <br>";
 $msgArray['msgtext'] = $msgtext;
 $msgArray['errtext'] = $errtext;
+$msgArray['dbgtext'] = $dbgtext;
 $msgArray['detailid'] = "$detailid";
 $msgArray['bodytext'] = "Successfully recalculated gas entry details and totals";
 

@@ -37,8 +37,8 @@ include 'mysqlconnect.php';
 $sql = "SELECT T.tripname, 
 	GT.odometer, 
 	GT.totalamount, 
-	GT.avecostpergallon, 
-	GT.totalmiles, 
+	GT.avecostpergallon,
+	COALESCE(CASE WHEN T.startodometer IS NOT NULL THEN (GT.odometer - T.startodometer) ELSE GT.totalmiles END,0) AS totalmiles,
 	GT.avempg, 
 	GT.totalgallons
 FROM triptbl T

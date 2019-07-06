@@ -112,9 +112,18 @@
                     </div>
                 </div> <!-- end of form-group -->
 
+                <div class="form-group">
+                    <div class="col-md-4  capture-detail-labels-input">
+                        Comments
+                    </div>
+                    <div class="col-md-7">
+                        <textarea tabindex="10" class="form-control" ng-model="current.capture.comments" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+                </div> <!-- end of form-group -->
+
                 <div class="form-group" >
                     <div class="col-md-7 capture-detail-checkbox-input">
-                        <input style="padding-top:10px;" ng-click="calculateChange()" tabindex="10" type="checkbox" ng-model="current.capture.nottankfilled" ng-checked="current.capture.nottankfilled == '1'" id="nottankfilled" name="nottankfilled"> Tank not filled
+                        <input style="padding-top:10px;" ng-click="calculateChange()" tabindex="11" type="checkbox" ng-model="current.capture.nottankfilled" ng-checked="current.capture.nottankfilled == '1'" id="nottankfilled" name="nottankfilled"> Tank not filled
                     </div>
                 </div> <!-- end of form-group -->
 
@@ -166,7 +175,7 @@
     <div class="col-md-12">
         <div class="panel panel-info">
             <div class="panel-heading panelTitlelMYRV">
-                Gas Totals
+                Gas Fill Totals
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
                 <div class="form-group">
@@ -227,29 +236,52 @@
     </div> <!-- end of col 12 -->
 </div> <!-- end of row -->    
 
-<div class="row pageStandardOffset">
+<div style="margin:5px;" class="row pageStandardOffset">
     <div class="col-md-12">
         <div style="padding-top:35px;" ></div>
         <div class="panel panel-warning">
             <div class="panel-heading panelTitlelMYRV">
-                Gas Calculation Friends
+               Trip Stats
             </div> <!-- end of inner pannel heading-->
             <div class="panel-body">
                 <div class="form-group">
-                    <div class="col-md-5 capture-detail-labels-calculated">
-                        Topoff Gallons 
+                    <div class="col-md-6 capture-detail-labels-calculated">
+                        Start Trip Odometer
                     </div>
-                    <div class="col-md-6  form-inline">
-                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.topoffgallons" id="topoffgallons" name="topoffgallons">
+                    <div class="col-md-5  form-inline">
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.trip.startodometer" id="tripstartodometer" name="tripstartodometer">
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-md-6 capture-detail-labels-calculated">
+                        Start Gas Odometer 
+                    </div>
+                    <div class="col-md-5  form-inline">
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.startgasodometer" id="startgasodometer" name="startgasodometer">
                     </div>
                 </div> <!-- end of form-group -->
-
                 <div class="form-group">
-                    <div class="col-md-5 capture-detail-labels-calculated">
-                        Prev Odometer
+                    <div class="col-md-6 capture-detail-labels-calculated">
+                        Trip Total Miles 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5  form-inline">
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.trip.totalmiles" id="triptotalmiles" name="triptotalmiles">
+                    </div>
+                </div> <!-- end of form-group -->
+                 <div class="form-group">
+                    <div class="col-md-6 capture-detail-labels-calculated">
+                        Prev Gas Odometer
+                    </div>
+                    <div class="col-md-5">
                         <input type="text" readonly class="form-control" ng-model="current.original.gastotals.odometer" id="prevodometer" name="prevodometer">
+                    </div>
+                </div> <!-- end of form-group -->
+                <div class="form-group">
+                    <div class="col-md-6 capture-detail-labels-calculated">
+                        Initial Gallon Fill
+                    </div>
+                    <div class="col-md-5  form-inline">
+                        <input style="width:90%;" type="text" readonly class="form-control" ng-model="current.gastotals.topoffgallons" id="topoffgallons" name="topoffgallons">
                     </div>
                 </div> <!-- end of form-group -->
 

@@ -18,6 +18,12 @@ if (is_numeric($_POST['odometer']))
 	$odometer = $_POST['odometer'];
 }
 
+$startgasodometer = 0;
+if (is_numeric($_POST['startgasodometer']))
+{
+	$startgasodometer = $_POST['startgasodometer'];
+}
+
 // 
 // calculated totals 
 //
@@ -94,23 +100,84 @@ include 'mysqlconnect.php';
 // print_r($msgArray);
 // exit(json_encode($msgArray));
 
+// 
+//  see if gas trip entry totals exists 
+// 
+$sql = "SELECT COUNT(*) AS total FROM gastriptotalstbl 
+	WHERE memberid = $memberid AND tripid = $tripid";
+
+// print $sql;
+
+//
+// sql query
+//
+$modulecontent = "Unable to SELECT member trip gas total information for gas trip entry. memberid = $memberid. tripid = $tripid.";
+$function = 'select';
+include 'mysqlquery.php';
 
 // 
-//  Update gas trip entry totals
+// Get the results
 // 
-$sqlFunction == "update";
-$sql = "UPDATE gastriptotalstbl 
-	SET 
-    odometer='$odometer',
-	totalamount='$totalamount',
-	totalgallons='$totalgallons',
-    nottankfilled='$gastotalsnottankfilled',
-    topoffgallons='$topoffgallons',
-	avecostpergallon='$avecostpergallon',
-	totalmiles='$totalmiles',
-	avempg='$avempg',
-	lastupdate='$enterdate' 
-	WHERE memberid = $memberid AND tripid = $tripid";
+$r = mysqli_fetch_assoc($sql_result);
+$totalrecords = $r['total'];
+
+if ($totalrecords == 0)
+{
+	// 
+	//  insert gas trip entry totals
+	// 
+	$sqlFunction == "insert";
+	$sql = "INSERT INTO gastriptotalstbl
+		(
+			memberid, 
+			tripid, 
+			odometer, 
+			startgasodometer, 
+			totalamount, 
+			totalgallons, 
+			avecostpergallon, 
+			totalmiles, 
+			avempg, 
+			topoffgallons, 
+			nottankfilled, 
+			lastupdate
+		) 
+		VALUES 
+		(
+			$memberid,
+			$tripid,
+			'$odometer',
+			'$startgasodometer',
+			'$totalamount',
+			'$totalgallons',
+			'$avecostpergallon',
+			'$totalmiles',
+			'$avempg',
+		    '$topoffgallons',
+			'$gastotalsnottankfilled',
+			'$enterdate'  
+		)";
+}
+else
+{
+	// 
+	//  Update gas trip entry totals
+	// 
+	$sqlFunction == "update";
+	$sql = "UPDATE gastriptotalstbl 
+		SET 
+	    odometer='$odometer',
+	    startgasodometer='$startgasodometer',
+		totalamount='$totalamount',
+		totalgallons='$totalgallons',
+	    nottankfilled='$gastotalsnottankfilled',
+	    topoffgallons='$topoffgallons',
+		avecostpergallon='$avecostpergallon',
+		totalmiles='$totalmiles',
+		avempg='$avempg',
+		lastupdate='$enterdate' 
+		WHERE memberid = $memberid AND tripid = $tripid";
+}
 
 // print $sql;
 

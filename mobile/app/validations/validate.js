@@ -85,7 +85,7 @@ function isValidTime(t) {
 function isEmptyField(varStaring) {
 	var retvalue = false;
 
-	if ($.trim(varStaring) == "" || varStaring == undefined)
+	if ($.trim(varStaring) == "" || varStaring == undefined || varStaring == "null")
 	{
 		retvalue = true;
 	}

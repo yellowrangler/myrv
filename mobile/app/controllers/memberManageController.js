@@ -129,7 +129,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         {
             if (!isValidDate($scope.current.trip.startdate))
             {
-                errmsg += "Start date must be a valid date! <br><br>";
+                errmsg += "Start date must be a valid date and is required! <br><br>";
                 $scope.current.trip.startdate = "";
             }
         }
@@ -145,7 +145,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         {
             if (!positiveDecimalPostValidation($scope.current.trip.startodometer))
             {
-                errmsg += "Starting odometer must be a valid number! <br><br>";
+                errmsg += "Starting odometer must be a valid number and is required! <br><br>";
                 $scope.current.trip.startodometer = "";
             }
         }
@@ -174,6 +174,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         {
             $scope.current.trip.towvehicle = "";
             $("#towvehicle").val("");
+            errmsg += "Tow vehicle is required <br><br>";
         }
 
         $scope.current.trip.rv = $("#rv").val();
@@ -181,6 +182,7 @@ controllers.membermanagetripController = function ($scope, $http, $location, mem
         {
             $scope.current.trip.rv = "";
             $("#rv").val("");
+            errmsg += "RV is required <br><br>";
         }
 
         return errmsg;

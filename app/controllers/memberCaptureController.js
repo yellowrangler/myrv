@@ -10,10 +10,12 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         // Local variables
         // 
-        var milgas = 0;   
-        var odmb4 = 0; 
-        var miltot = 0;  
-        var milgas = 0;        
+        var milesGas = 0;   
+        var odometerGasBefore = 0; 
+        var milesGasTotal = 0;  
+        var milesTripTotal = 0;   
+        var odometerGasCurrent = 0;
+        var odometerTripStart = 0;      
         
         if ($scope.current.capture.odometer == "" || $scope.current.capture.odometer == undefined)
             return;
@@ -27,20 +29,41 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        odmgas = $scope.current.capture.odometer * 1;  
-        odmb4 = $scope.current.original.gastotals.odometer * 1; 
-        milgas = odmgas - odmb4;
+        if ($scope.current.firstgasentry == 1) 
+        {
+            $scope.current.original.gastotals.odometer = $scope.current.capture.odometer; 
+            $scope.current.original.gastotals.startgasodometer = $scope.current.capture.odometer; 
 
-        miltot = $scope.current.original.gastotals.totalmiles * 1;
-        miltot = miltot + milgas;
+            $scope.current.gastotals.odometer = $scope.current.capture.odometer; 
+            $scope.current.gastotals.startgasodometer = $scope.current.capture.odometer; 
+        }
 
-        $scope.current.capture.odometer = odmgas.toFixed(1);
-        $scope.current.capture.miles = milgas.toFixed(1);
+        // 
+        // Trip miles data
+        // 
+        odometerTripStart = $scope.current.trip.startodometer * 1;
+        odometerGasCurrent = $scope.current.capture.odometer * 1; 
+        milesTripTotal = odometerGasCurrent - odometerTripStart;
+        $scope.current.trip.totalmiles = milesTripTotal.toFixed(1);
+
+
+        // 
+        //  Gas miles
+        // 
+        odometerGasCurrent = $scope.current.capture.odometer * 1;  
+        odometerGasBefore = $scope.current.original.gastotals.odometer * 1; 
+      
+        milesGas = odometerGasCurrent - odometerGasBefore;
+        milesGasTotal = $scope.current.original.gastotals.totalmiles * 1; 
+        milesGasTotal = milesGasTotal + milesGas;
+
+        $scope.current.capture.odometer = odometerGasCurrent.toFixed(1);
+        $scope.current.capture.miles = milesGas.toFixed(1);
 
         //
         // Totals
         //
-        $scope.current.gastotals.totalmiles = miltot.toFixed(1);
+        $scope.current.gastotals.totalmiles = milesGasTotal.toFixed(1);
     }
 
     //-----------------------------------------------------------
@@ -51,9 +74,9 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         // Local variables
         // 
-        var amtgas = 0; 
-        var galgas = 0;
-        var amtgastot = 0;        
+        var amountGas = 0; 
+        var gallonGas = 0;
+        var amountGasTotal = 0;        
         
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
             return;
@@ -67,9 +90,8 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        amtgas = $scope.current.capture.amount * 1; 
-
-        $scope.current.capture.amount = amtgas.toFixed(2); 
+        amountGas = $scope.current.capture.amount * 1; 
+        $scope.current.capture.amount = amountGas.toFixed(2); 
 
         // if only have amount then send formated decimal and return 
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
@@ -96,11 +118,10 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        amtgastot = $scope.current.original.gastotals.totalamount * 1;  
-        amtgastot = (amtgastot + amtgas);  
+        amountGasTotal = $scope.current.original.gastotals.totalamount * 1;  
+        amountGasTotal = (amountGasTotal + amountGas);  
  
-        $scope.current.gastotals.totalamount = amtgastot.toFixed(2);
-
+        $scope.current.gastotals.totalamount = amountGasTotal.toFixed(2);
     }
 
     //----------------------------------------------------------- 
@@ -111,12 +132,12 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         // Local variables
         // 
-        var amtgas = 0;   
-        var galgas = 0; 
+        var amountGas = 0;   
+        var gallonGas = 0; 
         var cpg = 0; 
 
-        var amtgastot = 0;  
-        var galgastot = 0;
+        var amountGasTotal = 0;  
+        var gallonsGasTotal = 0;
         var cpgtot = 0;        
         
         if ($scope.current.capture.amount == undefined || $scope.current.capture.amount == "" )
@@ -146,31 +167,30 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.amount == "" || $scope.current.capture.gallons == "")
             return;
 
-        amtgas = $scope.current.capture.amount * 1;  
-        galgas = $scope.current.capture.gallons * 1; 
+        amountGas = $scope.current.capture.amount * 1;  
+        gallonGas = $scope.current.capture.gallons * 1; 
 
-        amtgastot = $scope.current.original.gastotals.totalamount * 1;  
-        galgastot = $scope.current.original.gastotals.totalgallons * 1; 
-
-        amtgastot = (amtgastot + amtgas);  
-        galgastot = (galgastot + galgas); 
+        amountGasTotal = $scope.current.original.gastotals.totalamount * 1;  
+        gallonsGasTotal = $scope.current.original.gastotals.totalgallons * 1;  
+        amountGasTotal = (amountGasTotal + amountGas);  
+        gallonsGasTotal = (gallonsGasTotal + gallonGas); 
         
-        if (galgas == 0)
+        if (gallonGas == 0)
         {
             cpg = 0;
         }
         else
         {
-            cpg = amtgas / galgas;
+            cpg = amountGas / gallonGas;
         }
         
-        if (galgastot == 0)
+        if (gallonsGasTotal == 0)
         {
             cpgtot = 0;
         }
         else
         {
-            cpgtot = amtgastot / galgastot;
+            cpgtot = amountGasTotal / gallonsGasTotal;
         }
 
         $scope.current.capture.costpergallon = cpg.toFixed(3);
@@ -185,8 +205,8 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         // Local variables
         // 
-        var galgas = 0; 
-        var galgastot = 0;  
+        var gallonGas = 0; 
+        var gallonsGasTotal = 0;  
         
         if ($scope.current.capture.gallons == "" || $scope.current.capture.gallons == undefined)
             return;
@@ -198,13 +218,13 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        galgas = $scope.current.capture.gallons * 1; 
-        galgastot = $scope.current.original.gastotals.totalgallons * 1; 
-        galgastot = (galgastot + galgas); 
+        gallonGas = $scope.current.capture.gallons * 1; 
+
+        gallonsGasTotal = $scope.current.original.gastotals.totalgallons * 1;  
+        gallonsGasTotal = (gallonsGasTotal + gallonGas); 
         
-        $scope.current.capture.gallons= galgas.toFixed(3);
-        $scope.current.gastotals.totalgallons = galgastot.toFixed(3);
- 
+        $scope.current.capture.gallons= gallonGas.toFixed(3);
+        $scope.current.gastotals.totalgallons = gallonsGasTotal.toFixed(3);
     }
 
     //----------------------------------------------------------- 
@@ -215,12 +235,12 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         //
         // Local variables
         // 
-        var milgas = 0;
-        var galgas = 0; 
+        var milesGas = 0;
+        var gallonGas = 0; 
         var mpg = 0;
-        var milgastot = 0;
-        var galgastot = 0;  
-        var mpgtot = 0;
+        var milesGasTotal = 0;
+        var gallonsGasTotal = 0;  
+        var mpgTotal = 0;
 
 
         // 
@@ -229,7 +249,9 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         if ($scope.current.capture.nottankfilled)
         {
             $scope.current.capture.mpg = mpg.toFixed(3);
-            $scope.current.gastotals.avempg = $scope.current.original.gastotals.avempg;
+            
+            $scope.current.gastotals.avempg = $scope.current.original.gastotals.avempg;  
+        
             $scope.current.gastotals.nottankfilled = 1;
 
             return;
@@ -260,20 +282,21 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         }
 
         
-        milgas = $scope.current.capture.miles * 1;  
-        galgas = $scope.current.capture.gallons * 1; 
+        milesGas = $scope.current.capture.miles * 1;  
+        gallonGas = $scope.current.capture.gallons * 1; 
 
         // 
         //  we must provide for a tank not full
         // 
         var catchupDetailMiles = 0;
         var catchupDetailGallons = 0;
+
+        
         if ($scope.current.original.gastotals.nottankfilled)
         {
             // 
             // we must now gather miles and gallons to provide true mpg
             // 
-            // var arrayLength = objectArraySize($scope.current.original.gasdetails);
             for ($i = 0; $scope.current.original.gasdetails[$i].nottankfilled == 1; $i++)
             {
                 catchupDetailMiles = catchupDetailMiles + ($scope.current.original.gasdetails[$i].miles * 1);
@@ -281,52 +304,51 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             }
 
             $scope.current.gastotals.nottankfilled = 0;
-        }
+        }  
+     
+        milesGasTotal = $scope.current.original.gastotals.totalmiles * 1;
+        milesGasTotal = milesGasTotal + milesGas;
 
-        milgastot = $scope.current.original.gastotals.totalmiles * 1;  
-        milgastot = milgastot + milgas;
-
-        galgastot = $scope.current.original.gastotals.totalgallons * 1; 
-        galgastopofftot = $scope.current.original.gastotals.topoffgallons * 1;
-        if (milgastot > 0)
+        gallonsGasTotal = $scope.current.original.gastotals.totalgallons * 1;
+        gallaonGasTopoffTotal = $scope.current.original.gastotals.topoffgallons * 1; 
+        if ($scope.current.firstgasentry == 1) 
         {
-            galgastot = (galgastot + galgas) - galgastopofftot;
+            gallonsGasTotal = gallonGas;
+            $scope.current.gastotals.topoffgallons = gallonsGasTotal.toFixed(3);
         }
         else
         {
-            galgastot = galgastot + galgas;
-            $scope.current.gastotals.topoffgallons = galgastot.toFixed(3);
+            gallonsGasTotal = (gallonsGasTotal + gallonGas) - gallaonGasTopoffTotal;
         }
         
-        if (galgas == 0)
+        if (gallonGas == 0)
         {
             mpg = 0;
         }
         else
         {
-            mpg = (milgas + catchupDetailMiles) / (galgas + catchupDetailGallons);
+            mpg = (milesGas + catchupDetailMiles) / (gallonGas + catchupDetailGallons);
         }
         
-        if (galgastot == 0)
+        if (gallonsGasTotal == 0)
         {
-            mpgtot = 0;
+            mpgTotal = 0;
         }
         else
         {
-            if (milgastot == 0)
+            if (milesGasTotal == 0)
             {
-                mpgtot = mpg;
+                mpgTotal = mpg;
             }
             else
             {
-                mpgtot = milgastot / galgastot;
+                mpgTotal = milesGasTotal / gallonsGasTotal;
             }
         }
 
         $scope.current.capture.mpg = mpg.toFixed(3);
-        $scope.current.gastotals.avempg = mpgtot.toFixed(3);
+        $scope.current.gastotals.avempg = mpgTotal.toFixed(3);
     }
-
 
     function calculateChange() {
 
@@ -417,6 +439,7 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
         $scope.current.capture.date = getCurrentDateStr();
 
         $scope.current.gastotals = {};
+        $scope.current.firstgasentry = 0;
 
         // use ng-change in html to calc totals
 
@@ -462,16 +485,49 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
 
     }
 
+    function emptyGasTotals() {
+
+        var emptyGastTotals = {};
+
+        emptyGastTotals.memberid = $scope.current.memberid;
+        emptyGastTotals.tripid = $scope.current.tripid;
+        emptyGastTotals.odometer = 0;
+        emptyGastTotals.startgasodometer = 0;
+        emptyGastTotals.totalamount = 0;
+        emptyGastTotals.totalgallons = 0;
+        emptyGastTotals.avecostpergallon = 0;
+        emptyGastTotals.totalmiles = 0;
+        emptyGastTotals.avempg = 0;
+        emptyGastTotals.topoffgallons = 0;
+        emptyGastTotals.gastotalmiles = 0;
+
+        return emptyGastTotals;
+    }
+
     function getMemberTripGasTotals() {
         $scope.current.gastotals = {};
 
         var qdata = 'tripid='+$scope.current.tripid+'&memberid='+$scope.current.memberid;
         memberFactory.getMembertripgastotals(qdata)
             .success( function(data) {
-                $scope.current.gastotals = objectCopy(data);
-                
-                $scope.current.original.gastotals = objectCopy(data);
-                })
+                if (isEmptyField(data))
+                {
+                    // 
+                    //  must be first time gas capture
+                    // 
+                    $scope.current.gastotals = objectCopy(emptyGasTotals());
+                    $scope.current.original.gastotals = objectCopy(emptyGasTotals());
+
+                    $scope.current.firstgasentry = 1;
+                }
+                else
+                {
+                    $scope.current.gastotals = objectCopy(data);
+                    $scope.current.original.gastotals = objectCopy(data);
+
+                    $scope.current.firstgasentry = 0;
+                }
+            })
             .error( function(edata) {
                 alert(edata);
             });
@@ -516,15 +572,36 @@ controllers.gastripentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        var formstring = $("#membercapturegasForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMembergastripentry(formstring)
+        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=gasdetails';
+        memberFactory.odometerDoubleEntryCheck(qdata)
         .success( function(data) {
-            if (data.errtext == "")
+            if (data.msgtext == "ok")
             {
-                saveGasCaptureTotals();
+                var formstring = $("#membercapturegasForm").serialize();
+                memberFactory.saveMembergastripentry(formstring)
+                .success( function(data) {
+                    if (data.errtext == "")
+                    {
+                        saveGasCaptureTotals();
+                    }
+                    else
+                    {
+                        $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+                        $('#memCaptureGasDialogModalBody').html("Error saving gas trip entry - "+data.errtext);
+                        $('#memCaptureGasDialogModal').modal();
+                    }
+
+                    // must call for new totals and reload scope.current.original.gastotals
+                })
+                .error( function(edata) {
+                    alert(edata);
+                });
+            }
+            else if (data.msgtext == "dupe") 
+            {
+                $('#memCaptureGasDialogModalTitle').text("Gas Trip Entry Error");
+                $('#memCaptureGasDialogModalBody').html("Duplicate odometer gas trip entry");
+                $('#memCaptureGasDialogModal').modal();
             }
             else
             {

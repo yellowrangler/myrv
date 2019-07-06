@@ -10,6 +10,15 @@ myrvApp.factory('memberFactory', function($q, $http) {
         })
     }
 
+    factory.odometerDoubleEntryCheck = function (data) {
+        return $http({ 
+            method: 'POST', 
+            url: "app/ajax/odometerdoubleentrycheck.php",
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+    }
+
     factory.getMember = function (data) {
         return $http({ 
             method: 'POST', 
@@ -18,7 +27,6 @@ myrvApp.factory('memberFactory', function($q, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
     }
-
     factory.getMemberDashboardSnapshot = function (data) {
         return $http({ 
             method: 'POST', 
