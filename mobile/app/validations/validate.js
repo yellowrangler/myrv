@@ -25,6 +25,8 @@ function selectFieldBadValue(selectFieldValue) {
 		return rval;
 	}
 
+	selectFieldValue = selectFieldValue + "";
+
 	$pos = selectFieldValue.indexOf("undefined");
 	if ($pos !== -1)
 	{
@@ -98,6 +100,13 @@ function itemOccurancesInString(str, item) {
 	var pos = 0;
 	var num = -1;
 	var i = -1;
+
+	if (isEmptyField(str))
+	{
+		return 0;
+	}
+
+	str = str + "";
 
 	// Search the string and counts the number of e's
 	while (pos != -1) {

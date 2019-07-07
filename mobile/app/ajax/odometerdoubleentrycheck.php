@@ -89,9 +89,27 @@ switch ($target) {
     case 'gasdetails':
         $table = "gastripentrytbl";
         break;
+
     case 'gastotals':
         $table = "gastriptotalstbl";
         break;
+
+    case 'fooddetails':
+        $table = "foodtripentrytbl";
+        break;
+
+    case 'overnightdetails':
+        $table = "foodtripentrytbl";
+        break;   
+
+    case 'eventdetails':
+        $table = "serviceentrytbl";
+        break;
+        
+    case 'eventdetails':
+        $table = "serviceentrytbl";
+        break;             
+
     case 'trips':
         $table = "triptbl";
         break;
@@ -124,9 +142,9 @@ include 'mysqlconnect.php';
 //  see if gas trip entry totals exists 
 // 
 $sql = "SELECT COUNT(*) AS total FROM $table 
-	WHERE memberid = $memberid 
-	AND tripid = $tripid 
-	AND odometer = '$odometer'";
+  WHERE memberid = $memberid 
+  AND tripid = $tripid 
+  AND odometer = '$odometer'";
 
 //
 // sql query
@@ -144,7 +162,7 @@ $recordcount = $r['total'];
 $rvalue = "ok";
 if ($recordcount > 0)
 {
-	$rvalue = "dupe";
+  $rvalue = "dupe";
 }
 
 //

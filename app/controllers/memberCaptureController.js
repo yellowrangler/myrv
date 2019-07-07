@@ -810,19 +810,40 @@ controllers.overnightetryController = function ($scope, $http, $location, member
             return;
         }
 
-        var formstring = $("#membercaptureovernightForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMemberovernighttripentry(formstring)
+        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=overnightdetails';
+        memberFactory.odometerDoubleEntryCheck(qdata)
         .success( function(data) {
-            if (data.errtext == "")
+            if (data.msgtext == "ok")
             {
-                $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Success");
-                $('#memCaptureOvernightDialogModalBody').html(data.bodytext);
-                $('#memCaptureOvernightDialogModal').modal();
+                var formstring = $("#membercaptureovernightForm").serialize();
+                memberFactory.saveMemberovernighttripentry(formstring)
+                .success( function(data) {
+                    if (data.errtext == "")
+                    {
+                        $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Success");
+                        $('#memCaptureOvernightDialogModalBody').html(data.bodytext);
+                        $('#memCaptureOvernightDialogModal').modal();
 
-                // resetOvernightCapture();
+                        // resetOvernightCapture();
+                    }
+                    else
+                    {
+                        $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Error");
+                        $('#memCaptureOvernightDialogModalBody').html("Error saving overnight trip entry - "+data.errtext);
+                        $('#memCaptureOvernightDialogModal').modal();
+                    }
+
+                    // must call for new totals and reload scope.current.original.gastotals
+                })
+                .error( function(edata) {
+                    alert(edata);
+                });
+            }
+            else if (data.msgtext == "dupe") 
+            {
+                $('#memCaptureOvernightDialogModalTitle').text("Overnight Trip Entry Error");
+                $('#memCaptureOvernightDialogModalBody').html("Duplicate odometer entry");
+                $('#memCaptureOvernightDialogModal').modal();
             }
             else
             {
@@ -975,24 +996,45 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             return;
         }
 
-        var formstring = $("#membercapturefoodForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMemberfoodtripentry(formstring)
+        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=fooddetails';
+        memberFactory.odometerDoubleEntryCheck(qdata)
         .success( function(data) {
-            if (data.errtext == "")
+            if (data.msgtext == "ok")
             {
-                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Success");
-                $('#memCaptureFoodDialogModalBody').html(data.bodytext);
-                $('#memCaptureFoodDialogModal').modal();
+                var formstring = $("#membercapturefoodForm").serialize();
+                memberFactory.saveMemberfoodtripentry(formstring)
+                .success( function(data) {
+                    if (data.errtext == "")
+                    {
+                        $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Success");
+                        $('#memCaptureFoodDialogModalBody').html(data.bodytext);
+                        $('#memCaptureFoodDialogModal').modal();
 
-                // resetFoodCapture();
+                        // resetFoodCapture();
+                    }
+                    else
+                    {
+                        $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Error");
+                        $('#memCaptureFoodDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
+                        $('#memCaptureFoodDialogModal').modal();
+                    }
+
+                    // must call for new totals and reload scope.current.original.gastotals
+                })
+                .error( function(edata) {
+                    alert(edata);
+                });
+            }
+            else if (data.msgtext == "dupe") 
+            {
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Trip Entry Error");
+                $('#memCaptureFoodDialogModalBody').html("Duplicate odometer entry");
+                $('#memCaptureFoodDialogModal').modal();
             }
             else
             {
-                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Error");
-                $('#memCaptureFoodDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Trip Entry Error");
+                $('#memCaptureFoodDialogModalBody').html("Error saving restaurant trip entry - "+data.errtext);
                 $('#memCaptureFoodDialogModal').modal();
             }
 
@@ -1130,28 +1172,47 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
             return;
         }
 
-        var formstring = $("#membercaptureentryForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMembereventtripentry(formstring)
+        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=eventdetails';
+        memberFactory.odometerDoubleEntryCheck(qdata)
         .success( function(data) {
-            if (data.errtext == "")
+            if (data.msgtext == "ok")
             {
-                $('#memCaptureEventDialogModalTitle').text("Special Event Entry Success");
-                $('#memCaptureEventDialogModalBody').html(data.bodytext);
-                $('#memCaptureEventDialogModal').modal();
+                var formstring = $("#membercaptureentryForm").serialize();
+                memberFactory.saveMembereventtripentry(formstring)
+                .success( function(data) {
+                    if (data.errtext == "")
+                    {
+                        $('#memCaptureEventDialogModalTitle').text("Special Event Entry Success");
+                        $('#memCaptureEventDialogModalBody').html(data.bodytext);
+                        $('#memCaptureEventDialogModal').modal();
 
-                resetEventCapture();
+                        resetEventCapture();
+                    }
+                    else
+                    {
+                        $('#memCaptureEventDialogModalTitle').text("Special Event Entry Error");
+                        $('#memCaptureEventDialogModalBody').html("Error saving special event entry - "+data.errtext);
+                        $('#memCaptureEventDialogModal').modal();
+                    }
+
+                    // must call for new totals and reload scope.current.original.gastotals
+                })
+                .error( function(edata) {
+                    alert(edata);
+                });
+            }
+            else if (data.msgtext == "dupe") 
+            {
+                $('#memCaptureEventDialogModalTitle').text("Special Event Trip Entry Error");
+                $('#memCaptureEventDialogModalBody').html("Duplicate odometer entry");
+                $('#memCaptureEventDialogModal').modal();
             }
             else
             {
-                $('#memCaptureEventDialogModalTitle').text("Special Event Entry Error");
-                $('#memCaptureEventDialogModalBody').html("Error saving special event entry - "+data.errtext);
+                $('#memCaptureEventDialogModalTitle').text("Special Event Trip Entry Error");
+                $('#memCaptureEventDialogModalBody').html("Error saving special event trip entry - "+data.errtext);
                 $('#memCaptureEventDialogModal').modal();
             }
-
-            // must call for new totals and reload scope.current.original.gastotals
         })
         .error( function(edata) {
             alert(edata);
@@ -1306,28 +1367,47 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
             return;
         }
 
-        var formstring = $("#membercaptureserviceForm").serialize();
-
-        // console.log(formstring);
-
-        memberFactory.saveMemberservicetripentry(formstring)
+        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=eventdetails';
+        memberFactory.odometerDoubleEntryCheck(qdata)
         .success( function(data) {
-            if (data.errtext == "")
+            if (data.msgtext == "ok")
             {
-                $('#memCaptureServiceDialogModalTitle').text("Auto RV Service Entry Success");
-                $('#memCaptureServiceDialogModalBody').html(data.bodytext);
-                $('#memCaptureServiceDialogModal').modal();
+                var formstring = $("#membercaptureserviceForm").serialize();
+                memberFactory.saveMemberservicetripentry(formstring)
+                .success( function(data) {
+                    if (data.errtext == "")
+                    {
+                        $('#memCaptureServiceDialogModalTitle').text("Auto RV Service Entry Success");
+                        $('#memCaptureServiceDialogModalBody').html(data.bodytext);
+                        $('#memCaptureServiceDialogModal').modal();
 
-                resetServiceCapture();
+                        resetServiceCapture();
+                    }
+                    else
+                    {
+                        $('#memCaptureServiceDialogModalTitle').text("Auto RV Service Entry Error");
+                        $('#memCaptureServiceDialogModalBody').html("Error saving service entry - "+data.errtext);
+                        $('#memCaptureServiceDialogModal').modal();
+                    }
+
+                    // must call for new totals and reload scope.current.original.gastotals
+                })
+                .error( function(edata) {
+                    alert(edata);
+                });
+            }
+            else if (data.msgtext == "dupe") 
+            {
+                $('#memCaptureServiceDialogModalTitle').text("Special Event Trip Entry Error");
+                $('#memCaptureServiceDialogModalBody').html("Duplicate odometer entry");
+                $('#memCaptureServiceDialogModal').modal();
             }
             else
             {
-                $('#memCaptureServiceDialogModalTitle').text("Auto RV Service Entry Error");
-                $('#memCaptureServiceDialogModalBody').html("Error saving service entry - "+data.errtext);
+                $('#memCaptureServiceDialogModalTitle').text("Special Event Trip Entry Error");
+                $('#memCaptureServiceDialogModalBody').html("Error saving special event trip entry - "+data.errtext);
                 $('#memCaptureServiceDialogModal').modal();
             }
-
-            // must call for new totals and reload scope.current.original.gastotals
         })
         .error( function(edata) {
             alert(edata);

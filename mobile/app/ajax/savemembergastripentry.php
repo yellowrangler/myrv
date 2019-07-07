@@ -46,6 +46,10 @@ if (isset($_POST['nottankfilled']))
 	{
 		$nottankfilled = $_POST['nottankfilled'];
 	}
+	else
+	{
+		$nottankfilled = 1;
+	}
 }
 else
 {
