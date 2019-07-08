@@ -163,6 +163,11 @@ myrvAppMobile.config(function ($routeProvider) {
                 controller: 'membermanagervmembershipController',
                 templateUrl: 'app/partials/membermanagervmembership.html'
             })
+        .when('/accidentwhattodo',
+            {
+                controller: 'accidentwhattodoController',
+                templateUrl: 'app/partials/accidentwhattodo.html'
+            })
         .when('/login',
             {
                 controller: 'loginController',
