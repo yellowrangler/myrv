@@ -15,6 +15,93 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+DROP TABLE IF EXISTS accidentdetailtbl;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE accidentdetailtbl (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL,
+  accidentid bigint(20) DEFAULT NULL,  
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS accidenttbl;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE accidenttbl (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL, 
+  accidentid bigint(20) DEFAULT NULL,  
+  odometer decimal(18,1) DEFAULT NULL,
+  date date DEFAULT NULL,
+  time time DEFAULT NULL,
+  location varchar(256) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  weather varchar(1000) DEFAULT NULL,
+  roadconditions varchar(1000) DEFAULT NULL,
+  accidentdetails varchar(5000) DEFAULT NULL,
+  witnessinformation varchar(5000) DEFAULT NULL,
+  policeinformation varchar(5000) DEFAULT NULL,
+  witnessinformation varchar(5000) DEFAULT NULL,
+  yourpassangers varchar(5000) DEFAULT NULL,
+  theirpassangers varchar(5000) DEFAULT NULL,
+  comments varchar(1000) DEFAULT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS accidentpeopletbl;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE accidentpeopletbl (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL, 
+  accidentid bigint(20) DEFAULT NULL,  
+  peopletype varchar(256) DEFAULT NULL,  service Police, witness, driver, passanger, inured, samariten, other
+  injury varchar(100) DEFAULT NULL,  yes/no
+  fullname varchar(1000) DEFAULT NULL,
+  address varchar(5000) DEFAULT NULL,
+  city varchar(256) DEFAULT NULL,
+  state varchar(256) DEFAULT NULL,
+  zipcode varchar(100) DEFAULT NULL,
+  phonenumber varchar(1000) DEFAULT NULL,
+  email varchar(1000) DEFAULT NULL,
+  badgenumber varchar(1000) DEFAULT NULL,
+  relationtoyou varchar(5000) DEFAULT NULL,
+  comments varchar(1000) DEFAULT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS accidentdamagetbl;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE accidentdamagetbl (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  memberid bigint(20) DEFAULT NULL,
+  tripid bigint(20) DEFAULT NULL, 
+  accidentid bigint(20) DEFAULT NULL,  
+  yourvehicle varchar(5000) DEFAULT NULL, 
+  othervehicle varchar(5000) DEFAULT NULL,
+  towinginformation varchar(5000) DEFAULT NULL,
+  ambulanceinformation varchar(5000) DEFAULT NULL,
+  comments varchar(1000) DEFAULT NULL,
+  lastupdate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 --
 -- Table structure for table eventtripentrytbl
 --

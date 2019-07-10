@@ -953,13 +953,19 @@
 .accidentList {
 	margin:10px;
 	padding-left:5px;
+	line-height: 25px;
 	background: white;
 	font-size:16px;
 	color:teal;
 	list-style-type:disc;
 }
 
+/*.accidentHeading {
+	background-color:#F5CFC1; 
+	height:45px;
+}
 
+*/
 /*.exportDataTable tr  {
 	line-height: 35px;
 }*/

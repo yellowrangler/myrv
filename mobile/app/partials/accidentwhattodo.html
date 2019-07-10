@@ -2,7 +2,7 @@
 
 <div class="pageCaption row">
     <div class="col-md-12">
-        <h2 class="headerTitle">What you should do</h2>
+        <h2 class="headerTitle">Accident</h2>
     </div> <!-- end of column -->
 </div> <!-- end of row -->
 
@@ -10,69 +10,295 @@
     <div class="col-md-1">
       &nbsp;
     </div>
-    <div id="faqInfoItems" name="faqInfoItems" class="col-md-10">
+    <div id="accidentInfoItems" name="accidentInfoItems" class="col-md-10">
 	    <div class="panel-group" id="accordion">
 	        <div class="panel panel-default">
-		        <div class="panel-heading">
+		        <div style="background-color:#F5CFC1;" class="panel-heading">
 		            <h4 class="panel-title">
 		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-		                First Steps              
+		                What you should do              
 		              </a>
 		            </h4>
 		        </div>
 		        <div id="collapseOne" class="panel-collapse collapse">
-		            <div class="panel-body">
-		                <p>
-						<ul class="accidentList">
-						  <li>Remain calm</li>
-						  <li>Get to a safe place</li>
-						  <li>Check for injuries</li>
-						  <li>Administer First Aid</li>
-						  <li>Call police/EMT</li>
-						</ul> 
-		                </p>
-		            </div>
+		        	<div style="margin:5px;" class="row">
+					    <div style="padding-top:15px;" class="col-md-12">
+					        <div class="panel panel-success">
+					            <div class="panel-heading panelTitlelMYRV">
+					                First Steps
+					            </div> <!-- end of inner pannel heading-->
+					            <div style="padding-top:5px;" class="panel-body">
+
+									<ul class="accidentList">
+									  <li>Remain calm</li>
+									  <li>Get to a safe place</li>
+									  <li>Check for injuries</li>
+									  <li>Administer First Aid</li>
+									  <li>Call police/EMT</li>
+									</ul> 
+
+					            </div> <!-- end of col 7 -->
+					        </div> <!-- end of panel body -->
+					    </div> <!-- end of panel success -->
+					</div> <!-- end of row --> 
+
+					<div style="margin:5px;" class="row">
+					    <div style="padding-top:15px;" class="col-md-12">
+					        <div class="panel panel-success">
+					            <div class="panel-heading panelTitlelMYRV">
+					                 Do not say
+					            </div> <!-- end of inner pannel heading-->
+					            <div style="padding-top:5px;" class="panel-body">
+					            
+									<ul class="accidentList">
+									  <li>It’s all my fault, (even if it is).</li>
+									  <li>My insurance will pay for everything.</li>
+									  <li>It’s OK, I have full coverage.</li>
+									</ul> 
+					                
+					            </div> <!-- end of col 7 -->
+					        </div> <!-- end of panel body -->
+					    </div> <!-- end of panel success -->
+					</div> <!-- end of row --> 
+
+					<div style="margin:5px;" class="row">
+					    <div style="padding-top:15px;" class="col-md-12">
+					        <div class="panel panel-success">
+					            <div class="panel-heading panelTitlelMYRV">
+					                 While Stiil at the Sceene
+					            </div> <!-- end of inner pannel heading-->
+					            <div style="padding-top:5px;" class="panel-body">
+					               
+					            	<ul class="accidentList">
+									  <li>Get as much information as possible on this report.</li>
+									  <li>When the police come, cooperate and tell them what you know.</li>
+									  <li>Take Pictures, Take Pictures, Take Pictures</li>
+									</ul>
+					            	
+					            </div> <!-- end of col 7 -->
+					        </div> <!-- end of panel body -->
+					    </div> <!-- end of panel success -->
+					</div> <!-- end of row -->
+		           
 		         </div>
 	        </div> <!-- end of panel -->
 
 	        <div class="panel panel-default">
-	            <div class="panel-heading">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
 		            <h4 class="panel-title">
 		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
-		                Do not say
+		               Accident Details
 		              </a>
 		            </h4>
 	          	</div>
 	          	<div id="collapseTwo" class="panel-collapse collapse">
-		            <div class="panel-body">
-		                <p>
-						<ul class="accidentList">
-						  <li>It’s all my fault, (even if it is).</li>
-						  <li>My insurance will pay for everything.</li>
-						  <li>It’s OK, I have full coverage.</li>
-						</ul> 
-		                </p>
-			        </div>
+		            <div style="margin:5px;" class="pageStandardOffset row">
+					    <div class="col-md-12">
+
+			                <div class="form-group">
+			                    <label for="date" class="col-md-4 control-label capture-detail-labels-input capture-detail-labels-input">Date</label>
+			                    <div class="col-md-7">
+			                        <input tabindex="1" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.date" id="date" size="8" name="date" myrvdatepicker>
+
+			                        <span style="padding-right:10px">&nbsp;</span>
+
+			                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setToday()" id="settoday">Today</button>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="time" class="col-md-4 control-label capture-detail-labels-input">Time</label>
+			                    <div class="col-md-7">
+			                        <input tabindex="10" type="text" class="form-control" style="display:inline;width:135px;" ng-model="current.capture.time" id="time" name="time">
+
+			                        <span style="padding-right:10px">&nbsp;</span>
+
+			                        <button style="display:inline;" class="btn btn-info btn-sm" ng-click="setNow()" id="setnow">Now</button>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="weather" class="col-md-4 control-label capture-detail-labels-input">Weather</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="20" class="form-control" ng-model="current.capture.weather" id="weather" name="weather" rows="3"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="roadconditions" class="col-md-4 control-label capture-detail-labels-input">Road Conditions</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="30" class="form-control" ng-model="current.capture.roadconditions" id="roadconditions" name="roadconditions" rows="3"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="location" class="col-md-4 control-label capture-detail-labels-input">Location</label>
+			                    <div class="col-md-4">
+			                        <input tabindex="40" type="text" class="form-control" ng-model="current.capture.location" id="location" name="location" >
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="city" class="col-md-4 control-label capture-detail-labels-input">City</label>
+			                    <div class="col-md-4">
+			                        <input tabindex="50" type="text" class="form-control" ng-model="current.capture.city" id="city" name="city" >
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="state" class="col-md-4 control-label capture-detail-labels-input">State</label>
+			                    <div class="col-md-4">
+			                        <select tabindex="60" class="form-control" ng-model="current.capture.state" id="state" name="state" >
+			                            <option ng-repeat="state in states" value="{{state.value}}">{{state.title}}</option>
+			                        </select>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="accidentdetails" class="col-md-4 control-label capture-detail-labels-input">Accident Details</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="9" class="form-control" ng-model="current.capture.accidentdetails" id="accidentdetails" name="accidentdetails" rows="6"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+			            </div> <!-- end of col 7 -->
+					</div> <!-- end of row --> 
 			    </div>    
 	        </div> <!-- end of panel -->
 
 	        <div class="panel panel-default">
-	            <div class="panel-heading">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
 		            <h4 class="panel-title">
 		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree">
-		                 While Still At the Scene
+		                 Damage Description
 		             </a>
 		            </h4>
 		        </div>
 		        <div id="collapseThree" class="panel-collapse collapse">
+		            <div style="margin:5px;" class="pageStandardOffset row">
+					    <div class="col-md-12">
+			                <div class="form-group">
+			                    <label for="yourvehicle" class="col-md-4 control-label capture-detail-labels-input">Your Vehicle</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="20" class="form-control" ng-model="current.capture.yourvehicledamage" id="yourvehicledamage" name="yourvehicledamage" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="othervehicle" class="col-md-4 control-label capture-detail-labels-input">Other Vehicle</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="30" class="form-control" ng-model="current.capture.othervehicledamage" id="othervehicledamage" name="othervehicledamage" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+			            </div>
+					</div> <!-- end of row -->    
+	          	</div>
+	        </div> <!-- end of panel -->
+
+	        <div class="panel panel-default">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
+		            <h4 class="panel-title">
+		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour">
+		                 Other Vehicle/Driver/Owner Information
+		             </a>
+		            </h4>
+		        </div>
+		        <div id="collapseFour" class="panel-collapse collapse">
 		            <div class="panel-body">
 		            	<p>
-		            	<ul class="accidentList">
-						  <li>Get as much information as possible on this report.</li>
-						  <li>When the police come, cooperate and tell them what you know.</li>
-						  <li>Take Pictures, Take Pictures, Take Pictures</li>
-						</ul>
-		            	</p>
+						Coming soon!
+		                </p>
+		            </div>
+	          	</div>
+	        </div> <!-- end of panel -->
+
+	        <div class="panel panel-default">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
+		            <h4 class="panel-title">
+		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFive">
+		                 Passenger Information
+		             </a>
+		            </h4>
+		        </div>
+		        <div id="collapseFive" class="panel-collapse collapse">
+		            <div style="margin:5px;" class="pageStandardOffset row">
+					    <div class="col-md-12">
+			                <div class="form-group">
+			                    <label for="yourpassengers" class="col-md-4 control-label capture-detail-labels-input">Your Passengers</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="20" class="form-control" ng-model="current.capture.yourpassengers" id="yourpassengers" name="yourpassengers" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="otherpassengers" class="col-md-4 control-label capture-detail-labels-input">Other Passengers</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="30" class="form-control" ng-model="current.capture.otherpassengers" id="otherpassengers" name="otherpassengers" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+			            </div>
+					</div> <!-- end of row -->
+	          	</div>
+	        </div> <!-- end of panel -->
+
+	        <div class="panel panel-default">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
+		            <h4 class="panel-title">
+		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseSix">
+		                 Injury Information
+		             </a>
+		            </h4>
+		        </div>
+		        <div id="collapseSix" class="panel-collapse collapse">
+		            <div style="margin:5px;" class="pageStandardOffset row">
+					    <div class="col-md-12">
+			                <div class="form-group">
+			                    <label for="yourvehicle" class="col-md-4 control-label capture-detail-labels-input">Your Vehicle</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="20" class="form-control" ng-model="current.capture.yourvehicleinjuries" id="yourvehicleinjuries" name="yourvehicleinjuries" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+
+			                <div class="form-group">
+			                    <label for="othervehicle" class="col-md-4 control-label capture-detail-labels-input">Other Vehicle</label>
+			                    <div class="col-md-7">
+			                        <textarea tabindex="30" class="form-control" ng-model="current.capture.othervehicleinjuries" id="othervehicleinjuries" name="othervehicleinjuries" rows="8"></textarea>
+			                    </div>
+			                </div> <!-- end of form-group -->
+			            </div>
+					</div> <!-- end of row -->   
+	          	</div>
+	        </div> <!-- end of panel -->
+
+	        <div class="panel panel-default">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
+		            <h4 class="panel-title">
+		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseSeven">
+		                 Police Information
+		             </a>
+		            </h4>
+		        </div>
+		        <div id="collapseSeven" class="panel-collapse collapse">
+		            <div class="panel-body">
+		            	<p>
+						Coming soon!
+		                </p>
+		            </div>
+	          	</div>
+	        </div> <!-- end of panel -->
+
+	        <div class="panel panel-default">
+	            <div style="background-color:#F5CFC1;" class="panel-heading">
+		            <h4 class="panel-title">
+		              <a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseEight">
+		                 Witness Information
+		             </a>
+		            </h4>
+		        </div>
+		        <div id="collapseEight" class="panel-collapse collapse">
+		            <div class="panel-body">
+		            	<p>
+						Coming soon!
+		                </p>
 		            </div>
 	          	</div>
 	        </div> <!-- end of panel -->
