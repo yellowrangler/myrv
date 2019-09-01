@@ -92,6 +92,8 @@ if ($id == 0)
 
 				$k = $k.$key.",";
 				$v = $v."'".$value."'".",";
+				
+				$overnightname = $value;
 				break;		
 
 			case 'datein':
@@ -177,6 +179,8 @@ else
 				$value = mysqli_real_escape_string($dbConn, $value);
 
 				$l = $l.$key."='".$value."',";
+				
+				$overnightname = $value;
 				break;			
 
 			case 'tripid':
