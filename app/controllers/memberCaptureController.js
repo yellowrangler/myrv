@@ -970,7 +970,7 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             errmsg += "Odometer is required and must be a valid number! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
         {
             errmsg += "Cost is required and must be a valid number!  <br><br>";
         }
@@ -1146,7 +1146,7 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
             errmsg += "Odometer is required and must be a valid number! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
         {
             errmsg += "Cost is required and must be a valid number!  <br><br>";
         }
@@ -1331,7 +1331,7 @@ controllers.serviceentryController = function ($scope, $http, $location, memberF
             errmsg += "Odometer is required and must be a valid number! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.costperday))
+        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
         {
             errmsg += "Cost is required and must be a valid number!  <br><br>";
         }

@@ -73,6 +73,7 @@ myrvAppMobile.service('selectListService', function () {
 
     var typestayList = [ 
         { title :  "Walmart", value : "Walmart" },
+		{ title :  "Harvest Host", value : "Harvest Host" },
         { title :  "Truckstop", value : "Truckstop" },
         { title :  "City Park", value : "City Park" },
         { title :  "County Park", value : "County Park" },
