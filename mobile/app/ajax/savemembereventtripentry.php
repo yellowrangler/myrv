@@ -65,11 +65,12 @@ if ($id == 0)
 				break;
 
 			case 'event':
-				$event = $value;
 				$value = mysqli_real_escape_string($dbConn, $value);
 
 				$k = $k.$key.",";
 				$v = $v."'".$value."'".",";
+
+				$event = $value;
 				break;	
 
 			case 'venue':
