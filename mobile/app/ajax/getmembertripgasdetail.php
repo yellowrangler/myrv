@@ -58,7 +58,11 @@ if ( !is_null($detailEntry[date]) )
 	$detailEntry[date] = date("m/d/Y", $time);
 }
 
-
+if ( !is_null($detailEntry[time]) )
+{
+	$time = strtotime($detailEntry[time]);
+	$detailEntry[time] = date("g:i A", $time);
+}
 
 //
 // close db connection

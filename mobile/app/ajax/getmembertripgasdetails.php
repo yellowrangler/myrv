@@ -66,6 +66,12 @@ while($r = mysqli_fetch_assoc($sql_result))
 		$r[date] = date("m/d/Y", $time);
 	}
 
+	if ( !is_null($r[time]) )
+	{
+		$time = strtotime($r[time]);
+		$r[time] = date("g:i A", $time);
+	}	
+
     $detailEntrys[] = $r;
 }
 

@@ -72,6 +72,18 @@ while($r = mysqli_fetch_assoc($sql_result))
 		$r[dateout] = date("m/d/Y", $time);
 	}
 
+	if ( !is_null($r[timein]) )
+	{
+		$timein = strtotime($r[timein]);
+		$r[timein] = date("g:i A", $timein);
+	}
+
+	if ( !is_null($r[timeout]) )
+	{
+		$timeout = strtotime($r[timeout]);
+		$r[timeout] = date("g:i A", $timeout);
+	}
+
     $detailEntrys[] = $r;
 }
 
