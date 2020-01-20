@@ -937,6 +937,8 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
         $scope.current.email = $scope.current.memberlogin.email;
 
         $scope.current.capture = {};
+        $scope.current.capture.odometer = 0.0;
+        $scope.current.capture.cost = 0;
 
         getMemberTrip();
     }
@@ -975,6 +977,12 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             errmsg += "Cost is required and must be a valid number!  <br><br>";
         }
 
+        // This is a hack because daye picker does not add date to model
+        if ($scope.current.capture.date == "")
+        {
+            $scope.current.capture.date = $("#date").val();
+        }
+
         if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
         {
             errmsg += "Date is required and must be a valid date! <br><br>";
@@ -996,45 +1004,21 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             return;
         }
 
-        var qdata = 'memberid='+$scope.current.memberid+'&tripid='+$scope.current.tripid+'&odometer='+$scope.current.capture.odometer+'&target=fooddetails';
-        memberFactory.odometerDoubleEntryCheck(qdata)
+        var formstring = $("#membercapturefoodForm").serialize();
+        memberFactory.saveMemberfoodtripentry(formstring)
         .success( function(data) {
-            if (data.msgtext == "ok")
+            if (data.errtext == "")
             {
-                var formstring = $("#membercapturefoodForm").serialize();
-                memberFactory.saveMemberfoodtripentry(formstring)
-                .success( function(data) {
-                    if (data.errtext == "")
-                    {
-                        $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Success");
-                        $('#memCaptureFoodDialogModalBody').html(data.bodytext);
-                        $('#memCaptureFoodDialogModal').modal();
-
-                        // resetFoodCapture();
-                    }
-                    else
-                    {
-                        $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Error");
-                        $('#memCaptureFoodDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
-                        $('#memCaptureFoodDialogModal').modal();
-                    }
-
-                    // must call for new totals and reload scope.current.original.gastotals
-                })
-                .error( function(edata) {
-                    alert(edata);
-                });
-            }
-            else if (data.msgtext == "dupe") 
-            {
-                $('#memCaptureFoodDialogModalTitle').text("Restaurant Trip Entry Error");
-                $('#memCaptureFoodDialogModalBody').html("Duplicate odometer entry");
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Success");
+                $('#memCaptureFoodDialogModalBody').html(data.bodytext);
                 $('#memCaptureFoodDialogModal').modal();
+
+                // resetFoodCapture();
             }
             else
             {
-                $('#memCaptureFoodDialogModalTitle').text("Restaurant Trip Entry Error");
-                $('#memCaptureFoodDialogModalBody').html("Error saving restaurant trip entry - "+data.errtext);
+                $('#memCaptureFoodDialogModalTitle').text("Restaurant Entry Error");
+                $('#memCaptureFoodDialogModalBody').html("Error saving restaurant entry - "+data.errtext);
                 $('#memCaptureFoodDialogModal').modal();
             }
 
