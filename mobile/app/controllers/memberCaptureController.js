@@ -779,15 +779,25 @@ controllers.overnightetryController = function ($scope, $http, $location, member
             errmsg += "Type stay is required! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
-            errmsg += "Odometer is required and must be a valid number! <br><br>";
+            errmsg += "Odometer must be a valid number! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.costperday) || isEmptyField($scope.current.capture.costperday))
+        // if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        // {
+        //     errmsg += "Odometer is required and must be a valid number! <br><br>";
+        // }
+
+        if (!positiveDecimalPostValidation($scope.current.capture.costperday))
         {
-            errmsg += "Cost per day is required and must be a valid number!  <br><br>";
+            errmsg += "Cost per day must be a valid number!  <br><br>";
         }
+
+        // if (!positiveDecimalPostValidation($scope.current.capture.costperday) || isEmptyField($scope.current.capture.costperday))
+        // {
+        //     errmsg += "Cost per day is required and must be a valid number!  <br><br>";
+        // }
 
         if (isEmptyField($scope.current.capture.datein) || !isValidDate($scope.current.capture.datein))
         {
@@ -964,15 +974,26 @@ controllers.foodentryController = function ($scope, $http, $location, memberFact
             errmsg += "Restaurant name is required! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
-            errmsg += "Odometer is required and must be a valid number! <br><br>";
+            errmsg += "Odometer must be a valid number! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
+        // if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        // {
+        //     errmsg += "Odometer is required and must be a valid number! <br><br>";
+        // }
+
+
+        if (!positiveDecimalPostValidation($scope.current.capture.cost))
         {
-            errmsg += "Cost is required and must be a valid number!  <br><br>";
+            errmsg += "Cost is must be a valid number!  <br><br>";
         }
+
+        // if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
+        // {
+        //     errmsg += "Cost is required and must be a valid number!  <br><br>";
+        // }
 
         if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
         {
@@ -1139,21 +1160,32 @@ controllers.evententryController = function ($scope, $http, $location, memberFac
             errmsg += "Event name is required! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
-            errmsg += "Odometer is required and must be a valid number! <br><br>";
+            errmsg += "Odometer must be a valid number! <br><br>";
         }
+
+        // if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        // {
+        //     errmsg += "Odometer is required and must be a valid number! <br><br>";
+        // }
+
 
         if (!positiveDecimalPostValidation($scope.current.capture.cost) || isEmptyField($scope.current.capture.cost))
         {
             errmsg += "Cost is required and must be a valid number!  <br><br>";
         }
 
-        if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        if (!positiveDecimalPostValidation($scope.current.capture.cost))
         {
-            errmsg += "Date is required and must be a valid date! <br><br>";
-            $scope.current.capture.date = "";
+            errmsg += "Cost must be a valid number!  <br><br>";
         }
+
+        // if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
+        // {
+        //     errmsg += "Date is required and must be a valid date! <br><br>";
+        //     $scope.current.capture.date = "";
+        // }
 
         return errmsg;
     }
@@ -1504,10 +1536,15 @@ controllers.friendentryController = function ($scope, $http, $location, memberFa
             errmsg += "Friend name is required! <br><br>";
         }
 
-        if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        if (!positiveDecimalPostValidation($scope.current.capture.odometer))
         {
-            errmsg += "Odometer is required and must be a valid number! <br><br>";
+            errmsg += "Odometer must be a valid number! <br><br>";
         }
+
+        // if (!positiveDecimalPostValidation($scope.current.capture.odometer) || isEmptyField($scope.current.capture.odometer))
+        // {
+        //     errmsg += "Odometer is required and must be a valid number! <br><br>";
+        // }
 
         if (isEmptyField($scope.current.capture.date) || !isValidDate($scope.current.capture.date))
         {

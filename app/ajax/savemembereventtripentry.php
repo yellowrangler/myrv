@@ -69,6 +69,8 @@ if ($id == 0)
 
 				$k = $k.$key.",";
 				$v = $v."'".$value."'".",";
+
+				$event = $value;
 				break;	
 
 			case 'venue':

@@ -84,7 +84,8 @@ if ($id == 0)
 				$v = $v."'".$value."'".",";
 				break;	
 
-			case 'overnightname':	
+			case 'overnightname':
+				$overnightname = $value;	
 			case 'restrictions':
 			case 'comments':
 			case 'contact':
@@ -92,8 +93,6 @@ if ($id == 0)
 
 				$k = $k.$key.",";
 				$v = $v."'".$value."'".",";
-				
-				$overnightname = $value;
 				break;		
 
 			case 'datein':
@@ -172,15 +171,14 @@ else
 					$l = $l.$key."='".$value."',";
 					break;	
 		
-			case 'overnightname':	
+			case 'overnightname':
+				$overnightname = $value;		
 			case 'restrictions':
 			case 'comments':
 			case 'contact':
 				$value = mysqli_real_escape_string($dbConn, $value);
 
 				$l = $l.$key."='".$value."',";
-				
-				$overnightname = $value;
 				break;			
 
 			case 'tripid':
